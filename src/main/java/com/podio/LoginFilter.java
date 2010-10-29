@@ -1,18 +1,17 @@
 package com.podio;
 
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriBuilder;
 
 import com.podio.oauth.OAuthAPI;
 import com.podio.oauth.OAuthClientCredentials;
 import com.podio.oauth.OAuthRefreshTokenCredentials;
 import com.podio.oauth.OAuthToken;
+import com.podio.oauth.OAuthUserCredentials;
 import com.podio.oauth.OAuthUsernameCredentials;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.filter.ClientFilter;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 public class LoginFilter extends ClientFilter {
 
@@ -32,17 +31,19 @@ public class LoginFilter extends ClientFilter {
 		this.oauthAPI = new OAuthAPI(baseAPI);
 	}
 
-	private void newToken() {
-		this.token = oauthAPI.getToken(clientCredentials, userCredentials);
+	private void updateToken(OAuthUserCredentials credentials) {
+		this.token = oauthAPI.getToken(clientCredentials, credentials);
 		this.expireTime = System.currentTimeMillis() + token.getExpiresIn()
 				* 1000;
 	}
 
+	private void newToken() {
+		updateToken(userCredentials);
+	}
+
 	private void refreshToken() {
-		this.token = oauthAPI.getToken(clientCredentials,
-				new OAuthRefreshTokenCredentials(this.token.getRefreshToken()));
-		this.expireTime = System.currentTimeMillis() + token.getExpiresIn()
-				* 1000;
+		updateToken(new OAuthRefreshTokenCredentials(
+				this.token.getRefreshToken()));
 	}
 
 	@Override
@@ -54,21 +55,9 @@ public class LoginFilter extends ClientFilter {
 			refreshToken();
 		}
 
-		if (cr.getMethod() == "GET") {
-			UriBuilder b = UriBuilder.fromUri(cr.getURI());
-			b.queryParam("oauth_token", this.token.getAccessToken());
-			cr.setURI(b.build());
-		} else {
-			System.out.println(cr.getEntity());
-			MultivaluedMap<String, String> entity = (MultivaluedMap<String, String>) cr
-					.getEntity();
-			if (entity == null) {
-				entity = new MultivaluedMapImpl();
-				cr.setEntity(entity);
-			}
-
-			entity.add("oauth_token", this.token.getAccessToken());
-		}
+		UriBuilder b = UriBuilder.fromUri(cr.getURI());
+		b.queryParam("oauth_token", this.token.getAccessToken());
+		cr.setURI(b.build());
 
 		return getNext().handle(cr);
 	}

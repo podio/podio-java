@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.podio.space.Space;
 
-@XmlRootElement(name = "")
+@XmlRootElement
 public class Organization {
 
 	private int id;
