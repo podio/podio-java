@@ -15,7 +15,7 @@ public class StatusAPITest {
 	@Test
 	public void createStatus() {
 		StatusCreateResponse response = getAPI().createStatus(
-				new StatusCreate(2928, "Hello from Java", null, null));
+				new StatusCreate(1, "Hello from Java", null, null));
 
 		Assert.assertTrue(response.getId() > 1);
 	}

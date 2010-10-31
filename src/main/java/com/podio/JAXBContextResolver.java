@@ -15,9 +15,13 @@ import com.podio.app.ApplicationFieldSettings;
 import com.podio.app.ApplicationInstall;
 import com.podio.oauth.OAuthToken;
 import com.podio.org.Organization;
+import com.podio.root.SystemStatus;
 import com.podio.space.Space;
+import com.podio.space.SpaceWithOrganization;
 import com.podio.status.StatusCreate;
 import com.podio.status.StatusCreateResponse;
+import com.podio.user.User;
+import com.podio.user.UserStatus;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
 
@@ -33,16 +37,12 @@ public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 			ApplicationFieldSettings.class, StatusCreate.class,
 			StatusCreateResponse.class, ApplicationFieldCreateResponse.class,
 			ApplicationCreate.class, ApplicationCreateResponse.class,
-			ApplicationInstall.class };
+			ApplicationInstall.class, SystemStatus.class, UserStatus.class,
+			User.class, SpaceWithOrganization.class };
 
 	public JAXBContextResolver() throws Exception {
-		this.context = new JSONJAXBContext(JSONConfiguration
-				.mapped()
-				.nonStrings("space_id", "required", "visible", "delta",
-						"notify", "subscribe", "allow_edit", "allow_insert",
-						"allow_attachments", "allow_comments", "visible",
-						"fivestar", "approved", "thumbs", "rsvp", "yesno")
-				.arrays("fields").build(), types);
+		this.context = new JSONJAXBContext(JSONConfiguration.natural().build(),
+				types);
 	}
 
 	public JAXBContext getContext(Class<?> objectType) {

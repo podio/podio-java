@@ -26,9 +26,7 @@ public class OrgAPITest {
 
 	@Test
 	public void getOrganizations() throws URISyntaxException {
-		OrgAPI api = new OrgAPI(BaseAPIFactory.get());
-
-		List<Organization> organizations = api.getOrganizations();
+		List<Organization> organizations = getAPI().getOrganizations();
 		Assert.assertEquals(organizations.size(), 2);
 		Organization org = organizations.get(0);
 		Assert.assertEquals(org.getId(), 1);
