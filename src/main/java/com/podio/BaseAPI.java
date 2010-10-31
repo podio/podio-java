@@ -15,12 +15,15 @@ public final class BaseAPI {
 	private final WebResource resource;
 	private LoginFilter loginFilter;
 
-	public BaseAPI(String hostname, int port, boolean ssl,
+	public BaseAPI(String hostname, int port, boolean ssl, boolean test,
 			OAuthClientCredentials clientCredentials,
 			OAuthUsernameCredentials userCredentials) {
 		ClientConfig config = new DefaultClientConfig();
 		config.getClasses().add(JAXBContextResolver.class);
 		Client client = Client.create(config);
+		if (test) {
+			client.addFilter(new TestFilter());
+		}
 
 		URI uri;
 		try {

@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Application {
+public class Application extends ApplicationBase {
 
 	/**
 	 * The id of the app
@@ -32,11 +32,6 @@ public class Application {
 	 * The owner of the app, which has special access to the app
 	 */
 	private int ownerId;
-
-	/**
-	 * The current configuration of the app
-	 */
-	private ApplicationConfiguration configuration;
 
 	private List<ApplicationField> fields;
 
@@ -85,15 +80,6 @@ public class Application {
 		this.ownerId = ownerId;
 	}
 
-	@XmlElement(name = "config")
-	public ApplicationConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	public void setConfiguration(ApplicationConfiguration configuration) {
-		this.configuration = configuration;
-	}
-
 	@XmlElement(name = "fields")
 	public List<ApplicationField> getFields() {
 		return fields;
@@ -102,5 +88,4 @@ public class Application {
 	public void setFields(List<ApplicationField> fields) {
 		this.fields = fields;
 	}
-
 }

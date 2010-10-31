@@ -39,6 +39,21 @@ public class ApplicationFieldConfiguration {
 	 */
 	private boolean visible;
 
+	public ApplicationFieldConfiguration() {
+		super();
+	}
+
+	public ApplicationFieldConfiguration(String name, String label, int delta,
+			ApplicationFieldSettings settings, boolean required, boolean visible) {
+		super();
+		this.name = name;
+		this.label = label;
+		this.delta = delta;
+		this.settings = settings;
+		this.required = required;
+		this.visible = visible;
+	}
+
 	@XmlElement(name = "name")
 	public String getName() {
 		return name;

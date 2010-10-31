@@ -5,8 +5,8 @@ import com.podio.oauth.OAuthUsernameCredentials;
 
 public class BaseAPIFactory {
 
-	private static final BaseAPI BASE_API = new BaseAPI("localhost", 8080,
-			false, new OAuthClientCredentials("dev@hoisthq.com",
+	private static final BaseAPI BASE_API = new BaseAPI("localhost", 9090,
+			false, true, new OAuthClientCredentials("dev@hoisthq.com",
 					"CmACRWF1WBOTDfOa20A"), new OAuthUsernameCredentials(
 					"dev@hoisthq.com", "AARehARgE1NFPQUv"));
 

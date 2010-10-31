@@ -6,14 +6,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class StatusCreateResponse {
 
-	private int statusId;
+	private int id;
 
 	@XmlElement(name = "status_id")
-	public int getStatusId() {
-		return statusId;
+	public int getId() {
+		return id;
 	}
 
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
+	public void setId(int id) {
+		this.id = id;
 	}
 }

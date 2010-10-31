@@ -127,6 +127,43 @@ public class ApplicationConfiguration {
 	 */
 	private List<String> tasks;
 
+	public ApplicationConfiguration() {
+		super();
+	}
+
+	public ApplicationConfiguration(String name, String itemName,
+			String description, String usage, String externalId, String icon,
+			boolean allowEdit, boolean allowInsert,
+			ApplicationViewType defaultView, boolean allowAttachments,
+			boolean allowComments, boolean visible, boolean fivestar,
+			String fivestarLabel, boolean approved, boolean thumbs,
+			String thumbsLabel, boolean rsvp, String rsvpLabel, boolean yesno,
+			String yesnoLabel, List<String> tasks) {
+		super();
+		this.name = name;
+		this.itemName = itemName;
+		this.description = description;
+		this.usage = usage;
+		this.externalId = externalId;
+		this.icon = icon;
+		this.allowEdit = allowEdit;
+		this.allowInsert = allowInsert;
+		this.defaultView = defaultView;
+		this.allowAttachments = allowAttachments;
+		this.allowComments = allowComments;
+		this.visible = visible;
+		this.fivestar = fivestar;
+		this.fivestarLabel = fivestarLabel;
+		this.approved = approved;
+		this.thumbs = thumbs;
+		this.thumbsLabel = thumbsLabel;
+		this.rsvp = rsvp;
+		this.rsvpLabel = rsvpLabel;
+		this.yesno = yesno;
+		this.yesnoLabel = yesnoLabel;
+		this.tasks = tasks;
+	}
+
 	@XmlElement(name = "name")
 	public String getName() {
 		return name;
@@ -190,7 +227,7 @@ public class ApplicationConfiguration {
 		this.allowEdit = allowEdit;
 	}
 
-	@XmlElement(name = "insert")
+	@XmlElement(name = "allow_insert")
 	public boolean isAllowInsert() {
 		return allowInsert;
 	}

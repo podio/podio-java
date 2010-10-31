@@ -4,14 +4,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class ApplicationField extends ApplicationFieldCreate {
+public class ApplicationCreateResponse {
 
 	/**
-	 * The id of the field
+	 * The id of the created app
 	 */
 	private int id;
 
-	@XmlElement(name = "field_id")
+	@XmlElement(name = "app_id")
 	public int getId() {
 		return id;
 	}

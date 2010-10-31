@@ -7,7 +7,7 @@ import com.podio.oauth.OAuthUsernameCredentials;
 public class StatusPoster {
 
 	public static void main(String[] args) {
-		BaseAPI baseAPI = new BaseAPI("api.nextpodio.dk", 443, true,
+		BaseAPI baseAPI = new BaseAPI("api.nextpodio.dk", 443, true, false,
 				new OAuthClientCredentials("dev@podio.com", "secretstuff"),
 				new OAuthUsernameCredentials("holm@podio.com", "secretstuff"));
 
