@@ -5,8 +5,8 @@ import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 
-import com.podio.adapter.DateTimeDeserializer;
-import com.podio.adapter.DateTimeSerializer;
+import com.podio.serialize.DateTimeDeserializer;
+import com.podio.serialize.DateTimeSerializer;
 import com.podio.user.UserMini;
 
 public class ItemRevision {

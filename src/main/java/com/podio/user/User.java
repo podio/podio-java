@@ -7,8 +7,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.podio.adapter.TimeZoneDeserializer;
-import com.podio.adapter.TimeZoneSerializer;
+import com.podio.serialize.TimeZoneDeserializer;
+import com.podio.serialize.TimeZoneSerializer;
 
 public class User {
 
