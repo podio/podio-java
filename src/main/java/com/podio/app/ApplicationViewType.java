@@ -1,21 +1,25 @@
 package com.podio.app;
 
-import javax.xml.bind.annotation.XmlEnumValue;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonValue;
 
-@XmlRootElement
 public enum ApplicationViewType {
 
-	@XmlEnumValue("badge")
 	BADGE(),
-	@XmlEnumValue("table")
 	TABLE(),
-	@XmlEnumValue("list")
 	LIST(),
-	@XmlEnumValue("node")
 	NODE(),
-	@XmlEnumValue("calendar")
 	CALENDAR(),
-	@XmlEnumValue("gallery")
 	GALLERY();
+
+	@Override
+	@JsonValue
+	public String toString() {
+		return name().toLowerCase();
+	}
+
+	@JsonCreator
+	public static ApplicationViewType getByName(String value) {
+		return valueOf(value.toUpperCase());
+	}
 }

@@ -1,9 +1,7 @@
 package com.podio.oauth;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public final class OAuthToken {
 
 	private String accessToken;
@@ -12,31 +10,33 @@ public final class OAuthToken {
 
 	private int expiresIn;
 
-	@XmlElement(name = "access_token")
+	@JsonProperty("access_token")
 	public String getAccessToken() {
 		return accessToken;
 	}
 
+	@JsonProperty("access_token")
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
 
-	@XmlElement(name = "refresh_token")
+	@JsonProperty("refresh_token")
 	public String getRefreshToken() {
 		return refreshToken;
 	}
 
+	@JsonProperty("refresh_token")
 	public void setRefreshToken(String refreshToken) {
 		this.refreshToken = refreshToken;
 	}
 
-	@XmlElement(name = "expires_in")
+	@JsonProperty("expires_in")
 	public int getExpiresIn() {
 		return expiresIn;
 	}
 
+	@JsonProperty("expires_in")
 	public void setExpiresIn(int expiresIn) {
 		this.expiresIn = expiresIn;
 	}
-
 }

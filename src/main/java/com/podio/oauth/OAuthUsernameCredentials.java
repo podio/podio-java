@@ -17,10 +17,10 @@ public class OAuthUsernameCredentials implements OAuthUserCredentials {
 	public String getType() {
 		return "password";
 	}
-	
+
 	public void addParameters(MultivaluedMap<String, String> map) {
 		map.add("username", username);
 		map.add("password", password);
-	}	
-	
+	}
+
 }

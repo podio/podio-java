@@ -2,12 +2,10 @@ package com.podio.org;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import com.podio.space.Space;
 
-@XmlRootElement
 public class Organization {
 
 	private int id;
@@ -24,16 +22,16 @@ public class Organization {
 
 	private List<Space> spaces;
 
-	@XmlElement(name = "org_id")
+	@JsonProperty("org_id")
 	public int getId() {
 		return id;
 	}
 
+	@JsonProperty("org_id")
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	@XmlElement(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -42,7 +40,6 @@ public class Organization {
 		this.name = name;
 	}
 
-	@XmlElement(name = "logo")
 	public int getLogo() {
 		return logo;
 	}
@@ -51,7 +48,6 @@ public class Organization {
 		this.logo = logo;
 	}
 
-	@XmlElement(name = "url")
 	public String getUrl() {
 		return url;
 	}
@@ -68,16 +64,16 @@ public class Organization {
 		this.premium = premium;
 	}
 
-	@XmlElement(name = "create_right")
+	@JsonProperty("create_right")
 	public String getCreateRight() {
 		return createRight;
 	}
 
+	@JsonProperty("create_right")
 	public void setCreateRight(String createRight) {
 		this.createRight = createRight;
 	}
 
-	@XmlElement(name = "spaces")
 	public List<Space> getSpaces() {
 		return spaces;
 	}

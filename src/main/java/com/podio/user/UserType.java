@@ -1,15 +1,22 @@
 package com.podio.user;
 
-import javax.xml.bind.annotation.XmlEnumValue;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonValue;
 
-@XmlRootElement
 public enum UserType {
 
-	@XmlEnumValue("light")
 	LIGHT,
-	@XmlEnumValue("regular")
 	REGULAR,
-	@XmlEnumValue("admin")
 	ADMIN;
+
+	@Override
+	@JsonValue
+	public String toString() {
+		return name().toLowerCase();
+	}
+
+	@JsonCreator
+	public static UserType getByName(String value) {
+		return valueOf(value.toUpperCase());
+	}
 }

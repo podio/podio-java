@@ -1,9 +1,7 @@
 package com.podio.app;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class ApplicationMicro {
 
 	/**
@@ -38,16 +36,16 @@ public class ApplicationMicro {
 		this.icon = icon;
 	}
 
-	@XmlElement(name = "app_id")
+	@JsonProperty("app_id")
 	public int getId() {
 		return id;
 	}
 
+	@JsonProperty("app_id")
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	@XmlElement(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -56,16 +54,16 @@ public class ApplicationMicro {
 		this.name = name;
 	}
 
-	@XmlElement(name = "item_name")
+	@JsonProperty("item_name")
 	public String getItemName() {
 		return itemName;
 	}
 
+	@JsonProperty("item_name")
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
 
-	@XmlElement(name = "icon")
 	public String getIcon() {
 		return icon;
 	}

@@ -1,9 +1,7 @@
 package com.podio.app;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class ApplicationBase {
 
 	/**
@@ -20,11 +18,12 @@ public class ApplicationBase {
 		this.configuration = configuration;
 	}
 
-	@XmlElement(name = "config")
+	@JsonProperty("config")
 	public ApplicationConfiguration getConfiguration() {
 		return configuration;
 	}
 
+	@JsonProperty("config")
 	public void setConfiguration(ApplicationConfiguration configuration) {
 		this.configuration = configuration;
 	}

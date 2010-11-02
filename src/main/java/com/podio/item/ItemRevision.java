@@ -1,13 +1,14 @@
 package com.podio.item;
 
-import java.util.Date;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.joda.time.DateTime;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
+import com.podio.adapter.DateTimeDeserializer;
+import com.podio.adapter.DateTimeSerializer;
 import com.podio.user.UserMini;
 
-@XmlRootElement
 public class ItemRevision {
 
 	/**
@@ -28,9 +29,8 @@ public class ItemRevision {
 	/**
 	 * When the revision was created
 	 */
-	private Date createdOn;
+	private DateTime createdOn;
 
-	@XmlElement(name = "revision")
 	public int getRevision() {
 		return revision;
 	}
@@ -39,16 +39,16 @@ public class ItemRevision {
 		this.revision = revision;
 	}
 
-	@XmlElement(name = "app_revision")
+	@JsonProperty("app_revision")
 	public int getAppRevision() {
 		return appRevision;
 	}
 
+	@JsonProperty("app_revision")
 	public void setAppRevision(int appRevision) {
 		this.appRevision = appRevision;
 	}
 
-	@XmlElement(name = "user")
 	public UserMini getUser() {
 		return user;
 	}
@@ -57,13 +57,15 @@ public class ItemRevision {
 		this.user = user;
 	}
 
-	@XmlElement(name = "created_on")
-	public Date getCreatedOn() {
+	@JsonProperty("created_on")
+	@JsonSerialize(using = DateTimeSerializer.class)
+	public DateTime getCreatedOn() {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Date createdOn) {
+	@JsonProperty("created_on")
+	@JsonDeserialize(using = DateTimeDeserializer.class)
+	public void setCreatedOn(DateTime createdOn) {
 		this.createdOn = createdOn;
 	}
-
 }

@@ -1,9 +1,6 @@
 package com.podio.app;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class ApplicationFieldConfiguration {
 
 	/**
@@ -54,7 +51,6 @@ public class ApplicationFieldConfiguration {
 		this.visible = visible;
 	}
 
-	@XmlElement(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -63,7 +59,6 @@ public class ApplicationFieldConfiguration {
 		this.name = name;
 	}
 
-	@XmlElement(name = "label")
 	public String getLabel() {
 		return label;
 	}
@@ -72,7 +67,6 @@ public class ApplicationFieldConfiguration {
 		this.label = label;
 	}
 
-	@XmlElement(name = "delta")
 	public int getDelta() {
 		return delta;
 	}
@@ -81,7 +75,6 @@ public class ApplicationFieldConfiguration {
 		this.delta = delta;
 	}
 
-	@XmlElement(name = "settings")
 	public ApplicationFieldSettings getSettings() {
 		return settings;
 	}
@@ -90,7 +83,6 @@ public class ApplicationFieldConfiguration {
 		this.settings = settings;
 	}
 
-	@XmlElement(name = "required")
 	public boolean isRequired() {
 		return required;
 	}
@@ -99,7 +91,6 @@ public class ApplicationFieldConfiguration {
 		this.required = required;
 	}
 
-	@XmlElement(name = "visible")
 	public boolean isVisible() {
 		return visible;
 	}

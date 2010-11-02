@@ -2,10 +2,6 @@ package com.podio.app;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
 public class ApplicationUpdate extends ApplicationBase {
 
 	/**
@@ -28,7 +24,6 @@ public class ApplicationUpdate extends ApplicationBase {
 		this.fields = fields;
 	}
 
-	@XmlElement(name = "resubscribe")
 	public boolean isResubscribe() {
 		return resubscribe;
 	}
@@ -37,7 +32,6 @@ public class ApplicationUpdate extends ApplicationBase {
 		this.resubscribe = resubscribe;
 	}
 
-	@XmlElement(name = "fields")
 	public List<ApplicationFieldUpdate> getFields() {
 		return fields;
 	}

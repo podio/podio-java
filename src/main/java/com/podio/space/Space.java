@@ -1,9 +1,7 @@
 package com.podio.space;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class Space {
 
 	private int id;
@@ -14,16 +12,16 @@ public class Space {
 
 	private String role;
 
-	@XmlElement(name = "space_id")
+	@JsonProperty("space_id")
 	public int getId() {
 		return id;
 	}
 
+	@JsonProperty("space_id")
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	@XmlElement(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -32,7 +30,6 @@ public class Space {
 		this.name = name;
 	}
 
-	@XmlElement(name = "url")
 	public String getUrl() {
 		return url;
 	}
@@ -41,7 +38,6 @@ public class Space {
 		this.url = url;
 	}
 
-	@XmlElement(name = "role")
 	public String getRole() {
 		return role;
 	}

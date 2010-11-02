@@ -2,10 +2,8 @@ package com.podio.app;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class ApplicationConfiguration {
 
 	/**
@@ -164,7 +162,6 @@ public class ApplicationConfiguration {
 		this.tasks = tasks;
 	}
 
-	@XmlElement(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -173,16 +170,16 @@ public class ApplicationConfiguration {
 		this.name = name;
 	}
 
-	@XmlElement(name = "item_name")
+	@JsonProperty("item_name")
 	public String getItemName() {
 		return itemName;
 	}
 
+	@JsonProperty("item_name")
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
 
-	@XmlElement(name = "description")
 	public String getDescription() {
 		return description;
 	}
@@ -191,7 +188,6 @@ public class ApplicationConfiguration {
 		this.description = description;
 	}
 
-	@XmlElement(name = "usage")
 	public String getUsage() {
 		return usage;
 	}
@@ -200,16 +196,16 @@ public class ApplicationConfiguration {
 		this.usage = usage;
 	}
 
-	@XmlElement(name = "external_id")
+	@JsonProperty("external_id")
 	public String getExternalId() {
 		return externalId;
 	}
 
+	@JsonProperty("external_id")
 	public void setExternalId(String externalId) {
 		this.externalId = externalId;
 	}
 
-	@XmlElement(name = "icon")
 	public String getIcon() {
 		return icon;
 	}
@@ -218,52 +214,56 @@ public class ApplicationConfiguration {
 		this.icon = icon;
 	}
 
-	@XmlElement(name = "allow_edit")
+	@JsonProperty("allow_edit")
 	public boolean isAllowEdit() {
 		return allowEdit;
 	}
 
+	@JsonProperty("allow_edit")
 	public void setAllowEdit(boolean allowEdit) {
 		this.allowEdit = allowEdit;
 	}
 
-	@XmlElement(name = "allow_insert")
+	@JsonProperty("allow_insert")
 	public boolean isAllowInsert() {
 		return allowInsert;
 	}
 
+	@JsonProperty("allow_insert")
 	public void setAllowInsert(boolean allowInsert) {
 		this.allowInsert = allowInsert;
 	}
 
-	@XmlElement(name = "default_view")
+	@JsonProperty("default_view")
 	public ApplicationViewType getDefaultView() {
 		return defaultView;
 	}
 
+	@JsonProperty("default_view")
 	public void setDefaultView(ApplicationViewType defaultView) {
 		this.defaultView = defaultView;
 	}
 
-	@XmlElement(name = "allow_attachments")
+	@JsonProperty("allow_attachments")
 	public boolean isAllowAttachments() {
 		return allowAttachments;
 	}
 
+	@JsonProperty("allow_attachments")
 	public void setAllowAttachments(boolean allowAttachments) {
 		this.allowAttachments = allowAttachments;
 	}
 
-	@XmlElement(name = "allow_comments")
+	@JsonProperty("allow_comments")
 	public boolean isAllowComments() {
 		return allowComments;
 	}
 
+	@JsonProperty("allow_comments")
 	public void setAllowComments(boolean allowComments) {
 		this.allowComments = allowComments;
 	}
 
-	@XmlElement(name = "visible")
 	public boolean isVisible() {
 		return visible;
 	}
@@ -272,7 +272,6 @@ public class ApplicationConfiguration {
 		this.visible = visible;
 	}
 
-	@XmlElement(name = "fivestar")
 	public boolean isFivestar() {
 		return fivestar;
 	}
@@ -281,16 +280,16 @@ public class ApplicationConfiguration {
 		this.fivestar = fivestar;
 	}
 
-	@XmlElement(name = "fivestar_label")
+	@JsonProperty("fivestar_label")
 	public String getFivestarLabel() {
 		return fivestarLabel;
 	}
 
+	@JsonProperty("fivestar_label")
 	public void setFivestarLabel(String fivestarLabel) {
 		this.fivestarLabel = fivestarLabel;
 	}
 
-	@XmlElement(name = "approved")
 	public boolean isApproved() {
 		return approved;
 	}
@@ -299,7 +298,6 @@ public class ApplicationConfiguration {
 		this.approved = approved;
 	}
 
-	@XmlElement(name = "thumbs")
 	public boolean isThumbs() {
 		return thumbs;
 	}
@@ -308,16 +306,16 @@ public class ApplicationConfiguration {
 		this.thumbs = thumbs;
 	}
 
-	@XmlElement(name = "thumbs_label")
+	@JsonProperty("thumbs_label")
 	public String getThumbsLabel() {
 		return thumbsLabel;
 	}
 
+	@JsonProperty("thumbs_label")
 	public void setThumbsLabel(String thumbsLabel) {
 		this.thumbsLabel = thumbsLabel;
 	}
 
-	@XmlElement(name = "rsvp")
 	public boolean isRsvp() {
 		return rsvp;
 	}
@@ -326,16 +324,16 @@ public class ApplicationConfiguration {
 		this.rsvp = rsvp;
 	}
 
-	@XmlElement(name = "rsvp_label")
+	@JsonProperty("rsvp_label")
 	public String getRsvpLabel() {
 		return rsvpLabel;
 	}
 
+	@JsonProperty("rsvp_label")
 	public void setRsvpLabel(String rsvpLabel) {
 		this.rsvpLabel = rsvpLabel;
 	}
 
-	@XmlElement(name = "yesno")
 	public boolean isYesno() {
 		return yesno;
 	}
@@ -344,16 +342,16 @@ public class ApplicationConfiguration {
 		this.yesno = yesno;
 	}
 
-	@XmlElement(name = "yesno_label")
+	@JsonProperty("yesno_label")
 	public String getYesnoLabel() {
 		return yesnoLabel;
 	}
 
+	@JsonProperty("yesno_label")
 	public void setYesnoLabel(String yesnoLabel) {
 		this.yesnoLabel = yesnoLabel;
 	}
 
-	@XmlElement(name = "tasks")
 	public List<String> getTasks() {
 		return tasks;
 	}
@@ -361,5 +359,4 @@ public class ApplicationConfiguration {
 	public void setTasks(List<String> tasks) {
 		this.tasks = tasks;
 	}
-
 }

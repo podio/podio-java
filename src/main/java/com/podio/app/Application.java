@@ -2,10 +2,10 @@ package com.podio.app;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
+@JsonAutoDetect()
 public class Application extends ApplicationBase {
 
 	/**
@@ -35,16 +35,16 @@ public class Application extends ApplicationBase {
 
 	private List<ApplicationField> fields;
 
-	@XmlElement(name = "app_id")
+	@JsonProperty("app_id")
 	public int getId() {
 		return id;
 	}
 
+	@JsonProperty("app_id")
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	@XmlElement(name = "original")
 	public Integer getOriginal() {
 		return original;
 	}
@@ -53,34 +53,36 @@ public class Application extends ApplicationBase {
 		this.original = original;
 	}
 
-	@XmlElement(name = "original_revision")
+	@JsonProperty("original_revision")
 	public Integer getOriginalRevision() {
 		return originalRevision;
 	}
 
+	@JsonProperty("original_revision")
 	public void setOriginalRevision(Integer originalRevision) {
 		this.originalRevision = originalRevision;
 	}
 
-	@XmlElement(name = "space_id")
+	@JsonProperty("space_id")
 	public int getSpaceId() {
 		return spaceId;
 	}
 
+	@JsonProperty("space_id")
 	public void setSpaceId(int spaceId) {
 		this.spaceId = spaceId;
 	}
 
-	@XmlElement(name = "owner_id")
+	@JsonProperty("owner_id")
 	public int getOwnerId() {
 		return ownerId;
 	}
 
+	@JsonProperty("owner_id")
 	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
 	}
 
-	@XmlElement(name = "fields")
 	public List<ApplicationField> getFields() {
 		return fields;
 	}

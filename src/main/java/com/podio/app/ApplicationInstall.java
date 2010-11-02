@@ -1,9 +1,7 @@
 package com.podio.app;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class ApplicationInstall {
 
 	private int spaceId;
@@ -17,11 +15,12 @@ public class ApplicationInstall {
 		this.spaceId = spaceId;
 	}
 
-	@XmlElement(name = "space_id")
+	@JsonProperty("space_id")
 	public int getSpaceId() {
 		return spaceId;
 	}
 
+	@JsonProperty("space_id")
 	public void setSpaceId(int spaceId) {
 		this.spaceId = spaceId;
 	}

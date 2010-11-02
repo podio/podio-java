@@ -14,8 +14,8 @@ public class OAuthRefreshTokenCredentials implements OAuthUserCredentials {
 	public String getType() {
 		return "refresh_token";
 	}
-	
+
 	public void addParameters(MultivaluedMap<String, String> map) {
 		map.add("refresh_token", refreshToken);
-	}		
+	}
 }

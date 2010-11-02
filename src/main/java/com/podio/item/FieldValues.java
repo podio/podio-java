@@ -2,11 +2,10 @@ package com.podio.item;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlType
 public class FieldValues {
 
 	/**
@@ -17,45 +16,46 @@ public class FieldValues {
 	/**
 	 * The values
 	 */
-	private List<FieldValue> values;
+	private List<Map<String, Object>> values;
 
 	public FieldValues() {
 		super();
 	}
 
-	public FieldValues(int fieldId, List<FieldValue> values) {
+	public FieldValues(int fieldId, List<Map<String, Object>> values) {
 		super();
 		this.fieldId = fieldId;
 		this.values = values;
 	}
 
-	public FieldValues(int fieldId, FieldValue value) {
+	public FieldValues(int fieldId, Map<String, Object> value) {
 		super();
 		this.fieldId = fieldId;
 		this.values = Collections.singletonList(value);
 	}
 
-	public FieldValues(int fieldId, String subId, String value) {
+	public FieldValues(int fieldId, String subId, Object value) {
 		super();
 		this.fieldId = fieldId;
-		this.values = Collections.singletonList(new FieldValue(subId, value));
+		this.values = Collections.singletonList(Collections.singletonMap(subId,
+				value));
 	}
 
-	@XmlElement(name = "field_id")
+	@JsonProperty("field_id")
 	public int getFieldId() {
 		return fieldId;
 	}
 
+	@JsonProperty("field_id")
 	public void setFieldId(int fieldId) {
 		this.fieldId = fieldId;
 	}
 
-	@XmlElement(name = "values")
-	public List<FieldValue> getValues() {
+	public List<Map<String, Object>> getValues() {
 		return values;
 	}
 
-	public void setValues(List<FieldValue> values) {
+	public void setValues(List<Map<String, Object>> values) {
 		this.values = values;
 	}
 }

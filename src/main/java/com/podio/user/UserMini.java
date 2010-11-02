@@ -1,9 +1,7 @@
 package com.podio.user;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class UserMini {
 
 	private int id;
@@ -12,16 +10,16 @@ public class UserMini {
 
 	private String name;
 
-	@XmlElement(name = "user_id")
+	@JsonProperty("user_id")
 	public int getId() {
 		return id;
 	}
 
+	@JsonProperty("user_id")
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	@XmlElement(name = "avatar")
 	public Integer getAvatar() {
 		return avatar;
 	}
@@ -30,7 +28,6 @@ public class UserMini {
 		this.avatar = avatar;
 	}
 
-	@XmlElement(name = "name")
 	public String getName() {
 		return name;
 	}

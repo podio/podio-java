@@ -3,14 +3,13 @@ package com.podio.user;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.podio.adapter.LocaleAdapter;
-import com.podio.adapter.TimeZoneAdapter;
+import com.podio.adapter.TimeZoneDeserializer;
+import com.podio.adapter.TimeZoneSerializer;
 
-@XmlRootElement
 public class User {
 
 	private int id;
@@ -23,16 +22,16 @@ public class User {
 
 	private TimeZone timezone;
 
-	@XmlElement(name = "user_id")
+	@JsonProperty("user_id")
 	public int getId() {
 		return id;
 	}
 
+	@JsonProperty("user_id")
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	@XmlElement(name = "mail")
 	public String getMail() {
 		return mail;
 	}
@@ -41,7 +40,6 @@ public class User {
 		this.mail = mail;
 	}
 
-	@XmlElement(name = "type")
 	public UserType getType() {
 		return type;
 	}
@@ -50,8 +48,6 @@ public class User {
 		this.type = type;
 	}
 
-	@XmlElement(name = "locale")
-	@XmlJavaTypeAdapter(LocaleAdapter.class)
 	public Locale getLocale() {
 		return locale;
 	}
@@ -60,12 +56,12 @@ public class User {
 		this.locale = locale;
 	}
 
-	@XmlElement(name = "timezone")
-	@XmlJavaTypeAdapter(TimeZoneAdapter.class)
+	@JsonSerialize(using = TimeZoneSerializer.class)
 	public TimeZone getTimezone() {
 		return timezone;
 	}
 
+	@JsonDeserialize(using = TimeZoneDeserializer.class)
 	public void setTimezone(TimeZone timezone) {
 		this.timezone = timezone;
 	}

@@ -2,14 +2,12 @@ package com.podio.item;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import com.podio.app.ApplicationMicro;
 import com.podio.comment.Comment;
 import com.podio.rating.ObjectRatings;
 
-@XmlRootElement
 public class Item {
 
 	/**
@@ -64,52 +62,56 @@ public class Item {
 	 */
 	private ObjectRatings ratings;
 
-	@XmlElement(name = "item_id")
+	@JsonProperty("item_id")
 	public int getId() {
 		return id;
 	}
 
+	@JsonProperty("item_id")
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	@XmlElement(name = "app")
+	@JsonProperty("app")
 	public ApplicationMicro getApplication() {
 		return application;
 	}
 
+	@JsonProperty("app")
 	public void setApplication(ApplicationMicro application) {
 		this.application = application;
 	}
 
-	@XmlElement(name = "external_id")
+	@JsonProperty("external_id")
 	public String getExternalId() {
 		return externalId;
 	}
 
+	@JsonProperty("external_id")
 	public void setExternalId(String externalId) {
 		this.externalId = externalId;
 	}
 
-	@XmlElement(name = "initial_revision")
+	@JsonProperty("initial_revision")
 	public ItemRevision getInitialRevision() {
 		return initialRevision;
 	}
 
+	@JsonProperty("initial_revision")
 	public void setInitialRevision(ItemRevision initialRevision) {
 		this.initialRevision = initialRevision;
 	}
 
-	@XmlElement(name = "current_revision")
+	@JsonProperty("current_revision")
 	public ItemRevision getCurrentRevision() {
 		return currentRevision;
 	}
 
+	@JsonProperty("current_revision")
 	public void setCurrentRevision(ItemRevision currentRevision) {
 		this.currentRevision = currentRevision;
 	}
 
-	@XmlElement(name = "title")
 	public String getTitle() {
 		return title;
 	}
@@ -118,7 +120,6 @@ public class Item {
 		this.title = title;
 	}
 
-	@XmlElement(name = "fields")
 	public List<FieldValues> getFields() {
 		return fields;
 	}
@@ -127,7 +128,6 @@ public class Item {
 		this.fields = fields;
 	}
 
-	@XmlElement(name = "revisions")
 	public List<ItemRevision> getRevisions() {
 		return revisions;
 	}
@@ -136,7 +136,6 @@ public class Item {
 		this.revisions = revisions;
 	}
 
-	@XmlElement(name = "comments")
 	public List<Comment> getComments() {
 		return comments;
 	}
@@ -145,7 +144,6 @@ public class Item {
 		this.comments = comments;
 	}
 
-	@XmlElement(name = "ratings")
 	public ObjectRatings getRatings() {
 		return ratings;
 	}

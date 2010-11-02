@@ -3,12 +3,10 @@ package com.podio.file;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import com.podio.user.UserMini;
 
-@XmlRootElement
 public class File {
 
 	/**
@@ -51,16 +49,16 @@ public class File {
 	 */
 	private List<File> replaces;
 
-	@XmlElement(name = "file_id")
+	@JsonProperty("file_id")
 	public int getFileId() {
 		return fileId;
 	}
 
+	@JsonProperty("file_id")
 	public void setFileId(int fileId) {
 		this.fileId = fileId;
 	}
 
-	@XmlElement(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -69,7 +67,6 @@ public class File {
 		this.name = name;
 	}
 
-	@XmlElement(name = "description")
 	public String getDescription() {
 		return description;
 	}
@@ -78,7 +75,6 @@ public class File {
 		this.description = description;
 	}
 
-	@XmlElement(name = "mimetype")
 	public String getMimetype() {
 		return mimetype;
 	}
@@ -87,7 +83,6 @@ public class File {
 		this.mimetype = mimetype;
 	}
 
-	@XmlElement(name = "size")
 	public long getSize() {
 		return size;
 	}
@@ -96,25 +91,26 @@ public class File {
 		this.size = size;
 	}
 
-	@XmlElement(name = "created_on")
+	@JsonProperty("created_on")
 	public Date getCreatedOn() {
 		return createdOn;
 	}
 
+	@JsonProperty("created_on")
 	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
 	}
 
-	@XmlElement(name = "created_by")
+	@JsonProperty("created_by")
 	public UserMini getCreatedBy() {
 		return createdBy;
 	}
 
+	@JsonProperty("created_by")
 	public void setCreatedBy(UserMini createdBy) {
 		this.createdBy = createdBy;
 	}
 
-	@XmlElement(name = "replaces")
 	public List<File> getReplaces() {
 		return replaces;
 	}

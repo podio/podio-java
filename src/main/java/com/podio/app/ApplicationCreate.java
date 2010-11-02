@@ -2,10 +2,8 @@ package com.podio.app;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class ApplicationCreate extends ApplicationBase {
 
 	/**
@@ -41,16 +39,16 @@ public class ApplicationCreate extends ApplicationBase {
 		this.fields = fields;
 	}
 
-	@XmlElement(name = "space_id")
+	@JsonProperty("space_id")
 	public int getSpaceId() {
 		return spaceId;
 	}
 
+	@JsonProperty("space_id")
 	public void setSpaceId(int spaceId) {
 		this.spaceId = spaceId;
 	}
 
-	@XmlElement(name = "notify")
 	public boolean isNotify() {
 		return notify;
 	}
@@ -59,7 +57,6 @@ public class ApplicationCreate extends ApplicationBase {
 		this.notify = notify;
 	}
 
-	@XmlElement(name = "subscribe")
 	public boolean isSubscribe() {
 		return subscribe;
 	}
@@ -68,7 +65,6 @@ public class ApplicationCreate extends ApplicationBase {
 		this.subscribe = subscribe;
 	}
 
-	@XmlElement(name = "fields")
 	public List<ApplicationFieldCreate> getFields() {
 		return fields;
 	}

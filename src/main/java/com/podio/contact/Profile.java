@@ -3,10 +3,8 @@ package com.podio.contact;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class Profile {
 
 	/**
@@ -79,16 +77,16 @@ public class Profile {
 	 */
 	private List<String> urls;
 
-	@XmlElement(name = "user_id")
+	@JsonProperty("user_id")
 	public int getUserId() {
 		return userId;
 	}
 
+	@JsonProperty("user_id")
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
-	@XmlElement(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -97,7 +95,6 @@ public class Profile {
 		this.name = name;
 	}
 
-	@XmlElement(name = "avatar")
 	public Integer getAvatar() {
 		return avatar;
 	}
@@ -106,7 +103,6 @@ public class Profile {
 		this.avatar = avatar;
 	}
 
-	@XmlElement(name = "birthdate")
 	public Date getBirthdate() {
 		return birthdate;
 	}
@@ -115,7 +111,6 @@ public class Profile {
 		this.birthdate = birthdate;
 	}
 
-	@XmlElement(name = "organization")
 	public String getOrganization() {
 		return organization;
 	}
@@ -124,7 +119,6 @@ public class Profile {
 		this.organization = organization;
 	}
 
-	@XmlElement(name = "skype")
 	public String getSkype() {
 		return skype;
 	}
@@ -133,7 +127,6 @@ public class Profile {
 		this.skype = skype;
 	}
 
-	@XmlElement(name = "about")
 	public String getAbout() {
 		return about;
 	}
@@ -142,65 +135,72 @@ public class Profile {
 		this.about = about;
 	}
 
-	@XmlElement(name = "address")
+	@JsonProperty("address")
 	public List<String> getAddresses() {
 		return addresses;
 	}
 
+	@JsonProperty("address")
 	public void setAddresses(List<String> addresses) {
 		this.addresses = addresses;
 	}
 
-	@XmlElement(name = "im")
+	@JsonProperty("im")
 	public List<String> getIms() {
 		return ims;
 	}
 
+	@JsonProperty("im")
 	public void setIms(List<String> ims) {
 		this.ims = ims;
 	}
 
-	@XmlElement(name = "location")
+	@JsonProperty("location")
 	public List<String> getLocations() {
 		return locations;
 	}
 
+	@JsonProperty("location")
 	public void setLocations(List<String> locations) {
 		this.locations = locations;
 	}
 
-	@XmlElement(name = "mail")
+	@JsonProperty("mail")
 	public List<String> getMails() {
 		return mails;
 	}
 
+	@JsonProperty("mail")
 	public void setMails(List<String> mails) {
 		this.mails = mails;
 	}
 
-	@XmlElement(name = "phone")
+	@JsonProperty("phone")
 	public List<String> getPhones() {
 		return phones;
 	}
 
+	@JsonProperty("phone")
 	public void setPhones(List<String> phones) {
 		this.phones = phones;
 	}
 
-	@XmlElement(name = "title")
+	@JsonProperty("title")
 	public List<String> getTitles() {
 		return titles;
 	}
 
+	@JsonProperty("title")
 	public void setTitles(List<String> titles) {
 		this.titles = titles;
 	}
 
-	@XmlElement(name = "url")
+	@JsonProperty("url")
 	public List<String> getUrls() {
 		return urls;
 	}
 
+	@JsonProperty("url")
 	public void setUrls(List<String> urls) {
 		this.urls = urls;
 	}

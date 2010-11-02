@@ -1,9 +1,7 @@
 package com.podio.app;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class ApplicationFieldUpdate {
 
 	/**
@@ -27,20 +25,22 @@ public class ApplicationFieldUpdate {
 		this.configuration = configuration;
 	}
 
-	@XmlElement(name = "field_id")
+	@JsonProperty("field_id")
 	public int getId() {
 		return id;
 	}
 
+	@JsonProperty("field_id")
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	@XmlElement(name = "config")
+	@JsonProperty("config")
 	public ApplicationFieldConfiguration getConfiguration() {
 		return configuration;
 	}
 
+	@JsonProperty("config")
 	public void setConfiguration(ApplicationFieldConfiguration configuration) {
 		this.configuration = configuration;
 	}

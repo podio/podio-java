@@ -2,10 +2,8 @@ package com.podio.status;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class StatusCreate {
 
 	private int spaceId;
@@ -29,16 +27,16 @@ public class StatusCreate {
 		this.fileIds = fileIds;
 	}
 
-	@XmlElement(name = "space_id")
+	@JsonProperty("space_id")
 	public int getSpaceId() {
 		return spaceId;
 	}
 
+	@JsonProperty("space_id")
 	public void setSpaceId(int spaceId) {
 		this.spaceId = spaceId;
 	}
 
-	@XmlElement(name = "value")
 	public String getValue() {
 		return value;
 	}
@@ -47,7 +45,6 @@ public class StatusCreate {
 		this.value = value;
 	}
 
-	@XmlElement(name = "alerts")
 	public List<Integer> getAlerts() {
 		return alerts;
 	}
@@ -56,11 +53,12 @@ public class StatusCreate {
 		this.alerts = alerts;
 	}
 
-	@XmlElement(name = "file_ids")
+	@JsonProperty("file_ids")
 	public List<Integer> getFileIds() {
 		return fileIds;
 	}
 
+	@JsonProperty("file_ids")
 	public void setFileIds(List<Integer> fileIds) {
 		this.fileIds = fileIds;
 	}

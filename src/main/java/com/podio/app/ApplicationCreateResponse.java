@@ -1,9 +1,7 @@
 package com.podio.app;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class ApplicationCreateResponse {
 
 	/**
@@ -11,11 +9,12 @@ public class ApplicationCreateResponse {
 	 */
 	private int id;
 
-	@XmlElement(name = "app_id")
+	@JsonProperty("app_id")
 	public int getId() {
 		return id;
 	}
 
+	@JsonProperty("app_id")
 	public void setId(int id) {
 		this.id = id;
 	}

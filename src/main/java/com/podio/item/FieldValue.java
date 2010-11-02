@@ -3,11 +3,8 @@ package com.podio.item;
 import java.util.Collections;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
 
-@XmlRootElement
 public class FieldValue {
 
 	private Map<QName, Object> values;
@@ -31,7 +28,6 @@ public class FieldValue {
 		return values.get(new QName(subId));
 	}
 
-	@XmlAnyAttribute
 	public Map<QName, Object> getValues() {
 		return values;
 	}

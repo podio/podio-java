@@ -1,9 +1,7 @@
 package com.podio.user;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class UserStatus {
 
 	private User user;
@@ -12,7 +10,6 @@ public class UserStatus {
 
 	private String taskMail;
 
-	@XmlElement(name = "user")
 	public User getUser() {
 		return user;
 	}
@@ -21,20 +18,22 @@ public class UserStatus {
 		this.user = user;
 	}
 
-	@XmlElement(name = "inbox_new")
+	@JsonProperty("inbox_new")
 	public int getInboxNew() {
 		return inboxNew;
 	}
 
+	@JsonProperty("inbox_new")
 	public void setInboxNew(int inboxNew) {
 		this.inboxNew = inboxNew;
 	}
 
-	@XmlElement(name = "task_mail")
+	@JsonProperty("task_mail")
 	public String getTaskMail() {
 		return taskMail;
 	}
 
+	@JsonProperty("task_mail")
 	public void setTaskMail(String taskMail) {
 		this.taskMail = taskMail;
 	}

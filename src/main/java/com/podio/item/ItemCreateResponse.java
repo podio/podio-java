@@ -1,18 +1,17 @@
 package com.podio.item;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class ItemCreateResponse {
 
 	private int itemId;
 
-	@XmlElement(name = "item_id")
+	@JsonProperty("item_id")
 	public int getItemId() {
 		return itemId;
 	}
 
+	@JsonProperty("item_id")
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}

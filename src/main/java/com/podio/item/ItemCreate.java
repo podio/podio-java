@@ -2,10 +2,8 @@ package com.podio.item;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class ItemCreate {
 
 	/**
@@ -43,16 +41,16 @@ public class ItemCreate {
 		this.tags = tags;
 	}
 
-	@XmlElement(name = "external_id")
+	@JsonProperty("external_id")
 	public String getExternalId() {
 		return externalId;
 	}
 
+	@JsonProperty("external_id")
 	public void setExternalId(String externalId) {
 		this.externalId = externalId;
 	}
 
-	@XmlElement(name = "fields")
 	public List<FieldValues> getFields() {
 		return fields;
 	}
@@ -61,16 +59,16 @@ public class ItemCreate {
 		this.fields = fields;
 	}
 
-	@XmlElement(name = "file_ids")
+	@JsonProperty("file_ids")
 	public List<Integer> getFileIds() {
 		return fileIds;
 	}
 
+	@JsonProperty("file_ids")
 	public void setFileIds(List<Integer> fileIds) {
 		this.fileIds = fileIds;
 	}
 
-	@XmlElement(name = "tags")
 	public List<String> getTags() {
 		return tags;
 	}

@@ -1,15 +1,17 @@
 package com.podio.comment;
 
-import java.util.Date;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.joda.time.DateTime;
 
+import com.podio.adapter.DateTimeDeserializer;
+import com.podio.adapter.DateTimeSerializer;
 import com.podio.file.File;
 import com.podio.user.UserMini;
 
-@XmlRootElement
 public class Comment {
 
 	/**
@@ -30,7 +32,7 @@ public class Comment {
 	/**
 	 * The date and time the comment was created
 	 */
-	private Date createdOn;
+	private DateTime createdOn;
 
 	/**
 	 * The alerts on the comment
@@ -42,16 +44,16 @@ public class Comment {
 	 */
 	private List<File> files;
 
-	@XmlElement(name = "comment_id")
+	@JsonProperty("comment_id")
 	public int getId() {
 		return id;
 	}
 
+	@JsonProperty("comment_id")
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	@XmlElement(name = "value")
 	public String getValue() {
 		return value;
 	}
@@ -60,7 +62,6 @@ public class Comment {
 		this.value = value;
 	}
 
-	@XmlElement(name = "user")
 	public UserMini getUser() {
 		return user;
 	}
@@ -69,16 +70,18 @@ public class Comment {
 		this.user = user;
 	}
 
-	@XmlElement(name = "created_on")
-	public Date getCreatedOn() {
+	@JsonProperty("created_on")
+	@JsonSerialize(using = DateTimeSerializer.class)
+	public DateTime getCreatedOn() {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Date createdOn) {
+	@JsonProperty("created_on")
+	@JsonDeserialize(using = DateTimeDeserializer.class)
+	public void setCreatedOn(DateTime createdOn) {
 		this.createdOn = createdOn;
 	}
 
-	@XmlElement(name = "alerts")
 	public List<UserMini> getAlerts() {
 		return alerts;
 	}
@@ -87,7 +90,6 @@ public class Comment {
 		this.alerts = alerts;
 	}
 
-	@XmlElement(name = "files")
 	public List<File> getFiles() {
 		return files;
 	}

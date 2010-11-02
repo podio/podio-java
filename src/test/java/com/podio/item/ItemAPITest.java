@@ -1,6 +1,7 @@
 package com.podio.item;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import junit.framework.Assert;
 
@@ -19,7 +20,8 @@ public class ItemAPITest {
 		ItemCreateResponse response = getAPI().addItem(
 				1,
 				new ItemCreate(null, Arrays.asList(new FieldValues(1, "value",
-						"yes")), null, null));
+						"yes")), Collections.<Integer> emptyList(), Collections
+						.<String> emptyList()));
 
 		Assert.assertTrue(response.getItemId() > 1);
 	}

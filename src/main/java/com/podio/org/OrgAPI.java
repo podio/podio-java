@@ -1,11 +1,11 @@
 package com.podio.org;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
 import com.podio.BaseAPI;
-import com.sun.jersey.api.client.GenericType;
 
 public class OrgAPI {
 
@@ -22,9 +22,8 @@ public class OrgAPI {
 	}
 
 	public List<Organization> getOrganizations() {
-		return baseAPI.getResource("/org/")
+		return Arrays.asList(baseAPI.getResource("/org/")
 				.accept(MediaType.APPLICATION_JSON_TYPE)
-				.get(new GenericType<List<Organization>>() {
-				});
+				.get(Organization[].class));
 	}
 }

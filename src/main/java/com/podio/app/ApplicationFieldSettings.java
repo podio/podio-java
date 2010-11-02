@@ -2,10 +2,8 @@ package com.podio.app;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlRootElement
 public class ApplicationFieldSettings {
 
 	private List<String> allowedValues;
@@ -26,29 +24,32 @@ public class ApplicationFieldSettings {
 		this.allowedCurrencies = allowedCurrencies;
 	}
 
-	@XmlElement(name = "allowed_values")
+	@JsonProperty("allowed_values")
 	public List<String> getAllowedValues() {
 		return allowedValues;
 	}
 
+	@JsonProperty("allowed_values")
 	public void setAllowedValues(List<String> allowedValues) {
 		this.allowedValues = allowedValues;
 	}
 
-	@XmlElement(name = "referenceable_types")
+	@JsonProperty("referenceable_types")
 	public List<Integer> getReferenceableTypes() {
 		return referenceableTypes;
 	}
 
+	@JsonProperty("referenceable_types")
 	public void setReferenceableTypes(List<Integer> referenceableTypes) {
 		this.referenceableTypes = referenceableTypes;
 	}
 
-	@XmlElement(name = "allowed_currencies")
+	@JsonProperty("allowed_currencies")
 	public List<String> getAllowedCurrencies() {
 		return allowedCurrencies;
 	}
 
+	@JsonProperty("allowed_currencies")
 	public void setAllowedCurrencies(List<String> allowedCurrencies) {
 		this.allowedCurrencies = allowedCurrencies;
 	}
