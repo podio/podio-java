@@ -1,17 +1,28 @@
 package com.podio.rating;
 
+import java.util.HashMap;
+import java.util.Map;
 
 public class TypeRating {
 
-	private RatingCounts counts;
+	private Map<Integer, ValueRatings> counts = new HashMap<Integer, ValueRatings>();
 
 	private Float average;
 
-	public RatingCounts getCounts() {
+	@Override
+	public String toString() {
+		return "TypeRating [counts=" + counts + ", average=" + average + "]";
+	}
+
+	public ValueRatings getCounts(int value) {
+		return counts.get(value);
+	}
+
+	public Map<Integer, ValueRatings> getCounts() {
 		return counts;
 	}
 
-	public void setCounts(RatingCounts counts) {
+	public void setCounts(Map<Integer, ValueRatings> counts) {
 		this.counts = counts;
 	}
 

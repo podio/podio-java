@@ -10,6 +10,11 @@ public class ValueRatings {
 
 	private List<UserMini> users;
 
+	@Override
+	public String toString() {
+		return "ValueRatings [total=" + total + ", users=" + users + "]";
+	}
+
 	public int getTotal() {
 		return total;
 	}

@@ -1,12 +1,8 @@
 package com.podio.item;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 
-import com.podio.serialize.DateTimeDeserializer;
-import com.podio.serialize.DateTimeSerializer;
 import com.podio.user.UserMini;
 
 public class ItemRevision {
@@ -58,13 +54,11 @@ public class ItemRevision {
 	}
 
 	@JsonProperty("created_on")
-	@JsonSerialize(using = DateTimeSerializer.class)
 	public DateTime getCreatedOn() {
 		return createdOn;
 	}
 
 	@JsonProperty("created_on")
-	@JsonDeserialize(using = DateTimeDeserializer.class)
 	public void setCreatedOn(DateTime createdOn) {
 		this.createdOn = createdOn;
 	}

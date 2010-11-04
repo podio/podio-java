@@ -4,11 +4,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import com.podio.serialize.TimeZoneDeserializer;
-import com.podio.serialize.TimeZoneSerializer;
 
 public class User {
 
@@ -21,6 +16,12 @@ public class User {
 	private Locale locale;
 
 	private TimeZone timezone;
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", mail=" + mail + ", type=" + type
+				+ ", locale=" + locale + ", timezone=" + timezone + "]";
+	}
 
 	@JsonProperty("user_id")
 	public int getId() {
@@ -56,12 +57,10 @@ public class User {
 		this.locale = locale;
 	}
 
-	@JsonSerialize(using = TimeZoneSerializer.class)
 	public TimeZone getTimezone() {
 		return timezone;
 	}
 
-	@JsonDeserialize(using = TimeZoneDeserializer.class)
 	public void setTimezone(TimeZone timezone) {
 		this.timezone = timezone;
 	}

@@ -10,6 +10,12 @@ public class UserMini {
 
 	private String name;
 
+	@Override
+	public String toString() {
+		return "UserMini [id=" + id + ", avatar=" + avatar + ", name=" + name
+				+ "]";
+	}
+
 	@JsonProperty("user_id")
 	public int getId() {
 		return id;
@@ -35,5 +41,4 @@ public class UserMini {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 }

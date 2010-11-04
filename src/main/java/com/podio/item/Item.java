@@ -1,12 +1,17 @@
 package com.podio.item;
 
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
 import com.podio.app.ApplicationMicro;
 import com.podio.comment.Comment;
-import com.podio.rating.ObjectRatings;
+import com.podio.conversation.Conversation;
+import com.podio.rating.RatingType;
+import com.podio.rating.RatingTypeKeyDeserializer;
+import com.podio.rating.TypeRating;
 
 public class Item {
 
@@ -60,7 +65,12 @@ public class Item {
 	/**
 	 * The ratings on the item
 	 */
-	private ObjectRatings ratings;
+	private Map<RatingType, TypeRating> ratings;
+
+	/**
+	 * All the conversations on the item that the user is part of
+	 */
+	private List<Conversation> conversations;
 
 	@JsonProperty("item_id")
 	public int getId() {
@@ -144,11 +154,20 @@ public class Item {
 		this.comments = comments;
 	}
 
-	public ObjectRatings getRatings() {
+	public Map<RatingType, TypeRating> getRatings() {
 		return ratings;
 	}
 
-	public void setRatings(ObjectRatings ratings) {
+	@JsonDeserialize(keyUsing = RatingTypeKeyDeserializer.class)
+	public void setRatings(Map<RatingType, TypeRating> ratings) {
 		this.ratings = ratings;
+	}
+
+	public List<Conversation> getConversations() {
+		return conversations;
+	}
+
+	public void setConversations(List<Conversation> conversations) {
+		this.conversations = conversations;
 	}
 }
