@@ -1,8 +1,11 @@
 package com.podio.item;
 
+import java.util.List;
+
 import javax.ws.rs.core.MediaType;
 
 import com.podio.BaseAPI;
+import com.sun.jersey.api.client.GenericType;
 
 public class ItemAPI {
 
@@ -21,5 +24,12 @@ public class ItemAPI {
 	public Item getItem(int itemId) {
 		return baseAPI.getResource("/item/" + itemId)
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(Item.class);
+	}
+
+	public List<ItemReference> getItemReference(int itemId) {
+		return baseAPI.getResource("/item/" + itemId + "/reference/")
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.get(new GenericType<List<ItemReference>>() {
+				});
 	}
 }

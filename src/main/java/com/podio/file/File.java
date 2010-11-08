@@ -1,9 +1,9 @@
 package com.podio.file;
 
-import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.joda.time.DateTime;
 
 import com.podio.user.UserMini;
 
@@ -12,7 +12,7 @@ public class File {
 	/**
 	 * The id of the file
 	 */
-	private int fileId;
+	private int id;
 
 	/**
 	 * The name of the file
@@ -37,7 +37,7 @@ public class File {
 	/**
 	 * The date and time when the file was uploaded
 	 */
-	private Date createdOn;
+	private DateTime createdOn;
 
 	/**
 	 * The user who created the file
@@ -50,13 +50,13 @@ public class File {
 	private List<File> replaces;
 
 	@JsonProperty("file_id")
-	public int getFileId() {
-		return fileId;
+	public int getId() {
+		return id;
 	}
 
 	@JsonProperty("file_id")
-	public void setFileId(int fileId) {
-		this.fileId = fileId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -92,12 +92,12 @@ public class File {
 	}
 
 	@JsonProperty("created_on")
-	public Date getCreatedOn() {
+	public DateTime getCreatedOn() {
 		return createdOn;
 	}
 
 	@JsonProperty("created_on")
-	public void setCreatedOn(Date createdOn) {
+	public void setCreatedOn(DateTime createdOn) {
 		this.createdOn = createdOn;
 	}
 

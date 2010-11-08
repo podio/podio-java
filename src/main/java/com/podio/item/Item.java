@@ -9,9 +9,12 @@ import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import com.podio.app.ApplicationMicro;
 import com.podio.comment.Comment;
 import com.podio.conversation.Conversation;
+import com.podio.file.File;
 import com.podio.rating.RatingType;
 import com.podio.rating.RatingTypeKeyDeserializer;
 import com.podio.rating.TypeRating;
+import com.podio.share.Share;
+import com.podio.task.Task;
 
 public class Item {
 
@@ -71,6 +74,35 @@ public class Item {
 	 * All the conversations on the item that the user is part of
 	 */
 	private List<Conversation> conversations;
+
+	/**
+	 * The tasks on the item that are public or the user is part of
+	 */
+	private List<Task> tasks;
+
+	/**
+	 * The shares of the item
+	 */
+	private List<Share> shares;
+
+	/**
+	 * The files on the status
+	 */
+	private List<File> files;
+
+	/**
+	 * The items that reference this item
+	 */
+	private List<ItemReference> references;
+
+	/**
+	 * The tags on the item
+	 */
+	private List<String> tags;
+
+	private boolean subscribed;
+
+	private Map<RatingType, Integer> userRatings;
 
 	@JsonProperty("item_id")
 	public int getId() {
@@ -169,5 +201,68 @@ public class Item {
 
 	public void setConversations(List<Conversation> conversations) {
 		this.conversations = conversations;
+	}
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
+	}
+
+	public List<Share> getShares() {
+		return shares;
+	}
+
+	public void setShares(List<Share> shares) {
+		this.shares = shares;
+	}
+
+	public List<File> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<File> files) {
+		this.files = files;
+	}
+
+	public List<ItemReference> getReferences() {
+		return references;
+	}
+
+	public void setReferences(List<ItemReference> references) {
+		this.references = references;
+	}
+
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
+	public boolean isSubscribed() {
+		return subscribed;
+	}
+
+	public void setSubscribed(boolean subscribed) {
+		this.subscribed = subscribed;
+	}
+
+	public Integer getUserRating(RatingType type) {
+		return userRatings.get(type);
+	}
+
+	@JsonProperty("user_ratings")
+	public Map<RatingType, Integer> getUserRatings() {
+		return userRatings;
+	}
+
+	@JsonDeserialize(keyUsing = RatingTypeKeyDeserializer.class)
+	@JsonProperty("user_ratings")
+	public void setUserRatings(Map<RatingType, Integer> userRatings) {
+		this.userRatings = userRatings;
 	}
 }
