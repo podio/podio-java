@@ -31,6 +31,19 @@ public class ItemAPITest {
 	}
 
 	@Test
+	public void updateItem() {
+		getAPI().updateItem(
+				1,
+				new ItemUpdate(null, Arrays.asList(new FieldValues(1, "value",
+						"no"))));
+	}
+
+	@Test
+	public void deleteItem() {
+		getAPI().deleteItem(1);
+	}
+
+	@Test
 	public void getItem() {
 		Item item = getAPI().getItem(1);
 
@@ -93,5 +106,23 @@ public class ItemAPITest {
 		ItemMicro item = reference.getItems().get(0);
 		Assert.assertEquals(item.getId(), 1);
 		Assert.assertEquals(item.getTitle(), "זרו");
+	}
+
+	@Test
+	public void getItems() {
+		ItemsResponse response = getAPI().getItems(1, null, null, null, null);
+
+		Assert.assertEquals(response.getTotal(), 2);
+		Assert.assertEquals(response.getFiltered(), 2);
+		Assert.assertEquals(response.getItems().size(), 2);
+	}
+
+	@Test
+	public void getItemsByExternalId() {
+		ItemsResponse response = getAPI().getItemsByExternalId(1,
+				"Foo generator");
+
+		Assert.assertEquals(response.getItems().size(), 1);
+		Assert.assertEquals(response.getItems().get(0).getId(), 1);
 	}
 }

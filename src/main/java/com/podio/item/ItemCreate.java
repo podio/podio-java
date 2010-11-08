@@ -4,18 +4,7 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class ItemCreate {
-
-	/**
-	 * The external id of the item. This can be used to hold a reference to the
-	 * item in an external system.
-	 */
-	private String externalId;
-
-	/**
-	 * The values for each field
-	 */
-	private List<FieldValues> fields;
+public class ItemCreate extends ItemUpdate {
 
 	/**
 	 * Temporary files that have been uploaded and should be attached to this
@@ -34,29 +23,9 @@ public class ItemCreate {
 
 	public ItemCreate(String externalId, List<FieldValues> fields,
 			List<Integer> fileIds, List<String> tags) {
-		super();
-		this.externalId = externalId;
-		this.fields = fields;
+		super(externalId, fields);
 		this.fileIds = fileIds;
 		this.tags = tags;
-	}
-
-	@JsonProperty("external_id")
-	public String getExternalId() {
-		return externalId;
-	}
-
-	@JsonProperty("external_id")
-	public void setExternalId(String externalId) {
-		this.externalId = externalId;
-	}
-
-	public List<FieldValues> getFields() {
-		return fields;
-	}
-
-	public void setFields(List<FieldValues> fields) {
-		this.fields = fields;
 	}
 
 	@JsonProperty("file_ids")
