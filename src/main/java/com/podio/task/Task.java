@@ -42,7 +42,7 @@ public class Task {
 	/**
 	 * The id of the space the task is on, if any
 	 */
-	private int spaceId;
+	private Integer spaceId;
 
 	/**
 	 * The link to the task
@@ -62,22 +62,33 @@ public class Task {
 	/**
 	 * The type of the reference, if any
 	 */
-	private ReferenceType refType;
+	private ReferenceType referenceType;
 
 	/**
 	 * The id of the reference, if any
 	 */
-	private int refId;
+	private Integer referenceId;
 
 	/**
 	 * The title of the reference, if any
 	 */
-	private String refTitle;
+	private String referenceTitle;
 
 	/**
 	 * The direct link to the reference, if any
 	 */
-	private String refLink;
+	private String referenceLink;
+
+	@Override
+	public String toString() {
+		return "Task [id=" + id + ", status=" + status + ", text=" + text
+				+ ", priv=" + priv + ", dueDate=" + dueDate + ", responsible="
+				+ responsible + ", spaceId=" + spaceId + ", link=" + link
+				+ ", createdOn=" + createdOn + ", createdBy=" + createdBy
+				+ ", referenceType=" + referenceType + ", referenceId="
+				+ referenceId + ", referenceTitle=" + referenceTitle
+				+ ", referenceLink=" + referenceLink + "]";
+	}
 
 	@JsonProperty("task_id")
 	public int getId() {
@@ -134,12 +145,12 @@ public class Task {
 	}
 
 	@JsonProperty("space_id")
-	public int getSpaceId() {
+	public Integer getSpaceId() {
 		return spaceId;
 	}
 
 	@JsonProperty("space_id")
-	public void setSpaceId(int spaceId) {
+	public void setSpaceId(Integer spaceId) {
 		this.spaceId = spaceId;
 	}
 
@@ -172,42 +183,42 @@ public class Task {
 	}
 
 	@JsonProperty("ref_type")
-	public ReferenceType getRefType() {
-		return refType;
+	public ReferenceType getReferenceType() {
+		return referenceType;
 	}
 
 	@JsonProperty("ref_type")
-	public void setRefType(ReferenceType refType) {
-		this.refType = refType;
+	public void setReferenceType(ReferenceType refType) {
+		this.referenceType = refType;
 	}
 
 	@JsonProperty("ref_id")
-	public int getRefId() {
-		return refId;
+	public Integer getReferenceId() {
+		return referenceId;
 	}
 
 	@JsonProperty("ref_id")
-	public void setRefId(int refId) {
-		this.refId = refId;
+	public void setReferenceId(Integer refId) {
+		this.referenceId = refId;
 	}
 
 	@JsonProperty("ref_title")
-	public String getRefTitle() {
-		return refTitle;
+	public String getReferenceTitle() {
+		return referenceTitle;
 	}
 
 	@JsonProperty("ref_title")
-	public void setRefTitle(String refTitle) {
-		this.refTitle = refTitle;
+	public void setReferenceTitle(String refTitle) {
+		this.referenceTitle = refTitle;
 	}
 
 	@JsonProperty("ref_link")
-	public String getRefLink() {
-		return refLink;
+	public String getReferenceLink() {
+		return referenceLink;
 	}
 
 	@JsonProperty("ref_link")
-	public void setRefLink(String refLink) {
-		this.refLink = refLink;
+	public void setReferenceLink(String refLink) {
+		this.referenceLink = refLink;
 	}
 }
