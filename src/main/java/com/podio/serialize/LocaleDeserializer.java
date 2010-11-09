@@ -1,18 +1,18 @@
 package com.podio.serialize;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
-import org.joda.time.DateTime;
 
-public class DateTimeDeserializer extends JsonDeserializer<DateTime> {
+public class LocaleDeserializer extends JsonDeserializer<Locale> {
 
 	@Override
-	public DateTime deserialize(JsonParser jp, DeserializationContext ctxt)
+	public Locale deserialize(JsonParser jp, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {
-		return DateTimeUtil.parseDateTime(jp.getText());
+		return new Locale(jp.getText());
 	}
 }

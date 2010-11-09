@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.joda.time.DateTime;
 
 public class User {
 
@@ -16,6 +17,8 @@ public class User {
 	private Locale locale;
 
 	private TimeZone timezone;
+
+	private DateTime createdBy;
 
 	@Override
 	public String toString() {
@@ -63,5 +66,15 @@ public class User {
 
 	public void setTimezone(TimeZone timezone) {
 		this.timezone = timezone;
+	}
+
+	@JsonProperty("created_by")
+	public DateTime getCreatedBy() {
+		return createdBy;
+	}
+
+	@JsonProperty("created_by")
+	public void setCreatedBy(DateTime createdBy) {
+		this.createdBy = createdBy;
 	}
 }

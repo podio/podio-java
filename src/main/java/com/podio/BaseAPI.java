@@ -2,6 +2,7 @@ package com.podio;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
@@ -16,6 +17,8 @@ import com.podio.oauth.OAuthClientCredentials;
 import com.podio.oauth.OAuthUsernameCredentials;
 import com.podio.serialize.DateTimeDeserializer;
 import com.podio.serialize.DateTimeSerializer;
+import com.podio.serialize.LocaleDeserializer;
+import com.podio.serialize.LocaleSerializer;
 import com.podio.serialize.TimeZoneDeserializer;
 import com.podio.serialize.TimeZoneSerializer;
 import com.sun.jersey.api.client.Client;
@@ -61,6 +64,8 @@ public final class BaseAPI {
 				new DateTimeSerializer());
 		serializerFactory.addGenericMapping(TimeZone.class,
 				new TimeZoneSerializer());
+		serializerFactory.addSpecificMapping(Locale.class,
+				new LocaleSerializer());
 		mapper.setSerializerFactory(serializerFactory);
 
 		CustomDeserializerFactory deserializerFactory = new CustomDeserializerFactory();
@@ -68,6 +73,8 @@ public final class BaseAPI {
 				new DateTimeDeserializer());
 		deserializerFactory.addSpecificMapping(TimeZone.class,
 				new TimeZoneDeserializer());
+		deserializerFactory.addSpecificMapping(Locale.class,
+				new LocaleDeserializer());
 		mapper.setDeserializerProvider(new StdDeserializerProvider(
 				deserializerFactory));
 

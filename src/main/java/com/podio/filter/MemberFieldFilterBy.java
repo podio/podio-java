@@ -10,11 +10,11 @@ public class MemberFieldFilterBy extends FieldFilterBy<List<Integer>> {
 
 	@Override
 	public final String format(List<Integer> values) {
-		return FilterUtil.toCSV(values);
+		return FilterUtil.integerListToCSV(values);
 	}
 
 	@Override
 	public final List<Integer> parse(String value) {
-		return FilterUtil.fromCSV(value);
+		return FilterUtil.integerListFromCSV(value);
 	}
 }
