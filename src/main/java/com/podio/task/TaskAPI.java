@@ -175,4 +175,32 @@ public class TaskAPI {
 			}
 		}
 	}
+
+	/**
+	 * Returns the tasks that is completed and where the active user is
+	 * responsible.
+	 */
+	public List<Task> getCompletedTasks() {
+		try {
+			return baseAPI.getResource("/task/completed/")
+					.accept(MediaType.APPLICATION_JSON_TYPE)
+					.get(new GenericType<List<Task>>() {
+					});
+		} catch (UniformInterfaceException e) {
+			if (e.getResponse().getStatus() == 204) {
+				return Collections.<Task> emptyList();
+			} else {
+				throw e;
+			}
+		}
+	}
+
+	/**
+	 * Returns the tasks that are started and where the active user is the
+	 * responsible.
+	 */
+	public TasksByDue getStartedTasks() {
+		return baseAPI.getResource("/task/started/")
+				.accept(MediaType.APPLICATION_JSON_TYPE).get(TasksByDue.class);
+	}
 }

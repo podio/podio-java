@@ -125,4 +125,18 @@ public class TaskAPITest {
 		List<Task> tasks = getAPI().getAssignedCompletedTasks();
 		Assert.assertEquals(tasks.size(), 0);
 	}
+
+	@Test
+	public void getCompletedTasks() {
+		List<Task> tasks = getAPI().getCompletedTasks();
+		Assert.assertEquals(tasks.size(), 1);
+		Assert.assertEquals(tasks.get(0).getId(), 4);
+	}
+
+	@Test
+	public void getStartedTasks() {
+		TasksByDue tasks = getAPI().getStartedTasks();
+		Assert.assertEquals(tasks.getByDueStatus(TaskDueStatus.OVERDUE).size(),
+				1);
+	}
 }
