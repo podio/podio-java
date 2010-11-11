@@ -1,6 +1,5 @@
 package com.podio.task;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
@@ -11,7 +10,7 @@ import com.podio.BaseAPI;
 import com.podio.common.Empty;
 import com.podio.common.Reference;
 import com.sun.jersey.api.client.GenericType;
-import com.sun.jersey.api.client.UniformInterfaceException;
+import com.sun.jersey.api.client.WebResource;
 
 public class TaskAPI {
 
@@ -162,18 +161,10 @@ public class TaskAPI {
 	 * Returns the tasks that the user has assigned to another user.
 	 */
 	public List<Task> getAssignedCompletedTasks() {
-		try {
-			return baseAPI.getResource("/task/assigned/completed/")
-					.accept(MediaType.APPLICATION_JSON_TYPE)
-					.get(new GenericType<List<Task>>() {
-					});
-		} catch (UniformInterfaceException e) {
-			if (e.getResponse().getStatus() == 204) {
-				return Collections.<Task> emptyList();
-			} else {
-				throw e;
-			}
-		}
+		return baseAPI.getResource("/task/assigned/completed/")
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.get(new GenericType<List<Task>>() {
+				});
 	}
 
 	/**
@@ -181,18 +172,10 @@ public class TaskAPI {
 	 * responsible.
 	 */
 	public List<Task> getCompletedTasks() {
-		try {
-			return baseAPI.getResource("/task/completed/")
-					.accept(MediaType.APPLICATION_JSON_TYPE)
-					.get(new GenericType<List<Task>>() {
-					});
-		} catch (UniformInterfaceException e) {
-			if (e.getResponse().getStatus() == 204) {
-				return Collections.<Task> emptyList();
-			} else {
-				throw e;
-			}
-		}
+		return baseAPI.getResource("/task/completed/")
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.get(new GenericType<List<Task>>() {
+				});
 	}
 
 	/**
@@ -202,5 +185,49 @@ public class TaskAPI {
 	public TasksByDue getStartedTasks() {
 		return baseAPI.getResource("/task/started/")
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(TasksByDue.class);
+	}
+
+	/**
+	 * Returns all the tasks that are related to the space. It includes tasks
+	 * with a direct reference to the space, and tasks with an indirect
+	 * reference to the space (like items and status updates).
+	 */
+	public TasksByDue getTasksInSpaceByDue(int spaceId) {
+		return baseAPI.getResource("/task/in_space/" + spaceId + "/")
+				.queryParam("sort_by", "due_date")
+				.accept(MediaType.APPLICATION_JSON_TYPE).get(TasksByDue.class);
+	}
+
+	/**
+	 * Returns all the tasks that are related to the space. It includes tasks
+	 * with a direct reference to the space, and tasks with an indirect
+	 * reference to the space (like items and status updates).
+	 */
+	public List<TasksWithResponsible> getTasksInSpaceByResponsible(int spaceId) {
+		return baseAPI.getResource("/task/in_space/" + spaceId + "/")
+				.queryParam("sort_by", "responsible")
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.get(new GenericType<List<TasksWithResponsible>>() {
+				});
+	}
+
+	/**
+	 * Returns the total task count for the active user.
+	 */
+	public TaskTotals getTaskTotals() {
+		return getTaskTotals(null);
+	}
+
+	/**
+	 * Returns the total task count for the active user.
+	 */
+	public TaskTotals getTaskTotals(Integer spaceId) {
+		WebResource resource = baseAPI.getResource("/task/total");
+		if (spaceId != null) {
+			resource = resource.queryParam("space_id", spaceId.toString());
+		}
+
+		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
+				TaskTotals.class);
 	}
 }
