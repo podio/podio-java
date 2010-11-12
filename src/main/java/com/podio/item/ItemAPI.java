@@ -19,8 +19,10 @@ public class ItemAPI {
 		this.baseAPI = baseAPI;
 	}
 
-	public ItemCreateResponse addItem(int appId, ItemCreate create) {
+	public ItemCreateResponse addItem(int appId, ItemCreate create,
+			boolean silent) {
 		return baseAPI.getResource("/item/app/" + appId + "/")
+				.queryParam("silent", silent ? "1" : "0")
 				.entity(create, MediaType.APPLICATION_JSON_TYPE)
 				.post(ItemCreateResponse.class);
 	}
@@ -30,13 +32,15 @@ public class ItemAPI {
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(Item.class);
 	}
 
-	public void updateItem(int itemId, ItemUpdate update) {
+	public void updateItem(int itemId, ItemUpdate update, boolean silent) {
 		baseAPI.getResource("/item/" + itemId)
+				.queryParam("silent", silent ? "1" : "0")
 				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
-	public void deleteItem(int itemId) {
-		baseAPI.getResource("/item/" + itemId).delete();
+	public void deleteItem(int itemId, boolean silent) {
+		baseAPI.getResource("/item/" + itemId)
+				.queryParam("silent", silent ? "1" : "0").delete();
 	}
 
 	public List<ItemReference> getItemReference(int itemId) {

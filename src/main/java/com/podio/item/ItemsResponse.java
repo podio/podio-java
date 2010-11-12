@@ -19,6 +19,12 @@ public class ItemsResponse {
 	 */
 	private List<ItemBadge> items;
 
+	@Override
+	public String toString() {
+		return "ItemsResponse [total=" + total + ", filtered=" + filtered
+				+ ", items=" + items + "]";
+	}
+
 	public int getTotal() {
 		return total;
 	}

@@ -83,7 +83,6 @@ public enum ApplicationFieldType {
 
 	@JsonCreator()
 	public static ApplicationFieldType getByName(String value) {
-		System.out.println(value);
 		return ApplicationFieldType.valueOf(value.toUpperCase());
 	}
 }

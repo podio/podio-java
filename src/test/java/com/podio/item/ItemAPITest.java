@@ -25,7 +25,7 @@ public class ItemAPITest {
 				1,
 				new ItemCreate(null, Arrays.asList(new FieldValues(1, "value",
 						"yes")), Collections.<Integer> emptyList(), Collections
-						.<String> emptyList()));
+						.<String> emptyList()), false);
 
 		Assert.assertTrue(response.getItemId() > 1);
 	}
@@ -35,12 +35,12 @@ public class ItemAPITest {
 		getAPI().updateItem(
 				1,
 				new ItemUpdate(null, Arrays.asList(new FieldValues(1, "value",
-						"no"))));
+						"no"))), false);
 	}
 
 	@Test
 	public void deleteItem() {
-		getAPI().deleteItem(1);
+		getAPI().deleteItem(1, false);
 	}
 
 	@Test
