@@ -1,19 +1,13 @@
 package com.podio;
 
-import javax.ws.rs.core.UriBuilder;
-
 import com.podio.oauth.OAuthAPI;
 import com.podio.oauth.OAuthClientCredentials;
 import com.podio.oauth.OAuthRefreshTokenCredentials;
 import com.podio.oauth.OAuthToken;
 import com.podio.oauth.OAuthUserCredentials;
 import com.podio.oauth.OAuthUsernameCredentials;
-import com.sun.jersey.api.client.ClientHandlerException;
-import com.sun.jersey.api.client.ClientRequest;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.filter.ClientFilter;
 
-public class LoginFilter extends ClientFilter {
+public class AuthProvider {
 
 	private final OAuthClientCredentials clientCredentials;
 	private final OAuthUsernameCredentials userCredentials;
@@ -23,7 +17,7 @@ public class LoginFilter extends ClientFilter {
 
 	private long expireTime;
 
-	public LoginFilter(BaseAPI baseAPI,
+	public AuthProvider(BaseAPI baseAPI,
 			OAuthClientCredentials clientCredentials,
 			OAuthUsernameCredentials userCredentials) {
 		this.clientCredentials = clientCredentials;
@@ -46,19 +40,13 @@ public class LoginFilter extends ClientFilter {
 				this.token.getRefreshToken()));
 	}
 
-	@Override
-	public ClientResponse handle(ClientRequest cr)
-			throws ClientHandlerException {
+	public synchronized OAuthToken getToken() {
 		if (token == null) {
 			newToken();
 		} else if (expireTime < System.currentTimeMillis() - 30 * 1000) {
 			refreshToken();
 		}
 
-		UriBuilder b = UriBuilder.fromUri(cr.getURI());
-		b.queryParam("oauth_token", this.token.getAccessToken());
-		cr.setURI(b.build());
-
-		return getNext().handle(cr);
+		return token;
 	}
 }

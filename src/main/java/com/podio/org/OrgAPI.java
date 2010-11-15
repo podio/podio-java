@@ -16,13 +16,13 @@ public class OrgAPI {
 	}
 
 	public Organization getOrganization(int orgId) {
-		return baseAPI.getResource("/org/" + orgId)
+		return baseAPI.getApiResource("/org/" + orgId)
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(Organization.class);
 	}
 
 	public List<Organization> getOrganizations() {
-		return Arrays.asList(baseAPI.getResource("/org/")
+		return Arrays.asList(baseAPI.getApiResource("/org/")
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(Organization[].class));
 	}

@@ -24,7 +24,7 @@ public class TaskAPI {
 	 * Returns the task with the given id.
 	 */
 	public Task getTask(int taskId) {
-		return baseAPI.getResource("/task/" + taskId)
+		return baseAPI.getApiResource("/task/" + taskId)
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(Task.class);
 	}
 
@@ -33,7 +33,7 @@ public class TaskAPI {
 	 * task and its completion.
 	 */
 	public void assignTask(int taskId, int responsible) {
-		baseAPI.getResource("/task/" + taskId + "/assign")
+		baseAPI.getApiResource("/task/" + taskId + "/assign")
 				.entity(new AssignValue(responsible),
 						MediaType.APPLICATION_JSON_TYPE).post();
 	}
@@ -42,7 +42,7 @@ public class TaskAPI {
 	 * Mark the given task as completed.
 	 */
 	public void completeTask(int taskId) {
-		baseAPI.getResource("/task/" + taskId + "/complete")
+		baseAPI.getApiResource("/task/" + taskId + "/complete")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -50,7 +50,7 @@ public class TaskAPI {
 	 * Mark the completed task as no longer being completed.
 	 */
 	public void incompleteTask(int taskId) {
-		baseAPI.getResource("/task/" + taskId + "/incomplete")
+		baseAPI.getApiResource("/task/" + taskId + "/incomplete")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -58,7 +58,7 @@ public class TaskAPI {
 	 * Indicate that work has started on the given task.
 	 */
 	public void startTask(int taskId) {
-		baseAPI.getResource("/task/" + taskId + "/start")
+		baseAPI.getApiResource("/task/" + taskId + "/start")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -66,7 +66,7 @@ public class TaskAPI {
 	 * Indicate that worked has stopped on the given task.
 	 */
 	public void stopTask(int taskId) {
-		baseAPI.getResource("/task/" + taskId + "/stop")
+		baseAPI.getApiResource("/task/" + taskId + "/stop")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -74,7 +74,7 @@ public class TaskAPI {
 	 * Updates the due date of the task to the given value
 	 */
 	public void updateDueDate(int taskId, LocalDate dueDate) {
-		baseAPI.getResource("/task/" + taskId + "/due_date")
+		baseAPI.getApiResource("/task/" + taskId + "/due_date")
 				.entity(new TaskDueDate(dueDate),
 						MediaType.APPLICATION_JSON_TYPE).put();
 	}
@@ -83,7 +83,7 @@ public class TaskAPI {
 	 * Update the private flag on the given task.
 	 */
 	public void updatePrivate(int taskId, boolean priv) {
-		baseAPI.getResource("/task/" + taskId + "/private")
+		baseAPI.getApiResource("/task/" + taskId + "/private")
 				.entity(new TaskPrivate(priv), MediaType.APPLICATION_JSON_TYPE)
 				.put();
 	}
@@ -92,7 +92,7 @@ public class TaskAPI {
 	 * Updates the text of the task.
 	 */
 	public void updateText(int taskId, String text) {
-		baseAPI.getResource("/task/" + taskId + "/text")
+		baseAPI.getApiResource("/task/" + taskId + "/text")
 				.entity(new TaskText(text), MediaType.APPLICATION_JSON_TYPE)
 				.put();
 	}
@@ -101,7 +101,7 @@ public class TaskAPI {
 	 * Creates a new task with no reference to other objects.
 	 */
 	public int createTask(TaskCreate task) {
-		TaskCreateResponse response = baseAPI.getResource("/task/")
+		TaskCreateResponse response = baseAPI.getApiResource("/task/")
 				.entity(task, MediaType.APPLICATION_JSON_TYPE)
 				.post(TaskCreateResponse.class);
 
@@ -113,7 +113,7 @@ public class TaskAPI {
 	 */
 	public int createTaskWithReference(TaskCreate task, Reference reference) {
 		TaskCreateResponse response = baseAPI
-				.getResource(
+				.getApiResource(
 						"/task/" + reference.getType().name().toLowerCase()
 								+ "/" + reference.getId() + "/")
 				.entity(task, MediaType.APPLICATION_JSON_TYPE)
@@ -129,7 +129,7 @@ public class TaskAPI {
 	 */
 	public List<Task> getTasksWithReference(Reference reference) {
 		return baseAPI
-				.getResource(
+				.getApiResource(
 						"/task/" + reference.getType().name().toLowerCase()
 								+ "/" + reference.getId() + "/")
 				.accept(MediaType.APPLICATION_JSON_TYPE)
@@ -145,7 +145,7 @@ public class TaskAPI {
 	 * their due date status.
 	 */
 	public TasksByDue getActiveTasks() {
-		return baseAPI.getResource("/task/active/")
+		return baseAPI.getApiResource("/task/active/")
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(TasksByDue.class);
 	}
 
@@ -153,7 +153,7 @@ public class TaskAPI {
 	 * Returns the tasks that the user has assigned to another user.
 	 */
 	public TasksByDue getAssignedActiveTasks() {
-		return baseAPI.getResource("/task/assigned/active/")
+		return baseAPI.getApiResource("/task/assigned/active/")
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(TasksByDue.class);
 	}
 
@@ -161,7 +161,7 @@ public class TaskAPI {
 	 * Returns the tasks that the user has assigned to another user.
 	 */
 	public List<Task> getAssignedCompletedTasks() {
-		return baseAPI.getResource("/task/assigned/completed/")
+		return baseAPI.getApiResource("/task/assigned/completed/")
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(new GenericType<List<Task>>() {
 				});
@@ -172,7 +172,7 @@ public class TaskAPI {
 	 * responsible.
 	 */
 	public List<Task> getCompletedTasks() {
-		return baseAPI.getResource("/task/completed/")
+		return baseAPI.getApiResource("/task/completed/")
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(new GenericType<List<Task>>() {
 				});
@@ -183,7 +183,7 @@ public class TaskAPI {
 	 * responsible.
 	 */
 	public TasksByDue getStartedTasks() {
-		return baseAPI.getResource("/task/started/")
+		return baseAPI.getApiResource("/task/started/")
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(TasksByDue.class);
 	}
 
@@ -193,7 +193,7 @@ public class TaskAPI {
 	 * reference to the space (like items and status updates).
 	 */
 	public TasksByDue getTasksInSpaceByDue(int spaceId) {
-		return baseAPI.getResource("/task/in_space/" + spaceId + "/")
+		return baseAPI.getApiResource("/task/in_space/" + spaceId + "/")
 				.queryParam("sort_by", "due_date")
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(TasksByDue.class);
 	}
@@ -204,7 +204,7 @@ public class TaskAPI {
 	 * reference to the space (like items and status updates).
 	 */
 	public List<TasksWithResponsible> getTasksInSpaceByResponsible(int spaceId) {
-		return baseAPI.getResource("/task/in_space/" + spaceId + "/")
+		return baseAPI.getApiResource("/task/in_space/" + spaceId + "/")
 				.queryParam("sort_by", "responsible")
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(new GenericType<List<TasksWithResponsible>>() {
@@ -222,7 +222,7 @@ public class TaskAPI {
 	 * Returns the total task count for the active user.
 	 */
 	public TaskTotals getTaskTotals(Integer spaceId) {
-		WebResource resource = baseAPI.getResource("/task/total");
+		WebResource resource = baseAPI.getApiResource("/task/total");
 		if (spaceId != null) {
 			resource = resource.queryParam("space_id", spaceId.toString());
 		}

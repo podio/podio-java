@@ -23,7 +23,7 @@ public class ContactAPI {
 	 * Returns all the contact details about the user with the given id.
 	 */
 	public Profile getContact(int userId) {
-		return baseAPI.getResource("/contact/" + userId)
+		return baseAPI.getApiResource("/contact/" + userId)
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(Profile.class);
 	}
 
@@ -32,7 +32,7 @@ public class ContactAPI {
 	 */
 	public <T, R> List<T> getContactField(int userId, ProfileField<T, R> field) {
 		List<R> values = baseAPI
-				.getResource("/contact/" + userId + "/" + field.getName())
+				.getApiResource("/contact/" + userId + "/" + field.getName())
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(new GenericType<List<R>>() {
 				});
@@ -50,7 +50,7 @@ public class ContactAPI {
 	 * interactive with the active user.
 	 */
 	public <T> List<T> getTopContacts(Integer limit, ProfileType<T> type) {
-		WebResource resource = baseAPI.getResource("/contact/top/");
+		WebResource resource = baseAPI.getApiResource("/contact/top/");
 
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
@@ -65,7 +65,7 @@ public class ContactAPI {
 	 * Returns the total number of contacts by organization.
 	 */
 	public List<ContactTotal> getContactTotals() {
-		return baseAPI.getResource("/contact/totals/")
+		return baseAPI.getApiResource("/contact/totals/")
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(new GenericType<List<ContactTotal>>() {
 				});
@@ -77,7 +77,7 @@ public class ContactAPI {
 	public <T, F, R> List<T> getContacts(ProfileField<F, R> key, F value,
 			Integer limit, Integer offset, ProfileType<T> type,
 			ContactOrder order) {
-		WebResource resource = baseAPI.getResource("/contact/");
+		WebResource resource = baseAPI.getApiResource("/contact/");
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
 				order);
@@ -89,7 +89,7 @@ public class ContactAPI {
 	public <T, F, R> List<T> getOrganizationContacts(int organizationId,
 			ProfileField<F, R> key, F value, Integer limit, Integer offset,
 			ProfileType<T> type, ContactOrder order) {
-		WebResource resource = baseAPI.getResource("/contact/org/"
+		WebResource resource = baseAPI.getApiResource("/contact/org/"
 				+ organizationId);
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
@@ -102,7 +102,7 @@ public class ContactAPI {
 	public <T, F, R> List<T> getSpaceContacts(int spaceId,
 			ProfileField<F, R> key, F value, Integer limit, Integer offset,
 			ProfileType<T> type, ContactOrder order) {
-		WebResource resource = baseAPI.getResource("/contact/space/" + spaceId);
+		WebResource resource = baseAPI.getApiResource("/contact/space/" + spaceId);
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
 				order);

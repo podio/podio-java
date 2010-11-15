@@ -22,7 +22,7 @@ public class OAuthAPI {
 		parameters.add("client_secret", clientCredentials.getClientSecret());
 		userCredentials.addParameters(parameters);
 
-		return baseAPI.getResource("/oauth/token", false)
+		return baseAPI.getApiResource("/oauth/token", false)
 				.type(MediaType.APPLICATION_FORM_URLENCODED_TYPE)
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.post(OAuthToken.class, parameters);

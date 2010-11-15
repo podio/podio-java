@@ -27,7 +27,7 @@ public class UserAPI {
 	 * old password has to be supplied as well.
 	 */
 	public void updateUser(UserUpdate update) {
-		baseAPI.getResource("/user/")
+		baseAPI.getApiResource("/user/")
 				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -36,7 +36,7 @@ public class UserAPI {
 	 * profile data and notification data.
 	 */
 	public UserStatus getStatus() {
-		return baseAPI.getResource("/user/status")
+		return baseAPI.getApiResource("/user/status")
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(UserStatus.class);
 	}
 
@@ -44,7 +44,7 @@ public class UserAPI {
 	 * Returns the profile of the active user
 	 */
 	public Profile getProfile() {
-		return baseAPI.getResource("/user/profile/")
+		return baseAPI.getApiResource("/user/profile/")
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(Profile.class);
 	}
 
@@ -53,7 +53,7 @@ public class UserAPI {
 	 */
 	public <T, R> List<T> getProfileField(ProfileField<T, R> field) {
 		List<R> values = baseAPI
-				.getResource("/user/profile/" + field.getName())
+				.getApiResource("/user/profile/" + field.getName())
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(new GenericType<List<R>>() {
 				});
@@ -71,7 +71,7 @@ public class UserAPI {
 	 * as any fields not included will not be part of the new revision.
 	 */
 	public void updateProfile(ProfileUpdate update) {
-		baseAPI.getResource("/user/profile/")
+		baseAPI.getApiResource("/user/profile/")
 				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -80,11 +80,11 @@ public class UserAPI {
 	 */
 	public <F> void updateProfileField(ProfileField<F, ?> field, F value) {
 		if (field.isSingle()) {
-			baseAPI.getResource("/user/profile/" + field.getName())
+			baseAPI.getApiResource("/user/profile/" + field.getName())
 					.entity(new ProfileFieldSingleValue<F>(value),
 							MediaType.APPLICATION_JSON_TYPE).put();
 		} else {
-			baseAPI.getResource("/user/profile/" + field.getName())
+			baseAPI.getApiResource("/user/profile/" + field.getName())
 					.entity(new ProfileFieldMultiValue<F>(value),
 							MediaType.APPLICATION_JSON_TYPE).put();
 		}
@@ -105,7 +105,7 @@ public class UserAPI {
 			throw new IllegalArgumentException(
 					"Field is only valid for single value");
 		} else {
-			baseAPI.getResource("/user/profile/" + field.getName())
+			baseAPI.getApiResource("/user/profile/" + field.getName())
 					.entity(new ProfileFieldMultiValue<F>(values),
 							MediaType.APPLICATION_JSON_TYPE).put();
 		}
@@ -116,7 +116,7 @@ public class UserAPI {
 	 * the values.
 	 */
 	public void updateProfile(ProfileFieldValues values) {
-		baseAPI.getResource("/user/profile/")
+		baseAPI.getApiResource("/user/profile/")
 				.entity(values, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -124,7 +124,7 @@ public class UserAPI {
 	 * Gets the active user
 	 */
 	public User getUser() {
-		return baseAPI.getResource("/user/")
+		return baseAPI.getApiResource("/user/")
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(User.class);
 	}
 
@@ -132,7 +132,7 @@ public class UserAPI {
 	 * Returns the user with given mail address.
 	 */
 	public User getUserByMail(String mail) {
-		return baseAPI.getResource("/user/" + mail)
+		return baseAPI.getApiResource("/user/" + mail)
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(User.class);
 	}
 
@@ -141,7 +141,7 @@ public class UserAPI {
 	 * name. The property is specific to the auth client used.
 	 */
 	public boolean getProperty(String key) {
-		return baseAPI.getResource("/user/property/" + key)
+		return baseAPI.getApiResource("/user/property/" + key)
 				.get(PropertyValue.class).getValue();
 	}
 
@@ -150,7 +150,7 @@ public class UserAPI {
 	 * The property is specific to the auth client used.
 	 */
 	public void setProperty(String key, boolean value) {
-		baseAPI.getResource("/user/property/" + key)
+		baseAPI.getApiResource("/user/property/" + key)
 				.entity(new PropertyValue(value),
 						MediaType.APPLICATION_JSON_TYPE).put();
 	}
@@ -160,6 +160,6 @@ public class UserAPI {
 	 * property is specific to the auth client used.
 	 */
 	public void deleteProperty(String key) {
-		baseAPI.getResource("/user/property/" + key).delete();
+		baseAPI.getApiResource("/user/property/" + key).delete();
 	}
 }

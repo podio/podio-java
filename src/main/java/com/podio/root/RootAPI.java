@@ -13,7 +13,7 @@ public class RootAPI {
 	}
 
 	public SystemStatus getStatus() {
-		return baseAPI.getResource("/", false)
+		return baseAPI.getApiResource("/", false)
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(SystemStatus.class);
 	}

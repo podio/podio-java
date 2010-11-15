@@ -32,8 +32,10 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 public final class BaseAPI {
 
-	private final WebResource resource;
-	private LoginFilter loginFilter;
+	private final WebResource apiResource;
+	private final WebResource uploadResource;
+	private final ApiLoginFilter apiLoginFilter;
+	private FileLoginFilter fileLoginFilter;
 
 	public BaseAPI(String hostname, int port, boolean ssl, boolean test,
 			OAuthClientCredentials clientCredentials,
@@ -44,19 +46,25 @@ public final class BaseAPI {
 		if (test) {
 			client.addFilter(new TestFilter());
 		}
+		// client.addFilter(new LoggingFilter());
 
-		URI uri;
+		this.apiResource = client.resource(getURI("api", hostname, port, ssl));
+		this.uploadResource = client.resource(getURI("upload", hostname, port,
+				ssl));
+
+		AuthProvider authProvider = new AuthProvider(this, clientCredentials,
+				userCredentials);
+		this.apiLoginFilter = new ApiLoginFilter(authProvider);
+		this.fileLoginFilter = new FileLoginFilter(authProvider);
+	}
+
+	private URI getURI(String prefix, String hostname, int port, boolean ssl) {
 		try {
-			uri = new URI(ssl ? "https" : "http", null, hostname, port, null,
-					null, null);
+			return new URI(ssl ? "https" : "http", null, prefix + "."
+					+ hostname, port, null, null, null);
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
-
-		this.resource = client.resource(uri);
-
-		this.loginFilter = new LoginFilter(this, clientCredentials,
-				userCredentials);
 	}
 
 	private JacksonJsonProvider getJsonProvider() {
@@ -87,17 +95,30 @@ public final class BaseAPI {
 		mapper.setDeserializerProvider(new StdDeserializerProvider(
 				deserializerFactory));
 
-		return new JacksonJsonProvider(mapper);
+		return new CustomJacksonJsonProvider(mapper);
 	}
 
-	public WebResource getResource(String path) {
-		return getResource(path, true);
+	public WebResource getUploadResource(String path) {
+		return getUploadResource(path, true);
 	}
 
-	public WebResource getResource(String path, boolean secure) {
-		WebResource subResource = this.resource.path(path);
+	public WebResource getUploadResource(String path, boolean secure) {
+		WebResource subResource = uploadResource.path(path);
 		if (secure) {
-			subResource.addFilter(this.loginFilter);
+			subResource.addFilter(this.fileLoginFilter);
+		}
+
+		return subResource;
+	}
+
+	public WebResource getApiResource(String path) {
+		return getApiResource(path, true);
+	}
+
+	public WebResource getApiResource(String path, boolean secure) {
+		WebResource subResource = apiResource.path(path);
+		if (secure) {
+			subResource.addFilter(this.apiLoginFilter);
 		}
 
 		return subResource;

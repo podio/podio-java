@@ -13,7 +13,7 @@ public class StatusAPI {
 	}
 
 	public StatusCreateResponse createStatus(StatusCreate status) {
-		return baseAPI.getResource("/status/")
+		return baseAPI.getApiResource("/status/")
 				.entity(status, MediaType.APPLICATION_JSON_TYPE)
 				.post(StatusCreateResponse.class);
 	}

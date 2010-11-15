@@ -13,7 +13,7 @@ public class SpaceAPI {
 	}
 
 	public SpaceWithOrganization getByURL(String url) {
-		return baseAPI.getResource("/space/url").queryParam("url", url)
+		return baseAPI.getApiResource("/space/url").queryParam("url", url)
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(SpaceWithOrganization.class);
 	}

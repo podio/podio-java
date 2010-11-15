@@ -21,30 +21,30 @@ public class ItemAPI {
 
 	public ItemCreateResponse addItem(int appId, ItemCreate create,
 			boolean silent) {
-		return baseAPI.getResource("/item/app/" + appId + "/")
+		return baseAPI.getApiResource("/item/app/" + appId + "/")
 				.queryParam("silent", silent ? "1" : "0")
 				.entity(create, MediaType.APPLICATION_JSON_TYPE)
 				.post(ItemCreateResponse.class);
 	}
 
 	public Item getItem(int itemId) {
-		return baseAPI.getResource("/item/" + itemId)
+		return baseAPI.getApiResource("/item/" + itemId)
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(Item.class);
 	}
 
 	public void updateItem(int itemId, ItemUpdate update, boolean silent) {
-		baseAPI.getResource("/item/" + itemId)
+		baseAPI.getApiResource("/item/" + itemId)
 				.queryParam("silent", silent ? "1" : "0")
 				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
 	public void deleteItem(int itemId, boolean silent) {
-		baseAPI.getResource("/item/" + itemId)
+		baseAPI.getApiResource("/item/" + itemId)
 				.queryParam("silent", silent ? "1" : "0").delete();
 	}
 
 	public List<ItemReference> getItemReference(int itemId) {
-		return baseAPI.getResource("/item/" + itemId + "/reference/")
+		return baseAPI.getApiResource("/item/" + itemId + "/reference/")
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(new GenericType<List<ItemReference>>() {
 				});
@@ -52,7 +52,7 @@ public class ItemAPI {
 
 	public ItemsResponse getItems(int appId, Integer limit, Integer offset,
 			SortBy sortBy, Boolean sortDesc, FilterByValue... filters) {
-		WebResource resource = baseAPI.getResource("/item/app/" + appId
+		WebResource resource = baseAPI.getApiResource("/item/app/" + appId
 				+ "/v2/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
