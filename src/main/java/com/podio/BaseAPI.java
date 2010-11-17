@@ -60,8 +60,9 @@ public final class BaseAPI {
 
 	private URI getURI(String prefix, String hostname, int port, boolean ssl) {
 		try {
-			return new URI(ssl ? "https" : "http", null, prefix + "."
-					+ hostname, port, null, null, null);
+			return new URI(ssl ? "https" : "http", null,
+					hostname != "localhost" ? prefix + "." + hostname
+							: hostname, port, null, null, null);
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}

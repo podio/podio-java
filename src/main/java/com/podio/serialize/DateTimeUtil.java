@@ -2,6 +2,7 @@ package com.podio.serialize;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -17,7 +18,11 @@ public final class DateTimeUtil {
 	}
 
 	public static DateTime parseDateTime(String text) {
-		return DATE_TIME_FORMAT.parseDateTime(text);
+		try {
+			return DATE_TIME_FORMAT.parseDateTime(text);
+		} catch (IllegalArgumentException e) {
+			return parseDate(text).toDateTime(new LocalTime(0, 0));
+		}
 	}
 
 	public static String formatDateTime(DateTime dateTime) {
