@@ -6,6 +6,10 @@ public class Reference {
 
 	private int id;
 
+	public Reference() {
+		super();
+	}
+
 	public Reference(ReferenceType type, int id) {
 		super();
 		this.type = type;

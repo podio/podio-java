@@ -4,6 +4,11 @@ public class FileUpdate {
 
 	private String description;
 
+	public FileUpdate(String description) {
+		super();
+		this.description = description;
+	}
+
 	public String getDescription() {
 		return description;
 	}

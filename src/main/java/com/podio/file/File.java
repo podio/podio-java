@@ -2,6 +2,8 @@ package com.podio.file;
 
 import java.util.List;
 
+import javax.activation.MimeType;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
@@ -27,7 +29,18 @@ public class File {
 	/**
 	 * The type of the file, see the area for allowed types
 	 */
-	private String mimetype;
+	private MimeType mimetype;
+
+	/**
+	 * The reference to where the file was added, either comment, task, item or
+	 * status,
+	 */
+	private FileReference data;
+
+	/**
+	 * The context of the file, either an item, task or status
+	 */
+	private FileReference context;
 
 	/**
 	 * The size of the file in bytes
@@ -75,12 +88,28 @@ public class File {
 		this.description = description;
 	}
 
-	public String getMimetype() {
+	public MimeType getMimetype() {
 		return mimetype;
 	}
 
-	public void setMimetype(String mimetype) {
+	public void setMimetype(MimeType mimetype) {
 		this.mimetype = mimetype;
+	}
+
+	public FileReference getData() {
+		return data;
+	}
+
+	public void setData(FileReference data) {
+		this.data = data;
+	}
+
+	public FileReference getContext() {
+		return context;
+	}
+
+	public void setContext(FileReference context) {
+		this.context = context;
 	}
 
 	public long getSize() {

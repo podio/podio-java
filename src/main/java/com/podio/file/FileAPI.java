@@ -8,7 +8,9 @@ import javax.ws.rs.core.MediaType;
 import org.joda.time.LocalDate;
 
 import com.podio.BaseAPI;
+import com.podio.serialize.DateTimeUtil;
 import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 
@@ -73,9 +75,96 @@ public class FileAPI {
 	 *            The latest date to return files from. Defaults to no limit.
 	 */
 	public List<File> getLatestOnApp(int appId, Integer limit, LocalDate latest) {
-		return baseAPI.getApiResource("/file/app/" + appId + "/latest/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
-				.get(new GenericType<List<File>>() {
+		WebResource resource = baseAPI.getApiResource("/file/app/" + appId
+				+ "/latest/");
+		if (limit != null) {
+			resource = resource.queryParam("limit", limit.toString());
+		}
+		if (latest != null) {
+			resource = resource.queryParam("latest",
+					DateTimeUtil.formatDate(latest));
+		}
+
+		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
+				new GenericType<List<File>>() {
+				});
+	}
+
+	/**
+	 * Returns all the files related to the items in the application. This
+	 * includes files both on the item itself and in comments on the item.
+	 * 
+	 * @param limit
+	 *            The maximum number of files to be returned. Defaults to 50 and
+	 *            cannot be higher than 100.
+	 * @param offset
+	 *            The offset to use when returning files to be used for
+	 *            pagination. Defaults to 0 (no offset).
+	 */
+	public List<File> getOnApp(int appId, Integer limit, Integer offset) {
+		WebResource resource = baseAPI.getApiResource("/file/app/" + appId
+				+ "/");
+		if (limit != null) {
+			resource = resource.queryParam("limit", limit.toString());
+		}
+		if (offset != null) {
+			resource = resource.queryParam("offset", offset.toString());
+		}
+
+		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
+				new GenericType<List<File>>() {
+				});
+	}
+
+	/**
+	 * Returns the latest files on the space order descending by the date the
+	 * file was uploaded.
+	 * 
+	 * @param limit
+	 *            The limit of how many files should be returned. Defaults to 10
+	 *            and cannot be any higher than 50.
+	 * @param latest
+	 *            The latest date to return files from. Defaults to no limit.
+	 */
+	public List<File> getLatestOnSpace(int spaceId, Integer limit,
+			LocalDate latest) {
+		WebResource resource = baseAPI.getApiResource("/file/space/" + spaceId
+				+ "/latest/");
+		if (limit != null) {
+			resource = resource.queryParam("limit", limit.toString());
+		}
+		if (latest != null) {
+			resource = resource.queryParam("latest",
+					DateTimeUtil.formatDate(latest));
+		}
+
+		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
+				new GenericType<List<File>>() {
+				});
+	}
+
+	/**
+	 * Returns all the files on the space order by the file name.
+	 * 
+	 * @param limit
+	 *            The maximum number of files to be returned. Defaults to 50 and
+	 *            cannot be higher than 100.
+	 * @param offset
+	 *            The offset to use when returning files to be used for
+	 *            pagination. Defaults to 0 (no offset).
+	 */
+	public List<File> getOnSpace(int spaceId, Integer limit, Integer offset) {
+		WebResource resource = baseAPI.getApiResource("/file/space/" + spaceId
+				+ "/");
+		if (limit != null) {
+			resource = resource.queryParam("limit", limit.toString());
+		}
+		if (offset != null) {
+			resource = resource.queryParam("offset", offset.toString());
+		}
+
+		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
+				new GenericType<List<File>>() {
 				});
 	}
 }
