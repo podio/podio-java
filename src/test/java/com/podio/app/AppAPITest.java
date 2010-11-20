@@ -121,7 +121,7 @@ public class AppAPITest {
 	public void installApp() {
 		ApplicationCreateResponse result = getAPI().install(1,
 				new ApplicationInstall(1));
-		Assert.assertTrue(result.getId() > 10);
+		Assert.assertTrue(result.getId() > 1);
 
 	}
 }

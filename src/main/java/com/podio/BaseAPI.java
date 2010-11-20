@@ -37,7 +37,8 @@ public final class BaseAPI {
 	private final ApiLoginFilter apiLoginFilter;
 	private FileLoginFilter fileLoginFilter;
 
-	public BaseAPI(String hostname, int port, boolean ssl, boolean test,
+	public BaseAPI(String apiHostname, String uploadHostname, int port,
+			boolean ssl, boolean test,
 			OAuthClientCredentials clientCredentials,
 			OAuthUsernameCredentials userCredentials) {
 		ClientConfig config = new DefaultClientConfig();
@@ -48,9 +49,9 @@ public final class BaseAPI {
 		}
 		// client.addFilter(new LoggingFilter());
 
-		this.apiResource = client.resource(getURI("api", hostname, port, ssl));
-		this.uploadResource = client.resource(getURI("upload", hostname, port,
-				ssl));
+		this.apiResource = client.resource(getURI(apiHostname, port, ssl));
+		this.uploadResource = client
+				.resource(getURI(uploadHostname, port, ssl));
 
 		AuthProvider authProvider = new AuthProvider(this, clientCredentials,
 				userCredentials);
@@ -58,11 +59,10 @@ public final class BaseAPI {
 		this.fileLoginFilter = new FileLoginFilter(authProvider);
 	}
 
-	private URI getURI(String prefix, String hostname, int port, boolean ssl) {
+	private URI getURI(String hostname, int port, boolean ssl) {
 		try {
-			return new URI(ssl ? "https" : "http", null,
-					hostname != "localhost" ? prefix + "." + hostname
-							: hostname, port, null, null, null);
+			return new URI(ssl ? "https" : "http", null, hostname, port, null,
+					null, null);
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
