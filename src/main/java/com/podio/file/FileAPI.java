@@ -13,9 +13,11 @@ import org.apache.commons.io.IOUtils;
 import org.joda.time.LocalDate;
 
 import com.podio.BaseAPI;
+import com.podio.common.Reference;
 import com.podio.serialize.DateTimeUtil;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.WebResource.Builder;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 
@@ -31,13 +33,26 @@ public class FileAPI {
 	 * Uploads the file to the API
 	 */
 	public int uploadFile(String name, java.io.File file) throws IOException {
+		return uploadFile(name, file, null);
+	}
+
+	/**
+	 * Uploads the file to the API
+	 */
+	public int uploadFile(String name, java.io.File file, Reference reference)
+			throws IOException {
 		FormDataMultiPart multiPart = new FormDataMultiPart();
 		multiPart.bodyPart(new FileDataBodyPart("file", file));
 		multiPart.field("name", name);
 
-		FileUploadResponse response = baseAPI.getUploadResource("upload.php")
-				.entity(multiPart, MediaType.MULTIPART_FORM_DATA_TYPE)
-				.post(FileUploadResponse.class);
+		Builder resource = baseAPI.getUploadResource("upload.php").entity(
+				multiPart, MediaType.MULTIPART_FORM_DATA_TYPE);
+		if (reference != null) {
+			resource = resource.header("RefType",
+					reference.getType().toString()).header("RefID",
+					reference.getId());
+		}
+		FileUploadResponse response = resource.post(FileUploadResponse.class);
 		if (response.getResult() != null) {
 			return response.getResult().getFileId();
 		} else {
@@ -46,13 +61,28 @@ public class FileAPI {
 	}
 
 	public Integer uploadImage(URL url) throws IOException {
+		return uploadImage(url, null, null);
+	}
+
+	public Integer uploadImage(URL url, Reference reference) throws IOException {
+		return uploadImage(url, null, reference);
+	}
+
+	public Integer uploadImage(URL url, String name) throws IOException {
+		return uploadImage(url, name, null);
+	}
+
+	public Integer uploadImage(URL url, String name, Reference reference)
+			throws IOException {
 		java.io.File file = readURL(url);
 		try {
 			String path = url.getPath();
 			int lastSlashIdx = path.lastIndexOf('/');
-			String filename = path.substring(lastSlashIdx + 1);
+			if (name == null) {
+				name = path.substring(lastSlashIdx + 1);
+			}
 
-			return uploadFile(filename, file);
+			return uploadFile(name, file, reference);
 		} finally {
 			file.delete();
 		}
