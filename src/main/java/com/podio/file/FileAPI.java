@@ -1,10 +1,15 @@
 package com.podio.file;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.joda.time.LocalDate;
 
 import com.podio.BaseAPI;
@@ -37,6 +42,38 @@ public class FileAPI {
 			return response.getResult().getFileId();
 		} else {
 			throw new IOException(response.getError().getMessage());
+		}
+	}
+
+	public Integer uploadImage(URL url) throws IOException {
+		java.io.File file = readURL(url);
+		try {
+			String path = url.getPath();
+			int lastSlashIdx = path.lastIndexOf('/');
+			String filename = path.substring(lastSlashIdx + 1);
+
+			return uploadFile(filename, file);
+		} finally {
+			file.delete();
+		}
+	}
+
+	private static java.io.File readURL(URL url) throws IOException {
+		InputStream is = url.openStream();
+		try {
+			java.io.File file = new java.io.File(
+					System.getProperty("java.io.tmpdir"), url.getFile());
+			file.deleteOnExit();
+			FileOutputStream os = FileUtils.openOutputStream(file);
+			try {
+				IOUtils.copy(is, os);
+			} finally {
+				os.close();
+			}
+
+			return file;
+		} finally {
+			is.close();
 		}
 	}
 
