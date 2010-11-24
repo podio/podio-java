@@ -23,6 +23,11 @@ public class TagAPITest {
 	}
 
 	@Test
+	public void removeTag() {
+		getAPI().removeTag(new Reference(ReferenceType.ITEM, 1), "release");
+	}
+
+	@Test
 	public void getTagsOnApp() {
 		List<TagCount> tags = getAPI().getTagsOnApp(1);
 
@@ -54,5 +59,31 @@ public class TagAPITest {
 				2010, 8, 5, 10, 12, 0, 0));
 		Assert.assertEquals(references.get(0).getLink(),
 				"https://hoist.podio.com/api/item/2");
+	}
+
+	@Test
+	public void getTagsOnSpaceWithText() {
+		List<TagReference> references = getAPI().getTagsOnSpaceWithText(1,
+				"release");
+
+		Assert.assertEquals(references.size(), 2);
+		Assert.assertEquals(references.get(0).getReferenceType(),
+				ReferenceType.STATUS);
+		Assert.assertEquals(references.get(0).getReferenceId(), 1);
+		Assert.assertEquals(
+				references.get(0).getTitle(),
+				"This is going to be legen- wait for it -dary. @Andreas Haugstrup Now it's up to you to make it ha...");
+		Assert.assertEquals(references.get(0).getCreatedOn(), new DateTime(
+				2010, 8, 12, 17, 9, 0, 0));
+		Assert.assertEquals(references.get(0).getLink(),
+				"https://hoist.podio.com/api/status/1");
+		Assert.assertEquals(references.get(1).getReferenceType(),
+				ReferenceType.ITEM);
+		Assert.assertEquals(references.get(1).getReferenceId(), 1);
+		Assert.assertEquals(references.get(1).getTitle(), "זרו");
+		Assert.assertEquals(references.get(1).getCreatedOn(), new DateTime(
+				2010, 8, 2, 16, 0, 0, 0));
+		Assert.assertEquals(references.get(1).getLink(),
+				"https://hoist.podio.com/api/item/1");
 	}
 }

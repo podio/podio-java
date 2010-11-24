@@ -40,6 +40,20 @@ public class TagAPI {
 	}
 
 	/**
+	 * Removes a single tag from an object.
+	 * 
+	 * @param reference
+	 *            The object the tag should be removed from
+	 * @param tag
+	 *            The tag to remove
+	 */
+	public void removeTag(Reference reference, String tag) {
+		baseAPI.getApiResource("/tag/" + reference.toURLFragment())
+				.queryParam("text", tag)
+				.accept(MediaType.APPLICATION_JSON_TYPE).delete();
+	}
+
+	/**
 	 * Returns the tags on the given app. This includes only items. The tags are
 	 * ordered firstly by the number of uses, secondly by the tag text.
 	 * 
@@ -82,6 +96,24 @@ public class TagAPI {
 	 */
 	public List<TagReference> getTagsOnAppWithText(int appId, String text) {
 		return baseAPI.getApiResource("/tag/app/" + appId + "/search/")
+				.queryParam("text", text)
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.get(new GenericType<List<TagReference>>() {
+				});
+	}
+
+	/**
+	 * Returns the objects that are tagged with the given text on the space. The
+	 * objects are returned sorted descending by the time the tag was added.
+	 * 
+	 * @param spaceId
+	 *            The id of the space to search within
+	 * @param text
+	 *            The tag to search for
+	 * @return The list of objects in the space that have the given tag
+	 */
+	public List<TagReference> getTagsOnSpaceWithText(int spaceId, String text) {
+		return baseAPI.getApiResource("/tag/space/" + spaceId + "/search/")
 				.queryParam("text", text)
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(new GenericType<List<TagReference>>() {
