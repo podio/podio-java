@@ -2,10 +2,9 @@ package com.podio.calendar;
 
 import java.util.List;
 
-import org.junit.Assert;
-
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.BaseAPIFactory;
@@ -19,12 +18,9 @@ public class CalendarAPITest {
 
 	@Test
 	public void getAppCalendar() {
-		Calendar calendar = getAPI().getApp(1, new LocalDate(2010, 8, 1),
+		List<Event> events = getAPI().getApp(1, new LocalDate(2010, 8, 1),
 				new LocalDate(2010, 8, 31));
 
-		Assert.assertEquals(calendar.getFeedToken().length(), 128);
-
-		List<Event> events = calendar.getEvents();
 		Assert.assertEquals(events.size(), 3);
 		Event event = events.get(0);
 		Assert.assertEquals(event.getType(), ReferenceType.ITEM);
@@ -43,23 +39,15 @@ public class CalendarAPITest {
 
 	@Test
 	public void getSpaceCalendar() {
-		Calendar calendar = getAPI().getSpace(1, new LocalDate(2010, 8, 1),
+		List<Event> events = getAPI().getSpace(1, new LocalDate(2010, 8, 1),
 				new LocalDate(2010, 8, 31));
-
-		Assert.assertEquals(calendar.getFeedToken().length(), 128);
-
-		List<Event> events = calendar.getEvents();
 		Assert.assertEquals(events.size(), 3);
 	}
 
 	@Test
 	public void getGlobalCalendar() {
-		Calendar calendar = getAPI().getGlobal(new LocalDate(2010, 8, 1),
+		List<Event> events = getAPI().getGlobal(new LocalDate(2010, 8, 1),
 				new LocalDate(2010, 8, 31), null);
-
-		Assert.assertEquals(calendar.getFeedToken().length(), 128);
-
-		List<Event> events = calendar.getEvents();
 		Assert.assertEquals(events.size(), 3);
 	}
 }

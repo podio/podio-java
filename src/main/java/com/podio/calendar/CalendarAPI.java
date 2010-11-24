@@ -9,6 +9,7 @@ import org.joda.time.LocalDate;
 import com.podio.BaseAPI;
 import com.podio.common.ReferenceType;
 import com.podio.serialize.DateTimeUtil;
+import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
 public class CalendarAPI {
@@ -19,7 +20,7 @@ public class CalendarAPI {
 		this.baseAPI = baseAPI;
 	}
 
-	private Calendar getCalendar(String path, LocalDate dateFrom,
+	private List<Event> getCalendar(String path, LocalDate dateFrom,
 			LocalDate dateTo, List<Integer> spaceIds, ReferenceType... types) {
 		WebResource resource = baseAPI
 				.getApiResource("/calendar/" + path + "/");
@@ -51,13 +52,14 @@ public class CalendarAPI {
 		}
 
 		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
-				Calendar.class);
+				new GenericType<List<Event>>() {
+				});
 	}
 
 	/**
 	 * Returns the items and tasks that are related to the given app.
 	 */
-	public Calendar getApp(int appId, LocalDate dateFrom, LocalDate dateTo,
+	public List<Event> getApp(int appId, LocalDate dateFrom, LocalDate dateTo,
 			ReferenceType... types) {
 		return getCalendar("app/" + appId, dateFrom, dateTo, null, types);
 	}
@@ -67,8 +69,8 @@ public class CalendarAPI {
 	 * space. Tasks with reference to other spaces are not returned or tasks
 	 * with no reference.
 	 */
-	public Calendar getSpace(int spaceId, LocalDate dateFrom, LocalDate dateTo,
-			ReferenceType... types) {
+	public List<Event> getSpace(int spaceId, LocalDate dateFrom,
+			LocalDate dateTo, ReferenceType... types) {
 		return getCalendar("space/" + spaceId, dateFrom, dateTo, null, types);
 	}
 
@@ -77,7 +79,7 @@ public class CalendarAPI {
 	 * assigned to the user. The items and tasks can be filtered by a list of
 	 * space ids, but tasks without a reference will always be returned.
 	 */
-	public Calendar getGlobal(LocalDate dateFrom, LocalDate dateTo,
+	public List<Event> getGlobal(LocalDate dateFrom, LocalDate dateTo,
 			List<Integer> spaceIds, ReferenceType... types) {
 		return getCalendar("", dateFrom, dateTo, spaceIds, types);
 	}
