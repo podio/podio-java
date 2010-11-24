@@ -16,6 +16,10 @@ public class Reference {
 		this.id = id;
 	}
 
+	public String toURLFragment() {
+		return type + "/" + id + "/";
+	}
+
 	public ReferenceType getType() {
 		return type;
 	}

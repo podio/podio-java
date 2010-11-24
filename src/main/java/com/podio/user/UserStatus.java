@@ -16,6 +16,8 @@ public class UserStatus {
 
 	private int inboxNew;
 
+	private String calendarCode;
+
 	private String taskMail;
 
 	public User getUser() {
@@ -50,6 +52,16 @@ public class UserStatus {
 	@JsonProperty("inbox_new")
 	public void setInboxNew(int inboxNew) {
 		this.inboxNew = inboxNew;
+	}
+
+	@JsonProperty("calendar_code")
+	public String getCalendarCode() {
+		return calendarCode;
+	}
+
+	@JsonProperty("calendar_code")
+	public void setCalendarCode(String calendarCode) {
+		this.calendarCode = calendarCode;
 	}
 
 	@JsonProperty("task_mail")

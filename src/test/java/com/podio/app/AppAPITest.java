@@ -2,9 +2,8 @@ package com.podio.app;
 
 import java.util.Arrays;
 
-import junit.framework.Assert;
-
 import org.codehaus.jettison.json.JSONException;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.BaseAPIFactory;
@@ -96,9 +95,11 @@ public class AppAPITest {
 	public void addField() {
 		ApplicationFieldCreateResponse response = getAPI().addField(
 				1,
-				new ApplicationFieldCreate(ApplicationFieldType.LARGE_TEXT,
+				new ApplicationFieldCreate(ApplicationFieldType.TEXT,
 						new ApplicationFieldConfiguration("test",
-								"Description", 0, null, true, true)));
+								"Description", 0, ApplicationFieldSettings
+										.getText(TextFieldSize.LARGE), true,
+								true)));
 		Assert.assertTrue(response.getId() > 10);
 	}
 

@@ -188,8 +188,8 @@ public class Task {
 	}
 
 	@JsonProperty("ref_type")
-	public void setReferenceType(ReferenceType refType) {
-		this.referenceType = refType;
+	public void setReferenceType(ReferenceType refeferenceType) {
+		this.referenceType = refeferenceType;
 	}
 
 	@JsonProperty("ref_id")
@@ -198,8 +198,8 @@ public class Task {
 	}
 
 	@JsonProperty("ref_id")
-	public void setReferenceId(Integer refId) {
-		this.referenceId = refId;
+	public void setReferenceId(Integer referenceId) {
+		this.referenceId = referenceId;
 	}
 
 	@JsonProperty("ref_title")
@@ -208,8 +208,8 @@ public class Task {
 	}
 
 	@JsonProperty("ref_title")
-	public void setReferenceTitle(String refTitle) {
-		this.referenceTitle = refTitle;
+	public void setReferenceTitle(String referenceTitle) {
+		this.referenceTitle = referenceTitle;
 	}
 
 	@JsonProperty("ref_link")
@@ -218,7 +218,7 @@ public class Task {
 	}
 
 	@JsonProperty("ref_link")
-	public void setReferenceLink(String refLink) {
-		this.referenceLink = refLink;
+	public void setReferenceLink(String referenceLink) {
+		this.referenceLink = referenceLink;
 	}
 }

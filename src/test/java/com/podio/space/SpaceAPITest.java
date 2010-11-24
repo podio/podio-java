@@ -1,6 +1,6 @@
 package com.podio.space;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 

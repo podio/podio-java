@@ -3,7 +3,7 @@ package com.podio.org;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 

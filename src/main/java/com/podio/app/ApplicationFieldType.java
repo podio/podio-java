@@ -11,14 +11,9 @@ public enum ApplicationFieldType {
 	TITLE,
 
 	/**
-	 * A short text field that can hold a limited text string
+	 * A short text field that can hold a string
 	 */
-	SMALL_TEXT,
-
-	/**
-	 * A large text field that can hold a arbitrary long text.
-	 */
-	LARGE_TEXT,
+	TEXT,
 
 	/**
 	 * A field that can hold a single number with decimals.

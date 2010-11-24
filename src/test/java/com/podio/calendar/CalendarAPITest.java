@@ -2,7 +2,7 @@ package com.podio.calendar;
 
 import java.util.List;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;

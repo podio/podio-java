@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 
@@ -101,6 +101,9 @@ public class UserAPITest {
 		Assert.assertEquals(status.getProperties().size(), 3);
 		Assert.assertEquals(status.getProperties().get("global.video"),
 				Boolean.TRUE);
+
+		Assert.assertEquals(status.getCalendarCode(),
+				"3OAnjyFACrJjTNe2JLnpn9ZqVe5dLWS59aSLzqtvlXZyXUenbRVqvQwtOMOYZk2T");
 
 		Assert.assertEquals(status.getInboxNew(), 37);
 		Assert.assertEquals(status.getTaskMail(),
