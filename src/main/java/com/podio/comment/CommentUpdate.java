@@ -13,6 +13,11 @@ public class CommentUpdate {
 	private String value;
 
 	/**
+	 * The external id of the comment
+	 */
+	private String externalId;
+
+	/**
 	 * Temporary files that have been uploaded and should be attached to this
 	 * comment
 	 */
@@ -34,6 +39,15 @@ public class CommentUpdate {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	@JsonProperty("external_id")
+	public String getExternalId() {
+		return externalId;
+	}
+
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
 	}
 
 	@JsonProperty("file_ids")

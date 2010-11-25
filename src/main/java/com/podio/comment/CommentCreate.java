@@ -13,6 +13,11 @@ public class CommentCreate {
 	private String value;
 
 	/**
+	 * The external id
+	 */
+	private String externalId;
+
+	/**
 	 * The users who should be alerted about this comment
 	 */
 	private List<Integer> alerts;
@@ -24,14 +29,15 @@ public class CommentCreate {
 	private List<Integer> fileIds;
 
 	public CommentCreate(String value) {
-		this(value, Collections.<Integer> emptyList(), Collections
+		this(value, null, Collections.<Integer> emptyList(), Collections
 				.<Integer> emptyList());
 	}
 
-	public CommentCreate(String value, List<Integer> alerts,
+	public CommentCreate(String value, String externalId, List<Integer> alerts,
 			List<Integer> fileIds) {
 		super();
 		this.value = value;
+		this.externalId = externalId;
 		this.alerts = alerts;
 		this.fileIds = fileIds;
 	}
@@ -42,6 +48,15 @@ public class CommentCreate {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	@JsonProperty("external_id")
+	public String getExternalId() {
+		return externalId;
+	}
+
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
 	}
 
 	public List<Integer> getAlerts() {

@@ -21,6 +21,11 @@ public class Comment {
 	private String value;
 
 	/**
+	 * The external id set on the comment
+	 */
+	private String externalId;
+
+	/**
 	 * The user who created the comment
 	 */
 	private UserMini user;
@@ -56,6 +61,16 @@ public class Comment {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	@JsonProperty("external_id")
+	public String getExternalId() {
+		return externalId;
+	}
+
+	@JsonProperty("external_id")
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
 	}
 
 	public UserMini getUser() {

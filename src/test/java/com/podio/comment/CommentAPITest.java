@@ -2,9 +2,8 @@ package com.podio.comment;
 
 import java.util.List;
 
-import org.junit.Assert;
-
 import org.joda.time.DateTime;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.BaseAPIFactory;
@@ -25,6 +24,7 @@ public class CommentAPITest {
 		Assert.assertEquals(
 				comment.getValue(),
 				"Hoist rules, but we need to do more.<br />@Andreas Haugstrup Can you fix the javascript popup problem?");
+		Assert.assertEquals(comment.getExternalId(), "c1");
 		Assert.assertEquals(comment.getAlerts().size(), 1);
 		Assert.assertEquals(comment.getAlerts().get(0).getId(), 2);
 		Assert.assertEquals(comment.getCreatedOn(), new DateTime(2010, 8, 5, 9,
