@@ -34,6 +34,11 @@ public class ItemBadge {
 	private String title;
 
 	/**
+	 * The direct link to the item
+	 */
+	private String link;
+
+	/**
 	 * The values for each field
 	 */
 	private List<FieldValues> fields;
@@ -89,6 +94,14 @@ public class ItemBadge {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	public List<FieldValues> getFields() {

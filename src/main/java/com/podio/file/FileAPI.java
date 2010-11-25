@@ -72,7 +72,7 @@ public class FileAPI {
 		return uploadImage(url, name, null);
 	}
 
-	public Integer uploadImage(URL url, String name, Reference reference)
+	public int uploadImage(URL url, String name, Reference reference)
 			throws IOException {
 		java.io.File file = readURL(url);
 		try {
@@ -91,8 +91,8 @@ public class FileAPI {
 	private static java.io.File readURL(URL url) throws IOException {
 		InputStream is = url.openStream();
 		try {
-			java.io.File file = new java.io.File(
-					System.getProperty("java.io.tmpdir"), url.getFile());
+			java.io.File file = java.io.File.createTempFile(
+					Integer.toString(url.hashCode()), null);
 			file.deleteOnExit();
 			FileOutputStream os = FileUtils.openOutputStream(file);
 			try {
