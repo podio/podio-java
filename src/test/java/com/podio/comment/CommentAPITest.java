@@ -46,7 +46,7 @@ public class CommentAPITest {
 	public void addComment() {
 		int commentId = getAPI().addComment(
 				new Reference(ReferenceType.ITEM, 1),
-				new CommentCreate("Testing"));
+				new CommentCreate("Testing"), false);
 
 		Assert.assertTrue(commentId > 5);
 	}

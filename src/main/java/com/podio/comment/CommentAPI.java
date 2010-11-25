@@ -49,12 +49,21 @@ public class CommentAPI {
 
 	/**
 	 * Adds a new comment to the object of the given type and id, f.ex. item 1.
+	 * 
+	 * @param reference
+	 *            The reference to the object the comment should be added to
+	 * @param comment
+	 *            The comment that should be added
+	 * @param silent
+	 *            True if the update should be silent, false otherwise
 	 */
-	public int addComment(Reference reference, CommentCreate comment) {
+	public int addComment(Reference reference, CommentCreate comment,
+			boolean silent) {
 		return baseAPI
 				.getApiResource(
 						"/comment/" + reference.getType() + "/"
 								+ reference.getId())
+				.queryParam("silent", silent ? "1" : "0")
 				.entity(comment, MediaType.APPLICATION_JSON_TYPE)
 				.post(CommentCreateResponse.class).getId();
 	}
