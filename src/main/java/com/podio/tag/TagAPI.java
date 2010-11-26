@@ -40,6 +40,20 @@ public class TagAPI {
 	}
 
 	/**
+	 * Update the tags on the objects
+	 * 
+	 * @param reference
+	 *            The object the tags should be updated on
+	 * @param tags
+	 *            The tags that should now be set on the object
+	 */
+	public void updateTags(Reference reference, String... tags) {
+		baseAPI.getApiResource("/tag/" + reference.toURLFragment())
+				.entity(Arrays.asList(tags), MediaType.APPLICATION_JSON_TYPE)
+				.put();
+	}
+
+	/**
 	 * Removes a single tag from an object.
 	 * 
 	 * @param reference

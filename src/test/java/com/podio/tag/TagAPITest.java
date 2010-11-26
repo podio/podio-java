@@ -23,6 +23,12 @@ public class TagAPITest {
 	}
 
 	@Test
+	public void updateTags() {
+		getAPI().updateTags(new Reference(ReferenceType.ITEM, 1), "Tag1",
+				"Tag2");
+	}
+
+	@Test
 	public void removeTag() {
 		getAPI().removeTag(new Reference(ReferenceType.ITEM, 1), "release");
 	}
