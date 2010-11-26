@@ -1,6 +1,7 @@
 package com.podio.tag;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
@@ -33,10 +34,35 @@ public class TagAPI {
 	 * @param tags
 	 *            The tags that should be added
 	 */
-	public void createTags(Reference reference, String... tags) {
+	public void createTags(Reference reference, Collection<String> tags) {
 		baseAPI.getApiResource("/tag/" + reference.toURLFragment())
-				.entity(Arrays.asList(tags), MediaType.APPLICATION_JSON_TYPE)
-				.post();
+				.entity(tags, MediaType.APPLICATION_JSON_TYPE).post();
+	}
+
+	/**
+	 * Add a new set of tags to the object. If a tag with the same text is
+	 * already present, the tag will be ignored.
+	 * 
+	 * @param reference
+	 *            The object the tags should be added to
+	 * @param tags
+	 *            The tags that should be added
+	 */
+	public void createTags(Reference reference, String... tags) {
+		createTags(reference, Arrays.asList(tags));
+	}
+
+	/**
+	 * Update the tags on the objects
+	 * 
+	 * @param reference
+	 *            The object the tags should be updated on
+	 * @param tags
+	 *            The tags that should now be set on the object
+	 */
+	public void updateTags(Reference reference, Collection<String> tags) {
+		baseAPI.getApiResource("/tag/" + reference.toURLFragment())
+				.entity(tags, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
 	/**
@@ -48,9 +74,7 @@ public class TagAPI {
 	 *            The tags that should now be set on the object
 	 */
 	public void updateTags(Reference reference, String... tags) {
-		baseAPI.getApiResource("/tag/" + reference.toURLFragment())
-				.entity(Arrays.asList(tags), MediaType.APPLICATION_JSON_TYPE)
-				.put();
+		updateTags(reference, Arrays.asList(tags));
 	}
 
 	/**
