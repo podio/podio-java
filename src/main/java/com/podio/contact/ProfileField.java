@@ -11,7 +11,7 @@ import com.podio.serialize.DateTimeUtil;
 
 public abstract class ProfileField<F, R> {
 
-	private static final Map<String, ProfileField> MAP = new HashMap<String, ProfileField>();
+	private static final Map<String, ProfileField<?, ?>> MAP = new HashMap<String, ProfileField<?, ?>>();
 
 	/**
 	 * The full name
@@ -176,7 +176,7 @@ public abstract class ProfileField<F, R> {
 	}
 
 	@JsonCreator
-	public static ProfileField getByName(String value) {
+	public static ProfileField<?, ?> getByName(String value) {
 		return MAP.get(value);
 	}
 }

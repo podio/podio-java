@@ -9,14 +9,14 @@ import org.codehaus.jackson.annotate.JsonValue;
 
 public final class ProfileFieldValues {
 
-	private Map<ProfileField, Object> values = new HashMap<ProfileField, Object>();
+	private Map<ProfileField<?, ?>, Object> values = new HashMap<ProfileField<?, ?>, Object>();
 
 	@JsonValue
-	public Map<ProfileField, Object> getValues() {
+	public Map<ProfileField<?, ?>, Object> getValues() {
 		return values;
 	}
 
-	public void setValues(Map<ProfileField, Object> values) {
+	public void setValues(Map<ProfileField<?, ?>, Object> values) {
 		this.values = values;
 	}
 
@@ -42,7 +42,7 @@ public final class ProfileFieldValues {
 	}
 
 	public <F> void setValues(ProfileField<F, ?> field, List<F> values) {
-		this.values.put(field, (List<Object>) values);
+		this.values.put(field, values);
 	}
 
 	public <F> List<F> getValues(ProfileField<F, ?> field) {

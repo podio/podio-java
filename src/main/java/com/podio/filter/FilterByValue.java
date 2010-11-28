@@ -19,4 +19,8 @@ public class FilterByValue<T> {
 	public T getValue() {
 		return value;
 	}
+
+	public String getFormattedValue() {
+		return by.format(value);
+	}
 }

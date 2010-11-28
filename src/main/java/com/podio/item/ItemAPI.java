@@ -51,7 +51,7 @@ public class ItemAPI {
 	}
 
 	public ItemsResponse getItems(int appId, Integer limit, Integer offset,
-			SortBy sortBy, Boolean sortDesc, FilterByValue... filters) {
+			SortBy sortBy, Boolean sortDesc, FilterByValue<?>... filters) {
 		WebResource resource = baseAPI.getApiResource("/item/app/" + appId
 				+ "/v2/");
 		if (limit != null) {
@@ -66,9 +66,9 @@ public class ItemAPI {
 		if (sortDesc != null) {
 			resource = resource.queryParam("sortDesc", sortDesc ? "1" : "0");
 		}
-		for (FilterByValue filter : filters) {
-			resource = resource.queryParam(filter.getBy().getKey(), filter
-					.getBy().format(filter.getValue()));
+		for (FilterByValue<?> filter : filters) {
+			resource = resource.queryParam(filter.getBy().getKey(),
+					filter.getFormattedValue());
 		}
 
 		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
