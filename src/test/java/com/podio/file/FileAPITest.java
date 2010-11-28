@@ -2,9 +2,9 @@ package com.podio.file;
 
 import java.util.List;
 
-import org.junit.Assert;
-
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.BaseAPIFactory;
@@ -29,7 +29,7 @@ public class FileAPITest {
 		Assert.assertEquals(file.getSize(), 127445);
 		Assert.assertEquals(file.getCreatedBy().getId(), 1);
 		Assert.assertEquals(file.getCreatedOn(), new DateTime(2010, 8, 13, 14,
-				46, 0, 0));
+				46, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(file.getReplaces().size(), 1);
 		Assert.assertEquals(file.getReplaces().get(0).getId(), 2);
 	}

@@ -3,6 +3,7 @@ package com.podio.task;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,7 +31,7 @@ public class TaskAPITest {
 		Assert.assertEquals(task.getSpaceId(), null);
 		Assert.assertEquals(task.getLink(), "https://podio.com/tasks_goto/3");
 		Assert.assertEquals(task.getCreatedOn(), new DateTime(2010, 8, 20, 11,
-				30, 0, 0));
+				30, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(task.getCreatedBy().getId(), 1);
 		Assert.assertEquals(task.getReferenceType(), null);
 		Assert.assertEquals(task.getReferenceId(), null);

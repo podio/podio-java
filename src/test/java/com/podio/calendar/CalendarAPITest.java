@@ -3,6 +3,7 @@ package com.podio.calendar;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,9 +29,9 @@ public class CalendarAPITest {
 		Assert.assertEquals(event.getGroup(), "Bug");
 		Assert.assertEquals(event.getTitle(), "זרו");
 		Assert.assertEquals(event.getStart(), new DateTime(2010, 8, 4, 9, 0, 0,
-				0));
+				0, DateTimeZone.UTC));
 		Assert.assertEquals(event.getEnd(), new DateTime(2010, 8, 4, 10, 0, 0,
-				0));
+				0, DateTimeZone.UTC));
 		Assert.assertEquals(event.getLink(),
 				"https://hoist.podio.com/api/item/1");
 		Assert.assertEquals(event.getSpace().getId(), 1);

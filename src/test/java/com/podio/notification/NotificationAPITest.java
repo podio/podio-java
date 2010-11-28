@@ -1,8 +1,8 @@
 package com.podio.notification;
 
-import org.junit.Assert;
-
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.BaseAPIFactory;
@@ -28,7 +28,7 @@ public class NotificationAPITest {
 				"https://hoist.podio.com/api/item/1#comment-2");
 		Assert.assertEquals(notification.getCreatedBy().getId(), 2);
 		Assert.assertEquals(notification.getCreatedOn(), new DateTime(2010, 8,
-				5, 9, 9, 0, 0));
+				5, 9, 9, 0, 0, DateTimeZone.UTC));
 		// FIXME: Change the return on notifications
 		// Assert.assertEquals(notification.getOrganization().getId(), 1);
 		// Assert.assertEquals(notification.getSpace().getId(), 1);
@@ -36,6 +36,6 @@ public class NotificationAPITest {
 		Assert.assertEquals(notification.getType(), NotificationType.ALERT);
 		Assert.assertEquals(notification.getUser().getId(), 1);
 		Assert.assertEquals(notification.getViewedOn(), new DateTime(2010, 8,
-				5, 12, 1, 0, 0));
+				5, 12, 1, 0, 0, DateTimeZone.UTC));
 	}
 }

@@ -3,6 +3,7 @@ package com.podio.tag;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -62,7 +63,7 @@ public class TagAPITest {
 		Assert.assertEquals(references.get(0).getReferenceId(), 2);
 		Assert.assertEquals(references.get(0).getTitle(), "Bug 2");
 		Assert.assertEquals(references.get(0).getCreatedOn(), new DateTime(
-				2010, 8, 5, 10, 12, 0, 0));
+				2010, 8, 5, 10, 12, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(references.get(0).getLink(),
 				"https://hoist.podio.com/api/item/2");
 	}
@@ -80,7 +81,7 @@ public class TagAPITest {
 				references.get(0).getTitle(),
 				"This is going to be legen- wait for it -dary. @Andreas Haugstrup Now it's up to you to make it ha...");
 		Assert.assertEquals(references.get(0).getCreatedOn(), new DateTime(
-				2010, 8, 12, 17, 9, 0, 0));
+				2010, 8, 12, 17, 9, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(references.get(0).getLink(),
 				"https://hoist.podio.com/api/status/1");
 		Assert.assertEquals(references.get(1).getReferenceType(),
@@ -88,7 +89,7 @@ public class TagAPITest {
 		Assert.assertEquals(references.get(1).getReferenceId(), 1);
 		Assert.assertEquals(references.get(1).getTitle(), "זרו");
 		Assert.assertEquals(references.get(1).getCreatedOn(), new DateTime(
-				2010, 8, 2, 16, 0, 0, 0));
+				2010, 8, 2, 16, 0, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(references.get(1).getLink(),
 				"https://hoist.podio.com/api/item/1");
 	}

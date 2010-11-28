@@ -1,6 +1,7 @@
 package com.podio.serialize;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
@@ -9,10 +10,10 @@ import org.joda.time.format.DateTimeFormatter;
 public final class DateTimeUtil {
 
 	private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormat
-			.forPattern("yyyy-MM-dd HH:mm:ss");
+			.forPattern("yyyy-MM-dd HH:mm:ss").withZone(DateTimeZone.UTC);
 
 	private static final DateTimeFormatter DATE_FORMAT = DateTimeFormat
-			.forPattern("yyyy-MM-dd");
+			.forPattern("yyyy-MM-dd").withZone(DateTimeZone.UTC);
 
 	private DateTimeUtil() {
 	}
