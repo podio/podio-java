@@ -11,6 +11,14 @@ import com.podio.BaseAPI;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
+/**
+ * Each user have a profile attached, that holds all the personal details of the
+ * user. This includes very basic information like the name and mail addresses,
+ * but can also include more advanced fields like billing address and IM
+ * addresses. Fields can have either one or multiple values. There can f.ex.
+ * only be one name, but multiple mail addresses. The value of a field can
+ * either be a string, a number or a date.
+ */
 public class ContactAPI {
 
 	private final BaseAPI baseAPI;
@@ -21,6 +29,10 @@ public class ContactAPI {
 
 	/**
 	 * Returns all the contact details about the user with the given id.
+	 * 
+	 * @param userId
+	 *            The id of the user
+	 * @return The contact profile
 	 */
 	public Profile getContact(int userId) {
 		return baseAPI.getApiResource("/contact/" + userId)
@@ -29,6 +41,12 @@ public class ContactAPI {
 
 	/**
 	 * Returns the value of a contact with the specific field
+	 * 
+	 * @param userId
+	 *            The id of the user
+	 * @param field
+	 *            The field for which data should be returned
+	 * @return The list of values for the given field
 	 */
 	public <T, R> List<T> getContactField(int userId, ProfileField<T, R> field) {
 		List<R> values = baseAPI
@@ -48,6 +66,13 @@ public class ContactAPI {
 	/**
 	 * Returns the top contacts for the user ordered by their overall
 	 * interactive with the active user.
+	 * 
+	 * @param limit
+	 *            The maximum number of contacts to return, defaults to no
+	 *            limit.
+	 * @param type
+	 *            How the contacts should be returned, MINI, SHORT or FULL
+	 * @return The list of contacts
 	 */
 	public <T> List<T> getTopContacts(Integer limit, ProfileType<T> type) {
 		WebResource resource = baseAPI.getApiResource("/contact/top/");
@@ -63,6 +88,8 @@ public class ContactAPI {
 
 	/**
 	 * Returns the total number of contacts by organization.
+	 * 
+	 * @return The list of contact totals by organization
 	 */
 	public List<ContactTotal> getContactTotals() {
 		return baseAPI.getApiResource("/contact/totals/")
@@ -73,6 +100,20 @@ public class ContactAPI {
 
 	/**
 	 * Used to get a list of contacts for the user.
+	 * 
+	 * @param key
+	 *            The profile field if the contacts should be filtered
+	 * @param value
+	 *            The value for the field if the contacts should be filtered
+	 * @param limit
+	 *            The maximum number of contacts to return
+	 * @param offset
+	 *            The offset into the list of contacts
+	 * @param type
+	 *            The format in which the contacts should be returned
+	 * @param order
+	 *            How the contacts should be ordered
+	 * @return The list of contacts
 	 */
 	public <T, F, R> List<T> getContacts(ProfileField<F, R> key, F value,
 			Integer limit, Integer offset, ProfileType<T> type,
@@ -85,6 +126,23 @@ public class ContactAPI {
 
 	/**
 	 * Returns all the profiles of the users contacts on the given organization
+	 * 
+	 * @param organizationId
+	 *            The id of the organization the contacts should be returned
+	 *            from
+	 * @param key
+	 *            The profile field if the contacts should be filtered
+	 * @param value
+	 *            The value for the field if the contacts should be filtered
+	 * @param limit
+	 *            The maximum number of contacts to return
+	 * @param offset
+	 *            The offset into the list of contacts
+	 * @param type
+	 *            The format in which the contacts should be returned
+	 * @param order
+	 *            How the contacts should be ordered
+	 * @return The list of contacts
 	 */
 	public <T, F, R> List<T> getOrganizationContacts(int organizationId,
 			ProfileField<F, R> key, F value, Integer limit, Integer offset,
@@ -98,11 +156,28 @@ public class ContactAPI {
 
 	/**
 	 * Returns all the profiles of the users contacts on the given space
+	 * 
+	 * @param spaceId
+	 *            The id of the space the contacts should be returned from
+	 * @param key
+	 *            The profile field if the contacts should be filtered
+	 * @param value
+	 *            The value for the field if the contacts should be filtered
+	 * @param limit
+	 *            The maximum number of contacts to return
+	 * @param offset
+	 *            The offset into the list of contacts
+	 * @param type
+	 *            The format in which the contacts should be returned
+	 * @param order
+	 *            How the contacts should be ordered
+	 * @return The list of contacts
 	 */
 	public <T, F, R> List<T> getSpaceContacts(int spaceId,
 			ProfileField<F, R> key, F value, Integer limit, Integer offset,
 			ProfileType<T> type, ContactOrder order) {
-		WebResource resource = baseAPI.getApiResource("/contact/space/" + spaceId);
+		WebResource resource = baseAPI.getApiResource("/contact/space/"
+				+ spaceId);
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
 				order);

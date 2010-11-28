@@ -5,12 +5,12 @@ import org.codehaus.jackson.annotate.JsonValue;
 
 public enum ApplicationViewType {
 
-	BADGE(),
-	TABLE(),
-	LIST(),
-	NODE(),
-	CALENDAR(),
-	GALLERY();
+	BADGE,
+	TABLE,
+	LIST,
+	NODE,
+	CALENDAR,
+	GALLERY;
 
 	@Override
 	@JsonValue

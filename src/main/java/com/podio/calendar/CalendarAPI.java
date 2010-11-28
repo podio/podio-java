@@ -12,6 +12,13 @@ import com.podio.serialize.DateTimeUtil;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
+/**
+ * The calendar is used to get the calendar for a user. The calendar includes
+ * items with a date field in the interval and tasks with a due date in the
+ * interval.
+ * 
+ * Calendar entries are always sorted by date.
+ */
 public class CalendarAPI {
 
 	private final BaseAPI baseAPI;
@@ -58,6 +65,17 @@ public class CalendarAPI {
 
 	/**
 	 * Returns the items and tasks that are related to the given app.
+	 * 
+	 * @param appId
+	 *            The id of the app
+	 * @param dateFrom
+	 *            The from date
+	 * @param dateTo
+	 *            The to date
+	 * @param types
+	 *            The types of events that should be returned. Leave out to get
+	 *            all types of events.
+	 * @return The events in the calendar
 	 */
 	public List<Event> getApp(int appId, LocalDate dateFrom, LocalDate dateTo,
 			ReferenceType... types) {
@@ -68,6 +86,17 @@ public class CalendarAPI {
 	 * Returns all items and tasks that the user have access to in the given
 	 * space. Tasks with reference to other spaces are not returned or tasks
 	 * with no reference.
+	 * 
+	 * @param spaceId
+	 *            The id of the space
+	 * @param dateFrom
+	 *            The from date
+	 * @param dateTo
+	 *            The to date
+	 * @param types
+	 *            The types of events that should be returned. Leave out to get
+	 *            all types of events.
+	 * @return The events in the calendar
 	 */
 	public List<Event> getSpace(int spaceId, LocalDate dateFrom,
 			LocalDate dateTo, ReferenceType... types) {
@@ -78,6 +107,15 @@ public class CalendarAPI {
 	 * Returns all items that the user have access to and all tasks that are
 	 * assigned to the user. The items and tasks can be filtered by a list of
 	 * space ids, but tasks without a reference will always be returned.
+	 * 
+	 * @param dateFrom
+	 *            The from date
+	 * @param dateTo
+	 *            The to date
+	 * @param types
+	 *            The types of events that should be returned. Leave out to get
+	 *            all types of events.
+	 * @return The events in the calendar
 	 */
 	public List<Event> getGlobal(LocalDate dateFrom, LocalDate dateTo,
 			List<Integer> spaceIds, ReferenceType... types) {

@@ -27,6 +27,11 @@ public class CommentAPI {
 	 * Used to retrieve all the comments that have been made on an object of the
 	 * given type and with the given id. It returns a list of all the comments
 	 * sorted in ascending order by time created.
+	 * 
+	 * @param reference
+	 *            The reference to the object from which the comments should be
+	 *            retrieved
+	 * @return The comments on the object
 	 */
 	public List<Comment> getComments(Reference reference) {
 		return baseAPI
@@ -41,6 +46,10 @@ public class CommentAPI {
 	/**
 	 * Returns the contents of a comment. It is not possible to see where the
 	 * comment was made, only the comment itself.
+	 * 
+	 * @param commentId
+	 *            The id of the comment
+	 * @return The comment
 	 */
 	public Comment getComment(int commentId) {
 		return baseAPI.getApiResource("/comment/" + commentId)
@@ -71,6 +80,11 @@ public class CommentAPI {
 	/**
 	 * Updates an already created comment. This should only be used to correct
 	 * spelling and grammatical mistakes in the comment.
+	 * 
+	 * @param commentId
+	 *            The id of the comment
+	 * @param comment
+	 *            The updated comment definition
 	 */
 	public void updateComment(int commentId, CommentUpdate comment) {
 		baseAPI.getApiResource("/comment/" + commentId)
@@ -80,6 +94,9 @@ public class CommentAPI {
 	/**
 	 * Deletes a comment made by a user. This can be used to retract a comment
 	 * that was made and which the user regrets.
+	 * 
+	 * @param commentId
+	 *            The id of the comment
 	 */
 	public void deleteComment(int commentId) {
 		baseAPI.getApiResource("/comment/" + commentId).delete();

@@ -1,6 +1,7 @@
 package com.podio.app;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.codehaus.jettison.json.JSONException;
 import org.junit.Assert;
@@ -32,7 +33,7 @@ public class AppAPITest {
 
 	@Test
 	public void getAppShort() throws JSONException {
-		Application app = getAPI().getApp(1, "short");
+		Application app = getAPI().getApp(1, ApplicationGetType.SHORT);
 
 		Assert.assertEquals(app.getId(), 1);
 		Assert.assertNotNull(app.getConfiguration());
@@ -44,7 +45,7 @@ public class AppAPITest {
 
 	@Test
 	public void addApp() {
-		ApplicationCreateResponse response = getAPI().addApp(
+		int appId = getAPI().addApp(
 				new ApplicationCreate(1, true, true,
 						new ApplicationConfiguration("Tests", "Test",
 								"Description", "Usage", "ExternalId", "23.png",
@@ -57,7 +58,7 @@ public class AppAPITest {
 										new ApplicationFieldConfiguration(
 												"title", "Title", 0, null,
 												true, true)))));
-		Assert.assertTrue(response.getId() > 0);
+		Assert.assertTrue(appId > 0);
 	}
 
 	@Test
@@ -93,14 +94,14 @@ public class AppAPITest {
 
 	@Test
 	public void addField() {
-		ApplicationFieldCreateResponse response = getAPI().addField(
+		int fieldId = getAPI().addField(
 				1,
 				new ApplicationFieldCreate(ApplicationFieldType.TEXT,
 						new ApplicationFieldConfiguration("test",
 								"Description", 0, ApplicationFieldSettings
 										.getText(TextFieldSize.LARGE), true,
 								true)));
-		Assert.assertTrue(response.getId() > 10);
+		Assert.assertTrue(fieldId > 10);
 	}
 
 	@Test
@@ -120,9 +121,44 @@ public class AppAPITest {
 
 	@Test
 	public void installApp() {
-		ApplicationCreateResponse result = getAPI().install(1,
-				new ApplicationInstall(1));
-		Assert.assertTrue(result.getId() > 1);
+		int appId = getAPI().install(1, 1);
+		Assert.assertTrue(appId > 1);
 
+	}
+
+	@Test
+	public void updateOrder() {
+		getAPI().updateOrder(1, Arrays.asList(1, 2));
+	}
+
+	@Test
+	public void getAppsInSpace() {
+		List<ApplicationMini> apps = getAPI().getAppsOnSpace(1);
+
+		Assert.assertEquals(apps.size(), 2);
+		Assert.assertEquals(apps.get(0).getId(), 1);
+		Assert.assertEquals(apps.get(1).getId(), 2);
+	}
+
+	@Test
+	public void getTopApps() {
+		List<ApplicationMini> apps = getAPI().getTopApps(null);
+
+		Assert.assertEquals(apps.size(), 2);
+		Assert.assertEquals(apps.get(0).getId(), 1);
+		Assert.assertEquals(apps.get(1).getId(), 2);
+	}
+
+	@Test
+	public void getAvailableApps() {
+		List<ApplicationMicro> apps = getAPI().getAvailableApps(1);
+		Assert.assertEquals(apps.size(), 0);
+	}
+
+	@Test
+	public void getAppDependencies() {
+		List<ApplicationMicro> apps = getAPI().getDependencies(1);
+
+		Assert.assertEquals(apps.size(), 0);
 	}
 }
