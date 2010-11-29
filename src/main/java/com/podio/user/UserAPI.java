@@ -13,6 +13,9 @@ import com.podio.contact.ProfileFieldValues;
 import com.podio.contact.ProfileUpdate;
 import com.sun.jersey.api.client.GenericType;
 
+/**
+ * This area holds all the users which just includes basic operations.
+ */
 public class UserAPI {
 
 	private final BaseAPI baseAPI;
@@ -34,6 +37,8 @@ public class UserAPI {
 	/**
 	 * Returns the current status for the user. This includes the user data,
 	 * profile data and notification data.
+	 * 
+	 * @return The status of the user
 	 */
 	public UserStatus getStatus() {
 		return baseAPI.getApiResource("/user/status")
@@ -42,6 +47,8 @@ public class UserAPI {
 
 	/**
 	 * Returns the profile of the active user
+	 * 
+	 * @return The profile for the user
 	 */
 	public Profile getProfile() {
 		return baseAPI.getApiResource("/user/profile/")
@@ -50,6 +57,10 @@ public class UserAPI {
 
 	/**
 	 * Returns the field of the profile for the given key from the active user.
+	 * 
+	 * @param field
+	 *            The field to return the values for
+	 * @return The values for the given field
 	 */
 	public <T, R> List<T> getProfileField(ProfileField<T, R> field) {
 		List<R> values = baseAPI
@@ -69,14 +80,22 @@ public class UserAPI {
 	/**
 	 * Updates the fields of an existing profile. All fields must be filled out,
 	 * as any fields not included will not be part of the new revision.
+	 * 
+	 * @param profile
+	 *            The updated profile
 	 */
-	public void updateProfile(ProfileUpdate update) {
+	public void updateProfile(ProfileUpdate profile) {
 		baseAPI.getApiResource("/user/profile/")
-				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
+				.entity(profile, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
 	/**
 	 * Updates a single field on the profile of the user
+	 * 
+	 * @param field
+	 *            The field that should be updated
+	 * @param value
+	 *            The new value of the field
 	 */
 	public <F> void updateProfileField(ProfileField<F, ?> field, F value) {
 		if (field.isSingle()) {
@@ -92,6 +111,11 @@ public class UserAPI {
 
 	/**
 	 * Updates a single field on the profile of the user
+	 * 
+	 * @param field
+	 *            The field that should be updated
+	 * @param values
+	 *            The new values of the field
 	 */
 	public <F> void updateProfileField(ProfileField<F, ?> field, F... values) {
 		updateProfileField(field, Arrays.asList(values));
@@ -99,6 +123,11 @@ public class UserAPI {
 
 	/**
 	 * Updates a single field on the profile of the user
+	 * 
+	 * @param field
+	 *            The field that should be updated
+	 * @param values
+	 *            The new values of the field
 	 */
 	public <F> void updateProfileField(ProfileField<F, ?> field, List<F> values) {
 		if (field.isSingle()) {
@@ -114,6 +143,9 @@ public class UserAPI {
 	/**
 	 * Updates the fields of an existing profile. Will only update the fields in
 	 * the values.
+	 * 
+	 * @param values
+	 *            The updated values for the profile
 	 */
 	public void updateProfile(ProfileFieldValues values) {
 		baseAPI.getApiResource("/user/profile/")
@@ -122,6 +154,8 @@ public class UserAPI {
 
 	/**
 	 * Gets the active user
+	 * 
+	 * @return The active user
 	 */
 	public User getUser() {
 		return baseAPI.getApiResource("/user/")
@@ -130,6 +164,10 @@ public class UserAPI {
 
 	/**
 	 * Returns the user with given mail address.
+	 * 
+	 * @param mail
+	 *            The mail address of the user
+	 * @return The user with the given mail address
 	 */
 	public User getUserByMail(String mail) {
 		return baseAPI.getApiResource("/user/" + mail)
@@ -139,6 +177,9 @@ public class UserAPI {
 	/**
 	 * Returns the value of the property for the active user with the given
 	 * name. The property is specific to the auth client used.
+	 * 
+	 * @param key
+	 *            The key of the property
 	 */
 	public boolean getProperty(String key) {
 		return baseAPI.getApiResource("/user/property/" + key)
@@ -148,6 +189,11 @@ public class UserAPI {
 	/**
 	 * Sets the value of the property for the active user with the given name.
 	 * The property is specific to the auth client used.
+	 * 
+	 * @param key
+	 *            The key of the property
+	 * @param value
+	 *            The value of the property
 	 */
 	public void setProperty(String key, boolean value) {
 		baseAPI.getApiResource("/user/property/" + key)
@@ -158,6 +204,9 @@ public class UserAPI {
 	/**
 	 * Deletes the property for the active user with the given name. The
 	 * property is specific to the auth client used.
+	 * 
+	 * @param key
+	 *            The key of the property that should be deleted
 	 */
 	public void deleteProperty(String key) {
 		baseAPI.getApiResource("/user/property/" + key).delete();

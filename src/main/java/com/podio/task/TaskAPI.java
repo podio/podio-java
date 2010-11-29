@@ -12,6 +12,42 @@ import com.podio.common.Reference;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
+/**
+ * Tasks are used to track what work has to be done. Tasks have the following
+ * properties:
+ * 
+ * <ul>
+ * <li>Tasks can be stand-alone or can be attached to other objects.
+ * <li>Tasks can be delegated to other users of Hoist.
+ * <li>Tasks can be private or public. When private, only the creator, the
+ * assignee and assignor can see the task.
+ * <li>Tasks can have a due date, which is the target date for completion. When
+ * tasks miss their due date, they become over-due.
+ * <li>Tasks can be started on or not started on. This is used to indicate to
+ * other users if the task is in progress.
+ * </ul>
+ * 
+ * A task can be in one of the following states:
+ * 
+ * <ul>
+ * <li>active: The task is active and not yet completed
+ * <li>completed: The task is completed
+ * </ul>
+ * 
+ * The following actions can be performed on a task:
+ * <ul>
+ * <li>assign: Reassign the task to another user to make that user responsible
+ * for the task
+ * <li>update due date: Update the due date of the task
+ * <li>update text: Update the text of the task
+ * <li>update private: Make the task private or public start: Indicate that
+ * worked have started on the task stop: Indicate that work have been stopped
+ * complete: Mark the task as completed incomplete: Mark the task as being
+ * incomplete
+ * 
+ * @author admin
+ * 
+ */
 public class TaskAPI {
 
 	private final BaseAPI baseAPI;
