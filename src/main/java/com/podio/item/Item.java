@@ -12,7 +12,7 @@ import com.podio.conversation.Conversation;
 import com.podio.file.File;
 import com.podio.rating.RatingType;
 import com.podio.rating.RatingTypeKeyDeserializer;
-import com.podio.rating.TypeRating;
+import com.podio.rating.RatingValuesMap;
 import com.podio.share.Share;
 import com.podio.task.Task;
 
@@ -68,7 +68,7 @@ public class Item {
 	/**
 	 * The ratings on the item
 	 */
-	private Map<RatingType, TypeRating> ratings;
+	private RatingValuesMap ratings;
 
 	/**
 	 * All the conversations on the item that the user is part of
@@ -86,7 +86,7 @@ public class Item {
 	private List<Share> shares;
 
 	/**
-	 * The files on the status
+	 * The files on the item
 	 */
 	private List<File> files;
 
@@ -100,8 +100,15 @@ public class Item {
 	 */
 	private List<String> tags;
 
+	/**
+	 * <code>true</code> if the user is subscribed to the item,
+	 * <code>false</code> otherwise
+	 */
 	private boolean subscribed;
 
+	/**
+	 * The ratings and their values done by the active user on the item
+	 */
 	private Map<RatingType, Integer> userRatings;
 
 	@JsonProperty("item_id")
@@ -186,12 +193,11 @@ public class Item {
 		this.comments = comments;
 	}
 
-	public Map<RatingType, TypeRating> getRatings() {
+	public RatingValuesMap getRatings() {
 		return ratings;
 	}
 
-	@JsonDeserialize(keyUsing = RatingTypeKeyDeserializer.class)
-	public void setRatings(Map<RatingType, TypeRating> ratings) {
+	public void setRatings(RatingValuesMap ratings) {
 		this.ratings = ratings;
 	}
 
@@ -255,7 +261,6 @@ public class Item {
 		return userRatings.get(type);
 	}
 
-	@JsonProperty("user_ratings")
 	public Map<RatingType, Integer> getUserRatings() {
 		return userRatings;
 	}

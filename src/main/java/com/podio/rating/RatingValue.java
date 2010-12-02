@@ -22,4 +22,7 @@ public class RatingValue {
 	public static final int THUMBS_DOWN = 1;
 
 	public static final int LIKE = 1;
+
+	private RatingValue() {
+	}
 }

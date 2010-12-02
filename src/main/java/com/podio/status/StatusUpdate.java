@@ -4,23 +4,19 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class StatusCreate {
+public class StatusUpdate {
 
 	private String value;
 
-	private List<Integer> alerts;
-
 	private List<Integer> fileIds;
 
-	public StatusCreate() {
+	public StatusUpdate() {
 		super();
 	}
 
-	public StatusCreate(String value, List<Integer> alerts,
-			List<Integer> fileIds) {
+	public StatusUpdate(String value, List<Integer> fileIds) {
 		super();
 		this.value = value;
-		this.alerts = alerts;
 		this.fileIds = fileIds;
 	}
 
@@ -38,20 +34,6 @@ public class StatusCreate {
 		this.value = value;
 	}
 
-	public List<Integer> getAlerts() {
-		return alerts;
-	}
-
-	/**
-	 * Sets the list of users to alert in this status updated
-	 * 
-	 * @param alerts
-	 *            The ids of the users to alert
-	 */
-	public void setAlerts(List<Integer> alerts) {
-		this.alerts = alerts;
-	}
-
 	@JsonProperty("file_ids")
 	public List<Integer> getFileIds() {
 		return fileIds;
@@ -67,5 +49,4 @@ public class StatusCreate {
 	public void setFileIds(List<Integer> fileIds) {
 		this.fileIds = fileIds;
 	}
-
 }

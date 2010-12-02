@@ -2,11 +2,13 @@ package com.podio.status;
 
 import java.util.Collections;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Assert;
-
 import org.junit.Test;
 
 import com.podio.BaseAPIFactory;
+import com.podio.rating.RatingType;
 
 public class StatusAPITest {
 
@@ -16,11 +18,64 @@ public class StatusAPITest {
 
 	@Test
 	public void createStatus() {
-		StatusCreateResponse response = getAPI().createStatus(
-				new StatusCreate(1, "Hello from Java", Collections
+		int statusId = getAPI().createStatus(
+				1,
+				new StatusCreate("Hello from Java", Collections
 						.<Integer> emptyList(), Collections
 						.<Integer> emptyList()));
 
-		Assert.assertTrue(response.getId() > 1);
+		Assert.assertTrue(statusId > 1);
+	}
+
+	@Test
+	public void deleteStatus() {
+		getAPI().deleteStatus(1);
+	}
+
+	@Test
+	public void getLatestStatus() {
+		Status status = getAPI().getLatestStatus(1, 1);
+
+		Assert.assertEquals(status.getStatusId(), 3);
+		Assert.assertEquals(status.getSpaceId(), 1);
+		Assert.assertEquals(status.getUser().getId(), 1);
+		Assert.assertEquals(status.getValue(),
+				"What is after legendary? This status message.");
+		Assert.assertEquals(status.getCreatedOn(), new DateTime(2010, 8, 14,
+				17, 9, 0, 0, DateTimeZone.UTC));
+	}
+
+	@Test
+	public void getStatus() {
+		StatusFull status = getAPI().getStatus(1);
+
+		Assert.assertEquals(status.getStatusId(), 1);
+		Assert.assertEquals(status.getSpaceId(), 1);
+		Assert.assertEquals(status.getUser().getId(), 1);
+		Assert.assertEquals(
+				status.getValue(),
+				"This is going to be legen- wait for it -dary. @Andreas Haugstrup Now it's up to you to make it ha...");
+		Assert.assertEquals(status.getCreatedOn(), new DateTime(2010, 8, 12,
+				17, 9, 0, 0, DateTimeZone.UTC));
+		Assert.assertEquals(status.getComments().size(), 2);
+		Assert.assertEquals(
+				status.getRatings().get(RatingType.LIKE).getCounts(1)
+						.getUsers().get(0).getId(), 3);
+		Assert.assertEquals(status.getConversations().size(), 1);
+		Assert.assertEquals(status.getConversations().get(0).getId(), 4);
+		Assert.assertEquals(status.getConversations().get(0).getMessages()
+				.size(), 1);
+		Assert.assertEquals(status.getTasks().size(), 0);
+		Assert.assertEquals(status.getShares().size(), 0);
+		Assert.assertEquals(status.getFiles().size(), 2);
+		Assert.assertEquals(status.getFiles().get(0).getId(), 3);
+		Assert.assertEquals(status.isSubscribed(), true);
+		Assert.assertEquals(status.getUserRatings().size(), 0);
+	}
+
+	@Test
+	public void updateStatus() {
+		getAPI().updateStatus(1,
+				new StatusUpdate("Test", Collections.<Integer> emptyList()));
 	}
 }

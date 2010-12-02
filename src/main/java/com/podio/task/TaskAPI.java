@@ -40,13 +40,12 @@ import com.sun.jersey.api.client.WebResource;
  * for the task
  * <li>update due date: Update the due date of the task
  * <li>update text: Update the text of the task
- * <li>update private: Make the task private or public start: Indicate that
- * worked have started on the task stop: Indicate that work have been stopped
- * complete: Mark the task as completed incomplete: Mark the task as being
- * incomplete
- * 
- * @author admin
- * 
+ * <li>update private: Make the task private or public
+ * <li>start: Indicate that worked have started on the task
+ * <li>stop: Indicate that work have been stopped
+ * <li>complete: Mark the task as completed
+ * <li>incomplete: Mark the task as being incomplete
+ * </ul>
  */
 public class TaskAPI {
 
@@ -58,6 +57,10 @@ public class TaskAPI {
 
 	/**
 	 * Returns the task with the given id.
+	 * 
+	 * @param taskId
+	 *            The id of the task to retrieve
+	 * @return The retrieved task
 	 */
 	public Task getTask(int taskId) {
 		return baseAPI.getApiResource("/task/" + taskId)
@@ -67,6 +70,11 @@ public class TaskAPI {
 	/**
 	 * Assigns the task to another user. This makes the user responsible for the
 	 * task and its completion.
+	 * 
+	 * @param taskId
+	 *            The id of the task to assign
+	 * @param responsible
+	 *            The id of the user the task should be assigned to
 	 */
 	public void assignTask(int taskId, int responsible) {
 		baseAPI.getApiResource("/task/" + taskId + "/assign")
@@ -76,6 +84,9 @@ public class TaskAPI {
 
 	/**
 	 * Mark the given task as completed.
+	 * 
+	 * @param taskId
+	 *            The id of the task to nark as complete
 	 */
 	public void completeTask(int taskId) {
 		baseAPI.getApiResource("/task/" + taskId + "/complete")
@@ -84,6 +95,9 @@ public class TaskAPI {
 
 	/**
 	 * Mark the completed task as no longer being completed.
+	 * 
+	 * @param taskId
+	 *            The id of the task to mark as incomplete
 	 */
 	public void incompleteTask(int taskId) {
 		baseAPI.getApiResource("/task/" + taskId + "/incomplete")
@@ -92,6 +106,9 @@ public class TaskAPI {
 
 	/**
 	 * Indicate that work has started on the given task.
+	 * 
+	 * @param taskId
+	 *            The id of the task to mark as started
 	 */
 	public void startTask(int taskId) {
 		baseAPI.getApiResource("/task/" + taskId + "/start")
@@ -100,6 +117,9 @@ public class TaskAPI {
 
 	/**
 	 * Indicate that worked has stopped on the given task.
+	 * 
+	 * @param taskId
+	 *            The id of the task to mark as stopped
 	 */
 	public void stopTask(int taskId) {
 		baseAPI.getApiResource("/task/" + taskId + "/stop")
@@ -108,6 +128,11 @@ public class TaskAPI {
 
 	/**
 	 * Updates the due date of the task to the given value
+	 * 
+	 * @param taskId
+	 *            The id of the task
+	 * @param dueDate
+	 *            The new due date of the task
 	 */
 	public void updateDueDate(int taskId, LocalDate dueDate) {
 		baseAPI.getApiResource("/task/" + taskId + "/due_date")
@@ -117,6 +142,12 @@ public class TaskAPI {
 
 	/**
 	 * Update the private flag on the given task.
+	 * 
+	 * @param taskId
+	 *            The id of the task
+	 * @param priv
+	 *            <code>true</code> if the task should be private,
+	 *            <code>false</code> otherwise
 	 */
 	public void updatePrivate(int taskId, boolean priv) {
 		baseAPI.getApiResource("/task/" + taskId + "/private")
@@ -126,6 +157,11 @@ public class TaskAPI {
 
 	/**
 	 * Updates the text of the task.
+	 * 
+	 * @param taskId
+	 *            The id of the task
+	 * @param text
+	 *            The new text of the task
 	 */
 	public void updateText(int taskId, String text) {
 		baseAPI.getApiResource("/task/" + taskId + "/text")
@@ -135,6 +171,10 @@ public class TaskAPI {
 
 	/**
 	 * Creates a new task with no reference to other objects.
+	 * 
+	 * @param task
+	 *            The data of the task to be created
+	 * @return The id of the newly created task
 	 */
 	public int createTask(TaskCreate task) {
 		TaskCreateResponse response = baseAPI.getApiResource("/task/")
@@ -146,6 +186,12 @@ public class TaskAPI {
 
 	/**
 	 * Creates a new task with a reference to the given object.
+	 * 
+	 * @param task
+	 *            The data of the task to be created
+	 * @param reference
+	 *            The reference to the object the task should be attached to
+	 * @return The id of the newly created task
 	 */
 	public int createTaskWithReference(TaskCreate task, Reference reference) {
 		TaskCreateResponse response = baseAPI
@@ -162,6 +208,10 @@ public class TaskAPI {
 	 * Gets a list of tasks with a reference to the given object. This will
 	 * return both active and completed tasks. The reference will not be set on
 	 * the individual tasks.
+	 * 
+	 * @param reference
+	 *            The object on which to return tasks
+	 * @return The list of tasks
 	 */
 	public List<Task> getTasksWithReference(Reference reference) {
 		return baseAPI
@@ -179,6 +229,8 @@ public class TaskAPI {
 	 * 
 	 * The tasks will be sorted by due date and creation time, and grouped by
 	 * their due date status.
+	 * 
+	 * @return The tasks grouped by due date
 	 */
 	public TasksByDue getActiveTasks() {
 		return baseAPI.getApiResource("/task/active/")
@@ -187,6 +239,8 @@ public class TaskAPI {
 
 	/**
 	 * Returns the tasks that the user has assigned to another user.
+	 * 
+	 * @return The tasks grouped by due date
 	 */
 	public TasksByDue getAssignedActiveTasks() {
 		return baseAPI.getApiResource("/task/assigned/active/")
@@ -195,6 +249,8 @@ public class TaskAPI {
 
 	/**
 	 * Returns the tasks that the user has assigned to another user.
+	 * 
+	 * @return The list of tasks ordered by date of completion
 	 */
 	public List<Task> getAssignedCompletedTasks() {
 		return baseAPI.getApiResource("/task/assigned/completed/")
@@ -206,6 +262,8 @@ public class TaskAPI {
 	/**
 	 * Returns the tasks that is completed and where the active user is
 	 * responsible.
+	 * 
+	 * @return The list of tasks ordered by date of completion
 	 */
 	public List<Task> getCompletedTasks() {
 		return baseAPI.getApiResource("/task/completed/")
@@ -227,6 +285,10 @@ public class TaskAPI {
 	 * Returns all the tasks that are related to the space. It includes tasks
 	 * with a direct reference to the space, and tasks with an indirect
 	 * reference to the space (like items and status updates).
+	 * 
+	 * @param spaceId
+	 *            The id of the space
+	 * @return The tasks grouped by due date
 	 */
 	public TasksByDue getTasksInSpaceByDue(int spaceId) {
 		return baseAPI.getApiResource("/task/in_space/" + spaceId + "/")
@@ -238,6 +300,10 @@ public class TaskAPI {
 	 * Returns all the tasks that are related to the space. It includes tasks
 	 * with a direct reference to the space, and tasks with an indirect
 	 * reference to the space (like items and status updates).
+	 * 
+	 * @param spaceId
+	 *            The id of the space
+	 * @return The tasks grouped by responsible
 	 */
 	public List<TasksWithResponsible> getTasksInSpaceByResponsible(int spaceId) {
 		return baseAPI.getApiResource("/task/in_space/" + spaceId + "/")
@@ -249,6 +315,8 @@ public class TaskAPI {
 
 	/**
 	 * Returns the total task count for the active user.
+	 * 
+	 * @return The task total for all spaces
 	 */
 	public TaskTotals getTaskTotals() {
 		return getTaskTotals(null);
@@ -256,6 +324,11 @@ public class TaskAPI {
 
 	/**
 	 * Returns the total task count for the active user.
+	 * 
+	 * @param spaceId
+	 *            The id of the space to get totals for, <code>null</code> for
+	 *            all spaces
+	 * @return The task totals for the given space
 	 */
 	public TaskTotals getTaskTotals(Integer spaceId) {
 		WebResource resource = baseAPI.getApiResource("/task/total");
