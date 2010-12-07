@@ -44,7 +44,6 @@ public enum RatingType {
 
 	@JsonCreator
 	public static RatingType getByName(String value) {
-		System.out.println(value);
 		return valueOf(value.toUpperCase());
 	}
 }

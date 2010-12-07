@@ -29,6 +29,8 @@ public class RatingAPITest {
 
 		Assert.assertEquals(ratings.get(RatingType.LIKE).getCounts(1)
 				.getTotal(), 1);
+		Assert.assertEquals(ratings.get(RatingType.LIKE).getCounts(1)
+				.getUsers().get(0).getId(), 3);
 	}
 
 	@Test
@@ -37,7 +39,6 @@ public class RatingAPITest {
 				new Reference(ReferenceType.STATUS, 1), RatingType.LIKE);
 
 		Assert.assertEquals(ratings.getCounts(1).getTotal(), 1);
-		System.out.println(ratings.getCounts(1).getUsers().get(0));
 	}
 
 	@Test
