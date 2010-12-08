@@ -45,19 +45,20 @@ public class AppAPITest {
 
 	@Test
 	public void addApp() {
-		int appId = getAPI().addApp(
-				new ApplicationCreate(1, true, true,
+		int appId = getAPI()
+				.addApp(new ApplicationCreate(
+						1,
+						true,
+						true,
 						new ApplicationConfiguration("Tests", "Test",
 								"Description", "Usage", "ExternalId", "23.png",
-								true, true, ApplicationViewType.BADGE, true,
-								true, true, false, null, false, false, null,
-								false, null, false, null, Arrays.asList(
-										"Task 1", "Task 2")), Arrays
-								.asList(new ApplicationFieldCreate(
-										ApplicationFieldType.TITLE,
-										new ApplicationFieldConfiguration(
-												"title", "Title", 0, null,
-												true, true)))));
+								true, ApplicationViewType.BADGE, true, true,
+								false, null, false, false, null, false, null,
+								false, null, Arrays.asList("Task 1", "Task 2")),
+						Arrays.asList(new ApplicationFieldCreate(
+								ApplicationFieldType.TITLE,
+								new ApplicationFieldConfiguration("title",
+										"Title", 0, null, true, true)))));
 		Assert.assertTrue(appId > 0);
 	}
 
@@ -67,10 +68,10 @@ public class AppAPITest {
 				1,
 				new ApplicationUpdate(true, new ApplicationConfiguration(
 						"Tests", "Test", "Description", "Usage", "ExternalId",
-						"23.png", true, true, ApplicationViewType.BADGE, true,
-						true, true, false, null, false, false, null, false,
-						null, false, null, Arrays.asList("Task 1", "Task 2")),
-						Arrays.asList(new ApplicationFieldUpdate(1,
+						"23.png", true, ApplicationViewType.BADGE, true, true,
+						false, null, false, false, null, false, null, false,
+						null, Arrays.asList("Task 1", "Task 2")), Arrays
+						.asList(new ApplicationFieldUpdate(1,
 								new ApplicationFieldConfiguration("hired",
 										"Is hired?", 10,
 										ApplicationFieldSettings
@@ -135,18 +136,16 @@ public class AppAPITest {
 	public void getAppsInSpace() {
 		List<ApplicationMini> apps = getAPI().getAppsOnSpace(1);
 
-		Assert.assertEquals(apps.size(), 2);
+		Assert.assertEquals(apps.size(), 1);
 		Assert.assertEquals(apps.get(0).getId(), 1);
-		Assert.assertEquals(apps.get(1).getId(), 2);
 	}
 
 	@Test
 	public void getTopApps() {
 		List<ApplicationMini> apps = getAPI().getTopApps(null);
 
-		Assert.assertEquals(apps.size(), 2);
+		Assert.assertEquals(apps.size(), 1);
 		Assert.assertEquals(apps.get(0).getId(), 1);
-		Assert.assertEquals(apps.get(1).getId(), 2);
 	}
 
 	@Test
@@ -157,8 +156,20 @@ public class AppAPITest {
 
 	@Test
 	public void getAppDependencies() {
-		List<ApplicationMicro> apps = getAPI().getDependencies(1);
+		Dependencies dependencies = getAPI().getDependencies(2);
 
-		Assert.assertEquals(apps.size(), 0);
+		Assert.assertEquals(dependencies.getApps().size(), 1);
+		Assert.assertEquals(dependencies.getDependencies().size(), 1);
+		Assert.assertEquals(dependencies.getDependencies().get(1), null);
+	}
+
+	@Test
+	public void deactivateApp() {
+		getAPI().deactivateApp(1);
+	}
+
+	@Test
+	public void activateApp() {
+		getAPI().activateApp(2);
 	}
 }

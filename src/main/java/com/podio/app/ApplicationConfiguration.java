@@ -44,12 +44,6 @@ public class ApplicationConfiguration {
 	private boolean allowEdit;
 
 	/**
-	 * True if other members are allowed to add new items to the app, false
-	 * otherwise,
-	 */
-	private boolean allowInsert;
-
-	/**
 	 * The default view of the app items on the app main page (see area for more
 	 * information),
 	 */
@@ -64,12 +58,6 @@ public class ApplicationConfiguration {
 	 * True if members can make comments on an item, false otherwise
 	 */
 	private boolean allowComments;
-
-	/**
-	 * True if the app is visible, false otherwise (might be removed in a future
-	 * version),
-	 */
-	private boolean visible;
 
 	/**
 	 * True if fivestar rating is enabled on an item, false otherwise
@@ -131,9 +119,8 @@ public class ApplicationConfiguration {
 
 	public ApplicationConfiguration(String name, String itemName,
 			String description, String usage, String externalId, String icon,
-			boolean allowEdit, boolean allowInsert,
-			ApplicationViewType defaultView, boolean allowAttachments,
-			boolean allowComments, boolean visible, boolean fivestar,
+			boolean allowEdit, ApplicationViewType defaultView,
+			boolean allowAttachments, boolean allowComments, boolean fivestar,
 			String fivestarLabel, boolean approved, boolean thumbs,
 			String thumbsLabel, boolean rsvp, String rsvpLabel, boolean yesno,
 			String yesnoLabel, List<String> tasks) {
@@ -145,11 +132,9 @@ public class ApplicationConfiguration {
 		this.externalId = externalId;
 		this.icon = icon;
 		this.allowEdit = allowEdit;
-		this.allowInsert = allowInsert;
 		this.defaultView = defaultView;
 		this.allowAttachments = allowAttachments;
 		this.allowComments = allowComments;
-		this.visible = visible;
 		this.fivestar = fivestar;
 		this.fivestarLabel = fivestarLabel;
 		this.approved = approved;
@@ -224,16 +209,6 @@ public class ApplicationConfiguration {
 		this.allowEdit = allowEdit;
 	}
 
-	@JsonProperty("allow_insert")
-	public boolean isAllowInsert() {
-		return allowInsert;
-	}
-
-	@JsonProperty("allow_insert")
-	public void setAllowInsert(boolean allowInsert) {
-		this.allowInsert = allowInsert;
-	}
-
 	@JsonProperty("default_view")
 	public ApplicationViewType getDefaultView() {
 		return defaultView;
@@ -262,14 +237,6 @@ public class ApplicationConfiguration {
 	@JsonProperty("allow_comments")
 	public void setAllowComments(boolean allowComments) {
 		this.allowComments = allowComments;
-	}
-
-	public boolean isVisible() {
-		return visible;
-	}
-
-	public void setVisible(boolean visible) {
-		this.visible = visible;
 	}
 
 	public boolean isFivestar() {

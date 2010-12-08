@@ -26,8 +26,8 @@ public class CommentAPITest {
 				comment.getValue(),
 				"Hoist rules, but we need to do more.<br />@Andreas Haugstrup Can you fix the javascript popup problem?");
 		Assert.assertEquals(comment.getExternalId(), "c1");
-		Assert.assertEquals(comment.getAlerts().size(), 1);
-		Assert.assertEquals(comment.getAlerts().get(0).getId(), 2);
+		// Assert.assertEquals(comment.getAlerts().size(), 1);
+		// Assert.assertEquals(comment.getAlerts().get(0).getId(), 2);
 		Assert.assertEquals(comment.getCreatedOn(), new DateTime(2010, 8, 5, 9,
 				8, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(comment.getFiles().size(), 0);

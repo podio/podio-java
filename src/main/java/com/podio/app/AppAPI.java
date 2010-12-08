@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.core.MediaType;
 
 import com.podio.BaseAPI;
+import com.podio.common.Empty;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
@@ -234,10 +235,45 @@ public class AppAPI {
 	 *            The id of the app the dependecies should be returned for
 	 * @return The applications that the given app depends on
 	 */
-	public List<ApplicationMicro> getDependencies(int appId) {
+	public Dependencies getDependencies(int appId) {
 		return baseAPI.getApiResource("/app/" + appId + "/dependencies/")
 				.accept(MediaType.APPLICATION_JSON_TYPE)
-				.get(new GenericType<List<ApplicationMicro>>() {
-				});
+				.get(Dependencies.class);
+	}
+
+	/**
+	 * Deactivates the app with the given id. This removes the app from the app
+	 * navigator, and disables insertion of new items.
+	 * 
+	 * @param appId
+	 *            The id of the app to deactivate
+	 */
+	public void deactivateApp(int appId) {
+		baseAPI.getApiResource("/app/" + appId + "/deactivate")
+				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
+	}
+
+	/**
+	 * Activates a deactivated app. This puts the app back in the app navigator
+	 * and allows insertion of new items.
+	 * 
+	 * @param appId
+	 *            The id of the app to activate
+	 */
+	public void activateApp(int appId) {
+		baseAPI.getApiResource("/app/" + appId + "/activate")
+				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
+	}
+
+	/**
+	 * Deletes the app with the given id. This will delete all items, widgets,
+	 * filters and shares on the app. This operating is not reversible.
+	 * 
+	 * @param appId
+	 *            The id of the app to delete
+	 */
+	public void deleteApp(int appId) {
+		baseAPI.getApiResource("/app/" + appId)
+				.accept(MediaType.APPLICATION_JSON_TYPE).delete();
 	}
 }

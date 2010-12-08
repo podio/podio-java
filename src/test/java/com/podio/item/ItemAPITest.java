@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Assert;
-
 import org.junit.Test;
 
 import com.podio.BaseAPIFactory;
@@ -69,14 +68,14 @@ public class ItemAPITest {
 				.getCounts(1).getTotal(), 1);
 		Assert.assertEquals(item.getRatings().get(RatingType.APPROVED)
 				.getCounts(1).getUsers().get(0).getId(), 2);
-		Assert.assertEquals(item.getConversations().size(), 1);
-		Assert.assertEquals(item.getConversations().get(0).getId(), 1);
-		Assert.assertEquals(
-				item.getConversations().get(0).getMessages().size(), 2);
+		// Assert.assertEquals(item.getConversations().size(), 1);
+		// Assert.assertEquals(item.getConversations().get(0).getId(), 1);
+		// Assert.assertEquals(
+		// item.getConversations().get(0).getMessages().size(), 2);
 		Assert.assertEquals(item.getTasks().size(), 1);
 		Assert.assertEquals(item.getTasks().get(0).getId(), 4);
-		Assert.assertEquals(item.getShares().size(), 1);
-		Assert.assertEquals(item.getShares().get(0).getUser().getId(), 4);
+		// Assert.assertEquals(item.getShares().size(), 1);
+		// Assert.assertEquals(item.getShares().get(0).getUser().getId(), 4);
 		Assert.assertEquals(item.getFiles().size(), 1);
 		Assert.assertEquals(item.getFiles().get(0).getId(), 1);
 		Assert.assertEquals(item.getReferences().size(), 0);
