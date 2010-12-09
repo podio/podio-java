@@ -53,7 +53,7 @@ public class Item {
 	/**
 	 * The values for each field
 	 */
-	private List<FieldValues> fields;
+	private List<FieldValuesView> fields;
 
 	/**
 	 * The latest 8 revisions of the item sorted descending by date
@@ -169,11 +169,11 @@ public class Item {
 		this.title = title;
 	}
 
-	public List<FieldValues> getFields() {
+	public List<FieldValuesView> getFields() {
 		return fields;
 	}
 
-	public void setFields(List<FieldValues> fields) {
+	public void setFields(List<FieldValuesView> fields) {
 		this.fields = fields;
 	}
 

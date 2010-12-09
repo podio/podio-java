@@ -48,4 +48,10 @@ public class RatingAPITest {
 
 		Assert.assertEquals(value, 1);
 	}
+
+	@Test
+	public void deleteRating() {
+		getAPI().deleteRating(new Reference(ReferenceType.ITEM, 1),
+				RatingType.APPROVED);
+	}
 }

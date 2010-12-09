@@ -1,6 +1,7 @@
 package com.podio.item;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
 
@@ -11,6 +12,16 @@ import com.podio.filter.SortBy;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
+/**
+ * Items are entries in an app. If you think of app as a table, items will be
+ * the rows in the table. Items consists of some basic information as well
+ * values for each of the fields in the app. For each field there can be
+ * multiple values (F.ex. there can be multiple links to another app) and
+ * multiple types of values (F.ex. a field of type date field consists of both a
+ * start date and an optional end date). The type is denoted by an string id
+ * called a sub_id. Most types of fields have only one type, which is denoted by
+ * the sub_id values. Others have multiple sub_ids.
+ */
 public class ItemAPI {
 
 	private final BaseAPI baseAPI;
@@ -19,30 +30,176 @@ public class ItemAPI {
 		this.baseAPI = baseAPI;
 	}
 
-	public ItemCreateResponse addItem(int appId, ItemCreate create,
-			boolean silent) {
+	/**
+	 * Adds a new item to the given app.
+	 * 
+	 * @param appId
+	 *            The id of the app the item should be added to
+	 * @param create
+	 *            The data for the new item
+	 * @param silent
+	 *            True if the create should be silten, false otherwise
+	 * @return The id of the newly created item
+	 */
+	public int addItem(int appId, ItemCreate create, boolean silent) {
 		return baseAPI.getApiResource("/item/app/" + appId + "/")
 				.queryParam("silent", silent ? "1" : "0")
 				.entity(create, MediaType.APPLICATION_JSON_TYPE)
-				.post(ItemCreateResponse.class);
+				.post(ItemCreateResponse.class).getId();
 	}
 
+	/**
+	 * Gets the item with the given id
+	 * 
+	 * @param itemId
+	 *            The id of the item
+	 * @return The item with given id
+	 */
 	public Item getItem(int itemId) {
 		return baseAPI.getApiResource("/item/" + itemId)
 				.accept(MediaType.APPLICATION_JSON_TYPE).get(Item.class);
 	}
 
+	/**
+	 * Updates the entire item. Only fields which have values specified will be
+	 * updated. To delete the contents of a field, pass an empty array for the
+	 * value.
+	 * 
+	 * @param itemId
+	 *            The id of the item to update
+	 * @param update
+	 *            The data for the update
+	 * @param silent
+	 *            True if the update should be silent, false otherwise
+	 */
 	public void updateItem(int itemId, ItemUpdate update, boolean silent) {
 		baseAPI.getApiResource("/item/" + itemId)
 				.queryParam("silent", silent ? "1" : "0")
 				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
+	/**
+	 * Updates all the values for an item
+	 * 
+	 * @param itemId
+	 *            The id of the item
+	 * @param values
+	 *            The values for the fields
+	 * @param silent
+	 *            True if the update should be silent, false otherwise
+	 */
+	public void updateItemValues(int itemId, List<FieldValuesUpdate> values,
+			boolean silent) {
+		baseAPI.getApiResource("/item/" + itemId + "/value/")
+				.queryParam("silent", silent ? "1" : "0")
+				.entity(values, MediaType.APPLICATION_JSON_TYPE).put();
+	}
+
+	/**
+	 * Update the item values for a specific field.
+	 * 
+	 * @param itemId
+	 *            The id of the item
+	 * @param fieldId
+	 *            The id of the field
+	 * @param values
+	 *            The new values for the field
+	 * @param silent
+	 *            True if the update should be silent, false otherwise
+	 */
+	public void updateItemFieldValues(int itemId, int fieldId,
+			List<Map<String, Object>> values, boolean silent) {
+		baseAPI.getApiResource("/item/" + itemId + "/value/" + fieldId)
+				.queryParam("silent", silent ? "1" : "0")
+				.entity(values, MediaType.APPLICATION_JSON_TYPE).put();
+	}
+
+	/**
+	 * Deletes an item and removes it from all views. The data can no longer be
+	 * retrieved.
+	 * 
+	 * @param itemId
+	 *            The id of the item
+	 * @param silent
+	 *            True if the deletion should be silent, false otherwise
+	 */
 	public void deleteItem(int itemId, boolean silent) {
 		baseAPI.getApiResource("/item/" + itemId)
 				.queryParam("silent", silent ? "1" : "0").delete();
 	}
 
+	/**
+	 * Returns the values for a specified field on an item
+	 * 
+	 * @param itemId
+	 *            The id of the item
+	 * @param fieldId
+	 *            The id of the field
+	 * @return The values on the field on the item
+	 */
+	public List<Map<String, Object>> getItemFieldValues(int itemId, int fieldId) {
+		return baseAPI.getApiResource("/item/" + itemId + "/value/" + fieldId)
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.get(new GenericType<List<Map<String, Object>>>() {
+				});
+	}
+
+	/**
+	 * Returns all the values for an item, with the additional data provided by
+	 * the get item operation.
+	 * 
+	 * @param itemId
+	 *            The id of the item
+	 * @return The values on the item
+	 */
+	public List<FieldValuesView> getItemValues(int itemId) {
+		return baseAPI.getApiResource("/item/" + itemId + "/value/")
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.get(new GenericType<List<FieldValuesView>>() {
+				});
+	}
+
+	/**
+	 * Used to find possible items for a given application field. It searches
+	 * the relevant items for the title given.
+	 * 
+	 * @param fieldId
+	 *            The id of app reference field to search for
+	 * @param text
+	 *            The text to search for in the items title
+	 * @return The items that were valid for the field and with text matching
+	 */
+	public List<ItemMini> getItemsByFieldAndTitle(int fieldId, String text) {
+		return baseAPI.getApiResource("/item/field/" + fieldId + "/find")
+				.queryParam("text", text)
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.get(new GenericType<List<ItemMini>>() {
+				});
+	}
+
+	/**
+	 * Returns the recent activity on the app divided into activity today and
+	 * activity the last week. The activity events are ordered descending by the
+	 * time the events occurred.
+	 * 
+	 * @param appId
+	 *            The id of the app
+	 * @return The activities on the app grouped by today and last week.
+	 */
+	public AppActivities getAppActivities(int appId) {
+		return baseAPI.getApiResource("/item/app/" + appId + "/activity")
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.get(AppActivities.class);
+	}
+
+	/**
+	 * Returns the items that have a reference to the given item. The references
+	 * are grouped by app. Both the apps and the items are sorted by title.
+	 * 
+	 * @param itemId
+	 *            The id of the item
+	 * @return The references to the given item
+	 */
 	public List<ItemReference> getItemReference(int itemId) {
 		return baseAPI.getApiResource("/item/" + itemId + "/reference/")
 				.accept(MediaType.APPLICATION_JSON_TYPE)
@@ -50,10 +207,82 @@ public class ItemAPI {
 				});
 	}
 
+	/**
+	 * Returns the data about the specific revision on an item
+	 * 
+	 * @param itemId
+	 *            The id of the item
+	 * @param revisionId
+	 *            The running revision number, starts at 0 for the initial
+	 *            revision
+	 * @return The revision
+	 */
+	public ItemRevision getItemRevision(int itemId, int revisionId) {
+		return baseAPI
+				.getApiResource("/item/" + itemId + "/revision/" + revisionId)
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.get(ItemRevision.class);
+	}
+
+	/**
+	 * Returns the difference in fields values between the two revisions.
+	 * 
+	 * @param itemId
+	 *            The id of the item
+	 * @param revisionFrom
+	 *            The from revision
+	 * @param revisionTo
+	 *            The to revision
+	 * @return The difference between the two revision
+	 */
+	public List<ItemFieldDifference> getItemRevisionDifference(int itemId,
+			int revisionFrom, int revisionTo) {
+		return baseAPI
+				.getApiResource(
+						"/item/" + itemId + "/revision/" + revisionFrom + "/"
+								+ revisionTo)
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.get(new GenericType<List<ItemFieldDifference>>() {
+				});
+	}
+
+	/**
+	 * Returns all the revisions that have been made to an item
+	 * 
+	 * @param itemId
+	 *            The id of the item
+	 * @return All the revisions
+	 */
+	public List<ItemRevision> getItemRevisions(int itemId) {
+		return baseAPI.getApiResource("/item/" + itemId + "/revision/")
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.get(new GenericType<List<ItemRevision>>() {
+				});
+	}
+
+	/**
+	 * Returns the items on app matching the given filters.
+	 * 
+	 * @param appId
+	 *            The id of the app
+	 * @param limit
+	 *            The maximum number of items to receive, defaults to 20
+	 * @param offset
+	 *            The offset from the start of the items returned, defaults to 0
+	 * @param sortBy
+	 *            How the items should be sorted. For the possible options, see
+	 *            the filter area.
+	 * @param sortDesc
+	 *            <code>true</code> or leave out to sort descending, use
+	 *            <code>false</code> to sort ascending
+	 * @param filters
+	 *            The filters to apply
+	 * @return The items matching the filters
+	 */
 	public ItemsResponse getItems(int appId, Integer limit, Integer offset,
 			SortBy sortBy, Boolean sortDesc, FilterByValue<?>... filters) {
 		WebResource resource = baseAPI.getApiResource("/item/app/" + appId
-				+ "/v2/");
+				+ "/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
@@ -75,8 +304,43 @@ public class ItemAPI {
 				ItemsResponse.class);
 	}
 
+	/**
+	 * Utility method to get items matching an external id
+	 * 
+	 * @param appId
+	 *            The id of the app
+	 * @param externalId
+	 *            The external id
+	 * @return The items matching the app and external id
+	 */
 	public ItemsResponse getItemsByExternalId(int appId, String externalId) {
 		return getItems(appId, null, null, null, null,
 				new FilterByValue<String>(new ExternalIdFilterBy(), externalId));
+	}
+
+	/**
+	 * Returns the next item after the given item id. This takes into
+	 * consideration the last used filter on the app.
+	 * 
+	 * @param itemId
+	 *            The id of the item
+	 * @return The next item
+	 */
+	public ItemMicro getNextItem(int itemId) {
+		return baseAPI.getApiResource("/item/" + itemId + "/next")
+				.accept(MediaType.APPLICATION_JSON_TYPE).get(ItemMicro.class);
+	}
+
+	/**
+	 * Returns the previous item relative to the given item. This takes into
+	 * consideration the last used filter on the app.
+	 * 
+	 * @param itemId
+	 *            The id of the item
+	 * @return The previous item
+	 */
+	public ItemMicro getPreviousItem(int itemId) {
+		return baseAPI.getApiResource("/item/" + itemId + "/previous")
+				.accept(MediaType.APPLICATION_JSON_TYPE).get(ItemMicro.class);
 	}
 }

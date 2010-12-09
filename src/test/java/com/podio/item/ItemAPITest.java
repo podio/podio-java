@@ -3,6 +3,7 @@ package com.podio.item;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,21 +21,36 @@ public class ItemAPITest {
 
 	@Test
 	public void addItem() {
-		ItemCreateResponse response = getAPI().addItem(
+		int itemId = getAPI().addItem(
 				1,
-				new ItemCreate(null, Arrays.asList(new FieldValues(1, "value",
-						"yes")), Collections.<Integer> emptyList(), Collections
-						.<String> emptyList()), false);
+				new ItemCreate(null, Arrays.asList(new FieldValuesUpdate(1,
+						"value", "yes")), Collections.<Integer> emptyList(),
+						Collections.<String> emptyList()), false);
 
-		Assert.assertTrue(response.getItemId() > 1);
+		Assert.assertTrue(itemId > 1);
 	}
 
 	@Test
 	public void updateItem() {
 		getAPI().updateItem(
 				1,
-				new ItemUpdate(null, Arrays.asList(new FieldValues(1, "value",
-						"no"))), false);
+				new ItemUpdate(null, Arrays.asList(new FieldValuesUpdate(1,
+						"value", "no"))), false);
+	}
+
+	@Test
+	public void updateItemValues() {
+		getAPI().updateItemValues(1,
+				Arrays.asList(new FieldValuesUpdate(1, "value", "no")), false);
+	}
+
+	@Test
+	public void updateItemFieldValues() {
+		getAPI().updateItemFieldValues(
+				1,
+				1,
+				Collections.singletonList(Collections
+						.<String, Object> singletonMap("value", "no")), false);
 	}
 
 	@Test
@@ -53,7 +69,7 @@ public class ItemAPITest {
 		Assert.assertEquals(item.getApplication().getItemName(), "Bug");
 		Assert.assertEquals(item.getApplication().getIcon(), "23.png");
 		Assert.assertEquals(item.getFields().size(), 10);
-		FieldValues field = item.getFields().get(0);
+		FieldValuesView field = item.getFields().get(0);
 		Assert.assertEquals(field.getId(), 1);
 		Assert.assertEquals(field.getType(), ApplicationFieldType.STATE);
 		Assert.assertEquals(field.getLabel(), "Is hired?");
@@ -95,6 +111,32 @@ public class ItemAPITest {
 	}
 
 	@Test
+	public void getItemValues() {
+		List<FieldValuesView> values = getAPI().getItemValues(1);
+
+		Assert.assertEquals(values.size(), 10);
+		Assert.assertEquals(values.get(4).getValues().size(), 1);
+		Assert.assertEquals(values.get(4).getValues().get(0).size(), 1);
+		Assert.assertEquals(((Map<String, Object>) values.get(4).getValues()
+				.get(0).get("value")).get("item_id"), 2);
+		Assert.assertEquals(((Map<String, Object>) values.get(4).getValues()
+				.get(0).get("value")).get("title"), "Bug 2");
+	}
+
+	@Test
+	public void getItemFieldValues() {
+		List<Map<String, Object>> values = getAPI().getItemFieldValues(1, 5);
+
+		Assert.assertEquals(values.size(), 1);
+		Assert.assertEquals(values.get(0).size(), 1);
+		Assert.assertEquals(((Map<String, Object>) values.get(0).get("value"))
+				.get("item_id"), 2);
+		Assert.assertEquals(
+				((Map<String, Object>) values.get(0).get("value")).get("title"),
+				"Bug 2");
+	}
+
+	@Test
 	public void getItemReferences() {
 		List<ItemReference> references = getAPI().getItemReference(2);
 
@@ -105,6 +147,38 @@ public class ItemAPITest {
 		ItemMicro item = reference.getItems().get(0);
 		Assert.assertEquals(item.getId(), 1);
 		Assert.assertEquals(item.getTitle(), "זרו");
+	}
+
+	@Test
+	public void getItemRevision() {
+		ItemRevision revision = getAPI().getItemRevision(1, 0);
+
+		Assert.assertEquals(revision.getUser().getId(), 1);
+	}
+
+	@Test
+	public void getItemRevisionDifference() {
+		List<ItemFieldDifference> differences = getAPI()
+				.getItemRevisionDifference(2, 0, 1);
+
+		Assert.assertEquals(differences.size(), 1);
+		Assert.assertEquals(differences.get(0).getId(), 1);
+		Assert.assertEquals(differences.get(0).getType(),
+				ApplicationFieldType.STATE);
+		Assert.assertEquals(differences.get(0).getLabel(), "Is hired?");
+		Assert.assertEquals(differences.get(0).getFrom().size(), 1);
+		Assert.assertEquals(differences.get(0).getFrom().get(0).get("value"),
+				"yes");
+		Assert.assertEquals(differences.get(0).getTo().size(), 1);
+		Assert.assertEquals(differences.get(0).getTo().get(0).get("value"),
+				"no");
+	}
+
+	@Test
+	public void getItemRevisions() {
+		List<ItemRevision> revisions = getAPI().getItemRevisions(2);
+
+		Assert.assertEquals(revisions.size(), 2);
 	}
 
 	@Test
@@ -123,5 +197,35 @@ public class ItemAPITest {
 
 		Assert.assertEquals(response.getItems().size(), 1);
 		Assert.assertEquals(response.getItems().get(0).getId(), 1);
+	}
+
+	@Test
+	public void getItemsByFieldAndText() {
+		List<ItemMini> items = getAPI().getItemsByFieldAndTitle(5, "bug");
+
+		Assert.assertEquals(items.size(), 1);
+		Assert.assertEquals(items.get(0).getId(), 2);
+	}
+
+	@Test
+	public void getAppActivity() {
+		AppActivities activities = getAPI().getAppActivities(1);
+
+		Assert.assertEquals(activities.getToday().size(), 0);
+		Assert.assertEquals(activities.getLastWeek().size(), 0);
+	}
+
+	@Test
+	public void getNextItem() {
+		ItemMicro item = getAPI().getNextItem(1);
+
+		Assert.assertEquals(item.getId(), 2);
+	}
+
+	@Test
+	public void getPreviousItem() {
+		ItemMicro item = getAPI().getPreviousItem(2);
+
+		Assert.assertEquals(item.getId(), 1);
 	}
 }

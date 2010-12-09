@@ -7,6 +7,13 @@ import javax.ws.rs.core.MediaType;
 import com.podio.BaseAPI;
 import com.podio.common.Reference;
 
+/**
+ * Many objects can be rated including items and status messages. Ratings can be
+ * of different types and have different values.
+ * 
+ * @see RatingType
+ * @see RatingValue
+ */
 public class RatingAPI {
 
 	private final BaseAPI baseAPI;
@@ -41,6 +48,19 @@ public class RatingAPI {
 	}
 
 	/**
+	 * Deletes the rating of the given type on the object by the active user
+	 * 
+	 * @param reference
+	 *            The reference ot the object
+	 * @param type
+	 *            The type of the rating
+	 */
+	public void deleteRating(Reference reference, RatingType type) {
+		baseAPI.getApiResource("/rating/" + reference.toURLFragment() + type)
+				.accept(MediaType.APPLICATION_JSON_TYPE).delete();
+	}
+
+	/**
 	 * Indicates that the active user likes the object
 	 * 
 	 * @param reference
@@ -49,6 +69,123 @@ public class RatingAPI {
 	 */
 	public int like(Reference reference) {
 		return createRating(reference, RatingType.LIKE, RatingValue.LIKE);
+	}
+
+	/**
+	 * Indicates that the active user says "yes" to the object
+	 * 
+	 * @param reference
+	 *            The reference to the object
+	 * @return The id of the newly created rating
+	 */
+	public int yes(Reference reference) {
+		return createRating(reference, RatingType.YESNO, RatingValue.YESNO_YES);
+	}
+
+	/**
+	 * Indicates that the active user says "no" to the object
+	 * 
+	 * @param reference
+	 *            The reference to the object
+	 * @return The id of the newly created rating
+	 */
+	public int no(Reference reference) {
+		return createRating(reference, RatingType.YESNO, RatingValue.YESNO_NO);
+	}
+
+	/**
+	 * Indicates that the active user approves the object
+	 * 
+	 * @param reference
+	 *            The reference to the object
+	 * @return The id of the newly created rating
+	 */
+	public int approves(Reference reference) {
+		return createRating(reference, RatingType.APPROVED,
+				RatingValue.APPROVED_APPROVES);
+	}
+
+	/**
+	 * Indicates that the active user disapproves the object
+	 * 
+	 * @param reference
+	 *            The reference to the object
+	 * @return The id of the newly created rating
+	 */
+	public int disapproves(Reference reference) {
+		return createRating(reference, RatingType.APPROVED,
+				RatingValue.APPROVED_DISAPPROVES);
+	}
+
+	/**
+	 * Give a five star rating of the object
+	 * 
+	 * @param reference
+	 *            The reference to the object
+	 * @param stars
+	 *            The number of stars to give, between 1 and 5
+	 * @return The id of the newly created rating
+	 */
+	public int fivestar(Reference reference, int stars) {
+		return createRating(reference, RatingType.FIVESTAR, stars);
+	}
+
+	/**
+	 * Indicates that the active user will attend
+	 * 
+	 * @param reference
+	 *            The reference to the object
+	 * @return The id of the newly created rating
+	 */
+	public int attend(Reference reference) {
+		return createRating(reference, RatingType.RSVP, RatingValue.RSVP_ATTEND);
+	}
+
+	/**
+	 * Indicates that the active user will maybe attend
+	 * 
+	 * @param reference
+	 *            The reference to the object
+	 * @return The id of the newly created rating
+	 */
+	public int maybeAttend(Reference reference) {
+		return createRating(reference, RatingType.RSVP,
+				RatingValue.RSVP_MAYBE_ATTEND);
+	}
+
+	/**
+	 * Indicates that the active user will not attend
+	 * 
+	 * @param reference
+	 *            The reference to the object
+	 * @return The id of the newly created rating
+	 */
+	public int notAttend(Reference reference) {
+		return createRating(reference, RatingType.RSVP,
+				RatingValue.RSVP_NOT_ATTEND);
+	}
+
+	/**
+	 * Indicates that the active user give thumbs up to the object
+	 * 
+	 * @param reference
+	 *            The reference to the object
+	 * @return The id of the newly created rating
+	 */
+	public int thumbsUp(Reference reference) {
+		return createRating(reference, RatingType.THUMBS, RatingValue.THUMBS_UP);
+	}
+
+	/**
+	 * Indicates that the active user give thumbs down to the object
+	 * 
+	 * @param reference
+	 *            The reference to the object
+	 * @return The id of the newly created rating
+	 */
+	public int thumbsDown(Reference reference) {
+		return createRating(reference, RatingType.THUMBS,
+				RatingValue.THUMBS_DOWN);
 	}
 
 	/**

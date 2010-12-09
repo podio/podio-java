@@ -41,7 +41,7 @@ public class ItemBadge {
 	/**
 	 * The values for each field
 	 */
-	private List<FieldValues> fields;
+	private List<FieldValuesView> fields;
 
 	/**
 	 * Number of comments on the item
@@ -104,11 +104,11 @@ public class ItemBadge {
 		this.link = link;
 	}
 
-	public List<FieldValues> getFields() {
+	public List<FieldValuesView> getFields() {
 		return fields;
 	}
 
-	public void setFields(List<FieldValues> fields) {
+	public void setFields(List<FieldValuesView> fields) {
 		this.fields = fields;
 	}
 

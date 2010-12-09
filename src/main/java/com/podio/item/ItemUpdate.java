@@ -15,13 +15,13 @@ public class ItemUpdate {
 	/**
 	 * The values for each field
 	 */
-	private List<FieldValues> fields;
+	private List<FieldValuesUpdate> fields;
 
 	public ItemUpdate() {
 		super();
 	}
 
-	public ItemUpdate(String externalId, List<FieldValues> fields) {
+	public ItemUpdate(String externalId, List<FieldValuesUpdate> fields) {
 		super();
 		this.externalId = externalId;
 		this.fields = fields;
@@ -37,11 +37,11 @@ public class ItemUpdate {
 		this.externalId = externalId;
 	}
 
-	public List<FieldValues> getFields() {
+	public List<FieldValuesUpdate> getFields() {
 		return fields;
 	}
 
-	public void setFields(List<FieldValues> fields) {
+	public void setFields(List<FieldValuesUpdate> fields) {
 		this.fields = fields;
 	}
 }

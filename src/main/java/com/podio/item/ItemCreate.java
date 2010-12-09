@@ -21,7 +21,7 @@ public class ItemCreate extends ItemUpdate {
 		super();
 	}
 
-	public ItemCreate(String externalId, List<FieldValues> fields,
+	public ItemCreate(String externalId, List<FieldValuesUpdate> fields,
 			List<Integer> fileIds, List<String> tags) {
 		super(externalId, fields);
 		this.fileIds = fileIds;
