@@ -1,39 +1,79 @@
 package com.podio.org;
 
-import java.util.List;
-
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.joda.time.DateTime;
 
-import com.podio.space.SpaceMini;
+import com.podio.user.UserMini;
 
 public class Organization extends OrganizationMini {
 
 	/**
-	 * <code>true</code> if the user has the right to create new spaces,
-	 * <code>false</code> otherwise
+	 * The status of the organization
 	 */
-	private String createRight;
+	private OrganizationStatus status;
 
 	/**
-	 * The list of spaces in the organization that the user has access to
+	 * The user id of the owner of the organization, which is also the person
+	 * who pays its use
 	 */
-	private List<SpaceMini> spaces;
+	private int ownerId;
 
-	@JsonProperty("create_right")
-	public String getCreateRight() {
-		return createRight;
+	/**
+	 * The maximum number of users that are allowed in the organization
+	 */
+	private int userLimit;
+
+	/**
+	 * The date and time when the organization was created
+	 */
+	private DateTime createdOn;
+
+	/**
+	 * The user that created the organization
+	 */
+	private UserMini createdBy;
+
+	public OrganizationStatus getStatus() {
+		return status;
 	}
 
-	@JsonProperty("create_right")
-	public void setCreateRight(String createRight) {
-		this.createRight = createRight;
+	public void setStatus(OrganizationStatus status) {
+		this.status = status;
 	}
 
-	public List<SpaceMini> getSpaces() {
-		return spaces;
+	public int getOwnerId() {
+		return ownerId;
 	}
 
-	public void setSpaces(List<SpaceMini> spaces) {
-		this.spaces = spaces;
+	@JsonProperty("owner_id")
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
+	}
+
+	public int getUserLimit() {
+		return userLimit;
+	}
+
+	@JsonProperty("user_limit")
+	public void setUserLimit(int userLimit) {
+		this.userLimit = userLimit;
+	}
+
+	public DateTime getCreatedOn() {
+		return createdOn;
+	}
+
+	@JsonProperty("created_on")
+	public void setCreatedOn(DateTime createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public UserMini getCreatedBy() {
+		return createdBy;
+	}
+
+	@JsonProperty("created_by")
+	public void setCreatedBy(UserMini createdBy) {
+		this.createdBy = createdBy;
 	}
 }

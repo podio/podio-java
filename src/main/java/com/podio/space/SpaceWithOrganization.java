@@ -2,19 +2,19 @@ package com.podio.space;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import com.podio.org.Organization;
+import com.podio.org.OrganizationWithSpaces;
 
 public class SpaceWithOrganization extends Space {
 
-	private Organization organization;
+	private OrganizationWithSpaces organization;
 
 	@JsonProperty("org")
-	public Organization getOrganization() {
+	public OrganizationWithSpaces getOrganization() {
 		return organization;
 	}
 
 	@JsonProperty("org")
-	public void setOrganization(Organization organization) {
+	public void setOrganization(OrganizationWithSpaces organization) {
 		this.organization = organization;
 	}
 }

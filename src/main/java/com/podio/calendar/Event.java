@@ -4,7 +4,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
 import com.podio.common.ReferenceType;
-import com.podio.org.Organization;
+import com.podio.org.OrganizationWithSpaces;
 import com.podio.space.SpaceMini;
 
 public class Event {
@@ -52,7 +52,7 @@ public class Event {
 	/**
 	 * The organization the object is on, if any
 	 */
-	private Organization organization;
+	private OrganizationWithSpaces organization;
 
 	public ReferenceType getType() {
 		return type;
@@ -119,12 +119,12 @@ public class Event {
 	}
 
 	@JsonProperty("org")
-	public Organization getOrganization() {
+	public OrganizationWithSpaces getOrganization() {
 		return organization;
 	}
 
 	@JsonProperty("org")
-	public void setOrganization(Organization organization) {
+	public void setOrganization(OrganizationWithSpaces organization) {
 		this.organization = organization;
 	}
 }
