@@ -5,12 +5,11 @@ import com.podio.oauth.OAuthClientCredentials;
 import com.podio.oauth.OAuthRefreshTokenCredentials;
 import com.podio.oauth.OAuthToken;
 import com.podio.oauth.OAuthUserCredentials;
-import com.podio.oauth.OAuthUsernameCredentials;
 
 public class AuthProvider {
 
 	private final OAuthClientCredentials clientCredentials;
-	private final OAuthUsernameCredentials userCredentials;
+	private final OAuthUserCredentials userCredentials;
 	private final OAuthAPI oauthAPI;
 
 	private OAuthToken token;
@@ -19,7 +18,7 @@ public class AuthProvider {
 
 	public AuthProvider(BaseAPI baseAPI,
 			OAuthClientCredentials clientCredentials,
-			OAuthUsernameCredentials userCredentials) {
+			OAuthUserCredentials userCredentials) {
 		this.clientCredentials = clientCredentials;
 		this.userCredentials = userCredentials;
 		this.oauthAPI = new OAuthAPI(baseAPI);

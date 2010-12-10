@@ -16,7 +16,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import com.podio.oauth.OAuthClientCredentials;
-import com.podio.oauth.OAuthUsernameCredentials;
+import com.podio.oauth.OAuthUserCredentials;
 import com.podio.serialize.DateTimeDeserializer;
 import com.podio.serialize.DateTimeSerializer;
 import com.podio.serialize.LocalDateDeserializer;
@@ -40,7 +40,7 @@ public final class BaseAPI {
 	public BaseAPI(String apiHostname, String uploadHostname, int port,
 			boolean ssl, boolean test,
 			OAuthClientCredentials clientCredentials,
-			OAuthUsernameCredentials userCredentials) {
+			OAuthUserCredentials userCredentials) {
 		ClientConfig config = new DefaultClientConfig();
 		config.getSingletons().add(getJsonProvider());
 		Client client = Client.create(config);
