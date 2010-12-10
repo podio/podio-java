@@ -1,48 +1,94 @@
 package com.podio.space;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.joda.time.DateTime;
 
-public class Space {
+import com.podio.common.Role;
+import com.podio.user.UserMini;
 
-	private int id;
+public class Space extends SpaceMini {
 
-	private String name;
+	/**
+	 * The status of the space
+	 */
+	private SpaceStatus status;
 
-	private String url;
+	/**
+	 * <code>true</code> if new apps should be announced with a status update,
+	 * <code>false</code> otherwise
+	 */
+	private boolean postOnNewApp;
 
-	private String role;
+	/**
+	 * <code>true</code> if new members should be announced with a status
+	 * update, <code>false</code> otherwise
+	 */
+	private boolean postOnNewMember;
 
-	@JsonProperty("space_id")
-	public int getId() {
-		return id;
+	/**
+	 * The date and time the space was created
+	 */
+	private DateTime createdOn;
+
+	/**
+	 * The user who created the space
+	 */
+	private UserMini createdBy;
+
+	/**
+	 * The role of the active user on the space
+	 */
+	private Role role;
+
+	public SpaceStatus getStatus() {
+		return status;
 	}
 
-	@JsonProperty("space_id")
-	public void setId(int id) {
-		this.id = id;
+	public void setStatus(SpaceStatus status) {
+		this.status = status;
 	}
 
-	public String getName() {
-		return name;
+	public boolean isPostOnNewApp() {
+		return postOnNewApp;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	@JsonProperty("post_on_new_app")
+	public void setPostOnNewApp(boolean postOnNewApp) {
+		this.postOnNewApp = postOnNewApp;
 	}
 
-	public String getUrl() {
-		return url;
+	public boolean isPostOnNewMember() {
+		return postOnNewMember;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	@JsonProperty("post_on_new_member")
+	public void setPostOnNewMember(boolean postOnNewMember) {
+		this.postOnNewMember = postOnNewMember;
 	}
 
-	public String getRole() {
+	public DateTime getCreatedOn() {
+		return createdOn;
+	}
+
+	@JsonProperty("created_on")
+	public void setCreatedOn(DateTime createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public UserMini getCreatedBy() {
+		return createdBy;
+	}
+
+	@JsonProperty("created_by")
+	public void setCreatedBy(UserMini createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 }

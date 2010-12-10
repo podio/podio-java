@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
 import com.podio.org.OrganizationMini;
-import com.podio.space.Space;
+import com.podio.space.SpaceMini;
 import com.podio.user.UserMini;
 
 public class Notification {
@@ -49,7 +49,7 @@ public class Notification {
 	/**
 	 * The space where the notification comes from, if any,
 	 */
-	private Space space;
+	private SpaceMini space;
 
 	/**
 	 * The organization where the notification comes from, if any,
@@ -143,11 +143,11 @@ public class Notification {
 		this.createdBy = createdBy;
 	}
 
-	public Space getSpace() {
+	public SpaceMini getSpace() {
 		return space;
 	}
 
-	public void setSpace(Space space) {
+	public void setSpace(SpaceMini space) {
 		this.space = space;
 	}
 

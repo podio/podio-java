@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.BaseAPIFactory;
-import com.podio.space.Space;
+import com.podio.space.SpaceMini;
 
 public class OrgAPITest {
 
@@ -31,9 +31,9 @@ public class OrgAPITest {
 		Organization org = organizations.get(0);
 		Assert.assertEquals(org.getId(), 1);
 		Assert.assertEquals(org.getName(), "Hoist");
-		List<Space> spaces = org.getSpaces();
+		List<SpaceMini> spaces = org.getSpaces();
 		Assert.assertEquals(spaces.size(), 1);
-		Space space = spaces.get(0);
+		SpaceMini space = spaces.get(0);
 		Assert.assertEquals(space.getId(), 1);
 		Assert.assertEquals(space.getName(), "API");
 	}

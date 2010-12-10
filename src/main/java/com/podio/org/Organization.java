@@ -4,23 +4,20 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import com.podio.space.Space;
+import com.podio.space.SpaceMini;
 
 public class Organization extends OrganizationMini {
 
-	private boolean premium;
-
+	/**
+	 * <code>true</code> if the user has the right to create new spaces,
+	 * <code>false</code> otherwise
+	 */
 	private String createRight;
 
-	private List<Space> spaces;
-
-	public boolean isPremium() {
-		return premium;
-	}
-
-	public void setPremium(boolean premium) {
-		this.premium = premium;
-	}
+	/**
+	 * The list of spaces in the organization that the user has access to
+	 */
+	private List<SpaceMini> spaces;
 
 	@JsonProperty("create_right")
 	public String getCreateRight() {
@@ -32,11 +29,11 @@ public class Organization extends OrganizationMini {
 		this.createRight = createRight;
 	}
 
-	public List<Space> getSpaces() {
+	public List<SpaceMini> getSpaces() {
 		return spaces;
 	}
 
-	public void setSpaces(List<Space> spaces) {
+	public void setSpaces(List<SpaceMini> spaces) {
 		this.spaces = spaces;
 	}
 }

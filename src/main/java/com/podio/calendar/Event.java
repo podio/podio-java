@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 
 import com.podio.common.ReferenceType;
 import com.podio.org.Organization;
-import com.podio.space.Space;
+import com.podio.space.SpaceMini;
 
 public class Event {
 
@@ -47,7 +47,7 @@ public class Event {
 	/**
 	 * The space the object is on, if any
 	 */
-	private Space space;
+	private SpaceMini space;
 
 	/**
 	 * The organization the object is on, if any
@@ -110,11 +110,11 @@ public class Event {
 		this.link = link;
 	}
 
-	public Space getSpace() {
+	public SpaceMini getSpace() {
 		return space;
 	}
 
-	public void setSpace(Space space) {
+	public void setSpace(SpaceMini space) {
 		this.space = space;
 	}
 

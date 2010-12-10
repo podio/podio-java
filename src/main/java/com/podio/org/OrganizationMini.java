@@ -4,13 +4,31 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class OrganizationMini {
 
+	/**
+	 * The id of the org
+	 */
 	private int id;
 
+	/**
+	 * The name of the org
+	 */
 	private String name;
 
-	private int logo;
+	/**
+	 * The file id of the logo
+	 */
+	private Integer logo;
 
+	/**
+	 * The full url of the org
+	 */
 	private String url;
+
+	/**
+	 * <code>true</code> if the organization is a premium organization,
+	 * <code>false</code> otherwise
+	 */
+	private boolean premium;
 
 	@JsonProperty("org_id")
 	public int getId() {
@@ -30,11 +48,11 @@ public class OrganizationMini {
 		this.name = name;
 	}
 
-	public int getLogo() {
+	public Integer getLogo() {
 		return logo;
 	}
 
-	public void setLogo(int logo) {
+	public void setLogo(Integer logo) {
 		this.logo = logo;
 	}
 
@@ -44,5 +62,13 @@ public class OrganizationMini {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public boolean isPremium() {
+		return premium;
+	}
+
+	public void setPremium(boolean premium) {
+		this.premium = premium;
 	}
 }
