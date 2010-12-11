@@ -282,7 +282,7 @@ public class ItemAPI {
 	public ItemsResponse getItems(int appId, Integer limit, Integer offset,
 			SortBy sortBy, Boolean sortDesc, FilterByValue<?>... filters) {
 		WebResource resource = baseAPI.getApiResource("/item/app/" + appId
-				+ "/");
+				+ "/v2/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
