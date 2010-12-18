@@ -12,7 +12,7 @@ public class User {
 
 	private String mail;
 
-	private UserType type;
+	private UserStatusType status;
 
 	private Locale locale;
 
@@ -22,7 +22,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", mail=" + mail + ", type=" + type
+		return "User [id=" + id + ", mail=" + mail + ", status=" + status
 				+ ", locale=" + locale + ", timezone=" + timezone + "]";
 	}
 
@@ -44,12 +44,12 @@ public class User {
 		this.mail = mail;
 	}
 
-	public UserType getType() {
-		return type;
+	public UserStatusType getStatus() {
+		return status;
 	}
 
-	public void setType(UserType type) {
-		this.type = type;
+	public void setStatus(UserStatusType status) {
+		this.status = status;
 	}
 
 	public Locale getLocale() {

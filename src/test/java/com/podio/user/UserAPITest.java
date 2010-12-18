@@ -5,7 +5,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.junit.Assert;
-
 import org.junit.Test;
 
 import com.podio.BaseAPIFactory;
@@ -90,7 +89,7 @@ public class UserAPITest {
 		User user = status.getUser();
 		Assert.assertEquals(user.getId(), 1);
 		Assert.assertEquals(user.getMail(), "dev@hoisthq.com");
-		Assert.assertEquals(user.getType(), UserType.ADMIN);
+		Assert.assertEquals(user.getStatus(), UserStatusType.ACTIVE);
 		Assert.assertEquals(user.getLocale().getLanguage(), "en");
 		Assert.assertEquals(user.getTimezone().getID(), "Europe/Copenhagen");
 
