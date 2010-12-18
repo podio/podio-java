@@ -1,7 +1,5 @@
 package com.podio;
 
-import javax.ws.rs.core.UriBuilder;
-
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
@@ -19,9 +17,8 @@ public class ApiLoginFilter extends ClientFilter {
 	@Override
 	public ClientResponse handle(ClientRequest cr)
 			throws ClientHandlerException {
-		UriBuilder b = UriBuilder.fromUri(cr.getURI());
-		b.queryParam("oauth_token", authProvider.getToken().getAccessToken());
-		cr.setURI(b.build());
+		cr.getHeaders().add("authorization",
+				"OAuth2 " + authProvider.getToken().getAccessToken());
 
 		return getNext().handle(cr);
 	}

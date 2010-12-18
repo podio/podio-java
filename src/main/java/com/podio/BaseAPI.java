@@ -29,6 +29,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.client.filter.GZIPContentEncodingFilter;
 
 public final class BaseAPI {
 
@@ -44,6 +45,7 @@ public final class BaseAPI {
 		ClientConfig config = new DefaultClientConfig();
 		config.getSingletons().add(getJsonProvider());
 		Client client = Client.create(config);
+		client.addFilter(new GZIPContentEncodingFilter(false));
 		if (test) {
 			client.addFilter(new TestFilter());
 		}
