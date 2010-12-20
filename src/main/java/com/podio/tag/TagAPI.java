@@ -88,7 +88,7 @@ public class TagAPI {
 	public void removeTag(Reference reference, String tag) {
 		baseAPI.getApiResource("/tag/" + reference.toURLFragment())
 				.queryParam("text", tag)
-				.accept(MediaType.APPLICATION_JSON_TYPE).delete();
+				.delete();
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class TagAPI {
 	 */
 	public List<TagCount> getTagsOnApp(int appId) {
 		return baseAPI.getApiResource("/tag/app/" + appId + "/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<TagCount>>() {
 				});
 	}
@@ -117,7 +117,7 @@ public class TagAPI {
 	 */
 	public List<TagCount> getTagsOnSpace(int spaceId) {
 		return baseAPI.getApiResource("/tag/space/" + spaceId + "/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<TagCount>>() {
 				});
 	}
@@ -135,7 +135,7 @@ public class TagAPI {
 	public List<TagReference> getTagsOnAppWithText(int appId, String text) {
 		return baseAPI.getApiResource("/tag/app/" + appId + "/search/")
 				.queryParam("text", text)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<TagReference>>() {
 				});
 	}
@@ -153,7 +153,7 @@ public class TagAPI {
 	public List<TagReference> getTagsOnSpaceWithText(int spaceId, String text) {
 		return baseAPI.getApiResource("/tag/space/" + spaceId + "/search/")
 				.queryParam("text", text)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<TagReference>>() {
 				});
 	}

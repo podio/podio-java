@@ -64,7 +64,7 @@ public class TaskAPI {
 	 */
 	public Task getTask(int taskId) {
 		return baseAPI.getApiResource("/task/" + taskId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(Task.class);
+				.get(Task.class);
 	}
 
 	/**
@@ -218,7 +218,7 @@ public class TaskAPI {
 				.getApiResource(
 						"/task/" + reference.getType().name().toLowerCase()
 								+ "/" + reference.getId() + "/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<Task>>() {
 				});
 	}
@@ -234,7 +234,7 @@ public class TaskAPI {
 	 */
 	public TasksByDue getActiveTasks() {
 		return baseAPI.getApiResource("/task/active/")
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(TasksByDue.class);
+				.get(TasksByDue.class);
 	}
 
 	/**
@@ -244,7 +244,7 @@ public class TaskAPI {
 	 */
 	public TasksByDue getAssignedActiveTasks() {
 		return baseAPI.getApiResource("/task/assigned/active/")
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(TasksByDue.class);
+				.get(TasksByDue.class);
 	}
 
 	/**
@@ -254,7 +254,7 @@ public class TaskAPI {
 	 */
 	public List<Task> getAssignedCompletedTasks() {
 		return baseAPI.getApiResource("/task/assigned/completed/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<Task>>() {
 				});
 	}
@@ -267,7 +267,7 @@ public class TaskAPI {
 	 */
 	public List<Task> getCompletedTasks() {
 		return baseAPI.getApiResource("/task/completed/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<Task>>() {
 				});
 	}
@@ -278,7 +278,7 @@ public class TaskAPI {
 	 */
 	public TasksByDue getStartedTasks() {
 		return baseAPI.getApiResource("/task/started/")
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(TasksByDue.class);
+				.get(TasksByDue.class);
 	}
 
 	/**
@@ -293,7 +293,7 @@ public class TaskAPI {
 	public TasksByDue getTasksInSpaceByDue(int spaceId) {
 		return baseAPI.getApiResource("/task/in_space/" + spaceId + "/")
 				.queryParam("sort_by", "due_date")
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(TasksByDue.class);
+				.get(TasksByDue.class);
 	}
 
 	/**
@@ -308,7 +308,7 @@ public class TaskAPI {
 	public List<TasksWithResponsible> getTasksInSpaceByResponsible(int spaceId) {
 		return baseAPI.getApiResource("/task/in_space/" + spaceId + "/")
 				.queryParam("sort_by", "responsible")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<TasksWithResponsible>>() {
 				});
 	}
@@ -336,7 +336,7 @@ public class TaskAPI {
 			resource = resource.queryParam("space_id", spaceId.toString());
 		}
 
-		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
+		return resource.get(
 				TaskTotals.class);
 	}
 }

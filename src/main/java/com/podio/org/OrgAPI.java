@@ -53,7 +53,7 @@ public class OrgAPI {
 	 */
 	public Organization getOrganization(int orgId) {
 		return baseAPI.getApiResource("/org/" + orgId)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(Organization.class);
 	}
 
@@ -67,7 +67,7 @@ public class OrgAPI {
 	 */
 	public void deleteOrganization(int orgId) {
 		baseAPI.getApiResource("/org/" + orgId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).delete();
+				.delete();
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class OrgAPI {
 	 */
 	public List<OrganizationWithSpaces> getOrganizations() {
 		return Arrays.asList(baseAPI.getApiResource("/org/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(OrganizationWithSpaces[].class));
 	}
 
@@ -91,7 +91,7 @@ public class OrgAPI {
 	 */
 	public OrganizationMini getOrganizationByURL(String url) {
 		return baseAPI.getApiResource("/org/url").queryParam("url", url)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(OrganizationMini.class);
 	}
 
@@ -105,7 +105,7 @@ public class OrgAPI {
 	 */
 	public OrganizationStatistics getOrganizationStatistics(int orgId) {
 		return baseAPI.getApiResource("/org/" + orgId + "/statistics")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(OrganizationStatistics.class);
 	}
 
@@ -120,7 +120,7 @@ public class OrgAPI {
 	 */
 	public List<OrganizationWithSpaces> getSharedOrganizations(int userId) {
 		return baseAPI.getApiResource("/org/shared/" + userId)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<OrganizationWithSpaces>>() {
 				});
 	}
@@ -139,7 +139,7 @@ public class OrgAPI {
 	 */
 	public Space getSpaceByURL(int orgId, String url) {
 		return baseAPI.getApiResource("/org/" + orgId + "/space/url/" + url)
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(Space.class);
+				.get(Space.class);
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class OrgAPI {
 	 */
 	public List<Space> getSpaces(int orgId) {
 		return baseAPI.getApiResource("/org/" + orgId + "/space/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<Space>>() {
 				});
 	}

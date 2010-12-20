@@ -57,7 +57,7 @@ public class RatingAPI {
 	 */
 	public void deleteRating(Reference reference, RatingType type) {
 		baseAPI.getApiResource("/rating/" + reference.toURLFragment() + type)
-				.accept(MediaType.APPLICATION_JSON_TYPE).delete();
+				.delete();
 	}
 
 	/**
@@ -198,7 +198,7 @@ public class RatingAPI {
 	 */
 	public RatingValuesMap getAllRatings(Reference reference) {
 		return baseAPI.getApiResource("/rating/" + reference.toURLFragment())
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(RatingValuesMap.class);
 	}
 
@@ -215,7 +215,7 @@ public class RatingAPI {
 	public TypeRating getRatings(Reference reference, RatingType type) {
 		return baseAPI
 				.getApiResource("/rating/" + reference.toURLFragment() + type)
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(TypeRating.class);
+				.get(TypeRating.class);
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class RatingAPI {
 				.getApiResource(
 						"/rating/" + reference.toURLFragment() + type + "/"
 								+ userId)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(SingleRatingValue.class).getValue();
 	}
 }

@@ -51,7 +51,7 @@ public class AppAPI {
 	public Application getApp(int appId, ApplicationGetType type) {
 		return baseAPI.getApiResource("/app/" + appId)
 				.queryParam("type", type.name().toLowerCase())
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(Application.class);
+				.get(Application.class);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class AppAPI {
 	 */
 	public List<ApplicationMini> getAppsOnSpace(int spaceId) {
 		return baseAPI.getApiResource("/app/space/" + spaceId + "/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<ApplicationMini>>() {
 				});
 	}
@@ -82,7 +82,7 @@ public class AppAPI {
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
-		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
+		return resource.get(
 				new GenericType<List<ApplicationMini>>() {
 				});
 	}
@@ -163,7 +163,7 @@ public class AppAPI {
 	 */
 	public ApplicationField getField(int appId, int fieldId) {
 		return baseAPI.getApiResource("/app/" + appId + "/field/" + fieldId)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(ApplicationField.class);
 	}
 
@@ -223,7 +223,7 @@ public class AppAPI {
 	 */
 	public List<ApplicationMicro> getAvailableApps(int spaceId) {
 		return baseAPI.getApiResource("/app/space/" + spaceId + "/available/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<ApplicationMicro>>() {
 				});
 	}
@@ -237,7 +237,7 @@ public class AppAPI {
 	 */
 	public Dependencies getDependencies(int appId) {
 		return baseAPI.getApiResource("/app/" + appId + "/dependencies/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(Dependencies.class);
 	}
 
@@ -273,7 +273,6 @@ public class AppAPI {
 	 *            The id of the app to delete
 	 */
 	public void deleteApp(int appId) {
-		baseAPI.getApiResource("/app/" + appId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).delete();
+		baseAPI.getApiResource("/app/" + appId).delete();
 	}
 }

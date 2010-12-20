@@ -111,8 +111,7 @@ public class FileAPI {
 	 * Returns the file with the given id
 	 */
 	public File getFile(int fileId) {
-		return baseAPI.getApiResource("/file/" + fileId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(File.class);
+		return baseAPI.getApiResource("/file/" + fileId).get(File.class);
 	}
 
 	/**
@@ -152,9 +151,8 @@ public class FileAPI {
 					DateTimeUtil.formatDate(latest));
 		}
 
-		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
-				new GenericType<List<File>>() {
-				});
+		return resource.get(new GenericType<List<File>>() {
+		});
 	}
 
 	/**
@@ -178,9 +176,8 @@ public class FileAPI {
 			resource = resource.queryParam("offset", offset.toString());
 		}
 
-		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
-				new GenericType<List<File>>() {
-				});
+		return resource.get(new GenericType<List<File>>() {
+		});
 	}
 
 	/**
@@ -205,9 +202,8 @@ public class FileAPI {
 					DateTimeUtil.formatDate(latest));
 		}
 
-		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
-				new GenericType<List<File>>() {
-				});
+		return resource.get(new GenericType<List<File>>() {
+		});
 	}
 
 	/**
@@ -230,8 +226,7 @@ public class FileAPI {
 			resource = resource.queryParam("offset", offset.toString());
 		}
 
-		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
-				new GenericType<List<File>>() {
-				});
+		return resource.get(new GenericType<List<File>>() {
+		});
 	}
 }

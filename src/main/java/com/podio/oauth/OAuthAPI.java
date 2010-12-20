@@ -26,7 +26,7 @@ public class OAuthAPI {
 		resource.addFilter(new HTTPBasicAuthFilter(clientCredentials
 				.getClientId(), clientCredentials.getClientSecret()));
 		return resource.type(MediaType.APPLICATION_FORM_URLENCODED_TYPE)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.post(OAuthToken.class, parameters);
 	}
 }

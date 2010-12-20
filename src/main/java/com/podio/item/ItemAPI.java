@@ -57,7 +57,7 @@ public class ItemAPI {
 	 */
 	public Item getItem(int itemId) {
 		return baseAPI.getApiResource("/item/" + itemId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(Item.class);
+				.get(Item.class);
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class ItemAPI {
 	 */
 	public List<Map<String, Object>> getItemFieldValues(int itemId, int fieldId) {
 		return baseAPI.getApiResource("/item/" + itemId + "/value/" + fieldId)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<Map<String, Object>>>() {
 				});
 	}
@@ -154,7 +154,7 @@ public class ItemAPI {
 	 */
 	public List<FieldValuesView> getItemValues(int itemId) {
 		return baseAPI.getApiResource("/item/" + itemId + "/value/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<FieldValuesView>>() {
 				});
 	}
@@ -172,7 +172,7 @@ public class ItemAPI {
 	public List<ItemMini> getItemsByFieldAndTitle(int fieldId, String text) {
 		return baseAPI.getApiResource("/item/field/" + fieldId + "/find")
 				.queryParam("text", text)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<ItemMini>>() {
 				});
 	}
@@ -188,7 +188,7 @@ public class ItemAPI {
 	 */
 	public AppActivities getAppActivities(int appId) {
 		return baseAPI.getApiResource("/item/app/" + appId + "/activity")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(AppActivities.class);
 	}
 
@@ -202,7 +202,7 @@ public class ItemAPI {
 	 */
 	public List<ItemReference> getItemReference(int itemId) {
 		return baseAPI.getApiResource("/item/" + itemId + "/reference/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<ItemReference>>() {
 				});
 	}
@@ -220,7 +220,7 @@ public class ItemAPI {
 	public ItemRevision getItemRevision(int itemId, int revisionId) {
 		return baseAPI
 				.getApiResource("/item/" + itemId + "/revision/" + revisionId)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(ItemRevision.class);
 	}
 
@@ -241,7 +241,7 @@ public class ItemAPI {
 				.getApiResource(
 						"/item/" + itemId + "/revision/" + revisionFrom + "/"
 								+ revisionTo)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<ItemFieldDifference>>() {
 				});
 	}
@@ -255,7 +255,7 @@ public class ItemAPI {
 	 */
 	public List<ItemRevision> getItemRevisions(int itemId) {
 		return baseAPI.getApiResource("/item/" + itemId + "/revision/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<ItemRevision>>() {
 				});
 	}
@@ -300,7 +300,7 @@ public class ItemAPI {
 					filter.getFormattedValue());
 		}
 
-		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
+		return resource.get(
 				ItemsResponse.class);
 	}
 
@@ -328,7 +328,7 @@ public class ItemAPI {
 	 */
 	public ItemMicro getNextItem(int itemId) {
 		return baseAPI.getApiResource("/item/" + itemId + "/next")
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(ItemMicro.class);
+				.get(ItemMicro.class);
 	}
 
 	/**
@@ -341,6 +341,6 @@ public class ItemAPI {
 	 */
 	public ItemMicro getPreviousItem(int itemId) {
 		return baseAPI.getApiResource("/item/" + itemId + "/previous")
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(ItemMicro.class);
+				.get(ItemMicro.class);
 	}
 }

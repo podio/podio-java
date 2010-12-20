@@ -2,11 +2,10 @@ package com.podio.calendar;
 
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
-
 import org.joda.time.LocalDate;
 
 import com.podio.BaseAPI;
+import com.podio.common.CSVUtil;
 import com.podio.common.ReferenceType;
 import com.podio.serialize.DateTimeUtil;
 import com.sun.jersey.api.client.GenericType;
@@ -36,31 +35,15 @@ public class CalendarAPI {
 		resource = resource.queryParam("date_to",
 				DateTimeUtil.formatDate(dateTo));
 		if (spaceIds != null && spaceIds.size() > 0) {
-			String spaceIdsStr = "";
-			for (Integer spaceId : spaceIds) {
-				if (spaceIdsStr.length() > 0) {
-					spaceIdsStr += ",";
-				}
-				spaceIdsStr += spaceId;
-			}
-
-			resource = resource.queryParam("space_ids", spaceIdsStr);
+			resource = resource
+					.queryParam("space_ids", CSVUtil.toCSV(spaceIds));
 		}
 		if (types.length > 0) {
-			String typesStr = "";
-			for (ReferenceType type : types) {
-				if (typesStr.length() > 0) {
-					typesStr += ",";
-				}
-				typesStr += type;
-			}
-
-			resource = resource.queryParam("types", typesStr);
+			resource = resource.queryParam("types", CSVUtil.toCSV(types));
 		}
 
-		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
-				new GenericType<List<Event>>() {
-				});
+		return resource.get(new GenericType<List<Event>>() {
+		});
 	}
 
 	/**

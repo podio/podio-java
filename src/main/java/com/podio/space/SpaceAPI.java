@@ -40,7 +40,7 @@ public class SpaceAPI {
 	 */
 	public Space getSpace(int spaceId) {
 		return baseAPI.getApiResource("/space/" + spaceId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(Space.class);
+				.get(Space.class);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class SpaceAPI {
 	 */
 	public void deleteSpace(int spaceId) {
 		baseAPI.getApiResource("/space/" + spaceId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).delete();
+				.delete();
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class SpaceAPI {
 	 */
 	public SpaceWithOrganization getSpaceByURL(String url) {
 		return baseAPI.getApiResource("/space/url").queryParam("url", url)
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(SpaceWithOrganization.class);
 	}
 
@@ -120,7 +120,7 @@ public class SpaceAPI {
 	 */
 	public SpaceStatistics getSpaceStatistics(int spaceId) {
 		return baseAPI.getApiResource("/space/" + spaceId + "/statistics")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(SpaceStatistics.class);
 	}
 
@@ -136,7 +136,7 @@ public class SpaceAPI {
 	public SpaceMember getSpaceMembership(int spaceId, int userId) {
 		return baseAPI
 				.getApiResource("/space/" + spaceId + "/member/" + userId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(SpaceMember.class);
+				.get(SpaceMember.class);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class SpaceAPI {
 	 */
 	public void endSpaceMembership(int spaceId, int userId) {
 		baseAPI.getApiResource("/space/" + spaceId + "/member/" + userId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).delete();
+				.delete();
 	}
 
 	/**
@@ -178,7 +178,7 @@ public class SpaceAPI {
 	 */
 	public List<SpaceMember> getActiveMembers(int spaceId) {
 		return baseAPI.getApiResource("/space/" + spaceId + "/member/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<SpaceMember>>() {
 				});
 	}
@@ -193,7 +193,7 @@ public class SpaceAPI {
 	 */
 	public List<SpaceMember> getInvitedMembers(int spaceId) {
 		return baseAPI.getApiResource("/space/" + spaceId + "/member/invited/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<SpaceMember>>() {
 				});
 	}
@@ -207,7 +207,7 @@ public class SpaceAPI {
 	 */
 	public List<SpaceMember> getEndedMembers(int spaceId) {
 		return baseAPI.getApiResource("/space/" + spaceId + "/member/ended/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<SpaceMember>>() {
 				});
 	}
@@ -228,7 +228,7 @@ public class SpaceAPI {
 			resource = resource.queryParam("limit", limit.toString());
 		}
 
-		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
+		return resource.get(
 				new GenericType<List<UserMini>>() {
 				});
 	}
@@ -246,7 +246,7 @@ public class SpaceAPI {
 			resource = resource.queryParam("limit", limit.toString());
 		}
 
-		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
+		return resource.get(
 				new GenericType<List<SpaceWithOrganization>>() {
 				});
 	}

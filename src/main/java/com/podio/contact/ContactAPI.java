@@ -36,7 +36,7 @@ public class ContactAPI {
 	 */
 	public Profile getContact(int userId) {
 		return baseAPI.getApiResource("/contact/" + userId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(Profile.class);
+				.get(Profile.class);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class ContactAPI {
 	public <T, R> List<T> getContactField(int userId, ProfileField<T, R> field) {
 		List<R> values = baseAPI
 				.getApiResource("/contact/" + userId + "/" + field.getName())
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<R>>() {
 				});
 
@@ -82,7 +82,7 @@ public class ContactAPI {
 		}
 		resource = resource.queryParam("type", type.getName());
 
-		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
+		return resource.get(
 				getGenericType(type));
 	}
 
@@ -93,7 +93,7 @@ public class ContactAPI {
 	 */
 	public List<ContactTotal> getContactTotals() {
 		return baseAPI.getApiResource("/contact/totals/")
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<ContactTotal>>() {
 				});
 	}
@@ -201,7 +201,7 @@ public class ContactAPI {
 			resource = resource.queryParam("order", order.name().toLowerCase());
 		}
 
-		return resource.accept(MediaType.APPLICATION_JSON_TYPE).get(
+		return resource.get(
 				getGenericType(type));
 	}
 

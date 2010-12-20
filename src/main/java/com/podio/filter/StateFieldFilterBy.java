@@ -2,6 +2,8 @@ package com.podio.filter;
 
 import java.util.List;
 
+import com.podio.common.CSVUtil;
+
 public class StateFieldFilterBy extends FieldFilterBy<List<String>> {
 
 	public StateFieldFilterBy(int fieldId) {
@@ -10,7 +12,7 @@ public class StateFieldFilterBy extends FieldFilterBy<List<String>> {
 
 	@Override
 	public String format(List<String> values) {
-		return FilterUtil.stringListToCSV(values);
+		return CSVUtil.toCSV(values);
 	}
 
 	@Override

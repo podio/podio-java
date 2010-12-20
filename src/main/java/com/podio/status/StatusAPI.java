@@ -46,7 +46,7 @@ public class StatusAPI {
 	 */
 	public void deleteStatus(int statusId) {
 		baseAPI.getApiResource("/status/" + statusId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).delete();
+				.delete();
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class StatusAPI {
 				.getApiResource(
 						"/status/user/" + userId + "/space/" + spaceId
 								+ "/latest/")
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(Status.class);
+				.get(Status.class);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class StatusAPI {
 	 */
 	public StatusFull getStatus(int statusId) {
 		return baseAPI.getApiResource("/status/" + statusId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(StatusFull.class);
+				.get(StatusFull.class);
 	}
 
 	/**

@@ -1,7 +1,22 @@
 package com.podio.notification;
 
-import com.podio.BaseAPI;
+import java.util.Collection;
+import java.util.List;
 
+import org.joda.time.DateTime;
+
+import com.podio.BaseAPI;
+import com.podio.common.CSVUtil;
+import com.podio.serialize.DateTimeUtil;
+import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.api.client.WebResource;
+
+/**
+ * A notification is an information about an event that occured in Podio. A
+ * notification is directed against a single user, and can have a status of
+ * either unread or viewed. Notifications have a reference to the action that
+ * caused the notification.
+ */
 public class NotificationAPI {
 
 	private final BaseAPI baseAPI;
@@ -10,8 +25,121 @@ public class NotificationAPI {
 		this.baseAPI = baseAPI;
 	}
 
+	/**
+	 * Returns a single notification from an id. The notification will contain
+	 * the bare data, but will have a reference to the object that caused the
+	 * notification.
+	 * 
+	 * The data returned will vary based on the type of the notification. See
+	 * the online documentation for details.
+	 * 
+	 * @param notificationId
+	 *            The id of the notification
+	 * @return The notification requested
+	 */
 	public Notification getNotification(int notificationId) {
 		return baseAPI.getApiResource("/notification/" + notificationId).get(
 				Notification.class);
+	}
+
+	/**
+	 * Returns a list of notifications that have not yet been viewed. The
+	 * notifications will be sorted descending by the time of creation.
+	 * 
+	 * @param limit
+	 *            The limit of the maximum number of notifications to return,
+	 *            defaults to 10
+	 * @param offset
+	 *            The offset into the notifications to get, defaults to 0
+	 * @return The unviewed notifications
+	 */
+	public List<Notification> getInboxNew(Integer limit, Integer offset) {
+		WebResource resource = baseAPI
+				.getApiResource("/notification/inbox/new/");
+		if (limit != null) {
+			resource = resource.queryParam("limit", limit.toString());
+		}
+		if (offset != null) {
+			resource = resource.queryParam("offset", offset.toString());
+		}
+
+		return resource.get(new GenericType<List<Notification>>() {
+		});
+	}
+
+	/**
+	 * Returns the notifications in the inbox that has already been viewed. The
+	 * notifications are sorted in descending order, either by viewed time or
+	 * creation time.
+	 * 
+	 * For details on the content of the individual notifications, see the
+	 * online documentation.
+	 * 
+	 * @param limit
+	 *            The limit on the number of notifications to return, default is
+	 *            10 (used for paging)
+	 * @param offset
+	 *            The offset on the notifications to return, default is 0 (used
+	 *            for paging)
+	 * @param dateType
+	 *            The type of date to use for sorting and filtering.
+	 * @param types
+	 *            The list of notifications to return
+	 * @param dateFrom
+	 *            The earliest date to get notifications from
+	 * @param dateTo
+	 *            The latest date to get notifications from
+	 * @param users
+	 *            A of user ids to see notifications from
+	 * @param sent
+	 *            <code>true</code> if sent notifications should be returned,
+	 *            <code>false</code> otherwise
+	 * @return The list of notifications
+	 */
+	public List<Notification> getInboxViewed(Integer limit, Integer offset,
+			NotificationDateType dateType, Collection<NotificationType> types,
+			DateTime dateFrom, DateTime dateTo, Collection<Integer> users,
+			Boolean sent) {
+		WebResource resource = baseAPI
+				.getApiResource("/notification/inbox/viewed/");
+		if (limit != null) {
+			resource = resource.queryParam("limit", limit.toString());
+		}
+		if (offset != null) {
+			resource = resource.queryParam("offset", offset.toString());
+		}
+		if (dateType != null) {
+			resource = resource.queryParam("date_type", dateType.toString());
+		}
+		if (types != null && !types.isEmpty()) {
+			resource = resource.queryParam("types", CSVUtil.toCSV(types));
+		}
+		if (dateFrom != null) {
+			resource = resource.queryParam("date_from",
+					DateTimeUtil.formatDateTime(dateFrom));
+		}
+		if (dateTo != null) {
+			resource = resource.queryParam("date_to",
+					DateTimeUtil.formatDateTime(dateTo));
+		}
+		if (users != null && !users.isEmpty()) {
+			resource = resource.queryParam("users", CSVUtil.toCSV(users));
+		}
+		if (sent != null) {
+			resource = resource.queryParam("sent", sent ? "1" : "0");
+		}
+
+		return resource.get(new GenericType<List<Notification>>() {
+		});
+	}
+
+	/**
+	 * Returns the notification settings for the active user
+	 * 
+	 * @return The notification settings
+	 */
+	public NotificationSettings getSettings() {
+		return baseAPI.getApiResource("/notification/settings").get(
+				NotificationSettings.class);
 	}
 }

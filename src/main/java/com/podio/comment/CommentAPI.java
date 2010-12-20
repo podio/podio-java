@@ -38,7 +38,7 @@ public class CommentAPI {
 				.getApiResource(
 						"/comment/" + reference.getType() + "/"
 								+ reference.getId())
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<Comment>>() {
 				});
 	}
@@ -53,7 +53,7 @@ public class CommentAPI {
 	 */
 	public Comment getComment(int commentId) {
 		return baseAPI.getApiResource("/comment/" + commentId)
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(Comment.class);
+				.get(Comment.class);
 	}
 
 	/**

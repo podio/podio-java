@@ -42,7 +42,7 @@ public class UserAPI {
 	 */
 	public UserStatus getStatus() {
 		return baseAPI.getApiResource("/user/status")
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(UserStatus.class);
+				.get(UserStatus.class);
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class UserAPI {
 	 */
 	public Profile getProfile() {
 		return baseAPI.getApiResource("/user/profile/")
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(Profile.class);
+				.get(Profile.class);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class UserAPI {
 	public <T, R> List<T> getProfileField(ProfileField<T, R> field) {
 		List<R> values = baseAPI
 				.getApiResource("/user/profile/" + field.getName())
-				.accept(MediaType.APPLICATION_JSON_TYPE)
+				
 				.get(new GenericType<List<R>>() {
 				});
 
@@ -159,7 +159,7 @@ public class UserAPI {
 	 */
 	public User getUser() {
 		return baseAPI.getApiResource("/user/")
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(User.class);
+				.get(User.class);
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class UserAPI {
 	 */
 	public User getUserByMail(String mail) {
 		return baseAPI.getApiResource("/user/" + mail)
-				.accept(MediaType.APPLICATION_JSON_TYPE).get(User.class);
+				.get(User.class);
 	}
 
 	/**
