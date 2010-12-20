@@ -17,7 +17,15 @@ public class Reference {
 	}
 
 	public String toURLFragment() {
-		return type + "/" + id + "/";
+		return toURLFragment(true);
+	}
+
+	public String toURLFragment(boolean endDash) {
+		if (endDash) {
+			return type + "/" + id + "/";
+		} else {
+			return type + "/" + id;
+		}
 	}
 
 	public ReferenceType getType() {

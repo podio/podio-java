@@ -5,6 +5,9 @@ import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.filter.ClientFilter;
 
+/**
+ * Filter for supplying the access token to the end point
+ */
 public class ApiLoginFilter extends ClientFilter {
 
 	private final AuthProvider authProvider;

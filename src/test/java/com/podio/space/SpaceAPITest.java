@@ -8,18 +8,18 @@ import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.BaseAPIFactory;
+import com.podio.ResourceFactoryProvider;
 import com.podio.common.Role;
 import com.podio.user.UserMini;
 
 public class SpaceAPITest {
 
 	private SpaceAPI getAPI() {
-		return new SpaceAPI(BaseAPIFactory.get());
+		return new SpaceAPI(ResourceFactoryProvider.get());
 	}
 
 	private SpaceAPI getAPI(int userId) {
-		return new SpaceAPI(BaseAPIFactory.get(userId));
+		return new SpaceAPI(ResourceFactoryProvider.get(userId));
 	}
 
 	@Test

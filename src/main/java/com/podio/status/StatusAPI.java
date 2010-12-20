@@ -2,7 +2,7 @@ package com.podio.status;
 
 import javax.ws.rs.core.MediaType;
 
-import com.podio.BaseAPI;
+import com.podio.ResourceFactory;
 
 /**
  * Status messages are small texts that the users wishes to share with the other
@@ -15,10 +15,10 @@ import com.podio.BaseAPI;
  */
 public class StatusAPI {
 
-	private final BaseAPI baseAPI;
+	private final ResourceFactory resourceFactory;
 
-	public StatusAPI(BaseAPI baseAPI) {
-		this.baseAPI = baseAPI;
+	public StatusAPI(ResourceFactory resourceFactory) {
+		this.resourceFactory = resourceFactory;
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class StatusAPI {
 	 * @return The id of the newly created status message
 	 */
 	public int createStatus(int spaceId, StatusCreate status) {
-		return baseAPI.getApiResource("/status/space/" + spaceId + "/")
+		return resourceFactory.getApiResource("/status/space/" + spaceId + "/")
 				.entity(status, MediaType.APPLICATION_JSON_TYPE)
 				.post(StatusCreateResponse.class).getId();
 	}
@@ -45,8 +45,7 @@ public class StatusAPI {
 	 *            The id of the status to delete
 	 */
 	public void deleteStatus(int statusId) {
-		baseAPI.getApiResource("/status/" + statusId)
-				.delete();
+		resourceFactory.getApiResource("/status/" + statusId).delete();
 	}
 
 	/**
@@ -60,10 +59,8 @@ public class StatusAPI {
 	 * @return The latest status message
 	 */
 	public Status getLatestStatus(int userId, int spaceId) {
-		return baseAPI
-				.getApiResource(
-						"/status/user/" + userId + "/space/" + spaceId
-								+ "/latest/")
+		return resourceFactory.getApiResource(
+				"/status/user/" + userId + "/space/" + spaceId + "/latest/")
 				.get(Status.class);
 	}
 
@@ -76,8 +73,8 @@ public class StatusAPI {
 	 * @return The status message
 	 */
 	public StatusFull getStatus(int statusId) {
-		return baseAPI.getApiResource("/status/" + statusId)
-				.get(StatusFull.class);
+		return resourceFactory.getApiResource("/status/" + statusId).get(
+				StatusFull.class);
 	}
 
 	/**
@@ -90,7 +87,7 @@ public class StatusAPI {
 	 *            The new data for the status
 	 */
 	public void updateStatus(int statusId, StatusUpdate update) {
-		baseAPI.getApiResource("/status/" + statusId)
+		resourceFactory.getApiResource("/status/" + statusId)
 				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 }

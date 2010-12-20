@@ -8,7 +8,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.BaseAPIFactory;
+import com.podio.ResourceFactoryProvider;
 import com.podio.app.ApplicationFieldType;
 import com.podio.rating.RatingType;
 import com.podio.rating.RatingValue;
@@ -16,7 +16,7 @@ import com.podio.rating.RatingValue;
 public class ItemAPITest {
 
 	private ItemAPI getAPI() {
-		return new ItemAPI(BaseAPIFactory.get());
+		return new ItemAPI(ResourceFactoryProvider.get());
 	}
 
 	@Test

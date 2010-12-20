@@ -31,14 +31,14 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.GZIPContentEncodingFilter;
 
-public final class BaseAPI {
+public final class ResourceFactory {
 
 	private final WebResource apiResource;
 	private final WebResource uploadResource;
 	private final ApiLoginFilter apiLoginFilter;
 	private FileLoginFilter fileLoginFilter;
 
-	public BaseAPI(String apiHostname, String uploadHostname, int port,
+	public ResourceFactory(String apiHostname, String uploadHostname, int port,
 			boolean ssl, boolean test,
 			OAuthClientCredentials clientCredentials,
 			OAuthUserCredentials userCredentials) {

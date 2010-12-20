@@ -7,14 +7,14 @@ import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.BaseAPIFactory;
+import com.podio.ResourceFactoryProvider;
 import com.podio.common.Reference;
 import com.podio.common.ReferenceType;
 
 public class CommentAPITest {
 
 	private CommentAPI getAPI() {
-		return new CommentAPI(BaseAPIFactory.get());
+		return new CommentAPI(ResourceFactoryProvider.get());
 	}
 
 	@Test

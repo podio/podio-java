@@ -6,6 +6,9 @@ import com.podio.oauth.OAuthRefreshTokenCredentials;
 import com.podio.oauth.OAuthToken;
 import com.podio.oauth.OAuthUserCredentials;
 
+/**
+ * Manages tokens based on client credentials and user credentials.
+ */
 public class AuthProvider {
 
 	private final OAuthClientCredentials clientCredentials;
@@ -16,7 +19,7 @@ public class AuthProvider {
 
 	private long expireTime;
 
-	public AuthProvider(BaseAPI baseAPI,
+	public AuthProvider(ResourceFactory baseAPI,
 			OAuthClientCredentials clientCredentials,
 			OAuthUserCredentials userCredentials) {
 		this.clientCredentials = clientCredentials;

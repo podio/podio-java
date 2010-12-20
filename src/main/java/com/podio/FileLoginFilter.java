@@ -6,6 +6,9 @@ import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.filter.ClientFilter;
 
+/**
+ * Special filter for authorization for file upload
+ */
 public class FileLoginFilter extends ClientFilter {
 
 	private final AuthProvider authProvider;
@@ -24,5 +27,4 @@ public class FileLoginFilter extends ClientFilter {
 
 		return getNext().handle(cr);
 	}
-
 }

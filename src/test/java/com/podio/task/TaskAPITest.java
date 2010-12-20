@@ -8,14 +8,14 @@ import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.BaseAPIFactory;
+import com.podio.ResourceFactoryProvider;
 import com.podio.common.Reference;
 import com.podio.common.ReferenceType;
 
 public class TaskAPITest {
 
 	private TaskAPI getAPI() {
-		return new TaskAPI(BaseAPIFactory.get());
+		return new TaskAPI(ResourceFactoryProvider.get());
 	}
 
 	@Test

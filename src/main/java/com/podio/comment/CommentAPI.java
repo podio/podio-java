@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
-import com.podio.BaseAPI;
+import com.podio.ResourceFactory;
 import com.podio.common.Reference;
 import com.sun.jersey.api.client.GenericType;
 
@@ -17,10 +17,10 @@ import com.sun.jersey.api.client.GenericType;
  */
 public class CommentAPI {
 
-	private final BaseAPI baseAPI;
+	private final ResourceFactory resourceFactory;
 
-	public CommentAPI(BaseAPI baseAPI) {
-		this.baseAPI = baseAPI;
+	public CommentAPI(ResourceFactory resourceFactory) {
+		this.resourceFactory = resourceFactory;
 	}
 
 	/**
@@ -34,11 +34,8 @@ public class CommentAPI {
 	 * @return The comments on the object
 	 */
 	public List<Comment> getComments(Reference reference) {
-		return baseAPI
-				.getApiResource(
-						"/comment/" + reference.getType() + "/"
-								+ reference.getId())
-				
+		return resourceFactory.getApiResource(
+				"/comment/" + reference.getType() + "/" + reference.getId())
 				.get(new GenericType<List<Comment>>() {
 				});
 	}
@@ -52,8 +49,8 @@ public class CommentAPI {
 	 * @return The comment
 	 */
 	public Comment getComment(int commentId) {
-		return baseAPI.getApiResource("/comment/" + commentId)
-				.get(Comment.class);
+		return resourceFactory.getApiResource("/comment/" + commentId).get(
+				Comment.class);
 	}
 
 	/**
@@ -68,7 +65,7 @@ public class CommentAPI {
 	 */
 	public int addComment(Reference reference, CommentCreate comment,
 			boolean silent) {
-		return baseAPI
+		return resourceFactory
 				.getApiResource(
 						"/comment/" + reference.getType() + "/"
 								+ reference.getId())
@@ -87,7 +84,7 @@ public class CommentAPI {
 	 *            The updated comment definition
 	 */
 	public void updateComment(int commentId, CommentUpdate comment) {
-		baseAPI.getApiResource("/comment/" + commentId)
+		resourceFactory.getApiResource("/comment/" + commentId)
 				.entity(comment, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -99,6 +96,6 @@ public class CommentAPI {
 	 *            The id of the comment
 	 */
 	public void deleteComment(int commentId) {
-		baseAPI.getApiResource("/comment/" + commentId).delete();
+		resourceFactory.getApiResource("/comment/" + commentId).delete();
 	}
 }

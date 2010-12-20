@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
-import com.podio.BaseAPI;
+import com.podio.ResourceFactory;
 import com.podio.common.Empty;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
@@ -16,10 +16,10 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class AppAPI {
 
-	private final BaseAPI baseAPI;
+	private final ResourceFactory resourceFactory;
 
-	public AppAPI(BaseAPI baseAPI) {
-		this.baseAPI = baseAPI;
+	public AppAPI(ResourceFactory resourceFactory) {
+		this.resourceFactory = resourceFactory;
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class AppAPI {
 	 * @return The definition of the app
 	 */
 	public Application getApp(int appId, ApplicationGetType type) {
-		return baseAPI.getApiResource("/app/" + appId)
+		return resourceFactory.getApiResource("/app/" + appId)
 				.queryParam("type", type.name().toLowerCase())
 				.get(Application.class);
 	}
@@ -63,8 +63,7 @@ public class AppAPI {
 	 * @return The list of apps on the given space
 	 */
 	public List<ApplicationMini> getAppsOnSpace(int spaceId) {
-		return baseAPI.getApiResource("/app/space/" + spaceId + "/")
-				
+		return resourceFactory.getApiResource("/app/space/" + spaceId + "/")
 				.get(new GenericType<List<ApplicationMini>>() {
 				});
 	}
@@ -78,13 +77,12 @@ public class AppAPI {
 	 * @return The top apps for the active user
 	 */
 	public List<ApplicationMini> getTopApps(Integer limit) {
-		WebResource resource = baseAPI.getApiResource("/app/top/");
+		WebResource resource = resourceFactory.getApiResource("/app/top/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
-		return resource.get(
-				new GenericType<List<ApplicationMini>>() {
-				});
+		return resource.get(new GenericType<List<ApplicationMini>>() {
+		});
 	}
 
 	/**
@@ -95,7 +93,7 @@ public class AppAPI {
 	 * @return The id of the newly created app
 	 */
 	public int addApp(ApplicationCreate app) {
-		return baseAPI.getApiResource("/app/")
+		return resourceFactory.getApiResource("/app/")
 				.entity(app, MediaType.APPLICATION_JSON_TYPE)
 				.post(ApplicationCreateResponse.class).getId();
 	}
@@ -116,7 +114,7 @@ public class AppAPI {
 	 *            The updated app definition
 	 */
 	public void updateApp(int appId, ApplicationUpdate app) {
-		baseAPI.getApiResource("/app/" + appId)
+		resourceFactory.getApiResource("/app/" + appId)
 				.entity(app, MediaType.APPLICATION_JSON).put();
 	}
 
@@ -130,7 +128,7 @@ public class AppAPI {
 	 * @return The id of the newly created field
 	 */
 	public int addField(int appId, ApplicationFieldCreate field) {
-		return baseAPI.getApiResource("/app/" + appId + "/field/")
+		return resourceFactory.getApiResource("/app/" + appId + "/field/")
 				.entity(field, MediaType.APPLICATION_JSON_TYPE)
 				.post(ApplicationFieldCreateResponse.class).getId();
 	}
@@ -148,7 +146,7 @@ public class AppAPI {
 	 */
 	public void updateField(int appId, int fieldId,
 			ApplicationFieldConfiguration configuration) {
-		baseAPI.getApiResource("/app/" + appId + "/field/" + fieldId)
+		resourceFactory.getApiResource("/app/" + appId + "/field/" + fieldId)
 				.entity(configuration, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -162,9 +160,9 @@ public class AppAPI {
 	 * @return The definition and current configuration of the requested field
 	 */
 	public ApplicationField getField(int appId, int fieldId) {
-		return baseAPI.getApiResource("/app/" + appId + "/field/" + fieldId)
-				
-				.get(ApplicationField.class);
+		return resourceFactory.getApiResource(
+				"/app/" + appId + "/field/" + fieldId).get(
+				ApplicationField.class);
 	}
 
 	/**
@@ -178,7 +176,8 @@ public class AppAPI {
 	 *            The id of the field that should be deleted
 	 */
 	public void deleteField(int appId, int fieldId) {
-		baseAPI.getApiResource("/app/" + appId + "/field/" + fieldId).delete();
+		resourceFactory.getApiResource("/app/" + appId + "/field/" + fieldId)
+				.delete();
 	}
 
 	/**
@@ -191,7 +190,7 @@ public class AppAPI {
 	 * @return The id of the newly installed app
 	 */
 	public int install(int appId, int spaceId) {
-		return baseAPI
+		return resourceFactory
 				.getApiResource("/app/" + appId + "/install")
 				.entity(new ApplicationInstall(spaceId),
 						MediaType.APPLICATION_JSON_TYPE)
@@ -208,7 +207,7 @@ public class AppAPI {
 	 *            The ids of the apps in the new order
 	 */
 	public void updateOrder(int spaceId, List<Integer> appIds) {
-		baseAPI.getApiResource("/app/space/" + spaceId + "/order")
+		resourceFactory.getApiResource("/app/space/" + spaceId + "/order")
 				.entity(appIds, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -222,9 +221,9 @@ public class AppAPI {
 	 * @return The list of available apps for the space
 	 */
 	public List<ApplicationMicro> getAvailableApps(int spaceId) {
-		return baseAPI.getApiResource("/app/space/" + spaceId + "/available/")
-				
-				.get(new GenericType<List<ApplicationMicro>>() {
+		return resourceFactory.getApiResource(
+				"/app/space/" + spaceId + "/available/").get(
+				new GenericType<List<ApplicationMicro>>() {
 				});
 	}
 
@@ -236,9 +235,8 @@ public class AppAPI {
 	 * @return The applications that the given app depends on
 	 */
 	public Dependencies getDependencies(int appId) {
-		return baseAPI.getApiResource("/app/" + appId + "/dependencies/")
-				
-				.get(Dependencies.class);
+		return resourceFactory.getApiResource(
+				"/app/" + appId + "/dependencies/").get(Dependencies.class);
 	}
 
 	/**
@@ -249,7 +247,7 @@ public class AppAPI {
 	 *            The id of the app to deactivate
 	 */
 	public void deactivateApp(int appId) {
-		baseAPI.getApiResource("/app/" + appId + "/deactivate")
+		resourceFactory.getApiResource("/app/" + appId + "/deactivate")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -261,7 +259,7 @@ public class AppAPI {
 	 *            The id of the app to activate
 	 */
 	public void activateApp(int appId) {
-		baseAPI.getApiResource("/app/" + appId + "/activate")
+		resourceFactory.getApiResource("/app/" + appId + "/activate")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -273,6 +271,6 @@ public class AppAPI {
 	 *            The id of the app to delete
 	 */
 	public void deleteApp(int appId) {
-		baseAPI.getApiResource("/app/" + appId).delete();
+		resourceFactory.getApiResource("/app/" + appId).delete();
 	}
 }

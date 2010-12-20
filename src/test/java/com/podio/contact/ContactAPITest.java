@@ -7,12 +7,12 @@ import org.junit.Assert;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 
-import com.podio.BaseAPIFactory;
+import com.podio.ResourceFactoryProvider;
 
 public class ContactAPITest {
 
 	private ContactAPI getAPI() {
-		return new ContactAPI(BaseAPIFactory.get());
+		return new ContactAPI(ResourceFactoryProvider.get());
 	}
 
 	@Test

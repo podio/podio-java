@@ -7,13 +7,13 @@ import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.BaseAPIFactory;
+import com.podio.ResourceFactoryProvider;
 import com.podio.rating.RatingType;
 
 public class StatusAPITest {
 
 	private StatusAPI getAPI() {
-		return new StatusAPI(BaseAPIFactory.get());
+		return new StatusAPI(ResourceFactoryProvider.get());
 	}
 
 	@Test

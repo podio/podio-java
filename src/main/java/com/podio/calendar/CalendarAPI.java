@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.joda.time.LocalDate;
 
-import com.podio.BaseAPI;
+import com.podio.ResourceFactory;
 import com.podio.common.CSVUtil;
 import com.podio.common.ReferenceType;
 import com.podio.serialize.DateTimeUtil;
@@ -20,16 +20,16 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class CalendarAPI {
 
-	private final BaseAPI baseAPI;
+	private final ResourceFactory resourceFactory;
 
-	public CalendarAPI(BaseAPI baseAPI) {
-		this.baseAPI = baseAPI;
+	public CalendarAPI(ResourceFactory resourceFactory) {
+		this.resourceFactory = resourceFactory;
 	}
 
 	private List<Event> getCalendar(String path, LocalDate dateFrom,
 			LocalDate dateTo, List<Integer> spaceIds, ReferenceType... types) {
-		WebResource resource = baseAPI
-				.getApiResource("/calendar/" + path + "/");
+		WebResource resource = resourceFactory.getApiResource("/calendar/"
+				+ path + "/");
 		resource = resource.queryParam("date_from",
 				DateTimeUtil.formatDate(dateFrom));
 		resource = resource.queryParam("date_to",

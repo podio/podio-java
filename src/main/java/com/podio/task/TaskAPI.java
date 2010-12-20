@@ -6,7 +6,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.joda.time.LocalDate;
 
-import com.podio.BaseAPI;
+import com.podio.ResourceFactory;
 import com.podio.common.Empty;
 import com.podio.common.Reference;
 import com.sun.jersey.api.client.GenericType;
@@ -49,10 +49,10 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class TaskAPI {
 
-	private final BaseAPI baseAPI;
+	private final ResourceFactory resourceFactory;
 
-	public TaskAPI(BaseAPI baseAPI) {
-		this.baseAPI = baseAPI;
+	public TaskAPI(ResourceFactory resourceFactory) {
+		this.resourceFactory = resourceFactory;
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class TaskAPI {
 	 * @return The retrieved task
 	 */
 	public Task getTask(int taskId) {
-		return baseAPI.getApiResource("/task/" + taskId)
+		return resourceFactory.getApiResource("/task/" + taskId)
 				.get(Task.class);
 	}
 
@@ -77,7 +77,8 @@ public class TaskAPI {
 	 *            The id of the user the task should be assigned to
 	 */
 	public void assignTask(int taskId, int responsible) {
-		baseAPI.getApiResource("/task/" + taskId + "/assign")
+		resourceFactory
+				.getApiResource("/task/" + taskId + "/assign")
 				.entity(new AssignValue(responsible),
 						MediaType.APPLICATION_JSON_TYPE).post();
 	}
@@ -89,7 +90,7 @@ public class TaskAPI {
 	 *            The id of the task to nark as complete
 	 */
 	public void completeTask(int taskId) {
-		baseAPI.getApiResource("/task/" + taskId + "/complete")
+		resourceFactory.getApiResource("/task/" + taskId + "/complete")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -100,7 +101,7 @@ public class TaskAPI {
 	 *            The id of the task to mark as incomplete
 	 */
 	public void incompleteTask(int taskId) {
-		baseAPI.getApiResource("/task/" + taskId + "/incomplete")
+		resourceFactory.getApiResource("/task/" + taskId + "/incomplete")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -111,7 +112,7 @@ public class TaskAPI {
 	 *            The id of the task to mark as started
 	 */
 	public void startTask(int taskId) {
-		baseAPI.getApiResource("/task/" + taskId + "/start")
+		resourceFactory.getApiResource("/task/" + taskId + "/start")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -122,7 +123,7 @@ public class TaskAPI {
 	 *            The id of the task to mark as stopped
 	 */
 	public void stopTask(int taskId) {
-		baseAPI.getApiResource("/task/" + taskId + "/stop")
+		resourceFactory.getApiResource("/task/" + taskId + "/stop")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -135,7 +136,8 @@ public class TaskAPI {
 	 *            The new due date of the task
 	 */
 	public void updateDueDate(int taskId, LocalDate dueDate) {
-		baseAPI.getApiResource("/task/" + taskId + "/due_date")
+		resourceFactory
+				.getApiResource("/task/" + taskId + "/due_date")
 				.entity(new TaskDueDate(dueDate),
 						MediaType.APPLICATION_JSON_TYPE).put();
 	}
@@ -150,7 +152,7 @@ public class TaskAPI {
 	 *            <code>false</code> otherwise
 	 */
 	public void updatePrivate(int taskId, boolean priv) {
-		baseAPI.getApiResource("/task/" + taskId + "/private")
+		resourceFactory.getApiResource("/task/" + taskId + "/private")
 				.entity(new TaskPrivate(priv), MediaType.APPLICATION_JSON_TYPE)
 				.put();
 	}
@@ -164,7 +166,7 @@ public class TaskAPI {
 	 *            The new text of the task
 	 */
 	public void updateText(int taskId, String text) {
-		baseAPI.getApiResource("/task/" + taskId + "/text")
+		resourceFactory.getApiResource("/task/" + taskId + "/text")
 				.entity(new TaskText(text), MediaType.APPLICATION_JSON_TYPE)
 				.put();
 	}
@@ -177,7 +179,7 @@ public class TaskAPI {
 	 * @return The id of the newly created task
 	 */
 	public int createTask(TaskCreate task) {
-		TaskCreateResponse response = baseAPI.getApiResource("/task/")
+		TaskCreateResponse response = resourceFactory.getApiResource("/task/")
 				.entity(task, MediaType.APPLICATION_JSON_TYPE)
 				.post(TaskCreateResponse.class);
 
@@ -194,14 +196,12 @@ public class TaskAPI {
 	 * @return The id of the newly created task
 	 */
 	public int createTaskWithReference(TaskCreate task, Reference reference) {
-		TaskCreateResponse response = baseAPI
+		return resourceFactory
 				.getApiResource(
 						"/task/" + reference.getType().name().toLowerCase()
 								+ "/" + reference.getId() + "/")
 				.entity(task, MediaType.APPLICATION_JSON_TYPE)
-				.post(TaskCreateResponse.class);
-
-		return response.getId();
+				.post(TaskCreateResponse.class).getId();
 	}
 
 	/**
@@ -214,12 +214,10 @@ public class TaskAPI {
 	 * @return The list of tasks
 	 */
 	public List<Task> getTasksWithReference(Reference reference) {
-		return baseAPI
-				.getApiResource(
-						"/task/" + reference.getType().name().toLowerCase()
-								+ "/" + reference.getId() + "/")
-				
-				.get(new GenericType<List<Task>>() {
+		return resourceFactory.getApiResource(
+				"/task/" + reference.getType().name().toLowerCase() + "/"
+						+ reference.getId() + "/").get(
+				new GenericType<List<Task>>() {
 				});
 	}
 
@@ -233,8 +231,8 @@ public class TaskAPI {
 	 * @return The tasks grouped by due date
 	 */
 	public TasksByDue getActiveTasks() {
-		return baseAPI.getApiResource("/task/active/")
-				.get(TasksByDue.class);
+		return resourceFactory.getApiResource("/task/active/").get(
+				TasksByDue.class);
 	}
 
 	/**
@@ -243,8 +241,8 @@ public class TaskAPI {
 	 * @return The tasks grouped by due date
 	 */
 	public TasksByDue getAssignedActiveTasks() {
-		return baseAPI.getApiResource("/task/assigned/active/")
-				.get(TasksByDue.class);
+		return resourceFactory.getApiResource("/task/assigned/active/").get(
+				TasksByDue.class);
 	}
 
 	/**
@@ -253,9 +251,8 @@ public class TaskAPI {
 	 * @return The list of tasks ordered by date of completion
 	 */
 	public List<Task> getAssignedCompletedTasks() {
-		return baseAPI.getApiResource("/task/assigned/completed/")
-				
-				.get(new GenericType<List<Task>>() {
+		return resourceFactory.getApiResource("/task/assigned/completed/").get(
+				new GenericType<List<Task>>() {
 				});
 	}
 
@@ -266,9 +263,8 @@ public class TaskAPI {
 	 * @return The list of tasks ordered by date of completion
 	 */
 	public List<Task> getCompletedTasks() {
-		return baseAPI.getApiResource("/task/completed/")
-				
-				.get(new GenericType<List<Task>>() {
+		return resourceFactory.getApiResource("/task/completed/").get(
+				new GenericType<List<Task>>() {
 				});
 	}
 
@@ -277,8 +273,8 @@ public class TaskAPI {
 	 * responsible.
 	 */
 	public TasksByDue getStartedTasks() {
-		return baseAPI.getApiResource("/task/started/")
-				.get(TasksByDue.class);
+		return resourceFactory.getApiResource("/task/started/").get(
+				TasksByDue.class);
 	}
 
 	/**
@@ -291,9 +287,9 @@ public class TaskAPI {
 	 * @return The tasks grouped by due date
 	 */
 	public TasksByDue getTasksInSpaceByDue(int spaceId) {
-		return baseAPI.getApiResource("/task/in_space/" + spaceId + "/")
-				.queryParam("sort_by", "due_date")
-				.get(TasksByDue.class);
+		return resourceFactory
+				.getApiResource("/task/in_space/" + spaceId + "/")
+				.queryParam("sort_by", "due_date").get(TasksByDue.class);
 	}
 
 	/**
@@ -306,9 +302,9 @@ public class TaskAPI {
 	 * @return The tasks grouped by responsible
 	 */
 	public List<TasksWithResponsible> getTasksInSpaceByResponsible(int spaceId) {
-		return baseAPI.getApiResource("/task/in_space/" + spaceId + "/")
+		return resourceFactory
+				.getApiResource("/task/in_space/" + spaceId + "/")
 				.queryParam("sort_by", "responsible")
-				
 				.get(new GenericType<List<TasksWithResponsible>>() {
 				});
 	}
@@ -331,12 +327,11 @@ public class TaskAPI {
 	 * @return The task totals for the given space
 	 */
 	public TaskTotals getTaskTotals(Integer spaceId) {
-		WebResource resource = baseAPI.getApiResource("/task/total");
+		WebResource resource = resourceFactory.getApiResource("/task/total");
 		if (spaceId != null) {
 			resource = resource.queryParam("space_id", spaceId.toString());
 		}
 
-		return resource.get(
-				TaskTotals.class);
+		return resource.get(TaskTotals.class);
 	}
 }

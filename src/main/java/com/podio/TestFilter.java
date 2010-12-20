@@ -5,6 +5,9 @@ import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.filter.ClientFilter;
 
+/**
+ * Used to put the API in testmode
+ */
 public class TestFilter extends ClientFilter {
 
 	@Override

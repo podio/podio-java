@@ -4,17 +4,17 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
-import com.podio.BaseAPI;
+import com.podio.ResourceFactory;
 import com.podio.common.Reference;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
 public class ConversationAPI {
 
-	private final BaseAPI baseAPI;
+	private final ResourceFactory resourceFactory;
 
-	public ConversationAPI(BaseAPI baseAPI) {
-		this.baseAPI = baseAPI;
+	public ConversationAPI(ResourceFactory resourceFactory) {
+		this.resourceFactory = resourceFactory;
 	}
 
 	/**
@@ -54,10 +54,10 @@ public class ConversationAPI {
 			List<Integer> participants, Reference reference) {
 		WebResource resource;
 		if (reference != null) {
-			resource = baseAPI.getApiResource("/conversation/"
+			resource = resourceFactory.getApiResource("/conversation/"
 					+ reference.toURLFragment());
 		} else {
-			resource = baseAPI.getApiResource("/conversation/");
+			resource = resourceFactory.getApiResource("/conversation/");
 		}
 
 		return resource
@@ -76,8 +76,9 @@ public class ConversationAPI {
 	 * @return The conversation requested
 	 */
 	public Conversation getConversation(int conversationId) {
-		return baseAPI.getApiResource("/conversation/" + conversationId).get(
-				Conversation.class);
+		return resourceFactory
+				.getApiResource("/conversation/" + conversationId).get(
+						Conversation.class);
 	}
 
 	/**
@@ -89,10 +90,10 @@ public class ConversationAPI {
 	 * @return The list of conversations
 	 */
 	public List<Conversation> getConversationsOnObject(Reference object) {
-		return baseAPI
-				.getApiResource("/conversation/" + object.toURLFragment()).get(
-						new GenericType<List<Conversation>>() {
-						});
+		return resourceFactory.getApiResource(
+				"/conversation/" + object.toURLFragment()).get(
+				new GenericType<List<Conversation>>() {
+				});
 	}
 
 	/**
@@ -105,7 +106,7 @@ public class ConversationAPI {
 	 * @return The id of the new message
 	 */
 	public int addReply(int conversationId, String text) {
-		return baseAPI
+		return resourceFactory
 				.getApiResource("/conversation/" + conversationId + "/reply")
 				.entity(new MessageCreate(text),
 						MediaType.APPLICATION_JSON_TYPE)

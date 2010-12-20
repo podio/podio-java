@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
-import com.podio.BaseAPI;
+import com.podio.ResourceFactory;
 import com.podio.common.Role;
 import com.podio.user.UserMini;
 import com.sun.jersey.api.client.GenericType;
@@ -12,10 +12,10 @@ import com.sun.jersey.api.client.WebResource;
 
 public class SpaceAPI {
 
-	private final BaseAPI baseAPI;
+	private final ResourceFactory resourceFactory;
 
-	public SpaceAPI(BaseAPI baseAPI) {
-		this.baseAPI = baseAPI;
+	public SpaceAPI(ResourceFactory resourceFactory) {
+		this.resourceFactory = resourceFactory;
 	}
 
 	/**
@@ -26,7 +26,7 @@ public class SpaceAPI {
 	 * @return The data about the new created space
 	 */
 	public SpaceCreateResponse createSpace(SpaceCreate data) {
-		return baseAPI.getApiResource("/space/")
+		return resourceFactory.getApiResource("/space/")
 				.entity(data, MediaType.APPLICATION_JSON_TYPE)
 				.post(SpaceCreateResponse.class);
 	}
@@ -39,8 +39,8 @@ public class SpaceAPI {
 	 * @return The space with the given id
 	 */
 	public Space getSpace(int spaceId) {
-		return baseAPI.getApiResource("/space/" + spaceId)
-				.get(Space.class);
+		return resourceFactory.getApiResource("/space/" + spaceId).get(
+				Space.class);
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class SpaceAPI {
 	 *            The updated data of the space
 	 */
 	public void updateSpace(int spaceId, SpaceUpdate data) {
-		baseAPI.getApiResource("/space/" + spaceId)
+		resourceFactory.getApiResource("/space/" + spaceId)
 				.entity(data, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -64,8 +64,7 @@ public class SpaceAPI {
 	 *            The id of the space
 	 */
 	public void deleteSpace(int spaceId) {
-		baseAPI.getApiResource("/space/" + spaceId)
-				.delete();
+		resourceFactory.getApiResource("/space/" + spaceId).delete();
 	}
 
 	/**
@@ -76,9 +75,8 @@ public class SpaceAPI {
 	 * @return The space with organization
 	 */
 	public SpaceWithOrganization getSpaceByURL(String url) {
-		return baseAPI.getApiResource("/space/url").queryParam("url", url)
-				
-				.get(SpaceWithOrganization.class);
+		return resourceFactory.getApiResource("/space/url")
+				.queryParam("url", url).get(SpaceWithOrganization.class);
 	}
 
 	/**
@@ -89,7 +87,7 @@ public class SpaceAPI {
 	 *            The data of the invitations
 	 */
 	public void inviteToSpace(int spaceId, SpaceInvitation invitation) {
-		baseAPI.getApiResource("/space/" + spaceId + "/invite")
+		resourceFactory.getApiResource("/space/" + spaceId + "/invite")
 				.entity(invitation, MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -105,8 +103,10 @@ public class SpaceAPI {
 	 */
 	public void resendInvitation(int spaceId, int userId,
 			SpaceInvitationUpdate update) {
-		baseAPI.getApiResource(
-				"/space/" + spaceId + "/member/" + userId + "/resend_invite")
+		resourceFactory
+				.getApiResource(
+						"/space/" + spaceId + "/member/" + userId
+								+ "/resend_invite")
 				.entity(update, MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -119,9 +119,8 @@ public class SpaceAPI {
 	 * @return The statistics for the space
 	 */
 	public SpaceStatistics getSpaceStatistics(int spaceId) {
-		return baseAPI.getApiResource("/space/" + spaceId + "/statistics")
-				
-				.get(SpaceStatistics.class);
+		return resourceFactory.getApiResource(
+				"/space/" + spaceId + "/statistics").get(SpaceStatistics.class);
 	}
 
 	/**
@@ -134,9 +133,9 @@ public class SpaceAPI {
 	 * @return The details about the space membership
 	 */
 	public SpaceMember getSpaceMembership(int spaceId, int userId) {
-		return baseAPI
-				.getApiResource("/space/" + spaceId + "/member/" + userId)
-				.get(SpaceMember.class);
+		return resourceFactory.getApiResource(
+				"/space/" + spaceId + "/member/" + userId).get(
+				SpaceMember.class);
 	}
 
 	/**
@@ -150,7 +149,8 @@ public class SpaceAPI {
 	 *            The new role for the membership
 	 */
 	public void updateSpaceMembership(int spaceId, int userId, Role role) {
-		baseAPI.getApiResource("/space/" + spaceId + "/member/" + userId)
+		resourceFactory
+				.getApiResource("/space/" + spaceId + "/member/" + userId)
 				.entity(new SpaceMemberUpdate(role),
 						MediaType.APPLICATION_JSON_TYPE).put();
 	}
@@ -165,8 +165,8 @@ public class SpaceAPI {
 	 *            The id of the user
 	 */
 	public void endSpaceMembership(int spaceId, int userId) {
-		baseAPI.getApiResource("/space/" + spaceId + "/member/" + userId)
-				.delete();
+		resourceFactory.getApiResource(
+				"/space/" + spaceId + "/member/" + userId).delete();
 	}
 
 	/**
@@ -177,8 +177,7 @@ public class SpaceAPI {
 	 * @return The active members of the space
 	 */
 	public List<SpaceMember> getActiveMembers(int spaceId) {
-		return baseAPI.getApiResource("/space/" + spaceId + "/member/")
-				
+		return resourceFactory.getApiResource("/space/" + spaceId + "/member/")
 				.get(new GenericType<List<SpaceMember>>() {
 				});
 	}
@@ -192,9 +191,9 @@ public class SpaceAPI {
 	 * @return The active members of the space
 	 */
 	public List<SpaceMember> getInvitedMembers(int spaceId) {
-		return baseAPI.getApiResource("/space/" + spaceId + "/member/invited/")
-				
-				.get(new GenericType<List<SpaceMember>>() {
+		return resourceFactory.getApiResource(
+				"/space/" + spaceId + "/member/invited/").get(
+				new GenericType<List<SpaceMember>>() {
 				});
 	}
 
@@ -206,9 +205,9 @@ public class SpaceAPI {
 	 * @return The active members of the space
 	 */
 	public List<SpaceMember> getEndedMembers(int spaceId) {
-		return baseAPI.getApiResource("/space/" + spaceId + "/member/ended/")
-				
-				.get(new GenericType<List<SpaceMember>>() {
+		return resourceFactory.getApiResource(
+				"/space/" + spaceId + "/member/ended/").get(
+				new GenericType<List<SpaceMember>>() {
 				});
 	}
 
@@ -222,15 +221,14 @@ public class SpaceAPI {
 	 * @return The top users for the space
 	 */
 	public List<UserMini> getTopUsers(int spaceId, Integer limit) {
-		WebResource resource = baseAPI.getApiResource("/space/" + spaceId
-				+ "/member/top/");
+		WebResource resource = resourceFactory.getApiResource("/space/"
+				+ spaceId + "/member/top/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
 
-		return resource.get(
-				new GenericType<List<UserMini>>() {
-				});
+		return resource.get(new GenericType<List<UserMini>>() {
+		});
 	}
 
 	/**
@@ -241,13 +239,12 @@ public class SpaceAPI {
 	 * @return The top spaces for the user
 	 */
 	public List<SpaceWithOrganization> getTopSpaces(Integer limit) {
-		WebResource resource = baseAPI.getApiResource("/space/top/");
+		WebResource resource = resourceFactory.getApiResource("/space/top/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
 
-		return resource.get(
-				new GenericType<List<SpaceWithOrganization>>() {
-				});
+		return resource.get(new GenericType<List<SpaceWithOrganization>>() {
+		});
 	}
 }

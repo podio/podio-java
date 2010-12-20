@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.joda.time.DateTime;
 
-import com.podio.BaseAPI;
+import com.podio.ResourceFactory;
 import com.podio.common.CSVUtil;
 import com.podio.common.Empty;
 import com.podio.serialize.DateTimeUtil;
@@ -22,10 +22,10 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class NotificationAPI {
 
-	private final BaseAPI baseAPI;
+	private final ResourceFactory resourceFactory;
 
-	public NotificationAPI(BaseAPI baseAPI) {
-		this.baseAPI = baseAPI;
+	public NotificationAPI(ResourceFactory resourceFactory) {
+		this.resourceFactory = resourceFactory;
 	}
 
 	/**
@@ -41,8 +41,9 @@ public class NotificationAPI {
 	 * @return The notification requested
 	 */
 	public Notification getNotification(int notificationId) {
-		return baseAPI.getApiResource("/notification/" + notificationId).get(
-				Notification.class);
+		return resourceFactory
+				.getApiResource("/notification/" + notificationId).get(
+						Notification.class);
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class NotificationAPI {
 	 * @return The unviewed notifications
 	 */
 	public List<Notification> getInboxNew(Integer limit, Integer offset) {
-		WebResource resource = baseAPI
+		WebResource resource = resourceFactory
 				.getApiResource("/notification/inbox/new/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
@@ -103,7 +104,7 @@ public class NotificationAPI {
 			NotificationDateType dateType, Collection<NotificationType> types,
 			DateTime dateFrom, DateTime dateTo, Collection<Integer> users,
 			Boolean sent) {
-		WebResource resource = baseAPI
+		WebResource resource = resourceFactory
 				.getApiResource("/notification/inbox/viewed/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
@@ -142,7 +143,7 @@ public class NotificationAPI {
 	 * @return The notification settings
 	 */
 	public NotificationSettings getSettings() {
-		return baseAPI.getApiResource("/notification/settings").get(
+		return resourceFactory.getApiResource("/notification/settings").get(
 				NotificationSettings.class);
 	}
 
@@ -153,7 +154,7 @@ public class NotificationAPI {
 	 *            The updated settings
 	 */
 	public void updateSettings(NotificationSettings settings) {
-		baseAPI.getApiResource("/notification/settings")
+		resourceFactory.getApiResource("/notification/settings")
 				.entity(settings, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -165,7 +166,8 @@ public class NotificationAPI {
 	 *            The id of the notification
 	 */
 	public void markAsViewed(int notificationId) {
-		baseAPI.getApiResource("/notification/" + notificationId + "/viewed")
+		resourceFactory
+				.getApiResource("/notification/" + notificationId + "/viewed")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -177,7 +179,7 @@ public class NotificationAPI {
 	 *            The id of the notification
 	 */
 	public void markAsNotViewed(int notificationId) {
-		baseAPI.getApiResource("/notification/" + notificationId + "/viewed")
-				.delete();
+		resourceFactory.getApiResource(
+				"/notification/" + notificationId + "/viewed").delete();
 	}
 }

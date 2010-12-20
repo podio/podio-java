@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
 
-import com.podio.BaseAPI;
+import com.podio.ResourceFactory;
 import com.podio.filter.ExternalIdFilterBy;
 import com.podio.filter.FilterByValue;
 import com.podio.filter.SortBy;
@@ -24,10 +24,10 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class ItemAPI {
 
-	private final BaseAPI baseAPI;
+	private final ResourceFactory resourceFactory;
 
-	public ItemAPI(BaseAPI baseAPI) {
-		this.baseAPI = baseAPI;
+	public ItemAPI(ResourceFactory resourceFactory) {
+		this.resourceFactory = resourceFactory;
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class ItemAPI {
 	 * @return The id of the newly created item
 	 */
 	public int addItem(int appId, ItemCreate create, boolean silent) {
-		return baseAPI.getApiResource("/item/app/" + appId + "/")
+		return resourceFactory.getApiResource("/item/app/" + appId + "/")
 				.queryParam("silent", silent ? "1" : "0")
 				.entity(create, MediaType.APPLICATION_JSON_TYPE)
 				.post(ItemCreateResponse.class).getId();
@@ -56,7 +56,7 @@ public class ItemAPI {
 	 * @return The item with given id
 	 */
 	public Item getItem(int itemId) {
-		return baseAPI.getApiResource("/item/" + itemId)
+		return resourceFactory.getApiResource("/item/" + itemId)
 				.get(Item.class);
 	}
 
@@ -73,7 +73,7 @@ public class ItemAPI {
 	 *            True if the update should be silent, false otherwise
 	 */
 	public void updateItem(int itemId, ItemUpdate update, boolean silent) {
-		baseAPI.getApiResource("/item/" + itemId)
+		resourceFactory.getApiResource("/item/" + itemId)
 				.queryParam("silent", silent ? "1" : "0")
 				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
 	}
@@ -90,7 +90,7 @@ public class ItemAPI {
 	 */
 	public void updateItemValues(int itemId, List<FieldValuesUpdate> values,
 			boolean silent) {
-		baseAPI.getApiResource("/item/" + itemId + "/value/")
+		resourceFactory.getApiResource("/item/" + itemId + "/value/")
 				.queryParam("silent", silent ? "1" : "0")
 				.entity(values, MediaType.APPLICATION_JSON_TYPE).put();
 	}
@@ -109,7 +109,7 @@ public class ItemAPI {
 	 */
 	public void updateItemFieldValues(int itemId, int fieldId,
 			List<Map<String, Object>> values, boolean silent) {
-		baseAPI.getApiResource("/item/" + itemId + "/value/" + fieldId)
+		resourceFactory.getApiResource("/item/" + itemId + "/value/" + fieldId)
 				.queryParam("silent", silent ? "1" : "0")
 				.entity(values, MediaType.APPLICATION_JSON_TYPE).put();
 	}
@@ -124,7 +124,7 @@ public class ItemAPI {
 	 *            True if the deletion should be silent, false otherwise
 	 */
 	public void deleteItem(int itemId, boolean silent) {
-		baseAPI.getApiResource("/item/" + itemId)
+		resourceFactory.getApiResource("/item/" + itemId)
 				.queryParam("silent", silent ? "1" : "0").delete();
 	}
 
@@ -138,9 +138,9 @@ public class ItemAPI {
 	 * @return The values on the field on the item
 	 */
 	public List<Map<String, Object>> getItemFieldValues(int itemId, int fieldId) {
-		return baseAPI.getApiResource("/item/" + itemId + "/value/" + fieldId)
-				
-				.get(new GenericType<List<Map<String, Object>>>() {
+		return resourceFactory.getApiResource(
+				"/item/" + itemId + "/value/" + fieldId).get(
+				new GenericType<List<Map<String, Object>>>() {
 				});
 	}
 
@@ -153,8 +153,7 @@ public class ItemAPI {
 	 * @return The values on the item
 	 */
 	public List<FieldValuesView> getItemValues(int itemId) {
-		return baseAPI.getApiResource("/item/" + itemId + "/value/")
-				
+		return resourceFactory.getApiResource("/item/" + itemId + "/value/")
 				.get(new GenericType<List<FieldValuesView>>() {
 				});
 	}
@@ -170,9 +169,9 @@ public class ItemAPI {
 	 * @return The items that were valid for the field and with text matching
 	 */
 	public List<ItemMini> getItemsByFieldAndTitle(int fieldId, String text) {
-		return baseAPI.getApiResource("/item/field/" + fieldId + "/find")
+		return resourceFactory
+				.getApiResource("/item/field/" + fieldId + "/find")
 				.queryParam("text", text)
-				
 				.get(new GenericType<List<ItemMini>>() {
 				});
 	}
@@ -187,9 +186,8 @@ public class ItemAPI {
 	 * @return The activities on the app grouped by today and last week.
 	 */
 	public AppActivities getAppActivities(int appId) {
-		return baseAPI.getApiResource("/item/app/" + appId + "/activity")
-				
-				.get(AppActivities.class);
+		return resourceFactory.getApiResource(
+				"/item/app/" + appId + "/activity").get(AppActivities.class);
 	}
 
 	/**
@@ -201,10 +199,10 @@ public class ItemAPI {
 	 * @return The references to the given item
 	 */
 	public List<ItemReference> getItemReference(int itemId) {
-		return baseAPI.getApiResource("/item/" + itemId + "/reference/")
-				
-				.get(new GenericType<List<ItemReference>>() {
-				});
+		return resourceFactory
+				.getApiResource("/item/" + itemId + "/reference/").get(
+						new GenericType<List<ItemReference>>() {
+						});
 	}
 
 	/**
@@ -218,10 +216,9 @@ public class ItemAPI {
 	 * @return The revision
 	 */
 	public ItemRevision getItemRevision(int itemId, int revisionId) {
-		return baseAPI
-				.getApiResource("/item/" + itemId + "/revision/" + revisionId)
-				
-				.get(ItemRevision.class);
+		return resourceFactory.getApiResource(
+				"/item/" + itemId + "/revision/" + revisionId).get(
+				ItemRevision.class);
 	}
 
 	/**
@@ -237,12 +234,10 @@ public class ItemAPI {
 	 */
 	public List<ItemFieldDifference> getItemRevisionDifference(int itemId,
 			int revisionFrom, int revisionTo) {
-		return baseAPI
-				.getApiResource(
-						"/item/" + itemId + "/revision/" + revisionFrom + "/"
-								+ revisionTo)
-				
-				.get(new GenericType<List<ItemFieldDifference>>() {
+		return resourceFactory.getApiResource(
+				"/item/" + itemId + "/revision/" + revisionFrom + "/"
+						+ revisionTo).get(
+				new GenericType<List<ItemFieldDifference>>() {
 				});
 	}
 
@@ -254,8 +249,7 @@ public class ItemAPI {
 	 * @return All the revisions
 	 */
 	public List<ItemRevision> getItemRevisions(int itemId) {
-		return baseAPI.getApiResource("/item/" + itemId + "/revision/")
-				
+		return resourceFactory.getApiResource("/item/" + itemId + "/revision/")
 				.get(new GenericType<List<ItemRevision>>() {
 				});
 	}
@@ -281,8 +275,8 @@ public class ItemAPI {
 	 */
 	public ItemsResponse getItems(int appId, Integer limit, Integer offset,
 			SortBy sortBy, Boolean sortDesc, FilterByValue<?>... filters) {
-		WebResource resource = baseAPI.getApiResource("/item/app/" + appId
-				+ "/v2/");
+		WebResource resource = resourceFactory.getApiResource("/item/app/"
+				+ appId + "/v2/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
@@ -300,8 +294,7 @@ public class ItemAPI {
 					filter.getFormattedValue());
 		}
 
-		return resource.get(
-				ItemsResponse.class);
+		return resource.get(ItemsResponse.class);
 	}
 
 	/**
@@ -327,8 +320,8 @@ public class ItemAPI {
 	 * @return The next item
 	 */
 	public ItemMicro getNextItem(int itemId) {
-		return baseAPI.getApiResource("/item/" + itemId + "/next")
-				.get(ItemMicro.class);
+		return resourceFactory.getApiResource("/item/" + itemId + "/next").get(
+				ItemMicro.class);
 	}
 
 	/**
@@ -340,7 +333,7 @@ public class ItemAPI {
 	 * @return The previous item
 	 */
 	public ItemMicro getPreviousItem(int itemId) {
-		return baseAPI.getApiResource("/item/" + itemId + "/previous")
+		return resourceFactory.getApiResource("/item/" + itemId + "/previous")
 				.get(ItemMicro.class);
 	}
 }

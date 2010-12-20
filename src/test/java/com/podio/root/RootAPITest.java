@@ -4,12 +4,12 @@ import org.junit.Assert;
 
 import org.junit.Test;
 
-import com.podio.BaseAPIFactory;
+import com.podio.ResourceFactoryProvider;
 
 public class RootAPITest {
 
 	private RootAPI getAPI() {
-		return new RootAPI(BaseAPIFactory.get());
+		return new RootAPI(ResourceFactoryProvider.get());
 	}
 
 	@Test

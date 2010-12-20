@@ -7,12 +7,12 @@ import org.codehaus.jettison.json.JSONException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.BaseAPIFactory;
+import com.podio.ResourceFactoryProvider;
 
 public class AppAPITest {
 
 	private AppAPI getAPI() {
-		return new AppAPI(BaseAPIFactory.get());
+		return new AppAPI(ResourceFactoryProvider.get());
 	}
 
 	@Test

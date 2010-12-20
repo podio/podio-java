@@ -7,7 +7,7 @@ import com.podio.oauth.OAuthClientCredentials;
 import com.podio.oauth.OAuthUserCredentials;
 import com.podio.oauth.OAuthUsernameCredentials;
 
-public class BaseAPIFactory {
+public final class ResourceFactoryProvider {
 
 	// Username and password for the test database
 	// Don't bother trying it against api.podio.com, it won't work :)
@@ -19,15 +19,18 @@ public class BaseAPIFactory {
 				"haugstrup@hoisthq.com", "bar"));
 	}
 
-	private static final Map<Integer, BaseAPI> API_MAP = new HashMap<Integer, BaseAPI>();
+	private static final Map<Integer, ResourceFactory> API_MAP = new HashMap<Integer, ResourceFactory>();
 
-	public static BaseAPI get(int userId) {
-		BaseAPI api = API_MAP.get(userId);
+	private ResourceFactoryProvider() {
+	}
+
+	public static ResourceFactory get(int userId) {
+		ResourceFactory api = API_MAP.get(userId);
 		if (api != null) {
 			return api;
 		}
 
-		api = new BaseAPI("localhost", "localhost", 9090, false, true,
+		api = new ResourceFactory("localhost", "localhost", 9090, false, true,
 				new OAuthClientCredentials("dev@hoisthq.com",
 						"CmACRWF1WBOTDfOa20A"), CREDENTIALS_MAP.get(userId));
 
@@ -36,7 +39,7 @@ public class BaseAPIFactory {
 		return api;
 	}
 
-	public static BaseAPI get() {
+	public static ResourceFactory get() {
 		return get(1);
 	}
 }

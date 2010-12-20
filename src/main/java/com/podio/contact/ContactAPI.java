@@ -5,9 +5,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
-
-import com.podio.BaseAPI;
+import com.podio.ResourceFactory;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
@@ -21,10 +19,10 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class ContactAPI {
 
-	private final BaseAPI baseAPI;
+	private final ResourceFactory resourceFactory;
 
-	public ContactAPI(BaseAPI baseAPI) {
-		this.baseAPI = baseAPI;
+	public ContactAPI(ResourceFactory resourceFactory) {
+		this.resourceFactory = resourceFactory;
 	}
 
 	/**
@@ -35,8 +33,8 @@ public class ContactAPI {
 	 * @return The contact profile
 	 */
 	public Profile getContact(int userId) {
-		return baseAPI.getApiResource("/contact/" + userId)
-				.get(Profile.class);
+		return resourceFactory.getApiResource("/contact/" + userId).get(
+				Profile.class);
 	}
 
 	/**
@@ -49,11 +47,11 @@ public class ContactAPI {
 	 * @return The list of values for the given field
 	 */
 	public <T, R> List<T> getContactField(int userId, ProfileField<T, R> field) {
-		List<R> values = baseAPI
-				.getApiResource("/contact/" + userId + "/" + field.getName())
-				
-				.get(new GenericType<List<R>>() {
-				});
+		List<R> values = resourceFactory.getApiResource(
+				"/contact/" + userId + "/" + field.getName())
+
+		.get(new GenericType<List<R>>() {
+		});
 
 		List<T> formatted = new ArrayList<T>();
 		for (R value : values) {
@@ -75,15 +73,14 @@ public class ContactAPI {
 	 * @return The list of contacts
 	 */
 	public <T> List<T> getTopContacts(Integer limit, ProfileType<T> type) {
-		WebResource resource = baseAPI.getApiResource("/contact/top/");
+		WebResource resource = resourceFactory.getApiResource("/contact/top/");
 
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
 		resource = resource.queryParam("type", type.getName());
 
-		return resource.get(
-				getGenericType(type));
+		return resource.get(getGenericType(type));
 	}
 
 	/**
@@ -92,9 +89,8 @@ public class ContactAPI {
 	 * @return The list of contact totals by organization
 	 */
 	public List<ContactTotal> getContactTotals() {
-		return baseAPI.getApiResource("/contact/totals/")
-				
-				.get(new GenericType<List<ContactTotal>>() {
+		return resourceFactory.getApiResource("/contact/totals/").get(
+				new GenericType<List<ContactTotal>>() {
 				});
 	}
 
@@ -118,7 +114,7 @@ public class ContactAPI {
 	public <T, F, R> List<T> getContacts(ProfileField<F, R> key, F value,
 			Integer limit, Integer offset, ProfileType<T> type,
 			ContactOrder order) {
-		WebResource resource = baseAPI.getApiResource("/contact/");
+		WebResource resource = resourceFactory.getApiResource("/contact/");
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
 				order);
@@ -147,7 +143,7 @@ public class ContactAPI {
 	public <T, F, R> List<T> getOrganizationContacts(int organizationId,
 			ProfileField<F, R> key, F value, Integer limit, Integer offset,
 			ProfileType<T> type, ContactOrder order) {
-		WebResource resource = baseAPI.getApiResource("/contact/org/"
+		WebResource resource = resourceFactory.getApiResource("/contact/org/"
 				+ organizationId);
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
@@ -176,7 +172,7 @@ public class ContactAPI {
 	public <T, F, R> List<T> getSpaceContacts(int spaceId,
 			ProfileField<F, R> key, F value, Integer limit, Integer offset,
 			ProfileType<T> type, ContactOrder order) {
-		WebResource resource = baseAPI.getApiResource("/contact/space/"
+		WebResource resource = resourceFactory.getApiResource("/contact/space/"
 				+ spaceId);
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
@@ -201,8 +197,7 @@ public class ContactAPI {
 			resource = resource.queryParam("order", order.name().toLowerCase());
 		}
 
-		return resource.get(
-				getGenericType(type));
+		return resource.get(getGenericType(type));
 	}
 
 	private <T> GenericType<List<T>> getGenericType(final ProfileType<T> type) {

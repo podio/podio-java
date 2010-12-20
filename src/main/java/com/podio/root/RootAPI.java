@@ -1,26 +1,23 @@
 package com.podio.root;
 
-import javax.ws.rs.core.MediaType;
-
-import com.podio.BaseAPI;
+import com.podio.ResourceFactory;
 
 /**
  * Very basic API to get the status of the system.
  */
 public class RootAPI {
 
-	private final BaseAPI baseAPI;
+	private final ResourceFactory resourceFactory;
 
-	public RootAPI(BaseAPI baseAPI) {
-		this.baseAPI = baseAPI;
+	public RootAPI(ResourceFactory resourceFactory) {
+		this.resourceFactory = resourceFactory;
 	}
 
 	/**
 	 * @return The current status of the system
 	 */
 	public SystemStatus getStatus() {
-		return baseAPI.getApiResource("/", false)
-				
-				.get(SystemStatus.class);
+		return resourceFactory.getApiResource("/", false).get(
+				SystemStatus.class);
 	}
 }
