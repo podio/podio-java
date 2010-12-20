@@ -13,6 +13,7 @@ import com.podio.rating.RatingAPI;
 import com.podio.root.RootAPI;
 import com.podio.space.SpaceAPI;
 import com.podio.status.StatusAPI;
+import com.podio.stream.StreamAPI;
 import com.podio.subscription.SubscriptionAPI;
 import com.podio.tag.TagAPI;
 import com.podio.task.TaskAPI;
@@ -96,5 +97,9 @@ public class APIFactory {
 
 	public UserAPI getUserAPI() {
 		return new UserAPI(resourceFactory);
+	}
+
+	public StreamAPI getStreamAPI() {
+		return new StreamAPI(resourceFactory);
 	}
 }
