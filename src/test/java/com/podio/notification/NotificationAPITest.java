@@ -70,4 +70,19 @@ public class NotificationAPITest {
 		Assert.assertEquals(settings.isDigest(), true);
 		Assert.assertEquals(settings.isDirect(), true);
 	}
+
+	@Test
+	public void updateSettings() {
+		getAPI().updateSettings(new NotificationSettings(false, false));
+	}
+
+	@Test
+	public void markAsViewed() {
+		getAPI().markAsViewed(4);
+	}
+
+	@Test
+	public void markAsNotViewed() {
+		getAPI().markAsNotViewed(2);
+	}
 }

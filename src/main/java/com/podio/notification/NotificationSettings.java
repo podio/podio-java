@@ -14,6 +14,16 @@ public class NotificationSettings {
 	 */
 	private boolean direct;
 
+	public NotificationSettings() {
+		super();
+	}
+
+	public NotificationSettings(boolean digest, boolean direct) {
+		super();
+		this.digest = digest;
+		this.direct = direct;
+	}
+
 	public boolean isDigest() {
 		return digest;
 	}

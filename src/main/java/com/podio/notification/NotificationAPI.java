@@ -3,10 +3,13 @@ package com.podio.notification;
 import java.util.Collection;
 import java.util.List;
 
+import javax.ws.rs.core.MediaType;
+
 import org.joda.time.DateTime;
 
 import com.podio.BaseAPI;
 import com.podio.common.CSVUtil;
+import com.podio.common.Empty;
 import com.podio.serialize.DateTimeUtil;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
@@ -141,5 +144,40 @@ public class NotificationAPI {
 	public NotificationSettings getSettings() {
 		return baseAPI.getApiResource("/notification/settings").get(
 				NotificationSettings.class);
+	}
+
+	/**
+	 * Updates the notification settings for the user
+	 * 
+	 * @param settings
+	 *            The updated settings
+	 */
+	public void updateSettings(NotificationSettings settings) {
+		baseAPI.getApiResource("/notification/settings")
+				.entity(settings, MediaType.APPLICATION_JSON_TYPE).put();
+	}
+
+	/**
+	 * Mark the notification as viewed. This will move the notification from the
+	 * inbox to the viewed archive.
+	 * 
+	 * @param notificationId
+	 *            The id of the notification
+	 */
+	public void markAsViewed(int notificationId) {
+		baseAPI.getApiResource("/notification/" + notificationId + "/viewed")
+				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
+	}
+
+	/**
+	 * Mark the notification as not viewed. This will keep the notification in
+	 * the inbox even though it has been viewed.
+	 * 
+	 * @param notificationId
+	 *            The id of the notification
+	 */
+	public void markAsNotViewed(int notificationId) {
+		baseAPI.getApiResource("/notification/" + notificationId + "/viewed")
+				.delete();
 	}
 }
