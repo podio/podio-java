@@ -7,9 +7,9 @@
 	<packaging>jar</packaging>
 
 	<name>api</name>
-	<version>0.3.0-SNAPSHOT</version>
-	<url>http://maven.apache.org</url>
-	
+	<version>0.3.0</version>
+	<url>http://podio.com</url>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -19,10 +19,6 @@
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -39,7 +35,13 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>Podio Nexus</name>
+			<url>http://localhost:9191/nexus/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
