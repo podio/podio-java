@@ -1,5 +1,7 @@
 package com.podio;
 
+import org.eclipse.jetty.http.HttpHeaders;
+
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
@@ -20,7 +22,7 @@ public class ApiLoginFilter extends ClientFilter {
 	@Override
 	public ClientResponse handle(ClientRequest cr)
 			throws ClientHandlerException {
-		cr.getHeaders().add("authorization",
+		cr.getHeaders().add(HttpHeaders.AUTHORIZATION,
 				"OAuth2 " + authProvider.getToken().getAccessToken());
 
 		return getNext().handle(cr);

@@ -21,6 +21,7 @@ public class FileLoginFilter extends ClientFilter {
 	@Override
 	public ClientResponse handle(ClientRequest cr)
 			throws ClientHandlerException {
+		// FIXME: This should use the spec instead of custom headers
 		OAuthToken token = authProvider.getToken();
 		cr.getHeaders().putSingle("AccessToken", token.getAccessToken());
 		cr.getHeaders().putSingle("RefreshToken", token.getRefreshToken());

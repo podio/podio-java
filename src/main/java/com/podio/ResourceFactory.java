@@ -12,6 +12,7 @@ import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.deser.CustomDeserializerFactory;
 import org.codehaus.jackson.map.deser.StdDeserializerProvider;
 import org.codehaus.jackson.map.ser.CustomSerializerFactory;
+import org.eclipse.jetty.http.HttpHeaders;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
@@ -62,7 +63,7 @@ public final class ResourceFactory {
 		// client.addFilter(new LoggingFilter());
 
 		this.apiResource = client.resource(getURI(apiHostname, port, ssl));
-		apiResource.header("User-Agent", "Podio Java API Client");
+		apiResource.header(HttpHeaders.USER_AGENT, "Podio Java API Client");
 		this.uploadResource = client
 				.resource(getURI(uploadHostname, port, ssl));
 
