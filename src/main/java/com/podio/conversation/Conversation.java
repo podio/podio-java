@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class Conversation {
 
@@ -26,7 +26,7 @@ public class Conversation {
 	/**
 	 * The list of participants in the conversation
 	 */
-	private List<UserMini> participants;
+	private List<UserProfileMini> participants;
 
 	@JsonProperty("conversation_id")
 	public int getId() {
@@ -54,11 +54,11 @@ public class Conversation {
 		this.messages = messages;
 	}
 
-	public List<UserMini> getParticipants() {
+	public List<UserProfileMini> getParticipants() {
 		return participants;
 	}
 
-	public void setParticipants(List<UserMini> participants) {
+	public void setParticipants(List<UserProfileMini> participants) {
 		this.participants = participants;
 	}
 }

@@ -1,5 +1,6 @@
 package com.podio.user;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -17,6 +18,8 @@ public class User {
 	private Locale locale;
 
 	private TimeZone timezone;
+
+	private List<String> flags;
 
 	private DateTime createdBy;
 
@@ -66,6 +69,14 @@ public class User {
 
 	public void setTimezone(TimeZone timezone) {
 		this.timezone = timezone;
+	}
+
+	public List<String> getFlags() {
+		return flags;
+	}
+
+	public void setFlags(List<String> flags) {
+		this.flags = flags;
 	}
 
 	@JsonProperty("created_by")

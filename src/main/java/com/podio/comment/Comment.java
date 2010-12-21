@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
 import com.podio.file.File;
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class Comment {
 
@@ -28,7 +28,7 @@ public class Comment {
 	/**
 	 * The user who created the comment
 	 */
-	private UserMini user;
+	private UserProfileMini user;
 
 	/**
 	 * The date and time the comment was created
@@ -38,7 +38,7 @@ public class Comment {
 	/**
 	 * The alerts on the comment
 	 */
-	private List<UserMini> alerts;
+	private List<UserProfileMini> alerts;
 
 	/**
 	 * The files on the comment
@@ -73,11 +73,11 @@ public class Comment {
 		this.externalId = externalId;
 	}
 
-	public UserMini getUser() {
+	public UserProfileMini getUser() {
 		return user;
 	}
 
-	public void setUser(UserMini user) {
+	public void setUser(UserProfileMini user) {
 		this.user = user;
 	}
 
@@ -91,11 +91,11 @@ public class Comment {
 		this.createdOn = createdOn;
 	}
 
-	public List<UserMini> getAlerts() {
+	public List<UserProfileMini> getAlerts() {
 		return alerts;
 	}
 
-	public void setAlerts(List<UserMini> alerts) {
+	public void setAlerts(List<UserProfileMini> alerts) {
 		this.alerts = alerts;
 	}
 

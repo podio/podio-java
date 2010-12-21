@@ -4,7 +4,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
 import com.podio.common.Role;
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class Space extends SpaceMini {
 
@@ -33,7 +33,7 @@ public class Space extends SpaceMini {
 	/**
 	 * The user who created the space
 	 */
-	private UserMini createdBy;
+	private UserProfileMini createdBy;
 
 	/**
 	 * The role of the active user on the space
@@ -75,12 +75,12 @@ public class Space extends SpaceMini {
 		this.createdOn = createdOn;
 	}
 
-	public UserMini getCreatedBy() {
+	public UserProfileMini getCreatedBy() {
 		return createdBy;
 	}
 
 	@JsonProperty("created_by")
-	public void setCreatedBy(UserMini createdBy) {
+	public void setCreatedBy(UserProfileMini createdBy) {
 		this.createdBy = createdBy;
 	}
 

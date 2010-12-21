@@ -14,7 +14,7 @@ import com.podio.rating.RatingTypeKeyDeserializer;
 import com.podio.rating.RatingValuesMap;
 import com.podio.share.Share;
 import com.podio.task.Task;
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 /**
  * A status message posted by a user to a space
@@ -24,7 +24,7 @@ public class StatusFull extends Status {
 	/**
 	 * The alerts in the status message
 	 */
-	private List<UserMini> alerts;
+	private List<UserProfileMini> alerts;
 
 	/**
 	 * All the comments on the status
@@ -67,11 +67,11 @@ public class StatusFull extends Status {
 	 */
 	private Map<RatingType, Integer> userRatings;
 
-	public List<UserMini> getAlerts() {
+	public List<UserProfileMini> getAlerts() {
 		return alerts;
 	}
 
-	public void setAlerts(List<UserMini> alerts) {
+	public void setAlerts(List<UserProfileMini> alerts) {
 		this.alerts = alerts;
 	}
 

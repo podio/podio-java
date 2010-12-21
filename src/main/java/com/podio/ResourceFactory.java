@@ -31,12 +31,22 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.GZIPContentEncodingFilter;
 
+/**
+ * This is the main low level entry point to access the Podio API. Construct
+ * this and pass it to the APIFactory.
+ */
 public final class ResourceFactory {
 
 	private final WebResource apiResource;
 	private final WebResource uploadResource;
 	private final ApiLoginFilter apiLoginFilter;
 	private FileLoginFilter fileLoginFilter;
+
+	public ResourceFactory(OAuthClientCredentials clientCredentials,
+			OAuthUserCredentials userCredentials) {
+		this("api.podio.com", "upload.podio.com", 443, true, false,
+				clientCredentials, userCredentials);
+	}
 
 	public ResourceFactory(String apiHostname, String uploadHostname, int port,
 			boolean ssl, boolean test,

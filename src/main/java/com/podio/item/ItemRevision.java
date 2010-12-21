@@ -3,7 +3,7 @@ package com.podio.item;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class ItemRevision {
 
@@ -20,7 +20,7 @@ public class ItemRevision {
 	/**
 	 * The user who made the revision
 	 */
-	private UserMini user;
+	private UserProfileMini user;
 
 	/**
 	 * When the revision was created
@@ -45,11 +45,11 @@ public class ItemRevision {
 		this.appRevision = appRevision;
 	}
 
-	public UserMini getUser() {
+	public UserProfileMini getUser() {
 		return user;
 	}
 
-	public void setUser(UserMini user) {
+	public void setUser(UserProfileMini user) {
 		this.user = user;
 	}
 

@@ -2,14 +2,26 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>5</version>
+	</parent>
+
 	<groupId>com.podio</groupId>
 	<artifactId>api</artifactId>
 	<packaging>jar</packaging>
 
 	<name>api</name>
 	<version>0.4.0-SNAPSHOT</version>
+	<description>The official Java wrapper for the Podio API</description>
 	<url>http://podio.com</url>
 
+	<scm>
+		<connection>scm:git:git@github.com:podio/java.git</connection>
+		<developerConnection>scm:git:git@github.com:podio/java.git</developerConnection>
+		<url>git@github.com:podio/java.git</url>
+	</scm>
 	<build>
 		<plugins>
 			<plugin>
@@ -27,12 +39,23 @@
 			</plugin>
 		</plugins>
 	</build>
+	<ciManagement>
+		<system>Hudson</system>
+		<url>http://hudson.ohoist.com/job/PodioJava/</url>
+	</ciManagement>
 	<licenses>
 		<license>
 			<name>MIT</name>
 			<url>http://creativecommons.org/licenses/MIT/</url>
 		</license>
 	</licenses>
+	<developers>
+		<developer>
+			<id>holm</id>
+			<name>Christian Holm</name>
+			<email>holm@podio.com</email>
+		</developer>
+	</developers>
 	<repositories>
 		<repository>
 			<id>maven2-repository.dev.java.net</id>
@@ -41,13 +64,6 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-	<distributionManagement>
-		<repository>
-			<id>nexus</id>
-			<name>Podio Nexus</name>
-			<url>http://localhost:9191/nexus/content/repositories/releases/</url>
-		</repository>
-	</distributionManagement>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

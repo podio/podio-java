@@ -6,15 +6,7 @@ public class UserMini {
 
 	private int id;
 
-	private Integer avatar;
-
-	private String name;
-
-	@Override
-	public String toString() {
-		return "UserMini [id=" + id + ", avatar=" + avatar + ", name=" + name
-				+ "]";
-	}
+	private String mail;
 
 	@JsonProperty("user_id")
 	public int getId() {
@@ -26,19 +18,11 @@ public class UserMini {
 		this.id = id;
 	}
 
-	public Integer getAvatar() {
-		return avatar;
+	public String getMail() {
+		return mail;
 	}
 
-	public void setAvatar(Integer avatar) {
-		this.avatar = avatar;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 }

@@ -2,19 +2,19 @@ package com.podio.task;
 
 import java.util.List;
 
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class TasksWithResponsible {
 
-	private UserMini responsible;
+	private UserProfileMini responsible;
 
 	private List<Task> tasks;
 
-	public UserMini getResponsible() {
+	public UserProfileMini getResponsible() {
 		return responsible;
 	}
 
-	public void setResponsible(UserMini responsible) {
+	public void setResponsible(UserProfileMini responsible) {
 		this.responsible = responsible;
 	}
 

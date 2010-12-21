@@ -3,7 +3,7 @@ package com.podio.conversation;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class Message {
 
@@ -25,7 +25,7 @@ public class Message {
 	/**
 	 * The user who sent the message
 	 */
-	private UserMini createdBy;
+	private UserProfileMini createdBy;
 
 	@JsonProperty("message_id")
 	public int getId() {
@@ -56,12 +56,12 @@ public class Message {
 	}
 
 	@JsonProperty("created_by")
-	public UserMini getCreatedBy() {
+	public UserProfileMini getCreatedBy() {
 		return createdBy;
 	}
 
 	@JsonProperty("created_by")
-	public void setCreatedBy(UserMini createdBy) {
+	public void setCreatedBy(UserProfileMini createdBy) {
 		this.createdBy = createdBy;
 	}
 }

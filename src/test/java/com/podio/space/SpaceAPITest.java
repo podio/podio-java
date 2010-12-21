@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import com.podio.ResourceFactoryProvider;
 import com.podio.common.Role;
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class SpaceAPITest {
 
@@ -153,7 +153,7 @@ public class SpaceAPITest {
 
 	@Test
 	public void getTopUsers() {
-		List<UserMini> topUsers = getAPI().getTopUsers(1, null);
+		List<UserProfileMini> topUsers = getAPI().getTopUsers(1, null);
 
 		Assert.assertEquals(topUsers.size(), 3);
 		Assert.assertEquals(topUsers.get(0).getId(), 1);

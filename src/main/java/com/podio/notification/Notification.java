@@ -7,7 +7,7 @@ import org.joda.time.DateTime;
 
 import com.podio.org.OrganizationMini;
 import com.podio.space.SpaceMini;
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class Notification {
 
@@ -19,7 +19,7 @@ public class Notification {
 	/**
 	 * The target of the notification
 	 */
-	private UserMini user;
+	private UserProfileMini user;
 
 	/**
 	 * The type of the notification
@@ -44,7 +44,7 @@ public class Notification {
 	/**
 	 * Who created the notification
 	 */
-	private UserMini createdBy;
+	private UserProfileMini createdBy;
 
 	/**
 	 * The space where the notification comes from, if any,
@@ -91,11 +91,11 @@ public class Notification {
 		this.id = id;
 	}
 
-	public UserMini getUser() {
+	public UserProfileMini getUser() {
 		return user;
 	}
 
-	public void setUser(UserMini user) {
+	public void setUser(UserProfileMini user) {
 		this.user = user;
 	}
 
@@ -134,12 +134,12 @@ public class Notification {
 		this.createdOn = createdOn;
 	}
 
-	public UserMini getCreatedBy() {
+	public UserProfileMini getCreatedBy() {
 		return createdBy;
 	}
 
 	@JsonProperty("created_by")
-	public void setCreatedBy(UserMini createdBy) {
+	public void setCreatedBy(UserProfileMini createdBy) {
 		this.createdBy = createdBy;
 	}
 

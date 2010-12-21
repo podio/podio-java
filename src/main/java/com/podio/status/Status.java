@@ -3,7 +3,7 @@ package com.podio.status;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 /**
  * A status message posted by a user to a space
@@ -14,7 +14,7 @@ public class Status {
 
 	private int spaceId;
 
-	private UserMini user;
+	private UserProfileMini user;
 
 	private String value;
 
@@ -47,11 +47,11 @@ public class Status {
 	/**
 	 * @return The user who created the status
 	 */
-	public UserMini getUser() {
+	public UserProfileMini getUser() {
 		return user;
 	}
 
-	public void setUser(UserMini user) {
+	public void setUser(UserProfileMini user) {
 		this.user = user;
 	}
 

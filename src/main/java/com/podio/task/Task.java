@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import com.podio.common.ReferenceType;
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class Task {
 
@@ -37,7 +37,7 @@ public class Task {
 	/**
 	 * The user responsible for the task
 	 */
-	private UserMini responsible;
+	private UserProfileMini responsible;
 
 	/**
 	 * The id of the space the task is on, if any
@@ -57,7 +57,7 @@ public class Task {
 	/**
 	 * The user who created the task
 	 */
-	private UserMini createdBy;
+	private UserProfileMini createdBy;
 
 	/**
 	 * The type of the reference, if any
@@ -136,11 +136,11 @@ public class Task {
 		this.dueDate = dueDate;
 	}
 
-	public UserMini getResponsible() {
+	public UserProfileMini getResponsible() {
 		return responsible;
 	}
 
-	public void setResponsible(UserMini responsible) {
+	public void setResponsible(UserProfileMini responsible) {
 		this.responsible = responsible;
 	}
 
@@ -173,12 +173,12 @@ public class Task {
 	}
 
 	@JsonProperty("created_by")
-	public UserMini getCreatedBy() {
+	public UserProfileMini getCreatedBy() {
 		return createdBy;
 	}
 
 	@JsonProperty("created_by")
-	public void setCreatedBy(UserMini createdBy) {
+	public void setCreatedBy(UserProfileMini createdBy) {
 		this.createdBy = createdBy;
 	}
 

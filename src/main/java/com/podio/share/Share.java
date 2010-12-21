@@ -4,14 +4,14 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
 import com.podio.common.Role;
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class Share {
 
 	/**
 	 * The user the object was share with
 	 */
-	private UserMini user;
+	private UserProfileMini user;
 
 	/**
 	 * The role the user has to the object
@@ -26,13 +26,13 @@ public class Share {
 	/**
 	 * The user who shared the item
 	 */
-	private UserMini grantedBy;
+	private UserProfileMini grantedBy;
 
-	public UserMini getUser() {
+	public UserProfileMini getUser() {
 		return user;
 	}
 
-	public void setUser(UserMini user) {
+	public void setUser(UserProfileMini user) {
 		this.user = user;
 	}
 
@@ -55,12 +55,12 @@ public class Share {
 	}
 
 	@JsonProperty("granted_by")
-	public UserMini getGrantedBy() {
+	public UserProfileMini getGrantedBy() {
 		return grantedBy;
 	}
 
 	@JsonProperty("granted_by")
-	public void setGrantedBy(UserMini grantedBy) {
+	public void setGrantedBy(UserProfileMini grantedBy) {
 		this.grantedBy = grantedBy;
 	}
 }

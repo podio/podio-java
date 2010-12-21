@@ -4,14 +4,14 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
 import com.podio.common.Role;
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class SpaceMember {
 
 	/**
 	 * The member of the space
 	 */
-	private UserMini user;
+	private UserProfileMini user;
 
 	/**
 	 * The role that the member has
@@ -34,11 +34,11 @@ public class SpaceMember {
 	 */
 	private DateTime endedOn;
 
-	public UserMini getUser() {
+	public UserProfileMini getUser() {
 		return user;
 	}
 
-	public void setUser(UserMini user) {
+	public void setUser(UserProfileMini user) {
 		this.user = user;
 	}
 

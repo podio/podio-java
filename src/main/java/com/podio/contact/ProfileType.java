@@ -1,6 +1,6 @@
 package com.podio.contact;
 
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class ProfileType<T> {
 
@@ -8,8 +8,8 @@ public class ProfileType<T> {
 			"full", Profile.class);
 	public static final ProfileType<ProfileShort> SHORT = new ProfileType<ProfileShort>(
 			"short", ProfileShort.class);
-	public static final ProfileType<UserMini> MINI = new ProfileType<UserMini>(
-			"mini", UserMini.class);
+	public static final ProfileType<UserProfileMini> MINI = new ProfileType<UserProfileMini>(
+			"mini", UserProfileMini.class);
 
 	private final String name;
 

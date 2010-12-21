@@ -3,7 +3,7 @@ package com.podio.org;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class Organization extends OrganizationMini {
 
@@ -31,7 +31,7 @@ public class Organization extends OrganizationMini {
 	/**
 	 * The user that created the organization
 	 */
-	private UserMini createdBy;
+	private UserProfileMini createdBy;
 
 	public OrganizationStatus getStatus() {
 		return status;
@@ -68,12 +68,12 @@ public class Organization extends OrganizationMini {
 		this.createdOn = createdOn;
 	}
 
-	public UserMini getCreatedBy() {
+	public UserProfileMini getCreatedBy() {
 		return createdBy;
 	}
 
 	@JsonProperty("created_by")
-	public void setCreatedBy(UserMini createdBy) {
+	public void setCreatedBy(UserProfileMini createdBy) {
 		this.createdBy = createdBy;
 	}
 }

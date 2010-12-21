@@ -2,13 +2,13 @@ package com.podio.rating;
 
 import java.util.List;
 
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class ValueRatings {
 
 	private int total;
 
-	private List<UserMini> users;
+	private List<UserProfileMini> users;
 
 	@Override
 	public String toString() {
@@ -23,11 +23,11 @@ public class ValueRatings {
 		this.total = total;
 	}
 
-	public List<UserMini> getUsers() {
+	public List<UserProfileMini> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<UserMini> users) {
+	public void setUsers(List<UserProfileMini> users) {
 		this.users = users;
 	}
 

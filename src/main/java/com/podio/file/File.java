@@ -7,7 +7,7 @@ import javax.activation.MimeType;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.user.UserMini;
+import com.podio.user.UserProfileMini;
 
 public class File {
 
@@ -55,7 +55,7 @@ public class File {
 	/**
 	 * The user who created the file
 	 */
-	private UserMini createdBy;
+	private UserProfileMini createdBy;
 
 	/**
 	 * The file this file replaces, if any
@@ -131,12 +131,12 @@ public class File {
 	}
 
 	@JsonProperty("created_by")
-	public UserMini getCreatedBy() {
+	public UserProfileMini getCreatedBy() {
 		return createdBy;
 	}
 
 	@JsonProperty("created_by")
-	public void setCreatedBy(UserMini createdBy) {
+	public void setCreatedBy(UserProfileMini createdBy) {
 		this.createdBy = createdBy;
 	}
 
