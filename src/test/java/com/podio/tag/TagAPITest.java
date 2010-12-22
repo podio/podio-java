@@ -87,7 +87,7 @@ public class TagAPITest {
 		Assert.assertEquals(references.get(1).getReferenceType(),
 				ReferenceType.ITEM);
 		Assert.assertEquals(references.get(1).getReferenceId(), 1);
-		Assert.assertEquals(references.get(1).getTitle(), "æøå");
+		Assert.assertEquals(references.get(1).getTitle(), "Ã¦Ã¸Ã¥");
 		Assert.assertEquals(references.get(1).getCreatedOn(), new DateTime(
 				2010, 8, 2, 16, 0, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(references.get(1).getLink(),

@@ -52,10 +52,10 @@ public class FileAPITest {
 		File file = files.get(0);
 		Assert.assertEquals(file.getData().getId(), 1);
 		Assert.assertEquals(file.getData().getType(), ReferenceType.ITEM);
-		Assert.assertEquals(file.getData().getTitle(), "æøå");
+		Assert.assertEquals(file.getData().getTitle(), "Ã¦Ã¸Ã¥");
 		Assert.assertEquals(file.getContext().getId(), 1);
 		Assert.assertEquals(file.getContext().getType(), ReferenceType.ITEM);
-		Assert.assertEquals(file.getContext().getTitle(), "æøå");
+		Assert.assertEquals(file.getContext().getTitle(), "Ã¦Ã¸Ã¥");
 	}
 
 	@Test
@@ -66,10 +66,10 @@ public class FileAPITest {
 		File file = files.get(0);
 		Assert.assertEquals(file.getData().getId(), 1);
 		Assert.assertEquals(file.getData().getType(), ReferenceType.ITEM);
-		Assert.assertEquals(file.getData().getTitle(), "æøå");
+		Assert.assertEquals(file.getData().getTitle(), "Ã¦Ã¸Ã¥");
 		Assert.assertEquals(file.getContext().getId(), 1);
 		Assert.assertEquals(file.getContext().getType(), ReferenceType.ITEM);
-		Assert.assertEquals(file.getContext().getTitle(), "æøå");
+		Assert.assertEquals(file.getContext().getTitle(), "Ã¦Ã¸Ã¥");
 	}
 
 	@Test

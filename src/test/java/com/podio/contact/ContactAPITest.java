@@ -2,9 +2,8 @@ package com.podio.contact;
 
 import java.util.List;
 
-import org.junit.Assert;
-
 import org.joda.time.LocalDate;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.ResourceFactoryProvider;
@@ -28,9 +27,9 @@ public class ContactAPITest {
 		Assert.assertEquals(contact.getAbout(), "King of the API, baby!");
 		Assert.assertEquals(contact.getAddresses().get(0),
 				"Borgergade 144, 1.tv.");
-		Assert.assertEquals(contact.getAddresses().get(1), "1300 København K");
+		Assert.assertEquals(contact.getAddresses().get(1), "1300 KÃ¸benhavn K");
 		Assert.assertEquals(contact.getIms(), null);
-		Assert.assertEquals(contact.getLocations().get(0), "København");
+		Assert.assertEquals(contact.getLocations().get(0), "KÃ¸benhavn");
 		Assert.assertEquals(contact.getMails().get(0), "dev@hoisthq.com");
 		Assert.assertEquals(contact.getMails().get(1), "holm@hoisthq.com");
 		Assert.assertEquals(contact.getPhones().get(0), "26217563");

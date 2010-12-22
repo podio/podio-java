@@ -146,7 +146,7 @@ public class ItemAPITest {
 		Assert.assertEquals(reference.getItems().size(), 1);
 		ItemMicro item = reference.getItems().get(0);
 		Assert.assertEquals(item.getId(), 1);
-		Assert.assertEquals(item.getTitle(), "æøå");
+		Assert.assertEquals(item.getTitle(), "Ã¦Ã¸Ã¥");
 	}
 
 	@Test
