@@ -45,6 +45,7 @@
 					<useReleaseProfile>false</useReleaseProfile>
 					<arguments>-Psonatype-oss-release</arguments>
 					<pushChanges>false</pushChanges>
+					<localCheckout>true</localCheckout>
 				</configuration>
 			</plugin>
 		</plugins>
