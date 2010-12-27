@@ -12,14 +12,14 @@
 	<packaging>jar</packaging>
 
 	<name>api</name>
-	<version>0.4.1-SNAPSHOT</version>
+	<version>0.4.0-SNAPSHOT</version>
 	<description>The official Java wrapper for the Podio API</description>
 	<url>http://podio.com</url>
 
 	<scm>
-		<connection>scm:git:git@github.com:podio/java.git</connection>
-		<developerConnection>scm:git:git@github.com:podio/java.git</developerConnection>
-		<url>git@github.com:podio/java.git</url>
+		<connection>scm:git:file://C:\Udvidddkling\Eclipse\Workspace\java</connection>
+		<developerConnection>scm:git:C:\Udvidddkling\Eclipse\Workspace\java</developerConnection>
+		<url>file://C:\Udvidddkling\Eclipse\Workspace\java</url>
 	</scm>
 	<build>
 		<plugins>
