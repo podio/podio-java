@@ -17,9 +17,9 @@
 	<url>http://podio.com</url>
 
 	<scm>
-		<connection>scm:git:file://C:\Udvidddkling\Eclipse\Workspace\java</connection>
-		<developerConnection>scm:git:C:\Udvidddkling\Eclipse\Workspace\java</developerConnection>
-		<url>file://C:\Udvidddkling\Eclipse\Workspace\java</url>
+		<connection>scm:git:git@github.com:podio/java.git</connection>
+		<developerConnection>scm:git:git@github.com:podio/java.git</developerConnection>
+		<url>git@github.com:podio/java.git</url>
 	</scm>
 	<build>
 		<plugins>
