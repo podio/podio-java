@@ -12,7 +12,7 @@
 	<packaging>jar</packaging>
 
 	<name>api</name>
-	<version>0.4.0</version>
+	<version>0.4.0-SNAPSHOT</version>
 	<description>The official Java wrapper for the Podio API</description>
 	<url>http://podio.com</url>
 
@@ -35,13 +35,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.7</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>				
-				<configuration>
-					<pushChanges>false</pushChanges>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
