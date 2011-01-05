@@ -41,7 +41,6 @@ public final class ResourceFactory {
 	private final WebResource apiResource;
 	private final WebResource uploadResource;
 	private final ApiLoginFilter apiLoginFilter;
-	private FileLoginFilter fileLoginFilter;
 
 	public ResourceFactory(OAuthClientCredentials clientCredentials,
 			OAuthUserCredentials userCredentials) {
@@ -70,7 +69,6 @@ public final class ResourceFactory {
 		AuthProvider authProvider = new AuthProvider(this, clientCredentials,
 				userCredentials);
 		this.apiLoginFilter = new ApiLoginFilter(authProvider);
-		this.fileLoginFilter = new FileLoginFilter(authProvider);
 	}
 
 	private URI getURI(String hostname, int port, boolean ssl) {
@@ -120,7 +118,7 @@ public final class ResourceFactory {
 	public WebResource getUploadResource(String path, boolean secure) {
 		WebResource subResource = uploadResource.path(path);
 		if (secure) {
-			subResource.addFilter(this.fileLoginFilter);
+			subResource.addFilter(this.apiLoginFilter);
 		}
 
 		return subResource;
