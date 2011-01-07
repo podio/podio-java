@@ -1,6 +1,5 @@
 package com.podio.app;
 
-
 public class ApplicationFieldConfiguration {
 
 	/**
@@ -12,6 +11,12 @@ public class ApplicationFieldConfiguration {
 	 * The label of the field, which is what the users will see
 	 */
 	private String label;
+
+	/**
+	 * The description of the field, which is a help to users inserting/updating
+	 * an item
+	 */
+	private String description;
 
 	/**
 	 * An integer indicating the order of the field compared to other fields
@@ -40,11 +45,13 @@ public class ApplicationFieldConfiguration {
 		super();
 	}
 
-	public ApplicationFieldConfiguration(String name, String label, int delta,
-			ApplicationFieldSettings settings, boolean required, boolean visible) {
+	public ApplicationFieldConfiguration(String name, String label,
+			String description, int delta, ApplicationFieldSettings settings,
+			boolean required, boolean visible) {
 		super();
 		this.name = name;
 		this.label = label;
+		this.description = description;
 		this.delta = delta;
 		this.settings = settings;
 		this.required = required;
@@ -65,6 +72,14 @@ public class ApplicationFieldConfiguration {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public int getDelta() {

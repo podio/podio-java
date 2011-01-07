@@ -39,9 +39,25 @@ public class ItemAPITest {
 	}
 
 	@Test
+	public void updateItemExternalId() {
+		getAPI().updateItem(
+				1,
+				new ItemUpdate(null, Arrays.asList(new FieldValuesUpdate(
+						"is-hired", "value", "no"))), false);
+	}
+
+	@Test
 	public void updateItemValues() {
 		getAPI().updateItemValues(1,
 				Arrays.asList(new FieldValuesUpdate(1, "value", "no")), false);
+	}
+
+	@Test
+	public void updateItemValuesExternalId() {
+		getAPI().updateItemValues(
+				1,
+				Arrays.asList(new FieldValuesUpdate("is-hired", "value", "no")),
+				false);
 	}
 
 	@Test
@@ -71,6 +87,7 @@ public class ItemAPITest {
 		Assert.assertEquals(item.getFields().size(), 10);
 		FieldValuesView field = item.getFields().get(0);
 		Assert.assertEquals(field.getId(), 1);
+		Assert.assertEquals(field.getExternalId(), "is-hired");
 		Assert.assertEquals(field.getType(), ApplicationFieldType.STATE);
 		Assert.assertEquals(field.getLabel(), "Is hired?");
 		Assert.assertEquals(field.getValues().size(), 2);

@@ -58,7 +58,8 @@ public class AppAPITest {
 						Arrays.asList(new ApplicationFieldCreate(
 								ApplicationFieldType.TITLE,
 								new ApplicationFieldConfiguration("title",
-										"Title", 0, null, true, true)))));
+										"Title", "Description", 0, null, true,
+										true)))));
 		Assert.assertTrue(appId > 0);
 	}
 
@@ -73,7 +74,7 @@ public class AppAPITest {
 						null, Arrays.asList("Task 1", "Task 2")), Arrays
 						.asList(new ApplicationFieldUpdate(1,
 								new ApplicationFieldConfiguration("hired",
-										"Is hired?", 10,
+										"Is hired?", "Description", 10,
 										ApplicationFieldSettings
 												.getState(Arrays.asList("yes",
 														"no", "maybe")), true,
@@ -99,7 +100,8 @@ public class AppAPITest {
 				1,
 				new ApplicationFieldCreate(ApplicationFieldType.TEXT,
 						new ApplicationFieldConfiguration("test",
-								"Description", 0, ApplicationFieldSettings
+								"Description", "Field description", 0,
+								ApplicationFieldSettings
 										.getText(TextFieldSize.LARGE), true,
 								true)));
 		Assert.assertTrue(fieldId > 10);
@@ -110,9 +112,10 @@ public class AppAPITest {
 		getAPI().updateField(
 				1,
 				1,
-				new ApplicationFieldConfiguration("hired", "Is hired?", 10,
-						ApplicationFieldSettings.getState(Arrays.asList("yes",
-								"no", "maybe")), true, true));
+				new ApplicationFieldConfiguration("hired", "Is hired?",
+						"Description", 10, ApplicationFieldSettings
+								.getState(Arrays.asList("yes", "no", "maybe")),
+						true, true));
 	}
 
 	@Test

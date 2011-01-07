@@ -15,6 +15,11 @@ public class FieldValuesView {
 	private int id;
 
 	/**
+	 * The external id of the field
+	 */
+	private String externalId;
+
+	/**
 	 * The type of the field
 	 */
 	private ApplicationFieldType type;
@@ -41,6 +46,16 @@ public class FieldValuesView {
 	@JsonProperty("field_id")
 	public void setId(int fieldId) {
 		this.id = fieldId;
+	}
+
+	@JsonProperty("external_id")
+	public String getExternalId() {
+		return externalId;
+	}
+
+	@JsonProperty("external_id")
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
 	}
 
 	public ApplicationFieldType getType() {

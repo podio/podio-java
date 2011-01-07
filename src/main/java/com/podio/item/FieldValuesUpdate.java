@@ -11,7 +11,12 @@ public class FieldValuesUpdate {
 	/**
 	 * The id of the field
 	 */
-	private int id;
+	private Integer id;
+
+	/**
+	 * The external id of the field
+	 */
+	private String externalId;
 
 	/**
 	 * The values
@@ -41,14 +46,43 @@ public class FieldValuesUpdate {
 				value));
 	}
 
+	public FieldValuesUpdate(String externalId, List<Map<String, Object>> values) {
+		super();
+		this.externalId = externalId;
+		this.values = values;
+	}
+
+	public FieldValuesUpdate(String externalId, Map<String, Object> value) {
+		super();
+		this.externalId = externalId;
+		this.values = Collections.singletonList(value);
+	}
+
+	public FieldValuesUpdate(String externalId, String subId, Object value) {
+		super();
+		this.externalId = externalId;
+		this.values = Collections.singletonList(Collections.singletonMap(subId,
+				value));
+	}
+
 	@JsonProperty("field_id")
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	@JsonProperty("field_id")
-	public void setId(int fieldId) {
+	public void setId(Integer fieldId) {
 		this.id = fieldId;
+	}
+
+	@JsonProperty("external_id")
+	public String getExternalId() {
+		return externalId;
+	}
+
+	@JsonProperty("external_id")
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
 	}
 
 	public List<Map<String, Object>> getValues() {
