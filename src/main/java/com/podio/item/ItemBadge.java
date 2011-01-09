@@ -28,6 +28,11 @@ public class ItemBadge {
 	private ItemRevision currentRevision;
 
 	/**
+	 * The external id of the item, if any
+	 */
+	private String externalId;
+
+	/**
 	 * The title of the item. This is made of up one of the fields below, or by
 	 * the item name and id
 	 */
@@ -86,6 +91,15 @@ public class ItemBadge {
 	@JsonProperty("current_revision")
 	public void setCurrentRevision(ItemRevision currentRevision) {
 		this.currentRevision = currentRevision;
+	}
+
+	public String getExternalId() {
+		return externalId;
+	}
+
+	@JsonProperty("external_id")
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
 	}
 
 	public String getTitle() {

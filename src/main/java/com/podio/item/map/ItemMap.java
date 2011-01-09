@@ -12,7 +12,9 @@ import org.apache.commons.beanutils.PropertyUtils;
 import com.podio.app.Application;
 import com.podio.app.ApplicationField;
 import com.podio.item.FieldValuesUpdate;
+import com.podio.item.FieldValuesView;
 import com.podio.item.Item;
+import com.podio.item.ItemBadge;
 import com.podio.item.ItemCreate;
 import com.podio.item.ItemUpdate;
 import com.podio.item.map.converter.ExternalIdConverter;
@@ -69,6 +71,14 @@ public class ItemMap<T> {
 	}
 
 	public T getView(Item item) {
+		return getView(item.getExternalId(), item.getFields());
+	}
+
+	public T getView(ItemBadge item) {
+		return getView(item.getExternalId(), item.getFields());
+	}
+
+	private T getView(String externalId, List<FieldValuesView> views) {
 		T model;
 		try {
 			model = modelClass.newInstance();
@@ -78,10 +88,10 @@ public class ItemMap<T> {
 					+ ", ensure that a non-arguments public constructor exists");
 		}
 
-		setExternalId(item.getExternalId(), model);
+		setExternalId(externalId, model);
 
 		for (FieldMap fieldMap : fieldMaps) {
-			fieldMap.toModel(model, item.getFields());
+			fieldMap.toModel(model, views);
 		}
 
 		return model;

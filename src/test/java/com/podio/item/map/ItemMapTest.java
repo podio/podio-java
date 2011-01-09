@@ -1,10 +1,8 @@
 package com.podio.item.map;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import org.joda.money.Money;
 import org.junit.Assert;
@@ -23,7 +21,7 @@ public class ItemMapTest {
 	public void mapTest1() {
 		ItemCreate create = getCreate(
 				1,
-				new Test1(1, Collections.singleton(HireStatus.YES), Money.of(
+				new BugMap1(1, Collections.singleton(HireStatus.YES), Money.of(
 						"EUR", new BigDecimal("123.45")), "A mexican in a bar",
 						new BigDecimal("1.2"), 30, "Ignored"));
 		Assert.assertEquals(create.getExternalId(), "1");
@@ -37,7 +35,7 @@ public class ItemMapTest {
 		Assert.assertEquals(create.getFileIds().size(), 0);
 		Assert.assertEquals(create.getTags().size(), 0);
 
-		Test1 model = getView(1, 1, Test1.class);
+		BugMap1 model = getView(1, 1, BugMap1.class);
 		Assert.assertEquals(model.getExternalId(), 12);
 		Assert.assertTrue(model.getStatuses().contains(HireStatus.YES));
 		Assert.assertEquals(model.getAlottaCash().getAmount(), new BigDecimal(
@@ -52,7 +50,7 @@ public class ItemMapTest {
 	@Test
 	public void mapTest2() {
 		ItemCreate create = getCreate(1,
-				new Test2(2, Collections.singletonList("yes"), new BigDecimal(
+				new BugMap2(2, Collections.singletonList("yes"), new BigDecimal(
 						"123.45"), 1.2d, (short) 30));
 		Assert.assertEquals(create.getExternalId(), "2");
 		checkValue(create.getFields(), "is-hired", 0, "value", "yes");
@@ -63,7 +61,7 @@ public class ItemMapTest {
 		Assert.assertEquals(create.getFileIds().size(), 0);
 		Assert.assertEquals(create.getTags().size(), 0);
 
-		Test2 model = getView(1, 1, Test2.class);
+		BugMap2 model = getView(1, 1, BugMap2.class);
 		Assert.assertEquals(model.getExternalId(), 12);
 		Assert.assertTrue(model.getStatuses().contains("yes"));
 		Assert.assertEquals(model.getAlottaCash(), new BigDecimal("256.5000"));
@@ -74,7 +72,7 @@ public class ItemMapTest {
 	@Test
 	public void mapTest3() {
 		ItemCreate create = getCreate(1,
-				new Test3("3", Collections.singleton("yes"), 123.45, 1.2f));
+				new BugMap3("3", Collections.singleton("yes"), 123.45, 1.2f));
 		Assert.assertEquals(create.getExternalId(), "3");
 		checkValue(create.getFields(), "is-hired", 0, "value", "yes");
 		checkValue(create.getFields(), "alotta-cash", 0, "value", "123.45");
@@ -83,7 +81,7 @@ public class ItemMapTest {
 		Assert.assertEquals(create.getFileIds().size(), 0);
 		Assert.assertEquals(create.getTags().size(), 0);
 
-		Test3 model = getView(1, 1, Test3.class);
+		BugMap3 model = getView(1, 1, BugMap3.class);
 		Assert.assertEquals(model.getExternalId(), "12");
 		Assert.assertTrue(model.getStatuses().contains("yes"));
 		Assert.assertEquals(model.getAmount(), 256.5, 0);
@@ -123,227 +121,5 @@ public class ItemMapTest {
 		}
 
 		Assert.fail("No field found with external id " + externalId);
-	}
-
-	public static class Test1 {
-
-		private int externalId;
-
-		private Set<HireStatus> statuses;
-
-		private Money alottaCash;
-
-		private String writeAJoke;
-
-		private BigDecimal importance;
-
-		private int howFarAreWe;
-
-		private String ignored;
-
-		public Test1() {
-			super();
-		}
-
-		public Test1(int externalId, Set<HireStatus> statuses,
-				Money alottaCash, String writeAJoke, BigDecimal importance,
-				int howFarAreWe, String ignored) {
-			super();
-			this.externalId = externalId;
-			this.statuses = statuses;
-			this.alottaCash = alottaCash;
-			this.writeAJoke = writeAJoke;
-			this.importance = importance;
-			this.howFarAreWe = howFarAreWe;
-			this.ignored = ignored;
-		}
-
-		@ExternalId
-		public int getExternalId() {
-			return externalId;
-		}
-
-		public void setExternalId(int externalId) {
-			this.externalId = externalId;
-		}
-
-		@Field("is-hired")
-		public Set<HireStatus> getStatuses() {
-			return statuses;
-		}
-
-		public void setStatuses(Set<HireStatus> statuses) {
-			this.statuses = statuses;
-		}
-
-		public Money getAlottaCash() {
-			return alottaCash;
-		}
-
-		public void setAlottaCash(Money money) {
-			this.alottaCash = money;
-		}
-
-		public String getWriteAJoke() {
-			return writeAJoke;
-		}
-
-		public void setWriteAJoke(String writeAJoke) {
-			this.writeAJoke = writeAJoke;
-		}
-
-		public BigDecimal getImportance() {
-			return importance;
-		}
-
-		public void setImportance(BigDecimal importance) {
-			this.importance = importance;
-		}
-
-		public int getHowFarAreWe() {
-			return howFarAreWe;
-		}
-
-		public void setHowFarAreWe(int howFarAreWe) {
-			this.howFarAreWe = howFarAreWe;
-		}
-
-		@Transient
-		public String getIgnored() {
-			return ignored;
-		}
-
-		public void setIgnored(String ignored) {
-			this.ignored = ignored;
-		}
-	}
-
-	public static class Test2 {
-
-		private long externalId;
-
-		private List<String> statuses;
-
-		private BigDecimal alottaCash;
-
-		private double importance;
-
-		private Short howFarAreWe;
-
-		public Test2() {
-			super();
-		}
-
-		public Test2(long externalId, List<String> statuses,
-				BigDecimal alottaCash, double importance, Short howFarAreWe) {
-			super();
-			this.externalId = externalId;
-			this.statuses = statuses;
-			this.alottaCash = alottaCash;
-			this.importance = importance;
-			this.howFarAreWe = howFarAreWe;
-		}
-
-		@ExternalId
-		public long getExternalId() {
-			return externalId;
-		}
-
-		public void setExternalId(long externalId) {
-			this.externalId = externalId;
-		}
-
-		@Field("is-hired")
-		public List<String> getStatuses() {
-			return statuses;
-		}
-
-		public void setStatuses(List<String> statuses) {
-			this.statuses = statuses;
-		}
-
-		public BigDecimal getAlottaCash() {
-			return alottaCash;
-		}
-
-		public void setAlottaCash(BigDecimal amount) {
-			this.alottaCash = amount;
-		}
-
-		public double getImportance() {
-			return importance;
-		}
-
-		public void setImportance(double importance) {
-			this.importance = importance;
-		}
-
-		public Short getHowFarAreWe() {
-			return howFarAreWe;
-		}
-
-		public void setHowFarAreWe(Short howFarAreWe) {
-			this.howFarAreWe = howFarAreWe;
-		}
-	}
-
-	public static class Test3 {
-
-		private String externalId;
-
-		private Collection<String> statuses;
-
-		private double amount;
-
-		private float importance;
-
-		public Test3() {
-			super();
-		}
-
-		public Test3(String externalId, Collection<String> statuses,
-				double amount, float importance) {
-			super();
-			this.externalId = externalId;
-			this.statuses = statuses;
-			this.amount = amount;
-			this.importance = importance;
-		}
-
-		@ExternalId
-		public String getExternalId() {
-			return externalId;
-		}
-
-		public void setExternalId(String externalId) {
-			this.externalId = externalId;
-		}
-
-		@Field("is-hired")
-		public Collection<String> getStatuses() {
-			return statuses;
-		}
-
-		public void setStatuses(Collection<String> statuses) {
-			this.statuses = statuses;
-		}
-
-		@MoneyField(currency = "EUR")
-		@Field("alotta-cash")
-		public double getAmount() {
-			return amount;
-		}
-
-		public void setAmount(double amount) {
-			this.amount = amount;
-		}
-
-		public float getImportance() {
-			return importance;
-		}
-
-		public void setImportance(float importance) {
-			this.importance = importance;
-		}
 	}
 }
