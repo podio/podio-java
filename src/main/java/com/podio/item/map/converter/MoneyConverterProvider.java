@@ -1,6 +1,6 @@
 package com.podio.item.map.converter;
 
-import java.lang.reflect.Method;
+import java.lang.reflect.AnnotatedElement;
 
 import org.joda.money.CurrencyUnit;
 
@@ -16,8 +16,9 @@ public class MoneyConverterProvider implements FieldConverterProvider {
 	}
 
 	@Override
-	public FieldConverter getConverter(ApplicationField field, Method readMethod) {
-		MoneyField moneyField = readMethod.getAnnotation(MoneyField.class);
+	public FieldConverter getConverter(ApplicationField field,
+			AnnotatedElement element) {
+		MoneyField moneyField = element.getAnnotation(MoneyField.class);
 
 		CurrencyUnit defaultCurrency;
 		if (moneyField != null) {

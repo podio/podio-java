@@ -43,8 +43,8 @@ public class MoneyConverter implements FieldConverter {
 			BigDecimal amount = new BigDecimal((String) map.get("value"));
 			CurrencyUnit currency = CurrencyUnit.of((String) map
 					.get("currency"));
-			BigDecimal roundedAmount = amount.setScale(
-					currency.getDecimalPlaces(), RoundingMode.HALF_EVEN);
+			BigDecimal roundedAmount = amount.setScale(currency.getDecimalPlaces(),
+					RoundingMode.HALF_EVEN);
 
 			return Money.of(currency, roundedAmount);
 		} else {

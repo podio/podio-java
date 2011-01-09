@@ -1,10 +1,13 @@
 package com.podio.item.map;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.podio.app.ApplicationField;
 import com.podio.item.FieldValuesUpdate;
@@ -71,9 +74,31 @@ public class FieldMap {
 									.get(0), property.getPropertyType());
 							property.getWriteMethod().invoke(model, value);
 						} else {
-							// FIXME: Not yet done
+							ParameterizedType innerType = (ParameterizedType) property
+									.getReadMethod().getGenericReturnType();
+
+							Collection col;
+							if (property.getPropertyType() == Collection.class
+									|| property.getPropertyType() == List.class) {
+								col = new ArrayList();
+							} else if (property.getPropertyType() == Set.class) {
+								col = new HashSet();
+							} else {
+								col = (Collection) property.getPropertyType()
+										.newInstance();
+							}
+
+							for (Map<String, Object> values : view.getValues()) {
+								Object value = converter.toModel(values,
+										(Class) innerType
+												.getActualTypeArguments()[0]);
+								col.add(value);
+							}
+
+							property.getWriteMethod().invoke(model, col);
 						}
 					} catch (Exception e) {
+						e.printStackTrace();
 						throw new RuntimeException("Unable to set model value",
 								e);
 					}

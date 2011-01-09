@@ -12,6 +12,8 @@ public class FieldConverterRegistry {
 
 	static {
 		REGISTRY.add(new MoneyConverterProvider());
+		REGISTRY.add(new StateConverterProvider());
+		REGISTRY.add(new NumberConverterProvider());
 	}
 
 	private FieldConverterRegistry() {

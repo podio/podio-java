@@ -1,7 +1,10 @@
 package com.podio.item.map;
 
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.joda.money.Money;
 import org.junit.Assert;
@@ -18,17 +21,22 @@ public class ItemMapTest {
 
 	@Test
 	public void mapTest1() {
-		ItemCreate create = getCreate(1,
-				new Test1(1, Money.of("EUR", new BigDecimal("123.45")),
-						"Ignored"));
+		ItemCreate create = getCreate(
+				1,
+				new Test1(1, Collections.singleton(HireStatus.YES), Money.of(
+						"EUR", new BigDecimal("123.45")),
+						new BigDecimal("1.2"), "Ignored"));
 		Assert.assertEquals(create.getExternalId(), "1");
+		checkValue(create.getFields(), "is-hired", 0, "value", "yes");
 		checkValue(create.getFields(), "alotta-cash", 0, "value", "123.45");
 		checkValue(create.getFields(), "alotta-cash", 0, "currency", "EUR");
+		checkValue(create.getFields(), "importance", 0, "value", "1.2");
 		Assert.assertEquals(create.getFileIds().size(), 0);
 		Assert.assertEquals(create.getTags().size(), 0);
 
 		Test1 model = getView(1, 1, Test1.class);
 		Assert.assertEquals(model.getExternalId(), 12);
+		Assert.assertTrue(model.getStatuses().contains(HireStatus.YES));
 		Assert.assertEquals(model.getAlottaCash().getAmount(), new BigDecimal(
 				"256.50"));
 		Assert.assertEquals(model.getAlottaCash().getCurrencyUnit()
@@ -37,23 +45,39 @@ public class ItemMapTest {
 
 	@Test
 	public void mapTest2() {
-		ItemCreate create = getCreate(1, new Test2(2, new BigDecimal("123.45")));
+		ItemCreate create = getCreate(1,
+				new Test2(2, Collections.singletonList("yes"), new BigDecimal(
+						"123.45"), 1.2d));
 		Assert.assertEquals(create.getExternalId(), "2");
+		checkValue(create.getFields(), "is-hired", 0, "value", "yes");
 		checkValue(create.getFields(), "alotta-cash", 0, "value", "123.45");
 		checkValue(create.getFields(), "alotta-cash", 0, "currency", "DKK");
+		checkValue(create.getFields(), "importance", 0, "value", "1.2");
 		Assert.assertEquals(create.getFileIds().size(), 0);
 		Assert.assertEquals(create.getTags().size(), 0);
+
+		Test2 model = getView(1, 1, Test2.class);
+		Assert.assertEquals(model.getExternalId(), 12);
+		Assert.assertTrue(model.getStatuses().contains("yes"));
+		Assert.assertEquals(model.getAlottaCash(), new BigDecimal("256.5000"));
 	}
 
 	@Test
 	public void mapTest3() {
-		ItemCreate create = getCreate(1, new Test3("3",
-				new BigDecimal("123.45")));
+		ItemCreate create = getCreate(1,
+				new Test3("3", Collections.singleton("yes"), 123.45, 1.2f));
 		Assert.assertEquals(create.getExternalId(), "3");
+		checkValue(create.getFields(), "is-hired", 0, "value", "yes");
 		checkValue(create.getFields(), "alotta-cash", 0, "value", "123.45");
 		checkValue(create.getFields(), "alotta-cash", 0, "currency", "EUR");
+		checkValue(create.getFields(), "importance", 0, "value", "1.2");
 		Assert.assertEquals(create.getFileIds().size(), 0);
 		Assert.assertEquals(create.getTags().size(), 0);
+
+		Test3 model = getView(1, 1, Test3.class);
+		Assert.assertEquals(model.getExternalId(), "12");
+		Assert.assertTrue(model.getStatuses().contains("yes"));
+		Assert.assertEquals(model.getAmount(), 256.5, 0);
 	}
 
 	private <T> ItemMap<T> getMap(int appId, Class<? extends Object> cls) {
@@ -95,7 +119,11 @@ public class ItemMapTest {
 
 		private int externalId;
 
+		private Set<HireStatus> statuses;
+
 		private Money alottaCash;
+
+		private BigDecimal importance;
 
 		private String ignored;
 
@@ -103,10 +131,13 @@ public class ItemMapTest {
 			super();
 		}
 
-		public Test1(int externalId, Money alottaCash, String ignored) {
+		public Test1(int externalId, Set<HireStatus> statuses,
+				Money alottaCash, BigDecimal importance, String ignored) {
 			super();
 			this.externalId = externalId;
+			this.statuses = statuses;
 			this.alottaCash = alottaCash;
+			this.importance = importance;
 			this.ignored = ignored;
 		}
 
@@ -119,12 +150,29 @@ public class ItemMapTest {
 			this.externalId = externalId;
 		}
 
+		@Field("is-hired")
+		public Set<HireStatus> getStatuses() {
+			return statuses;
+		}
+
+		public void setStatuses(Set<HireStatus> statuses) {
+			this.statuses = statuses;
+		}
+
 		public Money getAlottaCash() {
 			return alottaCash;
 		}
 
 		public void setAlottaCash(Money money) {
 			this.alottaCash = money;
+		}
+
+		public BigDecimal getImportance() {
+			return importance;
+		}
+
+		public void setImportance(BigDecimal importance) {
+			this.importance = importance;
 		}
 
 		@Transient
@@ -141,16 +189,23 @@ public class ItemMapTest {
 
 		private long externalId;
 
+		private List<String> statuses;
+
 		private BigDecimal alottaCash;
+
+		private double importance;
 
 		public Test2() {
 			super();
 		}
 
-		public Test2(long externalId, BigDecimal alottaCash) {
+		public Test2(long externalId, List<String> statuses,
+				BigDecimal alottaCash, double importance) {
 			super();
 			this.externalId = externalId;
+			this.statuses = statuses;
 			this.alottaCash = alottaCash;
+			this.importance = importance;
 		}
 
 		@ExternalId
@@ -162,6 +217,15 @@ public class ItemMapTest {
 			this.externalId = externalId;
 		}
 
+		@Field("is-hired")
+		public List<String> getStatuses() {
+			return statuses;
+		}
+
+		public void setStatuses(List<String> statuses) {
+			this.statuses = statuses;
+		}
+
 		public BigDecimal getAlottaCash() {
 			return alottaCash;
 		}
@@ -169,22 +233,37 @@ public class ItemMapTest {
 		public void setAlottaCash(BigDecimal amount) {
 			this.alottaCash = amount;
 		}
+
+		public double getImportance() {
+			return importance;
+		}
+
+		public void setImportance(double importance) {
+			this.importance = importance;
+		}
 	}
 
 	public static class Test3 {
 
 		private String externalId;
 
-		private BigDecimal amount;
+		private Collection<String> statuses;
+
+		private double amount;
+
+		private float importance;
 
 		public Test3() {
 			super();
 		}
 
-		public Test3(String externalId, BigDecimal amount) {
+		public Test3(String externalId, Collection<String> statuses,
+				double amount, float importance) {
 			super();
 			this.externalId = externalId;
+			this.statuses = statuses;
 			this.amount = amount;
+			this.importance = importance;
 		}
 
 		@ExternalId
@@ -196,14 +275,31 @@ public class ItemMapTest {
 			this.externalId = externalId;
 		}
 
+		@Field("is-hired")
+		public Collection<String> getStatuses() {
+			return statuses;
+		}
+
+		public void setStatuses(Collection<String> statuses) {
+			this.statuses = statuses;
+		}
+
 		@MoneyField(currency = "EUR")
 		@Field("alotta-cash")
-		public BigDecimal getAmount() {
+		public double getAmount() {
 			return amount;
 		}
 
-		public void setAmount(BigDecimal amount) {
+		public void setAmount(double amount) {
 			this.amount = amount;
+		}
+
+		public float getImportance() {
+			return importance;
+		}
+
+		public void setImportance(float importance) {
+			this.importance = importance;
 		}
 	}
 }
