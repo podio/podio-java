@@ -4,7 +4,7 @@ import java.util.Map;
 
 public interface FieldConverter {
 
-	Map<String, Object> fromModel(Object value);
+	Map<String, ?> fromModel(Object value);
 
-	Object toModel(Map<String, Object> map, Class modelClass);
+	Object toModel(Map<String, ?> map, Class modelClass);
 }

@@ -32,7 +32,7 @@ public class FieldValuesView {
 	/**
 	 * The values
 	 */
-	private List<Map<String, Object>> values;
+	private List<Map<String, ?>> values;
 
 	public FieldValuesView() {
 		super();
@@ -74,11 +74,11 @@ public class FieldValuesView {
 		this.label = label;
 	}
 
-	public List<Map<String, Object>> getValues() {
+	public List<Map<String, ?>> getValues() {
 		return values;
 	}
 
-	public void setValues(List<Map<String, Object>> values) {
+	public void setValues(List<Map<String, ?>> values) {
 		this.values = values;
 	}
 }

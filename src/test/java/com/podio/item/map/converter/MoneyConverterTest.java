@@ -12,10 +12,9 @@ public class MoneyConverterTest {
 
 	@Test
 	public void fromModel() {
-		MoneyConverter converter = new MoneyConverter(
-				CurrencyUnit.of("DKK"));
+		MoneyConverter converter = new MoneyConverter(CurrencyUnit.of("DKK"));
 
-		Map<String, Object> result = converter.fromModel(Money.of(
+		Map<String, ?> result = converter.fromModel(Money.of(
 				CurrencyUnit.of("EUR"), new BigDecimal("123.45")));
 		Assert.assertEquals(result.get("value"), "123.45");
 		Assert.assertEquals(result.get("currency"), "EUR");

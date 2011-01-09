@@ -24,13 +24,16 @@ public class ItemMapTest {
 		ItemCreate create = getCreate(
 				1,
 				new Test1(1, Collections.singleton(HireStatus.YES), Money.of(
-						"EUR", new BigDecimal("123.45")),
-						new BigDecimal("1.2"), "Ignored"));
+						"EUR", new BigDecimal("123.45")), "A mexican in a bar",
+						new BigDecimal("1.2"), 30, "Ignored"));
 		Assert.assertEquals(create.getExternalId(), "1");
 		checkValue(create.getFields(), "is-hired", 0, "value", "yes");
 		checkValue(create.getFields(), "alotta-cash", 0, "value", "123.45");
 		checkValue(create.getFields(), "alotta-cash", 0, "currency", "EUR");
+		checkValue(create.getFields(), "write-a-joke", 0, "value",
+				"A mexican in a bar");
 		checkValue(create.getFields(), "importance", 0, "value", "1.2");
+		checkValue(create.getFields(), "how-far-are-we", 0, "value", 30);
 		Assert.assertEquals(create.getFileIds().size(), 0);
 		Assert.assertEquals(create.getTags().size(), 0);
 
@@ -41,18 +44,22 @@ public class ItemMapTest {
 				"256.50"));
 		Assert.assertEquals(model.getAlottaCash().getCurrencyUnit()
 				.getCurrencyCode(), "DKK");
+		Assert.assertEquals(model.getWriteAJoke(), "æøå");
+		Assert.assertEquals(model.getImportance(), new BigDecimal("2.2000"));
+		Assert.assertEquals(model.getHowFarAreWe(), 15);
 	}
 
 	@Test
 	public void mapTest2() {
 		ItemCreate create = getCreate(1,
 				new Test2(2, Collections.singletonList("yes"), new BigDecimal(
-						"123.45"), 1.2d));
+						"123.45"), 1.2d, (short) 30));
 		Assert.assertEquals(create.getExternalId(), "2");
 		checkValue(create.getFields(), "is-hired", 0, "value", "yes");
 		checkValue(create.getFields(), "alotta-cash", 0, "value", "123.45");
 		checkValue(create.getFields(), "alotta-cash", 0, "currency", "DKK");
 		checkValue(create.getFields(), "importance", 0, "value", "1.2");
+		checkValue(create.getFields(), "how-far-are-we", 0, "value", 30);
 		Assert.assertEquals(create.getFileIds().size(), 0);
 		Assert.assertEquals(create.getTags().size(), 0);
 
@@ -60,6 +67,8 @@ public class ItemMapTest {
 		Assert.assertEquals(model.getExternalId(), 12);
 		Assert.assertTrue(model.getStatuses().contains("yes"));
 		Assert.assertEquals(model.getAlottaCash(), new BigDecimal("256.5000"));
+		Assert.assertEquals(model.getImportance(), 2.2d, 0);
+		Assert.assertEquals(model.getHowFarAreWe(), new Short((short) 15));
 	}
 
 	@Test
@@ -78,6 +87,7 @@ public class ItemMapTest {
 		Assert.assertEquals(model.getExternalId(), "12");
 		Assert.assertTrue(model.getStatuses().contains("yes"));
 		Assert.assertEquals(model.getAmount(), 256.5, 0);
+		Assert.assertEquals(model.getImportance(), 2.2f, 0);
 	}
 
 	private <T> ItemMap<T> getMap(int appId, Class<? extends Object> cls) {
@@ -123,7 +133,11 @@ public class ItemMapTest {
 
 		private Money alottaCash;
 
+		private String writeAJoke;
+
 		private BigDecimal importance;
+
+		private int howFarAreWe;
 
 		private String ignored;
 
@@ -132,12 +146,15 @@ public class ItemMapTest {
 		}
 
 		public Test1(int externalId, Set<HireStatus> statuses,
-				Money alottaCash, BigDecimal importance, String ignored) {
+				Money alottaCash, String writeAJoke, BigDecimal importance,
+				int howFarAreWe, String ignored) {
 			super();
 			this.externalId = externalId;
 			this.statuses = statuses;
 			this.alottaCash = alottaCash;
+			this.writeAJoke = writeAJoke;
 			this.importance = importance;
+			this.howFarAreWe = howFarAreWe;
 			this.ignored = ignored;
 		}
 
@@ -167,12 +184,28 @@ public class ItemMapTest {
 			this.alottaCash = money;
 		}
 
+		public String getWriteAJoke() {
+			return writeAJoke;
+		}
+
+		public void setWriteAJoke(String writeAJoke) {
+			this.writeAJoke = writeAJoke;
+		}
+
 		public BigDecimal getImportance() {
 			return importance;
 		}
 
 		public void setImportance(BigDecimal importance) {
 			this.importance = importance;
+		}
+
+		public int getHowFarAreWe() {
+			return howFarAreWe;
+		}
+
+		public void setHowFarAreWe(int howFarAreWe) {
+			this.howFarAreWe = howFarAreWe;
 		}
 
 		@Transient
@@ -195,17 +228,20 @@ public class ItemMapTest {
 
 		private double importance;
 
+		private Short howFarAreWe;
+
 		public Test2() {
 			super();
 		}
 
 		public Test2(long externalId, List<String> statuses,
-				BigDecimal alottaCash, double importance) {
+				BigDecimal alottaCash, double importance, Short howFarAreWe) {
 			super();
 			this.externalId = externalId;
 			this.statuses = statuses;
 			this.alottaCash = alottaCash;
 			this.importance = importance;
+			this.howFarAreWe = howFarAreWe;
 		}
 
 		@ExternalId
@@ -240,6 +276,14 @@ public class ItemMapTest {
 
 		public void setImportance(double importance) {
 			this.importance = importance;
+		}
+
+		public Short getHowFarAreWe() {
+			return howFarAreWe;
+		}
+
+		public void setHowFarAreWe(Short howFarAreWe) {
+			this.howFarAreWe = howFarAreWe;
 		}
 	}
 

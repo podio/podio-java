@@ -21,48 +21,48 @@ public class FieldValuesUpdate {
 	/**
 	 * The values
 	 */
-	private List<Map<String, Object>> values;
+	private List<Map<String, ?>> values;
 
 	public FieldValuesUpdate() {
 		super();
 	}
 
-	public FieldValuesUpdate(int id, List<Map<String, Object>> values) {
+	public FieldValuesUpdate(int id, List<Map<String, ?>> values) {
 		super();
 		this.id = id;
 		this.values = values;
 	}
 
-	public FieldValuesUpdate(int id, Map<String, Object> value) {
+	public FieldValuesUpdate(int id, Map<String, ?> value) {
 		super();
 		this.id = id;
-		this.values = Collections.singletonList(value);
+		this.values = Collections.<Map<String, ?>> singletonList(value);
 	}
 
 	public FieldValuesUpdate(int id, String subId, Object value) {
 		super();
 		this.id = id;
-		this.values = Collections.singletonList(Collections.singletonMap(subId,
-				value));
+		this.values = Collections.<Map<String, ?>> singletonList(Collections
+				.singletonMap(subId, value));
 	}
 
-	public FieldValuesUpdate(String externalId, List<Map<String, Object>> values) {
+	public FieldValuesUpdate(String externalId, List<Map<String, ?>> values) {
 		super();
 		this.externalId = externalId;
 		this.values = values;
 	}
 
-	public FieldValuesUpdate(String externalId, Map<String, Object> value) {
+	public FieldValuesUpdate(String externalId, Map<String, ?> value) {
 		super();
 		this.externalId = externalId;
-		this.values = Collections.singletonList(value);
+		this.values = Collections.<Map<String, ?>> singletonList(value);
 	}
 
 	public FieldValuesUpdate(String externalId, String subId, Object value) {
 		super();
 		this.externalId = externalId;
-		this.values = Collections.singletonList(Collections.singletonMap(subId,
-				value));
+		this.values = Collections.<Map<String, ?>> singletonList(Collections
+				.singletonMap(subId, value));
 	}
 
 	@JsonProperty("field_id")
@@ -85,11 +85,11 @@ public class FieldValuesUpdate {
 		this.externalId = externalId;
 	}
 
-	public List<Map<String, Object>> getValues() {
+	public List<Map<String, ?>> getValues() {
 		return values;
 	}
 
-	public void setValues(List<Map<String, Object>> values) {
+	public void setValues(List<Map<String, ?>> values) {
 		this.values = values;
 	}
 }

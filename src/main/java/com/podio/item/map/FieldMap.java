@@ -43,7 +43,7 @@ public class FieldMap {
 			throw new RuntimeException("Unable to get model value", e);
 		}
 
-		List<Map<String, Object>> apiValues = new ArrayList<Map<String, Object>>();
+		List<Map<String, ?>> apiValues = new ArrayList<Map<String, ?>>();
 
 		if (value != null) {
 			if (!single) {
@@ -77,18 +77,9 @@ public class FieldMap {
 							ParameterizedType innerType = (ParameterizedType) property
 									.getReadMethod().getGenericReturnType();
 
-							Collection col;
-							if (property.getPropertyType() == Collection.class
-									|| property.getPropertyType() == List.class) {
-								col = new ArrayList();
-							} else if (property.getPropertyType() == Set.class) {
-								col = new HashSet();
-							} else {
-								col = (Collection) property.getPropertyType()
-										.newInstance();
-							}
+							Collection col = getCollectionInstance();
 
-							for (Map<String, Object> values : view.getValues()) {
+							for (Map<String, ?> values : view.getValues()) {
 								Object value = converter.toModel(values,
 										(Class) innerType
 												.getActualTypeArguments()[0]);
@@ -98,12 +89,23 @@ public class FieldMap {
 							property.getWriteMethod().invoke(model, col);
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
 						throw new RuntimeException("Unable to set model value",
 								e);
 					}
 				}
 			}
+		}
+	}
+
+	private Collection getCollectionInstance() throws InstantiationException,
+			IllegalAccessException {
+		if (property.getPropertyType() == Collection.class
+				|| property.getPropertyType() == List.class) {
+			return new ArrayList();
+		} else if (property.getPropertyType() == Set.class) {
+			return new HashSet();
+		} else {
+			return (Collection) property.getPropertyType().newInstance();
 		}
 	}
 

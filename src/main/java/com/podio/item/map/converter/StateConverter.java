@@ -16,15 +16,14 @@ public class StateConverter implements FieldConverter {
 	}
 
 	@Override
-	public Map<String, Object> fromModel(Object value) {
+	public Map<String, ?> fromModel(Object value) {
 		if (value.getClass().isEnum()) {
 			String stringValue = value.toString();
 			stringValue = stringValue.replace(' ', '_');
 
 			for (String state : states) {
 				if (state.equalsIgnoreCase(stringValue)) {
-					return Collections.<String, Object> singletonMap("value",
-							state);
+					return Collections.singletonMap("value", state);
 				}
 			}
 
@@ -34,13 +33,12 @@ public class StateConverter implements FieldConverter {
 			String stringValue = (String) ConvertUtils.convert(value,
 					String.class);
 
-			return Collections.<String, Object> singletonMap("value",
-					stringValue);
+			return Collections.singletonMap("value", stringValue);
 		}
 	}
 
 	@Override
-	public Object toModel(Map<String, Object> map, Class modelClass) {
+	public Object toModel(Map<String, ?> map, Class modelClass) {
 		String state = (String) map.get("value");
 
 		if (modelClass.isEnum()) {

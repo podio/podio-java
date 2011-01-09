@@ -14,6 +14,8 @@ public class FieldConverterRegistry {
 		REGISTRY.add(new MoneyConverterProvider());
 		REGISTRY.add(new StateConverterProvider());
 		REGISTRY.add(new NumberConverterProvider());
+		REGISTRY.add(new TextConverterProvider());
+		REGISTRY.add(new ProgressConverterProvider());
 	}
 
 	private FieldConverterRegistry() {

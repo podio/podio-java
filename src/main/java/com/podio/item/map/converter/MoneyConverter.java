@@ -19,7 +19,7 @@ public class MoneyConverter implements FieldConverter {
 	}
 
 	@Override
-	public Map<String, Object> fromModel(Object value) {
+	public Map<String, ?> fromModel(Object value) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		Class<? extends Object> javaClass = value.getClass();
@@ -38,13 +38,13 @@ public class MoneyConverter implements FieldConverter {
 	}
 
 	@Override
-	public Object toModel(Map<String, Object> map, Class modelClass) {
+	public Object toModel(Map<String, ?> map, Class modelClass) {
 		if (modelClass == Money.class) {
 			BigDecimal amount = new BigDecimal((String) map.get("value"));
 			CurrencyUnit currency = CurrencyUnit.of((String) map
 					.get("currency"));
-			BigDecimal roundedAmount = amount.setScale(currency.getDecimalPlaces(),
-					RoundingMode.HALF_EVEN);
+			BigDecimal roundedAmount = amount.setScale(
+					currency.getDecimalPlaces(), RoundingMode.HALF_EVEN);
 
 			return Money.of(currency, roundedAmount);
 		} else {
