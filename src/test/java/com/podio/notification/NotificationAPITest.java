@@ -23,8 +23,7 @@ public class NotificationAPITest {
 		Assert.assertEquals(notification.getId(), 2);
 		Assert.assertEquals(notification.getContextLink(),
 				"https://hoist.podio.com/api/item/1");
-		Assert.assertEquals(notification.getContext().get("external_id"),
-				"Foo generator");
+		Assert.assertEquals(notification.getContext().get("external_id"), "12");
 		Assert.assertEquals(notification.getContextType(),
 				NotificationContextType.ITEM);
 		Assert.assertEquals(notification.getDataLink(),

@@ -36,7 +36,6 @@ public class OrgAPITest {
 		Assert.assertEquals(org.getName(), "Hoist");
 		Assert.assertEquals(org.getUrl(), "https://podio.com/org/1");
 		Assert.assertEquals(org.getLogo().intValue(), 10);
-		Assert.assertEquals(org.getOwnerId(), 1);
 		Assert.assertEquals(org.getStatus(), OrganizationStatus.ACTIVE);
 		Assert.assertEquals(org.getUserLimit(), 10);
 		Assert.assertEquals(org.getCreatedBy().getId(), 1);
@@ -58,7 +57,7 @@ public class OrgAPITest {
 	public void getOrganizations() throws URISyntaxException {
 		List<OrganizationWithSpaces> organizations = getAPI()
 				.getOrganizations();
-		Assert.assertEquals(organizations.size(), 2);
+		Assert.assertEquals(organizations.size(), 3);
 
 		OrganizationWithSpaces org = organizations.get(0);
 		Assert.assertEquals(org.getId(), 1);

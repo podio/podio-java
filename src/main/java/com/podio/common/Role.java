@@ -7,8 +7,7 @@ public enum Role {
 
 	LIGHT,
 	REGULAR,
-	ADMIN,
-	CREATOR;
+	ADMIN;
 
 	@Override
 	@JsonValue

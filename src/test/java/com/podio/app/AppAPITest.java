@@ -57,9 +57,8 @@ public class AppAPITest {
 								false, null, Arrays.asList("Task 1", "Task 2")),
 						Arrays.asList(new ApplicationFieldCreate(
 								ApplicationFieldType.TITLE,
-								new ApplicationFieldConfiguration("title",
-										"Title", "Description", 0, null, true,
-										true)))));
+								new ApplicationFieldConfiguration("Title",
+										"Description", 0, null, true, true)))));
 		Assert.assertTrue(appId > 0);
 	}
 
@@ -73,8 +72,8 @@ public class AppAPITest {
 						false, null, false, false, null, false, null, false,
 						null, Arrays.asList("Task 1", "Task 2")), Arrays
 						.asList(new ApplicationFieldUpdate(1,
-								new ApplicationFieldConfiguration("hired",
-										"Is hired?", "Description", 10,
+								new ApplicationFieldConfiguration("Is hired?",
+										"Description", 10,
 										ApplicationFieldSettings
 												.getState(Arrays.asList("yes",
 														"no", "maybe")), true,
@@ -87,7 +86,7 @@ public class AppAPITest {
 
 		Assert.assertEquals(field.getId(), 1);
 		Assert.assertEquals(field.getType(), ApplicationFieldType.STATE);
-		Assert.assertEquals(field.getConfiguration().getName(), "hired");
+		Assert.assertEquals(field.getExternalId(), "is-hired");
 		Assert.assertEquals(field.getConfiguration().getLabel(), "Is hired?");
 		Assert.assertEquals(field.getConfiguration().getDelta(), 0);
 		Assert.assertEquals(field.getConfiguration().getSettings()
@@ -99,8 +98,8 @@ public class AppAPITest {
 		int fieldId = getAPI().addField(
 				1,
 				new ApplicationFieldCreate(ApplicationFieldType.TEXT,
-						new ApplicationFieldConfiguration("test",
-								"Description", "Field description", 0,
+						new ApplicationFieldConfiguration("Description",
+								"Field description", 0,
 								ApplicationFieldSettings
 										.getText(TextFieldSize.LARGE), true,
 								true)));
@@ -112,10 +111,9 @@ public class AppAPITest {
 		getAPI().updateField(
 				1,
 				1,
-				new ApplicationFieldConfiguration("hired", "Is hired?",
-						"Description", 10, ApplicationFieldSettings
-								.getState(Arrays.asList("yes", "no", "maybe")),
-						true, true));
+				new ApplicationFieldConfiguration("Is hired?", "Description",
+						10, ApplicationFieldSettings.getState(Arrays.asList(
+								"yes", "no", "maybe")), true, true));
 	}
 
 	@Test

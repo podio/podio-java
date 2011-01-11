@@ -3,11 +3,6 @@ package com.podio.app;
 public class ApplicationFieldConfiguration {
 
 	/**
-	 * The name of the field (might be removed in a future version)
-	 */
-	private String name;
-
-	/**
 	 * The label of the field, which is what the users will see
 	 */
 	private String label;
@@ -45,25 +40,16 @@ public class ApplicationFieldConfiguration {
 		super();
 	}
 
-	public ApplicationFieldConfiguration(String name, String label,
-			String description, int delta, ApplicationFieldSettings settings,
-			boolean required, boolean visible) {
+	public ApplicationFieldConfiguration(String label, String description,
+			int delta, ApplicationFieldSettings settings, boolean required,
+			boolean visible) {
 		super();
-		this.name = name;
 		this.label = label;
 		this.description = description;
 		this.delta = delta;
 		this.settings = settings;
 		this.required = required;
 		this.visible = visible;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getLabel() {

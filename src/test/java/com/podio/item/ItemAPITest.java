@@ -79,7 +79,7 @@ public class ItemAPITest {
 		Item item = getAPI().getItem(1);
 
 		Assert.assertEquals(item.getId(), 1);
-		Assert.assertEquals(item.getExternalId(), "Foo generator");
+		Assert.assertEquals(item.getExternalId(), "12");
 		Assert.assertEquals(item.getApplication().getId(), 1);
 		Assert.assertEquals(item.getApplication().getName(), "Bugs");
 		Assert.assertEquals(item.getApplication().getItemName(), "Bug");
@@ -209,8 +209,7 @@ public class ItemAPITest {
 
 	@Test
 	public void getItemsByExternalId() {
-		ItemsResponse response = getAPI().getItemsByExternalId(1,
-				"Foo generator");
+		ItemsResponse response = getAPI().getItemsByExternalId(1, "12");
 
 		Assert.assertEquals(response.getItems().size(), 1);
 		Assert.assertEquals(response.getItems().get(0).getId(), 1);

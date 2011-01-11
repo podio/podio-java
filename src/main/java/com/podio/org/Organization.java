@@ -13,12 +13,6 @@ public class Organization extends OrganizationMini {
 	private OrganizationStatus status;
 
 	/**
-	 * The user id of the owner of the organization, which is also the person
-	 * who pays its use
-	 */
-	private int ownerId;
-
-	/**
 	 * The maximum number of users that are allowed in the organization
 	 */
 	private int userLimit;
@@ -39,15 +33,6 @@ public class Organization extends OrganizationMini {
 
 	public void setStatus(OrganizationStatus status) {
 		this.status = status;
-	}
-
-	public int getOwnerId() {
-		return ownerId;
-	}
-
-	@JsonProperty("owner_id")
-	public void setOwnerId(int ownerId) {
-		this.ownerId = ownerId;
 	}
 
 	public int getUserLimit() {

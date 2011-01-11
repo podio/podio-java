@@ -42,7 +42,7 @@ public class SpaceAPITest {
 		Assert.assertEquals(space.getCreatedOn(), new DateTime(2010, 8, 9, 14,
 				49, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(space.getCreatedBy().getId(), 1);
-		Assert.assertEquals(space.getRole(), Role.CREATOR);
+		Assert.assertEquals(space.getRole(), Role.ADMIN);
 	}
 
 	@Test
@@ -112,7 +112,7 @@ public class SpaceAPITest {
 
 	@Test
 	public void endSpaceMembership() {
-		getAPI().endSpaceMembership(1, 1);
+		getAPI().endSpaceMembership(1, 2);
 	}
 
 	@Test
