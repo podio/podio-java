@@ -7,6 +7,7 @@ import com.podio.contact.ContactAPI;
 import com.podio.conversation.ConversationAPI;
 import com.podio.file.FileAPI;
 import com.podio.item.ItemAPI;
+import com.podio.item.map.MappedItemAPI;
 import com.podio.notification.NotificationAPI;
 import com.podio.org.OrgAPI;
 import com.podio.rating.RatingAPI;
@@ -57,6 +58,10 @@ public class APIFactory {
 
 	public ItemAPI getItemAPI() {
 		return new ItemAPI(resourceFactory);
+	}
+
+	public <T> MappedItemAPI<T> getMappedItemAPI(int appId, Class<T> cls) {
+		return new MappedItemAPI<T>(this, appId, cls);
 	}
 
 	public NotificationAPI getNotificationAPI() {
