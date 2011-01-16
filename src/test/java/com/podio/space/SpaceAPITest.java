@@ -15,11 +15,11 @@ import com.podio.user.UserProfileMini;
 public class SpaceAPITest {
 
 	private SpaceAPI getAPI() {
-		return new SpaceAPI(ResourceFactoryProvider.get());
+		return new SpaceAPI(ResourceFactoryProvider.getDefault());
 	}
 
 	private SpaceAPI getAPI(int userId) {
-		return new SpaceAPI(ResourceFactoryProvider.get(userId));
+		return new SpaceAPI(ResourceFactoryProvider.getUser(userId));
 	}
 
 	@Test

@@ -9,7 +9,7 @@ import com.podio.ResourceFactoryProvider;
 public class RootAPITest {
 
 	private RootAPI getAPI() {
-		return new RootAPI(ResourceFactoryProvider.get());
+		return new RootAPI(ResourceFactoryProvider.getDefault());
 	}
 
 	@Test

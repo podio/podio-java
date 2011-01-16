@@ -12,7 +12,7 @@ import com.podio.APIFactoryProvider;
 public class MappedItemAPITest {
 
 	private <T> MappedItemAPI<T> getMappedAPI(Class<T> cls) {
-		return new MappedItemAPI<T>(APIFactoryProvider.get(), 1, cls);
+		return new MappedItemAPI<T>(APIFactoryProvider.getDefault(), 1, cls);
 	}
 
 	@Test

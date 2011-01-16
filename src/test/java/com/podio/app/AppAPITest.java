@@ -12,7 +12,7 @@ import com.podio.ResourceFactoryProvider;
 public class AppAPITest {
 
 	private AppAPI getAPI() {
-		return new AppAPI(ResourceFactoryProvider.get());
+		return new AppAPI(ResourceFactoryProvider.getDefault());
 	}
 
 	@Test

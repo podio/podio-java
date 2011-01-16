@@ -13,7 +13,7 @@ import com.podio.rating.RatingType;
 public class StatusAPITest {
 
 	private StatusAPI getAPI() {
-		return new StatusAPI(ResourceFactoryProvider.get());
+		return new StatusAPI(ResourceFactoryProvider.getDefault());
 	}
 
 	@Test

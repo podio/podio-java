@@ -8,6 +8,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.podio.APIFactoryProvider;
 import com.podio.ResourceFactoryProvider;
 import com.podio.app.ApplicationFieldType;
 import com.podio.common.AuthorizationEntityType;
@@ -17,7 +18,7 @@ import com.podio.rating.RatingValue;
 public class ItemAPITest {
 
 	private ItemAPI getAPI() {
-		return new ItemAPI(ResourceFactoryProvider.get());
+		return new ItemAPI(ResourceFactoryProvider.getDefault());
 	}
 
 	@Test
@@ -27,6 +28,22 @@ public class ItemAPITest {
 				new ItemCreate(null, Arrays.asList(new FieldValuesUpdate(1,
 						"value", "yes")), Collections.<Integer> emptyList(),
 						Collections.<String> emptyList()), false);
+
+		Assert.assertTrue(itemId > 1);
+	}
+
+	@Test
+	public void addItemAsApp() {
+		int itemId = APIFactoryProvider
+				.getApp(1)
+				.getItemAPI()
+				.addItem(
+						1,
+						new ItemCreate(null,
+								Arrays.asList(new FieldValuesUpdate(1, "value",
+										"yes")), Collections
+										.<Integer> emptyList(), Collections
+										.<String> emptyList()), false);
 
 		Assert.assertTrue(itemId > 1);
 	}

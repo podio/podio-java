@@ -13,7 +13,7 @@ import com.podio.common.ReferenceType;
 public class FileAPITest {
 
 	private FileAPI getAPI() {
-		return new FileAPI(ResourceFactoryProvider.get());
+		return new FileAPI(ResourceFactoryProvider.getDefault());
 	}
 
 	@Test

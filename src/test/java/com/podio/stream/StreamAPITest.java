@@ -14,7 +14,7 @@ import com.podio.common.ReferenceType;
 public class StreamAPITest {
 
 	private StreamAPI getAPI() {
-		return APIFactoryProvider.get().getStreamAPI();
+		return APIFactoryProvider.getDefault().getStreamAPI();
 	}
 
 	@Test

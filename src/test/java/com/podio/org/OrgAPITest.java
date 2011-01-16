@@ -15,7 +15,7 @@ import com.podio.space.SpaceMini;
 public class OrgAPITest {
 
 	private OrgAPI getAPI() {
-		return new OrgAPI(ResourceFactoryProvider.get());
+		return new OrgAPI(ResourceFactoryProvider.getDefault());
 	}
 
 	@Test

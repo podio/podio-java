@@ -16,7 +16,7 @@ import com.podio.contact.ProfileUpdate;
 public class UserAPITest {
 
 	private UserAPI getAPI() {
-		return new UserAPI(ResourceFactoryProvider.get());
+		return new UserAPI(ResourceFactoryProvider.getDefault());
 	}
 
 	@Test

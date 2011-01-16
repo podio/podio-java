@@ -89,7 +89,7 @@ public class ItemMapTest {
 	}
 
 	private <T> ItemMap<T> getMap(int appId, Class<? extends Object> cls) {
-		Application application = APIFactoryProvider.get().getAppAPI()
+		Application application = APIFactoryProvider.getDefault().getAppAPI()
 				.getApp(appId);
 
 		ItemMap<T> itemMap = (ItemMap<T>) ItemMap.get(application, cls);
@@ -105,7 +105,7 @@ public class ItemMapTest {
 	}
 
 	private <T> T getView(int appId, int itemId, Class<T> cls) {
-		Item item = APIFactoryProvider.get().getItemAPI().getItem(itemId);
+		Item item = APIFactoryProvider.getDefault().getItemAPI().getItem(itemId);
 
 		return (T) getMap(appId, cls).getView(item);
 	}

@@ -11,7 +11,7 @@ import com.podio.ResourceFactoryProvider;
 public class ContactAPITest {
 
 	private ContactAPI getAPI() {
-		return new ContactAPI(ResourceFactoryProvider.get());
+		return new ContactAPI(ResourceFactoryProvider.getDefault());
 	}
 
 	@Test

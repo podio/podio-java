@@ -10,7 +10,7 @@ import com.podio.common.ReferenceType;
 public class RatingAPITest {
 
 	private RatingAPI getAPI() {
-		return new RatingAPI(ResourceFactoryProvider.get());
+		return new RatingAPI(ResourceFactoryProvider.getDefault());
 	}
 
 	@Test
