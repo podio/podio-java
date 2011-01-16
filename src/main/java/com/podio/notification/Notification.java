@@ -5,6 +5,8 @@ import java.util.HashMap;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
+import com.podio.common.AuthorizationEntity;
+import com.podio.common.AuthorizationInterface;
 import com.podio.org.OrganizationMini;
 import com.podio.space.SpaceMini;
 import com.podio.user.UserProfileMini;
@@ -42,10 +44,14 @@ public class Notification {
 	private DateTime createdOn;
 
 	/**
-	 * Who created the notification
+	 * The entity who created the notification
 	 */
-	private UserProfileMini createdBy;
+	private AuthorizationEntity createdBy;
 
+	/**
+	 * The interface through which the notification was created
+	 */
+	private AuthorizationInterface createdVia;
 	/**
 	 * The space where the notification comes from, if any,
 	 */
@@ -134,13 +140,22 @@ public class Notification {
 		this.createdOn = createdOn;
 	}
 
-	public UserProfileMini getCreatedBy() {
+	public AuthorizationEntity getCreatedBy() {
 		return createdBy;
 	}
 
 	@JsonProperty("created_by")
-	public void setCreatedBy(UserProfileMini createdBy) {
+	public void setCreatedBy(AuthorizationEntity createdBy) {
 		this.createdBy = createdBy;
+	}
+
+	public AuthorizationInterface getCreatedVia() {
+		return createdVia;
+	}
+
+	@JsonProperty("created_via")
+	public void setCreatedVia(AuthorizationInterface createdVia) {
+		this.createdVia = createdVia;
 	}
 
 	public SpaceMini getSpace() {

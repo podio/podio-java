@@ -7,7 +7,8 @@ import javax.activation.MimeType;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.user.UserProfileMini;
+import com.podio.common.AuthorizationEntity;
+import com.podio.common.AuthorizationInterface;
 
 public class File {
 
@@ -53,9 +54,14 @@ public class File {
 	private DateTime createdOn;
 
 	/**
-	 * The user who created the file
+	 * The entity who created the file
 	 */
-	private UserProfileMini createdBy;
+	private AuthorizationEntity createdBy;
+
+	/**
+	 * The interface through which the file was created
+	 */
+	private AuthorizationInterface createdVia;
 
 	/**
 	 * The file this file replaces, if any
@@ -130,14 +136,22 @@ public class File {
 		this.createdOn = createdOn;
 	}
 
-	@JsonProperty("created_by")
-	public UserProfileMini getCreatedBy() {
+	public AuthorizationEntity getCreatedBy() {
 		return createdBy;
 	}
 
 	@JsonProperty("created_by")
-	public void setCreatedBy(UserProfileMini createdBy) {
+	public void setCreatedBy(AuthorizationEntity createdBy) {
 		this.createdBy = createdBy;
+	}
+
+	public AuthorizationInterface getCreatedVia() {
+		return createdVia;
+	}
+
+	@JsonProperty("created_via")
+	public void setCreatedVia(AuthorizationInterface createdVia) {
+		this.createdVia = createdVia;
 	}
 
 	public List<File> getReplaces() {

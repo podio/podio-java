@@ -3,7 +3,8 @@ package com.podio.item;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.user.UserProfileMini;
+import com.podio.common.AuthorizationEntity;
+import com.podio.common.AuthorizationInterface;
 
 public class ItemRevision {
 
@@ -18,9 +19,14 @@ public class ItemRevision {
 	private int appRevision;
 
 	/**
-	 * The user who made the revision
+	 * The entity who created the revision
 	 */
-	private UserProfileMini user;
+	private AuthorizationEntity createdBy;
+
+	/**
+	 * The interface through which the revision was created
+	 */
+	private AuthorizationInterface createdVia;
 
 	/**
 	 * When the revision was created
@@ -45,12 +51,22 @@ public class ItemRevision {
 		this.appRevision = appRevision;
 	}
 
-	public UserProfileMini getUser() {
-		return user;
+	public AuthorizationEntity getCreatedBy() {
+		return createdBy;
 	}
 
-	public void setUser(UserProfileMini user) {
-		this.user = user;
+	@JsonProperty("created_by")
+	public void setCreatedBy(AuthorizationEntity createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public AuthorizationInterface getCreatedVia() {
+		return createdVia;
+	}
+
+	@JsonProperty("created_via")
+	public void setCreatedVia(AuthorizationInterface createdVia) {
+		this.createdVia = createdVia;
 	}
 
 	@JsonProperty("created_on")

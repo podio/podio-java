@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.ResourceFactoryProvider;
+import com.podio.common.AuthorizationEntityType;
+import com.podio.common.AvatarType;
 import com.podio.common.Reference;
 import com.podio.common.ReferenceType;
 
@@ -31,7 +33,18 @@ public class CommentAPITest {
 		Assert.assertEquals(comment.getCreatedOn(), new DateTime(2010, 8, 5, 9,
 				8, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(comment.getFiles().size(), 0);
-		Assert.assertEquals(comment.getUser().getId(), 1);
+		Assert.assertEquals(comment.getCreatedBy().getId(), 1);
+		Assert.assertEquals(comment.getCreatedBy().getType(),
+				AuthorizationEntityType.USER);
+		Assert.assertEquals(comment.getCreatedBy().getName(), "Christian Holm");
+		Assert.assertEquals(comment.getCreatedBy().getAvatarType(),
+				AvatarType.FILE);
+		Assert.assertEquals(comment.getCreatedBy().getAvatarId().intValue(), 9);
+		Assert.assertEquals(comment.getCreatedBy().getUrl().toString(),
+				"https://podio.com/-/contact/1");
+		Assert.assertEquals(comment.getCreatedVia().getId(), 1);
+		Assert.assertEquals(comment.getCreatedVia().getName(), "Podio Web");
+		Assert.assertEquals(comment.getCreatedVia().getUrl(), null);
 	}
 
 	@Test

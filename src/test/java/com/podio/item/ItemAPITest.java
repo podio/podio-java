@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.podio.ResourceFactoryProvider;
 import com.podio.app.ApplicationFieldType;
+import com.podio.common.AuthorizationEntityType;
 import com.podio.rating.RatingType;
 import com.podio.rating.RatingValue;
 
@@ -170,7 +171,9 @@ public class ItemAPITest {
 	public void getItemRevision() {
 		ItemRevision revision = getAPI().getItemRevision(1, 0);
 
-		Assert.assertEquals(revision.getUser().getId(), 1);
+		Assert.assertEquals(revision.getCreatedBy().getType(),
+				AuthorizationEntityType.USER);
+		Assert.assertEquals(revision.getCreatedBy().getId(), 1);
 	}
 
 	@Test

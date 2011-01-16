@@ -5,6 +5,8 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
+import com.podio.common.AuthorizationEntity;
+import com.podio.common.AuthorizationInterface;
 import com.podio.file.File;
 import com.podio.user.UserProfileMini;
 
@@ -26,9 +28,14 @@ public class Comment {
 	private String externalId;
 
 	/**
-	 * The user who created the comment
+	 * The entity who created the comment
 	 */
-	private UserProfileMini user;
+	private AuthorizationEntity createdBy;
+
+	/**
+	 * The interface through which the comment was created
+	 */
+	private AuthorizationInterface createdVia;
 
 	/**
 	 * The date and time the comment was created
@@ -73,12 +80,22 @@ public class Comment {
 		this.externalId = externalId;
 	}
 
-	public UserProfileMini getUser() {
-		return user;
+	public AuthorizationEntity getCreatedBy() {
+		return createdBy;
 	}
 
-	public void setUser(UserProfileMini user) {
-		this.user = user;
+	@JsonProperty("created_by")
+	public void setCreatedBy(AuthorizationEntity createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public AuthorizationInterface getCreatedVia() {
+		return createdVia;
+	}
+
+	@JsonProperty("created_via")
+	public void setCreatedVia(AuthorizationInterface createdVia) {
+		this.createdVia = createdVia;
 	}
 
 	@JsonProperty("created_on")
