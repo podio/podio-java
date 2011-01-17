@@ -16,7 +16,7 @@ public final class CSVUtil {
 		String out = "";
 		for (Object object : objects) {
 			if (out != "") {
-				out += ", ";
+				out += "; ";
 			}
 			out += object;
 		}

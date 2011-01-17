@@ -12,6 +12,11 @@ import com.podio.APIFactoryProvider;
 import com.podio.ResourceFactoryProvider;
 import com.podio.app.ApplicationFieldType;
 import com.podio.common.AuthorizationEntityType;
+import com.podio.common.Reference;
+import com.podio.common.ReferenceType;
+import com.podio.filter.CreatedByFilterBy;
+import com.podio.filter.CreatedViaFilterBy;
+import com.podio.filter.FilterByValue;
 import com.podio.rating.RatingType;
 import com.podio.rating.RatingValue;
 
@@ -233,6 +238,36 @@ public class ItemAPITest {
 
 		Assert.assertEquals(response.getItems().size(), 1);
 		Assert.assertEquals(response.getItems().get(0).getId(), 1);
+	}
+
+	@Test
+	public void getItemsFilterByCreatedBy() {
+		ItemsResponse response = getAPI().getItems(
+				1,
+				null,
+				null,
+				null,
+				null,
+				new FilterByValue<List<Reference>>(new CreatedByFilterBy(),
+						Arrays.asList(new Reference(ReferenceType.USER, 0))));
+
+		Assert.assertEquals(response.getItems().size(), 1);
+		Assert.assertEquals(response.getItems().get(0).getId(), 1);
+	}
+
+	@Test
+	public void getItemsFilterByCreatedVia() {
+		ItemsResponse response = getAPI().getItems(
+				1,
+				null,
+				null,
+				null,
+				null,
+				new FilterByValue<List<Integer>>(new CreatedViaFilterBy(),
+						Arrays.asList(2)));
+
+		Assert.assertEquals(response.getItems().size(), 1);
+		Assert.assertEquals(response.getItems().get(0).getId(), 2);
 	}
 
 	@Test

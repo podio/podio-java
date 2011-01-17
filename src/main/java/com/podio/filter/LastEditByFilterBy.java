@@ -1,6 +1,6 @@
 package com.podio.filter;
 
-public class LastEditByFilterBy extends BaseIntListFilterBy {
+public class LastEditByFilterBy extends BaseAuthListFilterBy {
 
 	@Override
 	public String getKey() {

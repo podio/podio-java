@@ -16,6 +16,11 @@ public class Reference {
 		this.id = id;
 	}
 
+	@Override
+	public String toString() {
+		return type + ":" + id;
+	}
+
 	public String toURLFragment() {
 		return toURLFragment(true);
 	}
@@ -42,5 +47,13 @@ public class Reference {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public static Reference parse(String value) {
+		String[] split = value.split(":");
+		ReferenceType type = ReferenceType.getByName(split[0]);
+		int id = Integer.parseInt(split[1]);
+
+		return new Reference(type, id);
 	}
 }

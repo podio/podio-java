@@ -1,6 +1,6 @@
 package com.podio.filter;
 
-public class CreatedByFilterBy extends BaseIntListFilterBy {
+public class CreatedByFilterBy extends BaseAuthListFilterBy {
 
 	@Override
 	public String getKey() {

@@ -11,13 +11,13 @@ public final class FilterUtil {
 
 	public static List<Integer> integerListFromCSV(String value) {
 		List<Integer> values = new ArrayList<Integer>();
-		for (String strValue : value.split(",")) {
+		for (String strValue : value.split(";")) {
 			values.add(Integer.parseInt(strValue));
 		}
 		return values;
 	}
 
 	public static List<String> stringListFromCSV(String value) {
-		return Arrays.asList(value.split(","));
+		return Arrays.asList(value.split(";"));
 	}
 }
