@@ -58,7 +58,7 @@ public final class ResourceFactory {
 		Client client = Client.create(config);
 		client.addFilter(new GZIPContentEncodingFilter(false));
 		if (test) {
-			client.addFilter(new TestFilter());
+			client.addFilter(new DryRunFilter());
 		}
 		// client.addFilter(new LoggingFilter());
 

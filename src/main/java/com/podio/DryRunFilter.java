@@ -8,13 +8,13 @@ import com.sun.jersey.api.client.filter.ClientFilter;
 /**
  * Used to put the API in testmode
  */
-public class TestFilter extends ClientFilter {
+public class DryRunFilter extends ClientFilter {
 
 	@Override
 	public ClientResponse handle(ClientRequest cr)
 			throws ClientHandlerException {
 		if (!cr.getURI().getPath().startsWith("/oauth")) {
-			cr.getHeaders().putSingle("hoist.api.test", "1");
+			cr.getHeaders().putSingle("X-Podio-Dry-Run", "1");
 		}
 
 		return getNext().handle(cr);
