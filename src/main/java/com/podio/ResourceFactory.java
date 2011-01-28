@@ -42,15 +42,16 @@ public final class ResourceFactory {
 	private final WebResource apiResource;
 	private final WebResource uploadResource;
 	private final ApiLoginFilter apiLoginFilter;
+	private WebResource downloadResource;
 
 	public ResourceFactory(OAuthClientCredentials clientCredentials,
 			OAuthUserCredentials userCredentials) {
-		this("api.podio.com", "upload.podio.com", 443, true, false,
-				clientCredentials, userCredentials);
+		this("api.podio.com", "upload.podio.com", "download.podio.com", 443,
+				true, false, clientCredentials, userCredentials);
 	}
 
-	public ResourceFactory(String apiHostname, String uploadHostname, int port,
-			boolean ssl, boolean test,
+	public ResourceFactory(String apiHostname, String uploadHostname,
+			String downloadHostname, int port, boolean ssl, boolean test,
 			OAuthClientCredentials clientCredentials,
 			OAuthUserCredentials userCredentials) {
 		ClientConfig config = new DefaultClientConfig();
@@ -66,6 +67,8 @@ public final class ResourceFactory {
 		apiResource.header(HttpHeaders.USER_AGENT, "Podio Java API Client");
 		this.uploadResource = client
 				.resource(getURI(uploadHostname, port, ssl));
+		this.downloadResource = client.resource(getURI(downloadHostname, port,
+				ssl));
 
 		AuthProvider authProvider = new AuthProvider(this, clientCredentials,
 				userCredentials);
@@ -120,6 +123,19 @@ public final class ResourceFactory {
 
 	public WebResource getUploadResource(String path, boolean secure) {
 		WebResource subResource = uploadResource.path(path);
+		if (secure) {
+			subResource.addFilter(this.apiLoginFilter);
+		}
+
+		return subResource;
+	}
+
+	public WebResource getDownloadResource(String path) {
+		return getDownloadResource(path, true);
+	}
+
+	public WebResource getDownloadResource(String path, boolean secure) {
+		WebResource subResource = downloadResource.path(path);
 		if (secure) {
 			subResource.addFilter(this.apiLoginFilter);
 		}

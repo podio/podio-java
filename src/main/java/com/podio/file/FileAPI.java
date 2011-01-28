@@ -37,6 +37,29 @@ public class FileAPI {
 	}
 
 	/**
+	 * Downloads the file and saves it to given file
+	 * 
+	 * @param fileId
+	 *            The id of the file to download
+	 * @param target
+	 *            The target file to save the contents to
+	 * @throws IOException
+	 *             If there was an error reading or writing the file
+	 */
+	public void downloadFile(int fileId, java.io.File target)
+			throws IOException {
+		WebResource builder = resourceFactory.getDownloadResource("/" + fileId);
+		byte[] data = builder.get(byte[].class);
+
+		FileOutputStream fos = new FileOutputStream(target);
+		try {
+			fos.write(data);
+		} finally {
+			fos.close();
+		}
+	}
+
+	/**
 	 * Uploads the file to the API
 	 */
 	public int uploadFile(String name, java.io.File file, Reference reference)
