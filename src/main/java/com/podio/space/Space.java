@@ -9,11 +9,6 @@ import com.podio.user.UserProfileMini;
 public class Space extends SpaceMini {
 
 	/**
-	 * The status of the space
-	 */
-	private SpaceStatus status;
-
-	/**
 	 * <code>true</code> if new apps should be announced with a status update,
 	 * <code>false</code> otherwise
 	 */
@@ -39,14 +34,6 @@ public class Space extends SpaceMini {
 	 * The role of the active user on the space
 	 */
 	private Role role;
-
-	public SpaceStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(SpaceStatus status) {
-		this.status = status;
-	}
 
 	public boolean isPostOnNewApp() {
 		return postOnNewApp;

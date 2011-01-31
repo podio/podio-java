@@ -38,7 +38,6 @@ public class SpaceAPITest {
 		Assert.assertEquals(space.getId(), 1);
 		Assert.assertEquals(space.getName(), "API");
 		Assert.assertEquals(space.getUrl(), "https://hoist.podio.com/api/");
-		Assert.assertEquals(space.getStatus(), SpaceStatus.ACTIVE);
 		Assert.assertEquals(space.getCreatedOn(), new DateTime(2010, 8, 9, 14,
 				49, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(space.getCreatedBy().getId(), 1);
@@ -128,7 +127,7 @@ public class SpaceAPITest {
 				8, 9, 15, 7, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(members.get(0).getEndedOn(), null);
 		Assert.assertEquals(members.get(1).getUser().getId(), 2);
-		Assert.assertEquals(members.get(2).getUser().getId(), 3);
+		Assert.assertEquals(members.get(2).getUser().getId(), 4);
 	}
 
 	@Test
@@ -158,7 +157,7 @@ public class SpaceAPITest {
 		Assert.assertEquals(topUsers.size(), 3);
 		Assert.assertEquals(topUsers.get(0).getId(), 1);
 		Assert.assertEquals(topUsers.get(1).getId(), 2);
-		Assert.assertEquals(topUsers.get(2).getId(), 3);
+		Assert.assertEquals(topUsers.get(2).getId(), 4);
 	}
 
 	@Test

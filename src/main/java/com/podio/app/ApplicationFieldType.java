@@ -68,7 +68,13 @@ public enum ApplicationFieldType {
 	/**
 	 * An uploaded video file. Can currently only be used by Hoist.
 	 */
-	VIDEO;
+	VIDEO,
+
+	/**
+	 * A duration field specified in seconds but often displayed in hours,
+	 * minutes, seconds.
+	 */
+	DURATION;
 
 	@Override
 	@JsonValue

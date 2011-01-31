@@ -28,8 +28,9 @@ public class StreamAPITest {
 				"https://hoist.podio.com/api/item/1");
 		Assert.assertEquals(object.getComments().size(), 2);
 		Assert.assertEquals(object.getComments().get(0).getId(), 1);
-		Assert.assertEquals(object.getFiles().size(), 1);
-		Assert.assertEquals(object.getFiles().get(0).getId(), 1);
+		Assert.assertEquals(object.getFiles().size(), 2);
+		Assert.assertEquals(object.getFiles().get(0).getId(), 8);
+		Assert.assertEquals(object.getFiles().get(1).getId(), 1);
 		Assert.assertEquals(object.getObject().get("item_id"), 1);
 		Assert.assertEquals(object.getOrganization().getId(), 1);
 		Assert.assertEquals(object.getRatings().size(), 0);

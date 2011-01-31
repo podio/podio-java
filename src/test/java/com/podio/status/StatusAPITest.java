@@ -60,7 +60,7 @@ public class StatusAPITest {
 		Assert.assertEquals(status.getComments().size(), 2);
 		Assert.assertEquals(
 				status.getRatings().get(RatingType.LIKE).getCounts(1)
-						.getUsers().get(0).getId(), 3);
+						.getUsers().get(0).getId(), 4);
 		Assert.assertEquals(status.getConversations().size(), 1);
 		Assert.assertEquals(status.getConversations().get(0).getId(), 4);
 		Assert.assertEquals(status.getConversations().get(0).getMessages()
