@@ -10,11 +10,11 @@ import com.sun.jersey.api.client.filter.ClientFilter;
 /**
  * Filter for supplying the access token to the end point
  */
-public class ApiLoginFilter extends ClientFilter {
+public class LoginFilter extends ClientFilter {
 
 	private final AuthProvider authProvider;
 
-	public ApiLoginFilter(AuthProvider authProvider) {
+	public LoginFilter(AuthProvider authProvider) {
 		super();
 		this.authProvider = authProvider;
 	}

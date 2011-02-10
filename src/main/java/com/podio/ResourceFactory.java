@@ -41,7 +41,7 @@ public final class ResourceFactory {
 
 	private final WebResource apiResource;
 	private final WebResource uploadResource;
-	private final ApiLoginFilter apiLoginFilter;
+	private final LoginFilter apiLoginFilter;
 	private WebResource downloadResource;
 
 	public ResourceFactory(OAuthClientCredentials clientCredentials,
@@ -72,7 +72,7 @@ public final class ResourceFactory {
 
 		AuthProvider authProvider = new AuthProvider(this, clientCredentials,
 				userCredentials);
-		this.apiLoginFilter = new ApiLoginFilter(authProvider);
+		this.apiLoginFilter = new LoginFilter(authProvider);
 	}
 
 	private URI getURI(String hostname, int port, boolean ssl) {
