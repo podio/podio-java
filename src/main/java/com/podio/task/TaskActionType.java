@@ -1,18 +1,18 @@
-package com.podio.notification;
+package com.podio.task;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonValue;
 
-public enum NotificationContextType {
+public enum TaskActionType {
 
-	STATUS,
-	TASK,
-	PROFILES,
-	SPACE,
-	ITEM,
-	BULLETIN,
-	APP,
-	ORG;
+	START,
+	STOP,
+	ASSIGN,
+	COMPLETE,
+	INCOMPLETE,
+	UPDATE_TEXT,
+	UPDATE_DUE_DATE,
+	UPDATE_PRIVATE;
 
 	@Override
 	@JsonValue
@@ -21,8 +21,7 @@ public enum NotificationContextType {
 	}
 
 	@JsonCreator
-	public static NotificationContextType getByName(String value) {
+	public static TaskActionType getByName(String value) {
 		return valueOf(value.toUpperCase());
 	}
-
 }
