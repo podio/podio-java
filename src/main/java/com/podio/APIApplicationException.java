@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.sun.jersey.api.client.ClientResponse.Status;
 
-public class APIException extends RuntimeException {
+public class APIApplicationException extends RuntimeException {
 
 	private final Status status;
 
@@ -14,7 +14,7 @@ public class APIException extends RuntimeException {
 
 	private final Map<String, Object> parameters;
 
-	public APIException(Status status, String error, String description,
+	public APIApplicationException(Status status, String error, String description,
 			Map<String, Object> parameters) {
 		super();
 		this.status = status;

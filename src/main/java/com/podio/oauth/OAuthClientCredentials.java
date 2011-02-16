@@ -12,6 +12,12 @@ public final class OAuthClientCredentials {
 		this.clientSecret = clientSecret;
 	}
 
+	@Override
+	public String toString() {
+		return "OAuthClientCredentials [clientId=" + clientId
+				+ ", clientSecret=" + clientSecret + "]";
+	}
+
 	public String getClientId() {
 		return clientId;
 	}

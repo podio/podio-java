@@ -19,6 +19,8 @@ public class User {
 
 	private TimeZone timezone;
 
+	private int invites;
+
 	private List<String> flags;
 
 	private DateTime createdBy;
@@ -69,6 +71,14 @@ public class User {
 
 	public void setTimezone(TimeZone timezone) {
 		this.timezone = timezone;
+	}
+
+	public int getInvites() {
+		return invites;
+	}
+
+	public void setInvites(int invites) {
+		this.invites = invites;
 	}
 
 	public List<String> getFlags() {
