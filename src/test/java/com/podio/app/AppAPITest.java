@@ -7,12 +7,28 @@ import org.codehaus.jettison.json.JSONException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.podio.APIException;
 import com.podio.ResourceFactoryProvider;
+import com.sun.jersey.api.client.ClientResponse.Status;
 
 public class AppAPITest {
 
 	private AppAPI getAPI() {
 		return new AppAPI(ResourceFactoryProvider.getDefault());
+	}
+
+	@Test
+	public void getNonExistingApp() {
+		try {
+			getAPI().getApp(-1);
+			Assert.fail();
+		} catch (APIException e) {
+			Assert.assertEquals(e.getStatus(), Status.NOT_FOUND);
+			Assert.assertEquals(e.getError(), "operation_not_found");
+			Assert.assertEquals(e.getDescription(),
+					"No matching operating could be found");
+			Assert.assertEquals(e.getParameters(), null);
+		}
 	}
 
 	@Test

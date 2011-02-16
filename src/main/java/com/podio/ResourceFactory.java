@@ -41,8 +41,9 @@ public final class ResourceFactory {
 
 	private final WebResource apiResource;
 	private final WebResource uploadResource;
-	private final LoginFilter apiLoginFilter;
-	private WebResource downloadResource;
+	private final WebResource downloadResource;
+
+	private final LoginFilter loginFilter;
 
 	public ResourceFactory(OAuthClientCredentials clientCredentials,
 			OAuthUserCredentials userCredentials) {
@@ -51,14 +52,15 @@ public final class ResourceFactory {
 	}
 
 	public ResourceFactory(String apiHostname, String uploadHostname,
-			String downloadHostname, int port, boolean ssl, boolean test,
+			String downloadHostname, int port, boolean ssl, boolean dryRun,
 			OAuthClientCredentials clientCredentials,
 			OAuthUserCredentials userCredentials) {
 		ClientConfig config = new DefaultClientConfig();
 		config.getSingletons().add(getJsonProvider());
 		Client client = Client.create(config);
 		client.addFilter(new GZIPContentEncodingFilter(false));
-		if (test) {
+		client.addFilter(new ExceptionFilter());
+		if (dryRun) {
 			client.addFilter(new DryRunFilter());
 		}
 		// client.addFilter(new LoggingFilter());
@@ -72,7 +74,7 @@ public final class ResourceFactory {
 
 		AuthProvider authProvider = new AuthProvider(this, clientCredentials,
 				userCredentials);
-		this.apiLoginFilter = new LoginFilter(authProvider);
+		this.loginFilter = new LoginFilter(authProvider);
 	}
 
 	private URI getURI(String hostname, int port, boolean ssl) {
@@ -124,7 +126,7 @@ public final class ResourceFactory {
 	public WebResource getUploadResource(String path, boolean secure) {
 		WebResource subResource = uploadResource.path(path);
 		if (secure) {
-			subResource.addFilter(this.apiLoginFilter);
+			subResource.addFilter(this.loginFilter);
 		}
 
 		return subResource;
@@ -137,7 +139,7 @@ public final class ResourceFactory {
 	public WebResource getDownloadResource(String path, boolean secure) {
 		WebResource subResource = downloadResource.path(path);
 		if (secure) {
-			subResource.addFilter(this.apiLoginFilter);
+			subResource.addFilter(this.loginFilter);
 		}
 
 		return subResource;
@@ -150,7 +152,7 @@ public final class ResourceFactory {
 	public WebResource getApiResource(String path, boolean secure) {
 		WebResource subResource = apiResource.path(path);
 		if (secure) {
-			subResource.addFilter(this.apiLoginFilter);
+			subResource.addFilter(this.loginFilter);
 		}
 
 		return subResource;

@@ -46,17 +46,14 @@ public class FileAPI {
 	 * @throws IOException
 	 *             If there was an error reading or writing the file
 	 */
-	public void downloadFile(int fileId, java.io.File target)
+	public void downloadFile(int fileId, java.io.File target, FileSize size)
 			throws IOException {
 		WebResource builder = resourceFactory.getDownloadResource("/" + fileId);
-		byte[] data = builder.get(byte[].class);
-
-		FileOutputStream fos = new FileOutputStream(target);
-		try {
-			fos.write(data);
-		} finally {
-			fos.close();
+		if (size != null) {
+			builder = builder.path("/" + size.name().toLowerCase());
 		}
+		byte[] data = builder.get(byte[].class);
+		FileUtils.writeByteArrayToFile(target, data);
 	}
 
 	/**
