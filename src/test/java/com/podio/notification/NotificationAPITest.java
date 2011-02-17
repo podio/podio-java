@@ -42,11 +42,18 @@ public class NotificationAPITest {
 
 	@Test
 	public void getInboxNew() {
-		List<Notification> notifications = getAPI().getInboxNew(2, 1);
+		List<Notification> notifications = getAPI().getInboxNew(2, 1, null);
 
 		Assert.assertEquals(notifications.size(), 2);
 		Assert.assertEquals(notifications.get(0).getId(), 65);
 		Assert.assertEquals(notifications.get(1).getId(), 62);
+	}
+
+	@Test
+	public void getInboxNewCount() {
+		int count = getAPI().getInboxNewCount();
+
+		Assert.assertEquals(count, 37);
 	}
 
 	@Test

@@ -57,7 +57,8 @@ public class NotificationAPI {
 	 *            The offset into the notifications to get, defaults to 0
 	 * @return The unviewed notifications
 	 */
-	public List<Notification> getInboxNew(Integer limit, Integer offset) {
+	public List<Notification> getInboxNew(Integer limit, Integer offset,
+			DateTime earliest) {
 		WebResource resource = resourceFactory
 				.getApiResource("/notification/inbox/new/");
 		if (limit != null) {
@@ -66,9 +67,25 @@ public class NotificationAPI {
 		if (offset != null) {
 			resource = resource.queryParam("offset", offset.toString());
 		}
+		if (earliest != null) {
+			resource = resource.queryParam("earliest",
+					DateTimeUtil.formatDateTime(earliest));
+		}
 
 		return resource.get(new GenericType<List<Notification>>() {
 		});
+	}
+
+	/**
+	 * Returns the number of unread notifications
+	 * 
+	 * @return The number of unread notifications
+	 */
+	public int getInboxNewCount() {
+		WebResource resource = resourceFactory
+				.getApiResource("/notification/inbox/new/count");
+
+		return resource.get(InboxNewCount.class).getNewNotifications();
 	}
 
 	/**
