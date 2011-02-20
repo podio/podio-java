@@ -107,7 +107,7 @@ public class ItemAPITest {
 		Assert.assertEquals(item.getApplication().getName(), "Bugs");
 		Assert.assertEquals(item.getApplication().getItemName(), "Bug");
 		Assert.assertEquals(item.getApplication().getIcon(), "23.png");
-		Assert.assertEquals(item.getFields().size(), 11);
+		Assert.assertEquals(item.getFields().size(), 12);
 		FieldValuesView field = item.getFields().get(0);
 		Assert.assertEquals(field.getId(), 1);
 		Assert.assertEquals(field.getExternalId(), "is-hired");
@@ -154,7 +154,7 @@ public class ItemAPITest {
 	public void getItemValues() {
 		List<FieldValuesView> values = getAPI().getItemValues(1);
 
-		Assert.assertEquals(values.size(), 11);
+		Assert.assertEquals(values.size(), 12);
 		Assert.assertEquals(values.get(4).getValues().size(), 1);
 		Assert.assertEquals(values.get(4).getValues().get(0).size(), 1);
 		Assert.assertEquals(((Map<String, Object>) values.get(4).getValues()

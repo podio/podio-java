@@ -74,7 +74,12 @@ public enum ApplicationFieldType {
 	 * A duration field specified in seconds but often displayed in hours,
 	 * minutes, seconds.
 	 */
-	DURATION;
+	DURATION,
+
+	/**
+	 * Holds a reference to a profile, which can be either a member or a contact
+	 */
+	CONTACT;
 
 	@Override
 	@JsonValue
