@@ -178,8 +178,9 @@ public class TaskAPI {
 	 *            The data of the task to be created
 	 * @return The id of the newly created task
 	 */
-	public int createTask(TaskCreate task) {
+	public int createTask(TaskCreate task, boolean silent) {
 		TaskCreateResponse response = resourceFactory.getApiResource("/task/")
+				.queryParam("silent", silent ? "1" : "0")
 				.entity(task, MediaType.APPLICATION_JSON_TYPE)
 				.post(TaskCreateResponse.class);
 
@@ -195,11 +196,13 @@ public class TaskAPI {
 	 *            The reference to the object the task should be attached to
 	 * @return The id of the newly created task
 	 */
-	public int createTaskWithReference(TaskCreate task, Reference reference) {
+	public int createTaskWithReference(TaskCreate task, Reference reference,
+			boolean silent) {
 		return resourceFactory
 				.getApiResource(
 						"/task/" + reference.getType().name().toLowerCase()
 								+ "/" + reference.getId() + "/")
+				.queryParam("silent", silent ? "1" : "0")
 				.entity(task, MediaType.APPLICATION_JSON_TYPE)
 				.post(TaskCreateResponse.class).getId();
 	}

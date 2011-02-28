@@ -68,7 +68,7 @@ public class TaskAPITest {
 	public void createTask() {
 		int taskId = getAPI().createTask(
 				new TaskCreate("Test task", false, new LocalDate(2010, 11, 10),
-						1));
+						1), false);
 
 		Assert.assertTrue(taskId > 0);
 	}
@@ -77,7 +77,7 @@ public class TaskAPITest {
 	public void createTaskWithReference() {
 		int taskId = getAPI().createTaskWithReference(
 				new TaskCreate("Test task", false, new LocalDate(2010, 11, 10),
-						1), new Reference(ReferenceType.ITEM, 1));
+						1), new Reference(ReferenceType.ITEM, 1), false);
 
 		Assert.assertTrue(taskId > 0);
 	}

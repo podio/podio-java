@@ -38,7 +38,7 @@ public class StatusAPITest {
 
 		Assert.assertEquals(status.getStatusId(), 3);
 		Assert.assertEquals(status.getSpaceId(), 1);
-		Assert.assertEquals(status.getUser().getUserId().intValue(), 1);
+		Assert.assertEquals(status.getCreatedBy().getId(), 1);
 		Assert.assertEquals(status.getValue(),
 				"What is after legendary? This status message.");
 		Assert.assertEquals(status.getCreatedOn(), new DateTime(2010, 8, 14,
@@ -51,7 +51,7 @@ public class StatusAPITest {
 
 		Assert.assertEquals(status.getStatusId(), 1);
 		Assert.assertEquals(status.getSpaceId(), 1);
-		Assert.assertEquals(status.getUser().getUserId().intValue(), 1);
+		Assert.assertEquals(status.getCreatedBy().getId(), 1);
 		Assert.assertEquals(
 				status.getValue(),
 				"This is going to be legen- wait for it -dary. @Andreas Haugstrup Now it's up to you to make it ha...");

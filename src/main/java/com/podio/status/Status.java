@@ -3,7 +3,8 @@ package com.podio.status;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.contact.ProfileMini;
+import com.podio.common.AuthorizationEntity;
+import com.podio.common.AuthorizationInterface;
 
 /**
  * A status message posted by a user to a space
@@ -14,9 +15,11 @@ public class Status {
 
 	private int spaceId;
 
-	private ProfileMini user;
-
 	private String value;
+
+	private AuthorizationEntity createdBy;
+
+	private AuthorizationInterface createdVia;
 
 	private DateTime createdOn;
 
@@ -45,17 +48,6 @@ public class Status {
 	}
 
 	/**
-	 * @return The user who created the status
-	 */
-	public ProfileMini getUser() {
-		return user;
-	}
-
-	public void setUser(ProfileMini user) {
-		this.user = user;
-	}
-
-	/**
 	 * @return The actual status message
 	 */
 	public String getValue() {
@@ -64,6 +56,30 @@ public class Status {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	/**
+	 * @return The entity who created the status message
+	 */
+	public AuthorizationEntity getCreatedBy() {
+		return createdBy;
+	}
+
+	@JsonProperty("created_by")
+	public void setCreatedBy(AuthorizationEntity createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	/**
+	 * @return The interface through which the status was created
+	 */
+	public AuthorizationInterface getCreatedVia() {
+		return createdVia;
+	}
+
+	@JsonProperty("created_via")
+	public void setCreatedVia(AuthorizationInterface createdVia) {
+		this.createdVia = createdVia;
 	}
 
 	/**
