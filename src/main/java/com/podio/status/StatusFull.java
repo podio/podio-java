@@ -7,6 +7,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
 import com.podio.comment.Comment;
+import com.podio.contact.ProfileMini;
 import com.podio.conversation.Conversation;
 import com.podio.file.File;
 import com.podio.rating.RatingType;
@@ -14,7 +15,6 @@ import com.podio.rating.RatingTypeKeyDeserializer;
 import com.podio.rating.RatingValuesMap;
 import com.podio.share.Share;
 import com.podio.task.Task;
-import com.podio.user.UserProfileMini;
 
 /**
  * A status message posted by a user to a space
@@ -24,7 +24,7 @@ public class StatusFull extends Status {
 	/**
 	 * The alerts in the status message
 	 */
-	private List<UserProfileMini> alerts;
+	private List<ProfileMini> alerts;
 
 	/**
 	 * All the comments on the status
@@ -67,11 +67,11 @@ public class StatusFull extends Status {
 	 */
 	private Map<RatingType, Integer> userRatings;
 
-	public List<UserProfileMini> getAlerts() {
+	public List<ProfileMini> getAlerts() {
 		return alerts;
 	}
 
-	public void setAlerts(List<UserProfileMini> alerts) {
+	public void setAlerts(List<ProfileMini> alerts) {
 		this.alerts = alerts;
 	}
 

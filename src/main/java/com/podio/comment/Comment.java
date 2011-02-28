@@ -7,8 +7,8 @@ import org.joda.time.DateTime;
 
 import com.podio.common.AuthorizationEntity;
 import com.podio.common.AuthorizationInterface;
+import com.podio.contact.ProfileMini;
 import com.podio.file.File;
-import com.podio.user.UserProfileMini;
 
 public class Comment {
 
@@ -45,7 +45,7 @@ public class Comment {
 	/**
 	 * The alerts on the comment
 	 */
-	private List<UserProfileMini> alerts;
+	private List<ProfileMini> alerts;
 
 	/**
 	 * The files on the comment
@@ -108,11 +108,11 @@ public class Comment {
 		this.createdOn = createdOn;
 	}
 
-	public List<UserProfileMini> getAlerts() {
+	public List<ProfileMini> getAlerts() {
 		return alerts;
 	}
 
-	public void setAlerts(List<UserProfileMini> alerts) {
+	public void setAlerts(List<ProfileMini> alerts) {
 		this.alerts = alerts;
 	}
 

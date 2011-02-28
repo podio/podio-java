@@ -94,7 +94,7 @@ public class UserAPITest {
 		Assert.assertEquals(user.getTimezone().getID(), "Europe/Copenhagen");
 
 		Profile profile = status.getProfile();
-		Assert.assertEquals(profile.getId(), 1);
+		Assert.assertEquals(profile.getUserId().intValue(), 1);
 		Assert.assertEquals(profile.getName(), "Christian Holm");
 
 		Assert.assertEquals(status.getProperties().size(), 3);

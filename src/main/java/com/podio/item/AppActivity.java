@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.user.UserProfileMini;
+import com.podio.contact.ProfileMini;
 
 public class AppActivity {
 
@@ -37,7 +37,7 @@ public class AppActivity {
 	/**
 	 * The user who was responsible for the event
 	 */
-	private UserProfileMini user;
+	private ProfileMini user;
 
 	public ItemActivityType getType() {
 		return type;
@@ -81,11 +81,11 @@ public class AppActivity {
 		this.data = data;
 	}
 
-	public UserProfileMini getUser() {
+	public ProfileMini getUser() {
 		return user;
 	}
 
-	public void setUser(UserProfileMini user) {
+	public void setUser(ProfileMini user) {
 		this.user = user;
 	}
 }

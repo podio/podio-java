@@ -123,7 +123,7 @@ public class ItemAPITest {
 		Assert.assertEquals(item.getRatings().get(RatingType.APPROVED)
 				.getCounts(1).getTotal(), 1);
 		Assert.assertEquals(item.getRatings().get(RatingType.APPROVED)
-				.getCounts(1).getUsers().get(0).getId(), 2);
+				.getCounts(1).getUsers().get(0).getUserId().intValue(), 2);
 		// Assert.assertEquals(item.getConversations().size(), 1);
 		// Assert.assertEquals(item.getConversations().get(0).getId(), 1);
 		// Assert.assertEquals(

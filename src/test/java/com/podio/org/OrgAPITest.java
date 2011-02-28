@@ -37,7 +37,7 @@ public class OrgAPITest {
 		Assert.assertEquals(org.getLogo().intValue(), 10);
 		Assert.assertEquals(org.getStatus(), OrganizationStatus.ACTIVE);
 		Assert.assertEquals(org.getUserLimit(), 10);
-		Assert.assertEquals(org.getCreatedBy().getId(), 1);
+		Assert.assertEquals(org.getCreatedBy().getUserId().intValue(), 1);
 		Assert.assertEquals(org.getCreatedOn(), new DateTime(2010, 8, 6, 23, 1,
 				0, 0, DateTimeZone.UTC));
 	}

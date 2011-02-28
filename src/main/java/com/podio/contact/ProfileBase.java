@@ -2,7 +2,7 @@ package com.podio.contact;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class Profile extends ProfileUpdate {
+public class ProfileBase {
 
 	/**
 	 * The id of the profile
@@ -13,6 +13,28 @@ public class Profile extends ProfileUpdate {
 	 * The id of the user
 	 */
 	private Integer userId;
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + profileId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProfileBase other = (ProfileBase) obj;
+		if (profileId != other.profileId)
+			return false;
+		return true;
+	}
 
 	@JsonProperty("profile_id")
 	public int getProfileId() {
@@ -33,4 +55,5 @@ public class Profile extends ProfileUpdate {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+
 }

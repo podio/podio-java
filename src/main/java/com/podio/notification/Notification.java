@@ -7,9 +7,9 @@ import org.joda.time.DateTime;
 
 import com.podio.common.AuthorizationEntity;
 import com.podio.common.AuthorizationInterface;
+import com.podio.contact.ProfileMini;
 import com.podio.org.OrganizationMini;
 import com.podio.space.SpaceMini;
-import com.podio.user.UserProfileMini;
 
 public class Notification {
 
@@ -21,7 +21,7 @@ public class Notification {
 	/**
 	 * The target of the notification
 	 */
-	private UserProfileMini user;
+	private ProfileMini user;
 
 	/**
 	 * The type of the notification
@@ -97,11 +97,11 @@ public class Notification {
 		this.id = id;
 	}
 
-	public UserProfileMini getUser() {
+	public ProfileMini getUser() {
 		return user;
 	}
 
-	public void setUser(UserProfileMini user) {
+	public void setUser(ProfileMini user) {
 		this.user = user;
 	}
 

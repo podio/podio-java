@@ -27,9 +27,9 @@ public class TaskAPITest {
 		Assert.assertEquals(task.getText(), "Document API");
 		Assert.assertEquals(task.isPrivate(), true);
 		Assert.assertEquals(task.getDueDate(), new LocalDate(2010, 8, 21));
-		Assert.assertEquals(task.getResponsible().getId(), 2);
+		Assert.assertEquals(task.getResponsible().getUserId().intValue(), 2);
 		Assert.assertEquals(task.getSpaceId(), null);
-		Assert.assertEquals(task.getLink(), "https://podio.com/tasks_goto/3");
+		Assert.assertEquals(task.getLink(), "https://podio.com/tasks/3");
 		Assert.assertEquals(task.getCreatedOn(), new DateTime(2010, 8, 20, 11,
 				30, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(task.getCreatedBy().getId(), 1);
@@ -139,6 +139,9 @@ public class TaskAPITest {
 		List<Task> tasks = getAPI().getCompletedTasks();
 		Assert.assertEquals(tasks.size(), 1);
 		Assert.assertEquals(tasks.get(0).getId(), 4);
+		Assert.assertEquals(tasks.get(0).getCompletedOn(), new DateTime(2010,
+				8, 20, 11, 44, 0, 0, DateTimeZone.UTC));
+		Assert.assertEquals(tasks.get(0).getCompletedBy().getId(), 1);
 	}
 
 	@Test
@@ -159,8 +162,9 @@ public class TaskAPITest {
 	public void getTasksInSpaceByResponsible() {
 		List<TasksWithResponsible> tasks = getAPI()
 				.getTasksInSpaceByResponsible(1);
-		Assert.assertEquals(tasks.size(), 1);
-		Assert.assertEquals(tasks.get(0).getResponsible().getId(), 1);
+		Assert.assertEquals(tasks.size(), 3);
+		Assert.assertEquals(tasks.get(0).getResponsible().getUserId()
+				.intValue(), 1);
 		Assert.assertEquals(tasks.get(0).getTasks().size(), 3);
 		Assert.assertEquals(tasks.get(0).getTasks().get(0).getId(), 5);
 	}
@@ -175,7 +179,7 @@ public class TaskAPITest {
 		Assert.assertEquals(totals.getDelegated().getOverDue(), 0);
 		Assert.assertEquals(totals.getDelegated().getDueToday(), 0);
 		Assert.assertEquals(totals.getDelegated().getStarted(), 0);
-		Assert.assertEquals(totals.getDelegated().getTotal(), 1);
+		Assert.assertEquals(totals.getDelegated().getTotal(), 2);
 	}
 
 	@Test
@@ -188,6 +192,6 @@ public class TaskAPITest {
 		Assert.assertEquals(totals.getDelegated().getOverDue(), 0);
 		Assert.assertEquals(totals.getDelegated().getDueToday(), 0);
 		Assert.assertEquals(totals.getDelegated().getStarted(), 0);
-		Assert.assertEquals(totals.getDelegated().getTotal(), 0);
+		Assert.assertEquals(totals.getDelegated().getTotal(), 1);
 	}
 }

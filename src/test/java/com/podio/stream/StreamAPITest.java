@@ -29,8 +29,8 @@ public class StreamAPITest {
 		Assert.assertEquals(object.getComments().size(), 2);
 		Assert.assertEquals(object.getComments().get(0).getId(), 1);
 		Assert.assertEquals(object.getFiles().size(), 2);
-		Assert.assertEquals(object.getFiles().get(0).getId(), 8);
-		Assert.assertEquals(object.getFiles().get(1).getId(), 1);
+		Assert.assertEquals(object.getFiles().get(0).getId(), 1);
+		Assert.assertEquals(object.getFiles().get(1).getId(), 8);
 		Assert.assertEquals(object.getObject().get("item_id"), 1);
 		Assert.assertEquals(object.getOrganization().getId(), 1);
 		Assert.assertEquals(object.getRatings().size(), 0);
@@ -40,7 +40,7 @@ public class StreamAPITest {
 
 	@Test
 	public void getGlobalStream() {
-		List<StreamObject> objects = getAPI().getGlobalStream(3, 1,
+		List<StreamObject> objects = getAPI().getGlobalStream(3, 2,
 				new DateTime(2010, 10, 4, 12, 0, 0, 0, DateTimeZone.UTC));
 
 		Assert.assertEquals(objects.size(), 3);
@@ -50,7 +50,7 @@ public class StreamAPITest {
 
 	@Test
 	public void getOrganizationStream() {
-		List<StreamObject> objects = getAPI().getOrganizationStream(1, 3, 1,
+		List<StreamObject> objects = getAPI().getOrganizationStream(1, 3, 2,
 				new DateTime(2010, 10, 4, 12, 0, 0, 0, DateTimeZone.UTC));
 
 		Assert.assertEquals(objects.size(), 3);
@@ -60,7 +60,7 @@ public class StreamAPITest {
 
 	@Test
 	public void getSpaceStream() {
-		List<StreamObject> objects = getAPI().getSpaceStream(1, 3, 1,
+		List<StreamObject> objects = getAPI().getSpaceStream(1, 3, 2,
 				new DateTime(2010, 10, 4, 12, 0, 0, 0, DateTimeZone.UTC));
 
 		Assert.assertEquals(objects.size(), 3);

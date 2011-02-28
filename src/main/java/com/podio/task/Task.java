@@ -4,8 +4,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
+import com.podio.common.AuthorizationEntity;
 import com.podio.common.ReferenceType;
-import com.podio.user.UserProfileMini;
+import com.podio.contact.ProfileMini;
 
 public class Task {
 
@@ -37,7 +38,7 @@ public class Task {
 	/**
 	 * The user responsible for the task
 	 */
-	private UserProfileMini responsible;
+	private ProfileMini responsible;
 
 	/**
 	 * The id of the space the task is on, if any
@@ -57,7 +58,17 @@ public class Task {
 	/**
 	 * The user who created the task
 	 */
-	private UserProfileMini createdBy;
+	private AuthorizationEntity createdBy;
+
+	/**
+	 * The date and time the task was completed
+	 */
+	private DateTime completedOn;
+
+	/**
+	 * The user who created the task
+	 */
+	private AuthorizationEntity completedBy;
 
 	/**
 	 * The type of the reference, if any
@@ -136,11 +147,11 @@ public class Task {
 		this.dueDate = dueDate;
 	}
 
-	public UserProfileMini getResponsible() {
+	public ProfileMini getResponsible() {
 		return responsible;
 	}
 
-	public void setResponsible(UserProfileMini responsible) {
+	public void setResponsible(ProfileMini responsible) {
 		this.responsible = responsible;
 	}
 
@@ -173,13 +184,33 @@ public class Task {
 	}
 
 	@JsonProperty("created_by")
-	public UserProfileMini getCreatedBy() {
+	public AuthorizationEntity getCreatedBy() {
 		return createdBy;
 	}
 
 	@JsonProperty("created_by")
-	public void setCreatedBy(UserProfileMini createdBy) {
+	public void setCreatedBy(AuthorizationEntity createdBy) {
 		this.createdBy = createdBy;
+	}
+
+	@JsonProperty("completed_on")
+	public DateTime getCompletedOn() {
+		return completedOn;
+	}
+
+	@JsonProperty("completed_on")
+	public void setCompletedOn(DateTime completedOn) {
+		this.completedOn = completedOn;
+	}
+
+	@JsonProperty("completed_by")
+	public AuthorizationEntity getCompletedBy() {
+		return completedBy;
+	}
+
+	@JsonProperty("completed_by")
+	public void setCompletedBy(AuthorizationEntity completedBy) {
+		this.completedBy = completedBy;
 	}
 
 	@JsonProperty("ref_type")

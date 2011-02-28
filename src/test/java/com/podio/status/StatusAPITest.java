@@ -38,7 +38,7 @@ public class StatusAPITest {
 
 		Assert.assertEquals(status.getStatusId(), 3);
 		Assert.assertEquals(status.getSpaceId(), 1);
-		Assert.assertEquals(status.getUser().getId(), 1);
+		Assert.assertEquals(status.getUser().getUserId().intValue(), 1);
 		Assert.assertEquals(status.getValue(),
 				"What is after legendary? This status message.");
 		Assert.assertEquals(status.getCreatedOn(), new DateTime(2010, 8, 14,
@@ -51,7 +51,7 @@ public class StatusAPITest {
 
 		Assert.assertEquals(status.getStatusId(), 1);
 		Assert.assertEquals(status.getSpaceId(), 1);
-		Assert.assertEquals(status.getUser().getId(), 1);
+		Assert.assertEquals(status.getUser().getUserId().intValue(), 1);
 		Assert.assertEquals(
 				status.getValue(),
 				"This is going to be legen- wait for it -dary. @Andreas Haugstrup Now it's up to you to make it ha...");
@@ -60,12 +60,12 @@ public class StatusAPITest {
 		Assert.assertEquals(status.getComments().size(), 2);
 		Assert.assertEquals(
 				status.getRatings().get(RatingType.LIKE).getCounts(1)
-						.getUsers().get(0).getId(), 4);
+						.getUsers().get(0).getUserId().intValue(), 4);
 		Assert.assertEquals(status.getConversations().size(), 1);
 		Assert.assertEquals(status.getConversations().get(0).getId(), 4);
 		Assert.assertEquals(status.getConversations().get(0).getMessages()
 				.size(), 1);
-		Assert.assertEquals(status.getTasks().size(), 0);
+		Assert.assertEquals(status.getTasks().size(), 1);
 		Assert.assertEquals(status.getShares().size(), 0);
 		Assert.assertEquals(status.getFiles().size(), 2);
 		Assert.assertEquals(status.getFiles().get(0).getId(), 3);

@@ -18,7 +18,7 @@ public class ContactAPITest {
 	public void getContact() {
 		Profile contact = getAPI().getContact(1);
 
-		Assert.assertEquals(contact.getId(), 1);
+		Assert.assertEquals(contact.getUserId().intValue(), 1);
 		Assert.assertEquals(contact.getName(), "Christian Holm");
 		Assert.assertEquals(contact.getAvatar(), new Integer(9));
 		Assert.assertEquals(contact.getBirthdate(), new LocalDate(1978, 12, 11));
@@ -73,8 +73,8 @@ public class ContactAPITest {
 		List<Profile> contacts = getAPI().getTopContacts(2, ProfileType.FULL);
 
 		Assert.assertEquals(contacts.size(), 2);
-		Assert.assertEquals(contacts.get(0).getId(), 2);
-		Assert.assertEquals(contacts.get(1).getId(), 4);
+		Assert.assertEquals(contacts.get(0).getUserId().intValue(), 2);
+		Assert.assertEquals(contacts.get(1).getUserId().intValue(), 4);
 	}
 
 	@Test
@@ -97,6 +97,6 @@ public class ContactAPITest {
 				ProfileType.FULL, null);
 
 		Assert.assertEquals(contacts.size(), 1);
-		Assert.assertEquals(contacts.get(0).getId(), 2);
+		Assert.assertEquals(contacts.get(0).getUserId().intValue(), 2);
 	}
 }

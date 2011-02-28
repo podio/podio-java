@@ -2,7 +2,7 @@ package com.podio.rating;
 
 import org.joda.time.DateTime;
 
-import com.podio.user.UserProfileMini;
+import com.podio.contact.ProfileMini;
 
 public class Rating {
 
@@ -19,7 +19,7 @@ public class Rating {
 	/**
 	 * The user who gave the rating
 	 */
-	private UserProfileMini user;
+	private ProfileMini user;
 
 	/**
 	 * The date and time the rating was given
@@ -42,11 +42,11 @@ public class Rating {
 		this.value = value;
 	}
 
-	public UserProfileMini getUser() {
+	public ProfileMini getUser() {
 		return user;
 	}
 
-	public void setUser(UserProfileMini user) {
+	public void setUser(ProfileMini user) {
 		this.user = user;
 	}
 

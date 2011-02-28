@@ -30,7 +30,7 @@ public class RatingAPITest {
 		Assert.assertEquals(ratings.get(RatingType.LIKE).getCounts(1)
 				.getTotal(), 1);
 		Assert.assertEquals(ratings.get(RatingType.LIKE).getCounts(1)
-				.getUsers().get(0).getId(), 4);
+				.getUsers().get(0).getUserId().intValue(), 4);
 	}
 
 	@Test
