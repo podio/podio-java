@@ -6,6 +6,8 @@ import com.sun.jersey.api.client.ClientResponse.Status;
 
 public class APIApplicationException extends RuntimeException {
 
+	private static final long serialVersionUID = -4533177892434958205L;
+
 	private final Status status;
 
 	private final String error;
@@ -14,8 +16,8 @@ public class APIApplicationException extends RuntimeException {
 
 	private final Map<String, Object> parameters;
 
-	public APIApplicationException(Status status, String error, String description,
-			Map<String, Object> parameters) {
+	public APIApplicationException(Status status, String error,
+			String description, Map<String, Object> parameters) {
 		super();
 		this.status = status;
 		this.error = error;
