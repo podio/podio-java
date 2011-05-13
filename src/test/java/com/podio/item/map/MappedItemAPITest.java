@@ -38,9 +38,4 @@ public class MappedItemAPITest {
 		int itemId = getMappedAPI(BugMap1.class).insert(bug, true);
 		Assert.assertTrue(itemId > 0);
 	}
-
-	@Test
-	public void updateItem() {
-		// FIXME: Implement
-	}
 }

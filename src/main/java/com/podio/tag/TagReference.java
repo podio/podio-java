@@ -10,12 +10,12 @@ public class TagReference {
 	/**
 	 * The type of object
 	 */
-	private ReferenceType referenceType;
+	private ReferenceType type;
 
 	/**
 	 * The id of the object
 	 */
-	private int referenceId;
+	private int id;
 
 	/**
 	 * The title of the object
@@ -32,22 +32,22 @@ public class TagReference {
 	 */
 	private String link;
 
-	public ReferenceType getReferenceType() {
-		return referenceType;
+	public ReferenceType getType() {
+		return type;
 	}
 
-	@JsonProperty("ref_type")
-	public void setReferenceType(ReferenceType referenceType) {
-		this.referenceType = referenceType;
+	@JsonProperty("type")
+	public void setType(ReferenceType type) {
+		this.type = type;
 	}
 
-	public int getReferenceId() {
-		return referenceId;
+	public int getId() {
+		return id;
 	}
 
-	@JsonProperty("ref_id")
-	public void setReferenceId(int referenceId) {
-		this.referenceId = referenceId;
+	@JsonProperty("id")
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitle() {

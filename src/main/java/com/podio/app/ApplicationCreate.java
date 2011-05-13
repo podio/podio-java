@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class ApplicationCreate extends ApplicationBase {
+public class ApplicationCreate  {
 
 	/**
 	 * The id of the space on which the app is placed
@@ -12,16 +12,9 @@ public class ApplicationCreate extends ApplicationBase {
 	private int spaceId;
 
 	/**
-	 * True if at the space members should be notified about this new app, false
-	 * otherwise
+	 * The new configuration of the app
 	 */
-	private boolean notify;
-
-	/**
-	 * True if the space members should be subscribed to this new app, false
-	 * otherwise,
-	 */
-	private boolean subscribe;
+	private ApplicationConfigurationCreate configuration;
 
 	private List<ApplicationFieldCreate> fields;
 
@@ -29,13 +22,11 @@ public class ApplicationCreate extends ApplicationBase {
 		super();
 	}
 
-	public ApplicationCreate(int spaceId, boolean notify, boolean subscribe,
-			ApplicationConfiguration configuration,
+	public ApplicationCreate(int spaceId,
+			ApplicationConfigurationCreate configuration,
 			List<ApplicationFieldCreate> fields) {
-		super(configuration);
 		this.spaceId = spaceId;
-		this.notify = notify;
-		this.subscribe = subscribe;
+		this.configuration = configuration;
 		this.fields = fields;
 	}
 
@@ -49,20 +40,14 @@ public class ApplicationCreate extends ApplicationBase {
 		this.spaceId = spaceId;
 	}
 
-	public boolean isNotify() {
-		return notify;
+	@JsonProperty("config")
+	public ApplicationConfigurationCreate getConfiguration() {
+		return configuration;
 	}
 
-	public void setNotify(boolean notify) {
-		this.notify = notify;
-	}
-
-	public boolean isSubscribe() {
-		return subscribe;
-	}
-
-	public void setSubscribe(boolean subscribe) {
-		this.subscribe = subscribe;
+	@JsonProperty("config")
+	public void setConfiguration(ApplicationConfigurationCreate configuration) {
+		this.configuration = configuration;
 	}
 
 	public List<ApplicationFieldCreate> getFields() {

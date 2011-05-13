@@ -23,7 +23,7 @@ public class User {
 
 	private List<String> flags;
 
-	private DateTime createdBy;
+	private DateTime createdOn;
 
 	@Override
 	public String toString() {
@@ -89,13 +89,13 @@ public class User {
 		this.flags = flags;
 	}
 
-	@JsonProperty("created_by")
-	public DateTime getCreatedBy() {
-		return createdBy;
+	@JsonProperty("created_on")
+	public DateTime getCreatedOn() {
+		return createdOn;
 	}
 
 	@JsonProperty("created_by")
-	public void setCreatedBy(DateTime createdBy) {
-		this.createdBy = createdBy;
+	public void setCreatedOn(DateTime createdOn) {
+		this.createdOn = createdOn;
 	}
 }

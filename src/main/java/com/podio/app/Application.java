@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 @JsonAutoDetect()
-public class Application extends ApplicationBase {
+public class Application {
 
 	/**
 	 * The id of the app
@@ -32,6 +32,11 @@ public class Application extends ApplicationBase {
 	 * The owner of the app, which has special access to the app
 	 */
 	private int ownerId;
+
+	/**
+	 * The configuration of the app
+	 */
+	private ApplicationConfiguration configuration;
 
 	private List<ApplicationField> fields;
 
@@ -81,6 +86,16 @@ public class Application extends ApplicationBase {
 	@JsonProperty("owner_id")
 	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
+	}
+
+	@JsonProperty("config")
+	public ApplicationConfiguration getConfiguration() {
+		return configuration;
+	}
+
+	@JsonProperty("config")
+	public void setConfiguration(ApplicationConfiguration configuration) {
+		this.configuration = configuration;
 	}
 
 	public List<ApplicationField> getFields() {

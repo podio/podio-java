@@ -284,10 +284,10 @@ public class ItemAPI {
 			resource = resource.queryParam("offset", offset.toString());
 		}
 		if (sortBy != null) {
-			resource = resource.queryParam("sortBy", sortBy.getKey());
+			resource = resource.queryParam("sort_by", sortBy.getKey());
 		}
 		if (sortDesc != null) {
-			resource = resource.queryParam("sortDesc", sortDesc ? "1" : "0");
+			resource = resource.queryParam("sort_desc", sortDesc ? "1" : "0");
 		}
 		for (FilterByValue<?> filter : filters) {
 			resource = resource.queryParam(filter.getBy().getKey(),

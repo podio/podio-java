@@ -18,7 +18,7 @@ public class UserStatus {
 
 	private String calendarCode;
 
-	private String taskMail;
+	private String mailbox;
 
 	public User getUser() {
 		return user;
@@ -64,13 +64,13 @@ public class UserStatus {
 		this.calendarCode = calendarCode;
 	}
 
-	@JsonProperty("task_mail")
-	public String getTaskMail() {
-		return taskMail;
+	@JsonProperty("mailbox")
+	public String getMailbox() {
+		return mailbox;
 	}
 
-	@JsonProperty("task_mail")
-	public void setTaskMail(String taskMail) {
-		this.taskMail = taskMail;
+	@JsonProperty("mailbox")
+	public void setMailbox(String mailbox) {
+		this.mailbox = mailbox;
 	}
 }

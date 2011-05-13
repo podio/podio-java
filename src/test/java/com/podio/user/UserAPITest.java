@@ -90,7 +90,7 @@ public class UserAPITest {
 		Assert.assertEquals(user.getId(), 1);
 		Assert.assertEquals(user.getMail(), "dev@hoisthq.com");
 		Assert.assertEquals(user.getStatus(), UserStatusType.ACTIVE);
-		Assert.assertEquals(user.getLocale().getLanguage(), "en");
+		Assert.assertEquals(user.getLocale().getLanguage(), "en_gb");
 		Assert.assertEquals(user.getTimezone().getID(), "Europe/Copenhagen");
 
 		Profile profile = status.getProfile();
@@ -104,9 +104,8 @@ public class UserAPITest {
 		Assert.assertEquals(status.getCalendarCode(),
 				"3OAnjyFACrJjTNe2JLnpn9ZqVe5dLWS59aSLzqtvlXZyXUenbRVqvQwtOMOYZk2T");
 
-		Assert.assertEquals(status.getInboxNew(), 37);
-		Assert.assertEquals(status.getTaskMail(),
-				"task-2-1-l6msvc@inbox.podio.com");
+		Assert.assertEquals(status.getInboxNew(), 41);
+		Assert.assertEquals(status.getMailbox(), "cholm.fdb27615");
 	}
 
 	@Test

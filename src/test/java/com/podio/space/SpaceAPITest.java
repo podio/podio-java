@@ -8,6 +8,7 @@ import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.podio.APIApplicationException;
 import com.podio.ResourceFactoryProvider;
 import com.podio.common.Role;
 import com.podio.contact.ProfileMini;
@@ -106,7 +107,13 @@ public class SpaceAPITest {
 
 	@Test
 	public void updateSpaceMembership() {
-		getAPI().updateSpaceMembership(1, 1, Role.REGULAR);
+		try {
+			getAPI().updateSpaceMembership(1, 1, Role.REGULAR);
+			Assert.fail();
+		} catch (APIApplicationException e) {
+			// Expected
+		}
+
 	}
 
 	@Test

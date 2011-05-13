@@ -22,8 +22,9 @@ public class SubscriptionAPITest {
 		Assert.assertEquals(subscription.getStartedOn(), new DateTime(2010, 7,
 				29, 16, 2, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(subscription.getNotifications(), 0);
-		Assert.assertEquals(subscription.getReferenceType(), ReferenceType.APP);
-		Assert.assertEquals(subscription.getReferenceId(), 1);
+		Assert.assertEquals(subscription.getReference().getType(),
+				ReferenceType.APP);
+		Assert.assertEquals(subscription.getReference().getId(), 1);
 	}
 
 	@Test
@@ -34,8 +35,9 @@ public class SubscriptionAPITest {
 		Assert.assertEquals(subscription.getStartedOn(), new DateTime(2010, 7,
 				29, 16, 2, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(subscription.getNotifications(), 0);
-		Assert.assertEquals(subscription.getReferenceType(), ReferenceType.APP);
-		Assert.assertEquals(subscription.getReferenceId(), 1);
+		Assert.assertEquals(subscription.getReference().getType(),
+				ReferenceType.APP);
+		Assert.assertEquals(subscription.getReference().getId(), 1);
 	}
 
 	@Test

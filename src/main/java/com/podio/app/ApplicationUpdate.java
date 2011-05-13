@@ -2,13 +2,14 @@ package com.podio.app;
 
 import java.util.List;
 
-public class ApplicationUpdate extends ApplicationBase {
+import org.codehaus.jackson.annotate.JsonProperty;
+
+public class ApplicationUpdate {
 
 	/**
-	 * True if all space members should be resubscribed to this app, false
-	 * otherwise
+	 * The new configuration of the app
 	 */
-	private boolean resubscribe;
+	private ApplicationConfigurationCreate configuration;
 
 	private List<ApplicationFieldUpdate> fields;
 
@@ -16,20 +17,20 @@ public class ApplicationUpdate extends ApplicationBase {
 		super();
 	}
 
-	public ApplicationUpdate(boolean resubscribe,
-			ApplicationConfiguration configuration,
+	public ApplicationUpdate(ApplicationConfigurationCreate configuration,
 			List<ApplicationFieldUpdate> fields) {
-		super(configuration);
-		this.resubscribe = resubscribe;
+		this.configuration = configuration;
 		this.fields = fields;
 	}
 
-	public boolean isResubscribe() {
-		return resubscribe;
+	@JsonProperty("config")
+	public ApplicationConfigurationCreate getConfiguration() {
+		return configuration;
 	}
 
-	public void setResubscribe(boolean resubscribe) {
-		this.resubscribe = resubscribe;
+	@JsonProperty("config")
+	public void setConfiguration(ApplicationConfigurationCreate configuration) {
+		this.configuration = configuration;
 	}
 
 	public List<ApplicationFieldUpdate> getFields() {

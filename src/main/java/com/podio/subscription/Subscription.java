@@ -3,7 +3,7 @@ package com.podio.subscription;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.common.ReferenceType;
+import com.podio.common.Reference;
 
 public class Subscription {
 
@@ -18,14 +18,9 @@ public class Subscription {
 	private int notifications;
 
 	/**
-	 * The type of object this subscription is on
+	 * The object this subscription is on
 	 */
-	private ReferenceType referenceType;
-
-	/**
-	 * The id of the object this subscription is on
-	 */
-	private int referenceId;
+	private Reference reference;
 
 	public DateTime getStartedOn() {
 		return startedOn;
@@ -44,21 +39,13 @@ public class Subscription {
 		this.notifications = notifications;
 	}
 
-	public ReferenceType getReferenceType() {
-		return referenceType;
+	@JsonProperty("ref")
+	public Reference getReference() {
+		return reference;
 	}
 
-	@JsonProperty("ref_type")
-	public void setReferenceType(ReferenceType referenceType) {
-		this.referenceType = referenceType;
-	}
-
-	public int getReferenceId() {
-		return referenceId;
-	}
-
-	@JsonProperty("ref_id")
-	public void setReferenceId(int referenceId) {
-		this.referenceId = referenceId;
+	@JsonProperty("ref")
+	public void setReference(Reference reference) {
+		this.reference = reference;
 	}
 }

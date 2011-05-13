@@ -20,13 +20,12 @@ public class AppAPITest {
 	@Test
 	public void getNonExistingApp() {
 		try {
-			getAPI().getApp(-1);
+			getAPI().getApp(222);
 			Assert.fail();
 		} catch (APIApplicationException e) {
 			Assert.assertEquals(e.getStatus(), Status.NOT_FOUND);
-			Assert.assertEquals(e.getError(), "operation_not_found");
-			Assert.assertEquals(e.getDescription(),
-					"No matching operating could be found");
+			Assert.assertEquals(e.getError(), "not_found");
+			Assert.assertEquals(e.getDescription(), "Object not found");
 			Assert.assertEquals(e.getParameters(), null);
 		}
 	}
@@ -61,16 +60,13 @@ public class AppAPITest {
 
 	@Test
 	public void addApp() {
-		int appId = getAPI()
-				.addApp(new ApplicationCreate(
-						1,
-						true,
-						true,
-						new ApplicationConfiguration("Tests", "Test",
-								"Description", "Usage", "ExternalId", "23.png",
-								true, ApplicationViewType.BADGE, true, true,
-								false, null, false, false, null, false, null,
-								false, null, Arrays.asList("Task 1", "Task 2")),
+		int appId = getAPI().addApp(
+				new ApplicationCreate(1, new ApplicationConfigurationCreate(
+						"Tests", "Test", "Description", "Usage", "ExternalId",
+						"23.png", true, ApplicationViewType.BADGE, true, true,
+						false, null, false, false, null, false, null, false,
+						null, Arrays.asList(new ApplicationTaskCreate("Task 1",
+								1), new ApplicationTaskCreate("Task 2"))),
 						Arrays.asList(new ApplicationFieldCreate(
 								ApplicationFieldType.TITLE,
 								new ApplicationFieldConfiguration("Title",
@@ -82,12 +78,13 @@ public class AppAPITest {
 	public void updateApp() {
 		getAPI().updateApp(
 				1,
-				new ApplicationUpdate(true, new ApplicationConfiguration(
+				new ApplicationUpdate(new ApplicationConfigurationCreate(
 						"Tests", "Test", "Description", "Usage", "ExternalId",
 						"23.png", true, ApplicationViewType.BADGE, true, true,
 						false, null, false, false, null, false, null, false,
-						null, Arrays.asList("Task 1", "Task 2")), Arrays
-						.asList(new ApplicationFieldUpdate(1,
+						null, Arrays.asList(new ApplicationTaskCreate("Task 1",
+								1), new ApplicationTaskCreate("Task 2"))),
+						Arrays.asList(new ApplicationFieldUpdate(1,
 								new ApplicationFieldConfiguration("Is hired?",
 										"Description", 10,
 										ApplicationFieldSettings

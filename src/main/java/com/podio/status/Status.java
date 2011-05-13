@@ -13,8 +13,6 @@ public class Status {
 
 	private int statusId;
 
-	private int spaceId;
-
 	private String value;
 
 	private AuthorizationEntity createdBy;
@@ -33,18 +31,6 @@ public class Status {
 	@JsonProperty("status_id")
 	public void setStatusId(int statusId) {
 		this.statusId = statusId;
-	}
-
-	/**
-	 * @return The id of the space the status message is on
-	 */
-	public int getSpaceId() {
-		return spaceId;
-	}
-
-	@JsonProperty("space_id")
-	public void setSpaceId(int spaceId) {
-		this.spaceId = spaceId;
 	}
 
 	/**

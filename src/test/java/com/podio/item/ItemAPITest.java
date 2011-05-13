@@ -114,9 +114,9 @@ public class ItemAPITest {
 		Assert.assertEquals(field.getType(), ApplicationFieldType.STATE);
 		Assert.assertEquals(field.getLabel(), "Is hired?");
 		Assert.assertEquals(field.getValues().size(), 2);
-		Assert.assertEquals(field.getValues().get(0).get("value"), "yes");
+		Assert.assertEquals(field.getValues().get(0).get("value"), "no");
 		Assert.assertEquals(field.getValues().get(0).size(), 1);
-		Assert.assertEquals(field.getValues().get(1).get("value"), "no");
+		Assert.assertEquals(field.getValues().get(1).get("value"), "yes");
 		Assert.assertEquals(field.getValues().get(1).size(), 1);
 		Assert.assertEquals(item.getComments().size(), 2);
 		Assert.assertEquals(item.getRevisions().size(), 1);

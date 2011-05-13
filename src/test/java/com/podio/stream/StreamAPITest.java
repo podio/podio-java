@@ -40,7 +40,7 @@ public class StreamAPITest {
 
 	@Test
 	public void getGlobalStream() {
-		List<StreamObject> objects = getAPI().getGlobalStream(3, 2,
+		List<StreamObject> objects = getAPI().getGlobalStream(3, 2, null,
 				new DateTime(2010, 10, 4, 12, 0, 0, 0, DateTimeZone.UTC));
 
 		Assert.assertEquals(objects.size(), 3);
@@ -51,7 +51,7 @@ public class StreamAPITest {
 	@Test
 	public void getOrganizationStream() {
 		List<StreamObject> objects = getAPI().getOrganizationStream(1, 3, 2,
-				new DateTime(2010, 10, 4, 12, 0, 0, 0, DateTimeZone.UTC));
+				null, new DateTime(2010, 10, 4, 12, 0, 0, 0, DateTimeZone.UTC));
 
 		Assert.assertEquals(objects.size(), 3);
 		Assert.assertEquals(objects.get(0).getType(), ReferenceType.STATUS);
@@ -60,7 +60,7 @@ public class StreamAPITest {
 
 	@Test
 	public void getSpaceStream() {
-		List<StreamObject> objects = getAPI().getSpaceStream(1, 3, 2,
+		List<StreamObject> objects = getAPI().getSpaceStream(1, 3, 2, null,
 				new DateTime(2010, 10, 4, 12, 0, 0, 0, DateTimeZone.UTC));
 
 		Assert.assertEquals(objects.size(), 3);

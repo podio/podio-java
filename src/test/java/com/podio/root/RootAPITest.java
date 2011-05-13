@@ -14,7 +14,7 @@ public class RootAPITest {
 	@Test
 	public void getStatus() {
 		SystemStatus status = getAPI().getStatus();
-		Assert.assertEquals(status.getVersion(), "1.0.1");
+		Assert.assertEquals(status.getVersion(), "1.9");
 		Assert.assertEquals(status.isDatabase(), true);
 		// Assert.assertEquals(status.isMessaging(), true);
 	}

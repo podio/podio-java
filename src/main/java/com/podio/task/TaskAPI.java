@@ -106,28 +106,6 @@ public class TaskAPI {
 	}
 
 	/**
-	 * Indicate that work has started on the given task.
-	 * 
-	 * @param taskId
-	 *            The id of the task to mark as started
-	 */
-	public void startTask(int taskId) {
-		resourceFactory.getApiResource("/task/" + taskId + "/start")
-				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
-	}
-
-	/**
-	 * Indicate that worked has stopped on the given task.
-	 * 
-	 * @param taskId
-	 *            The id of the task to mark as stopped
-	 */
-	public void stopTask(int taskId) {
-		resourceFactory.getApiResource("/task/" + taskId + "/stop")
-				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
-	}
-
-	/**
 	 * Updates the due date of the task to the given value
 	 * 
 	 * @param taskId
@@ -269,15 +247,6 @@ public class TaskAPI {
 		return resourceFactory.getApiResource("/task/completed/").get(
 				new GenericType<List<Task>>() {
 				});
-	}
-
-	/**
-	 * Returns the tasks that are started and where the active user is the
-	 * responsible.
-	 */
-	public TasksByDue getStartedTasks() {
-		return resourceFactory.getApiResource("/task/started/").get(
-				TasksByDue.class);
 	}
 
 	/**

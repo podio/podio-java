@@ -51,8 +51,8 @@ public class StreamAPI {
 	 * @return The list of stream objects
 	 */
 	public List<StreamObject> getGlobalStream(Integer limit, Integer offset,
-			DateTime latest) {
-		return getStream("/stream/", limit, offset, latest);
+			DateTime dateFrom, DateTime dateTo) {
+		return getStream("/stream/", limit, offset, dateFrom, dateTo);
 	}
 
 	/**
@@ -69,8 +69,9 @@ public class StreamAPI {
 	 * @return The list of stream objects
 	 */
 	public List<StreamObject> getOrganizationStream(int orgId, Integer limit,
-			Integer offset, DateTime latest) {
-		return getStream("/stream/org/" + orgId + "/", limit, offset, latest);
+			Integer offset, DateTime dateFrom, DateTime dateTo) {
+		return getStream("/stream/org/" + orgId + "/", limit, offset, dateFrom,
+				dateTo);
 	}
 
 	/**
@@ -87,13 +88,13 @@ public class StreamAPI {
 	 * @return The list of stream objects
 	 */
 	public List<StreamObject> getSpaceStream(int spaceId, Integer limit,
-			Integer offset, DateTime latest) {
+			Integer offset, DateTime dateFrom, DateTime dateTo) {
 		return getStream("/stream/space/" + spaceId + "/", limit, offset,
-				latest);
+				dateFrom, dateTo);
 	}
 
 	private List<StreamObject> getStream(String path, Integer limit,
-			Integer offset, DateTime latest) {
+			Integer offset, DateTime dateFrom, DateTime dateTo) {
 		WebResource resource = resourceFactory.getApiResource(path);
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
@@ -101,9 +102,13 @@ public class StreamAPI {
 		if (offset != null) {
 			resource = resource.queryParam("offset", offset.toString());
 		}
-		if (latest != null) {
-			resource = resource.queryParam("latest",
-					DateTimeUtil.formatDateTime(latest));
+		if (dateFrom != null) {
+			resource = resource.queryParam("date_from",
+					DateTimeUtil.formatDateTime(dateFrom));
+		}
+		if (dateTo != null) {
+			resource = resource.queryParam("date_to",
+					DateTimeUtil.formatDateTime(dateTo));
 		}
 		return resource.get(new GenericType<List<StreamObject>>() {
 		});

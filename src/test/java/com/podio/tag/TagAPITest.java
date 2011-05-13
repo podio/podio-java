@@ -48,8 +48,8 @@ public class TagAPITest {
 		List<TagCount> tags = getAPI().getTagsOnSpace(1);
 
 		Assert.assertEquals(tags.size(), 3);
-		Assert.assertEquals(tags.get(0).getText(), "release");
-		Assert.assertEquals(tags.get(0).getCount(), 2);
+		Assert.assertEquals(tags.get(0).getText(), "problems");
+		Assert.assertEquals(tags.get(0).getCount(), 1);
 	}
 
 	@Test
@@ -58,9 +58,8 @@ public class TagAPITest {
 				"problems");
 
 		Assert.assertEquals(references.size(), 1);
-		Assert.assertEquals(references.get(0).getReferenceType(),
-				ReferenceType.ITEM);
-		Assert.assertEquals(references.get(0).getReferenceId(), 2);
+		Assert.assertEquals(references.get(0).getType(), ReferenceType.ITEM);
+		Assert.assertEquals(references.get(0).getId(), 2);
 		Assert.assertEquals(references.get(0).getTitle(), "Bug 2");
 		Assert.assertEquals(references.get(0).getCreatedOn(), new DateTime(
 				2010, 8, 5, 10, 12, 0, 0, DateTimeZone.UTC));
@@ -74,9 +73,8 @@ public class TagAPITest {
 				"release");
 
 		Assert.assertEquals(references.size(), 2);
-		Assert.assertEquals(references.get(0).getReferenceType(),
-				ReferenceType.STATUS);
-		Assert.assertEquals(references.get(0).getReferenceId(), 1);
+		Assert.assertEquals(references.get(0).getType(), ReferenceType.STATUS);
+		Assert.assertEquals(references.get(0).getId(), 1);
 		Assert.assertEquals(
 				references.get(0).getTitle(),
 				"This is going to be legen- wait for it -dary. @Andreas Haugstrup Now it's up to you to make it ha...");
@@ -84,9 +82,8 @@ public class TagAPITest {
 				2010, 8, 12, 17, 9, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(references.get(0).getLink(),
 				"https://hoist.podio.com/api/status/1");
-		Assert.assertEquals(references.get(1).getReferenceType(),
-				ReferenceType.ITEM);
-		Assert.assertEquals(references.get(1).getReferenceId(), 1);
+		Assert.assertEquals(references.get(1).getType(), ReferenceType.ITEM);
+		Assert.assertEquals(references.get(1).getId(), 1);
 		Assert.assertEquals(references.get(1).getTitle(), "æøå");
 		Assert.assertEquals(references.get(1).getCreatedOn(), new DateTime(
 				2010, 8, 2, 16, 0, 0, 0, DateTimeZone.UTC));

@@ -4,7 +4,7 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 @JsonAutoDetect()
-public class ApplicationMini extends ApplicationBase {
+public class ApplicationMini {
 
 	/**
 	 * The id of the app
@@ -20,6 +20,11 @@ public class ApplicationMini extends ApplicationBase {
 	 * True if there is a date field on the app, false otherwise
 	 */
 	private boolean dateField;
+
+	/**
+	 * The configuration of the app
+	 */
+	private ApplicationConfiguration configuration;
 
 	@JsonProperty("app_id")
 	public int getId() {
@@ -48,5 +53,15 @@ public class ApplicationMini extends ApplicationBase {
 	@JsonProperty("date_field")
 	public void setDateField(boolean dateField) {
 		this.dateField = dateField;
+	}
+
+	@JsonProperty("config")
+	public ApplicationConfiguration getConfiguration() {
+		return configuration;
+	}
+
+	@JsonProperty("config")
+	public void setConfiguration(ApplicationConfiguration configuration) {
+		this.configuration = configuration;
 	}
 }

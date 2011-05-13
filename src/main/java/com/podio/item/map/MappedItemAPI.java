@@ -27,8 +27,6 @@ public class MappedItemAPI<T> {
 	}
 
 	public void update(T object, boolean silent) {
-		// FIXME: Decide if we want to add item id to the model, use external
-		// id, or keep it separate
 		factory.getItemAPI().updateItem(-1, map.getUpdate(object), silent);
 	}
 

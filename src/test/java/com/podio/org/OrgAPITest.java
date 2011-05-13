@@ -21,7 +21,7 @@ public class OrgAPITest {
 	@Test
 	public void createOrganization() {
 		OrganizationCreateResponse response = getAPI().createOrganization(
-				new OrganizationCreate("CubiTech", null));
+				new OrganizationCreate("CubiTech2", null));
 
 		Assert.assertTrue(response.getId() > 1);
 		Assert.assertEquals(response.getUrl(), "https://cubitech2.podio.com/");
@@ -36,7 +36,7 @@ public class OrgAPITest {
 		Assert.assertEquals(org.getUrl(), "https://hoist.podio.com/");
 		Assert.assertEquals(org.getLogo().intValue(), 10);
 		Assert.assertEquals(org.getStatus(), OrganizationStatus.ACTIVE);
-		Assert.assertEquals(org.getUserLimit(), 10);
+		Assert.assertEquals(org.getUserLimit(), 50);
 		Assert.assertEquals(org.getCreatedBy().getUserId().intValue(), 1);
 		Assert.assertEquals(org.getCreatedOn(), new DateTime(2010, 8, 6, 23, 1,
 				0, 0, DateTimeZone.UTC));
