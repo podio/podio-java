@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.podio.oauth.OAuthAppCredentials;
 import com.podio.oauth.OAuthClientCredentials;
-import com.podio.oauth.OAuthCodeCredentials;
 import com.podio.oauth.OAuthUserCredentials;
 import com.podio.oauth.OAuthUsernameCredentials;
 
@@ -67,11 +66,6 @@ public final class ResourceFactoryProvider {
 		APP_API_MAP.put(appId, api);
 
 		return api;
-	}
-
-	public static ResourceFactory getCode(String code) {
-		return new ResourceFactory("localhost", "localhost", "localhost", 8080,
-				false, true, CLIENT_CREDENTIALS, new OAuthCodeCredentials(code));
 	}
 
 	public static ResourceFactory getDefault() {
