@@ -5,12 +5,10 @@ import java.util.List;
 import javax.activation.MimeType;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.joda.time.DateTime;
 
-import com.podio.common.AuthorizationEntity;
-import com.podio.common.AuthorizationInterface;
+import com.podio.common.CreatedBase;
 
-public class File {
+public class File extends CreatedBase {
 
 	/**
 	 * The id of the file
@@ -47,21 +45,6 @@ public class File {
 	 * The size of the file in bytes
 	 */
 	private long size;
-
-	/**
-	 * The date and time when the file was uploaded
-	 */
-	private DateTime createdOn;
-
-	/**
-	 * The entity who created the file
-	 */
-	private AuthorizationEntity createdBy;
-
-	/**
-	 * The interface through which the file was created
-	 */
-	private AuthorizationInterface createdVia;
 
 	/**
 	 * The file this file replaces, if any
@@ -124,34 +107,6 @@ public class File {
 
 	public void setSize(long size) {
 		this.size = size;
-	}
-
-	@JsonProperty("created_on")
-	public DateTime getCreatedOn() {
-		return createdOn;
-	}
-
-	@JsonProperty("created_on")
-	public void setCreatedOn(DateTime createdOn) {
-		this.createdOn = createdOn;
-	}
-
-	public AuthorizationEntity getCreatedBy() {
-		return createdBy;
-	}
-
-	@JsonProperty("created_by")
-	public void setCreatedBy(AuthorizationEntity createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public AuthorizationInterface getCreatedVia() {
-		return createdVia;
-	}
-
-	@JsonProperty("created_via")
-	public void setCreatedVia(AuthorizationInterface createdVia) {
-		this.createdVia = createdVia;
 	}
 
 	public List<File> getReplaces() {

@@ -3,14 +3,12 @@ package com.podio.comment;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.joda.time.DateTime;
 
-import com.podio.common.AuthorizationEntity;
-import com.podio.common.AuthorizationInterface;
+import com.podio.common.CreatedBase;
 import com.podio.contact.ProfileMini;
 import com.podio.file.File;
 
-public class Comment {
+public class Comment extends CreatedBase {
 
 	/**
 	 * The id of the comment. Can be used to update and delete the comment
@@ -26,21 +24,6 @@ public class Comment {
 	 * The external id set on the comment
 	 */
 	private String externalId;
-
-	/**
-	 * The entity who created the comment
-	 */
-	private AuthorizationEntity createdBy;
-
-	/**
-	 * The interface through which the comment was created
-	 */
-	private AuthorizationInterface createdVia;
-
-	/**
-	 * The date and time the comment was created
-	 */
-	private DateTime createdOn;
 
 	/**
 	 * The alerts on the comment
@@ -78,34 +61,6 @@ public class Comment {
 	@JsonProperty("external_id")
 	public void setExternalId(String externalId) {
 		this.externalId = externalId;
-	}
-
-	public AuthorizationEntity getCreatedBy() {
-		return createdBy;
-	}
-
-	@JsonProperty("created_by")
-	public void setCreatedBy(AuthorizationEntity createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public AuthorizationInterface getCreatedVia() {
-		return createdVia;
-	}
-
-	@JsonProperty("created_via")
-	public void setCreatedVia(AuthorizationInterface createdVia) {
-		this.createdVia = createdVia;
-	}
-
-	@JsonProperty("created_on")
-	public DateTime getCreatedOn() {
-		return createdOn;
-	}
-
-	@JsonProperty("created_on")
-	public void setCreatedOn(DateTime createdOn) {
-		this.createdOn = createdOn;
 	}
 
 	public List<ProfileMini> getAlerts() {

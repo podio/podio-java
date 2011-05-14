@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.APIApplicationException;
+import com.podio.APIFactoryProvider;
 import com.podio.ResourceFactoryProvider;
 import com.podio.common.Role;
 import com.podio.contact.ProfileMini;
@@ -16,7 +17,7 @@ import com.podio.contact.ProfileMini;
 public class SpaceAPITest {
 
 	private SpaceAPI getAPI() {
-		return new SpaceAPI(ResourceFactoryProvider.getDefault());
+		return APIFactoryProvider.getDefault().getSpaceAPI();
 	}
 
 	private SpaceAPI getAPI(int userId) {

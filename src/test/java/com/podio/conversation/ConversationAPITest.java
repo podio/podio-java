@@ -8,14 +8,14 @@ import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.ResourceFactoryProvider;
+import com.podio.APIFactoryProvider;
 import com.podio.common.Reference;
 import com.podio.common.ReferenceType;
 
 public class ConversationAPITest {
 
 	private ConversationAPI getAPI() {
-		return new ConversationAPI(ResourceFactoryProvider.getDefault());
+		return APIFactoryProvider.getDefault().getConversationAPI();
 	}
 
 	@Test

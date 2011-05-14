@@ -5,10 +5,11 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import com.podio.common.AuthorizationEntity;
+import com.podio.common.CreatedBase;
 import com.podio.common.ReferenceType;
 import com.podio.contact.ProfileMini;
 
-public class Task {
+public class Task extends CreatedBase {
 
 	/**
 	 * The id of the task
@@ -51,16 +52,6 @@ public class Task {
 	private String link;
 
 	/**
-	 * The date and time the task was created
-	 */
-	private DateTime createdOn;
-
-	/**
-	 * The user who created the task
-	 */
-	private AuthorizationEntity createdBy;
-
-	/**
 	 * The date and time the task was completed
 	 */
 	private DateTime completedOn;
@@ -95,7 +86,6 @@ public class Task {
 		return "Task [id=" + id + ", status=" + status + ", text=" + text
 				+ ", priv=" + priv + ", dueDate=" + dueDate + ", responsible="
 				+ responsible + ", spaceId=" + spaceId + ", link=" + link
-				+ ", createdOn=" + createdOn + ", createdBy=" + createdBy
 				+ ", referenceType=" + referenceType + ", referenceId="
 				+ referenceId + ", referenceTitle=" + referenceTitle
 				+ ", referenceLink=" + referenceLink + "]";
@@ -171,26 +161,6 @@ public class Task {
 
 	public void setLink(String link) {
 		this.link = link;
-	}
-
-	@JsonProperty("created_on")
-	public DateTime getCreatedOn() {
-		return createdOn;
-	}
-
-	@JsonProperty("created_on")
-	public void setCreatedOn(DateTime createdOn) {
-		this.createdOn = createdOn;
-	}
-
-	@JsonProperty("created_by")
-	public AuthorizationEntity getCreatedBy() {
-		return createdBy;
-	}
-
-	@JsonProperty("created_by")
-	public void setCreatedBy(AuthorizationEntity createdBy) {
-		this.createdBy = createdBy;
 	}
 
 	@JsonProperty("completed_on")

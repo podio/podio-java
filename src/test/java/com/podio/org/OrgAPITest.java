@@ -8,14 +8,14 @@ import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.ResourceFactoryProvider;
+import com.podio.APIFactoryProvider;
 import com.podio.space.Space;
 import com.podio.space.SpaceMini;
 
 public class OrgAPITest {
 
 	private OrgAPI getAPI() {
-		return new OrgAPI(ResourceFactoryProvider.getDefault());
+		return APIFactoryProvider.getDefault().getOrgAPI();
 	}
 
 	@Test

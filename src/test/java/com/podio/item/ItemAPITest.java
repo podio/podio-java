@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.APIFactoryProvider;
-import com.podio.ResourceFactoryProvider;
 import com.podio.app.ApplicationFieldType;
 import com.podio.common.AuthorizationEntityType;
 import com.podio.common.Reference;
@@ -23,7 +22,7 @@ import com.podio.rating.RatingValue;
 public class ItemAPITest {
 
 	private ItemAPI getAPI() {
-		return new ItemAPI(ResourceFactoryProvider.getDefault());
+		return APIFactoryProvider.getDefault().getItemAPI();
 	}
 
 	@Test

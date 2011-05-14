@@ -8,12 +8,12 @@ import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.ResourceFactoryProvider;
+import com.podio.APIFactoryProvider;
 
 public class NotificationAPITest {
 
 	private NotificationAPI getAPI() {
-		return new NotificationAPI(ResourceFactoryProvider.getDefault());
+		return APIFactoryProvider.getDefault().getNotificationAPI();
 	}
 
 	@Test

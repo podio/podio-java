@@ -38,6 +38,21 @@ public class StreamAPI {
 	}
 
 	/**
+	 * Returns an object (item or status) as a stream object. This is useful
+	 * when a new status has been posted and should be rendered directly in the
+	 * stream without reloading the entire stream.
+	 * 
+	 * @param reference
+	 *            The reference to the item
+	 * @return The stream object
+	 */
+	public StreamObjectV2 getStreamObjectV2(Reference reference) {
+		return resourceFactory.getApiResource(
+				"/stream/" + reference.toURLFragment(false) + "/v2").get(
+				StreamObjectV2.class);
+	}
+
+	/**
 	 * Returns the global stream. This includes items and statuses with
 	 * comments, ratings, files and edits.
 	 * 
@@ -45,7 +60,10 @@ public class StreamAPI {
 	 *            How many objects should be returned, defaults to 10
 	 * @param offset
 	 *            How far should the objects be offset, defaults to 0
-	 * @param latest
+	 * @param dateFrom
+	 *            The date and time that all events should be after, defaults to
+	 *            no limit
+	 * @param dateTo
 	 *            The date and time that all events should be before, defaults
 	 *            to no limit
 	 * @return The list of stream objects
@@ -56,6 +74,27 @@ public class StreamAPI {
 	}
 
 	/**
+	 * Returns the global stream. The types of objects in the stream can be
+	 * either "item", "status" or "task".
+	 * 
+	 * @param limit
+	 *            How many objects should be returned, defaults to 10
+	 * @param offset
+	 *            How far should the objects be offset, defaults to 0
+	 * @param dateFrom
+	 *            The date and time that all events should be after, defaults to
+	 *            no limit
+	 * @param dateTo
+	 *            The date and time that all events should be before, defaults
+	 *            to no limit
+	 * @return The list of stream objects
+	 */
+	public List<StreamObjectV2> getGlobalStreamV2(Integer limit,
+			Integer offset, DateTime dateFrom, DateTime dateTo) {
+		return getStreamV2("/stream/v2/", limit, offset, dateFrom, dateTo);
+	}
+
+	/**
 	 * Returns the stream for the organization. Is identical to the global
 	 * stream, but only returns objects in the organization.
 	 * 
@@ -63,7 +102,10 @@ public class StreamAPI {
 	 *            How many objects should be returned, defaults to 10
 	 * @param offset
 	 *            How far should the objects be offset, defaults to 0
-	 * @param latest
+	 * @param dateFrom
+	 *            The date and time that all events should be after, defaults to
+	 *            no limit
+	 * @param dateTo
 	 *            The date and time that all events should be before, defaults
 	 *            to no limit
 	 * @return The list of stream objects
@@ -75,6 +117,28 @@ public class StreamAPI {
 	}
 
 	/**
+	 * Returns the stream for the organization. Is identical to the global
+	 * stream, but only returns objects in the organization.
+	 * 
+	 * @param limit
+	 *            How many objects should be returned, defaults to 10
+	 * @param offset
+	 *            How far should the objects be offset, defaults to 0
+	 * @param dateFrom
+	 *            The date and time that all events should be after, defaults to
+	 *            no limit
+	 * @param dateTo
+	 *            The date and time that all events should be before, defaults
+	 *            to no limit
+	 * @return The list of stream objects
+	 */
+	public List<StreamObjectV2> getOrganizationStreamV2(int orgId,
+			Integer limit, Integer offset, DateTime dateFrom, DateTime dateTo) {
+		return getStreamV2("/stream/org/" + orgId + "/v2/", limit, offset,
+				dateFrom, dateTo);
+	}
+
+	/**
 	 * Returns the stream for the space. Is identical to the global stream, but
 	 * only returns objects in the space.
 	 * 
@@ -82,7 +146,10 @@ public class StreamAPI {
 	 *            How many objects should be returned, defaults to 10
 	 * @param offset
 	 *            How far should the objects be offset, defaults to 0
-	 * @param latest
+	 * @param dateFrom
+	 *            The date and time that all events should be after, defaults to
+	 *            no limit
+	 * @param dateTo
 	 *            The date and time that all events should be before, defaults
 	 *            to no limit
 	 * @return The list of stream objects
@@ -91,6 +158,50 @@ public class StreamAPI {
 			Integer offset, DateTime dateFrom, DateTime dateTo) {
 		return getStream("/stream/space/" + spaceId + "/", limit, offset,
 				dateFrom, dateTo);
+	}
+
+	/**
+	 * Returns the stream for the space. Is identical to the global stream, but
+	 * only returns objects in the space.
+	 * 
+	 * @param limit
+	 *            How many objects should be returned, defaults to 10
+	 * @param offset
+	 *            How far should the objects be offset, defaults to 0
+	 * @param dateFrom
+	 *            The date and time that all events should be after, defaults to
+	 *            no limit
+	 * @param dateTo
+	 *            The date and time that all events should be before, defaults
+	 *            to no limit
+	 * @return The list of stream objects
+	 */
+	public List<StreamObjectV2> getSpaceStreamV2(int spaceId, Integer limit,
+			Integer offset, DateTime dateFrom, DateTime dateTo) {
+		return getStreamV2("/stream/space/" + spaceId + "/v2/", limit, offset,
+				dateFrom, dateTo);
+	}
+
+	/**
+	 * Returns the stream for the app. Is identical to the global stream, but
+	 * only returns objects in the app.
+	 * 
+	 * @param limit
+	 *            How many objects should be returned, defaults to 10
+	 * @param offset
+	 *            How far should the objects be offset, defaults to 0
+	 * @param dateFrom
+	 *            The date and time that all events should be after, defaults to
+	 *            no limit
+	 * @param dateTo
+	 *            The date and time that all events should be before, defaults
+	 *            to no limit
+	 * @return The list of stream objects
+	 */
+	public List<StreamObjectV2> getAppStream(int appId, Integer limit,
+			Integer offset) {
+		return getStreamV2("/stream/app/" + appId + "/", limit, offset, null,
+				null);
 	}
 
 	private List<StreamObject> getStream(String path, Integer limit,
@@ -111,6 +222,27 @@ public class StreamAPI {
 					DateTimeUtil.formatDateTime(dateTo));
 		}
 		return resource.get(new GenericType<List<StreamObject>>() {
+		});
+	}
+
+	private List<StreamObjectV2> getStreamV2(String path, Integer limit,
+			Integer offset, DateTime dateFrom, DateTime dateTo) {
+		WebResource resource = resourceFactory.getApiResource(path);
+		if (limit != null) {
+			resource = resource.queryParam("limit", limit.toString());
+		}
+		if (offset != null) {
+			resource = resource.queryParam("offset", offset.toString());
+		}
+		if (dateFrom != null) {
+			resource = resource.queryParam("date_from",
+					DateTimeUtil.formatDateTime(dateFrom));
+		}
+		if (dateTo != null) {
+			resource = resource.queryParam("date_to",
+					DateTimeUtil.formatDateTime(dateTo));
+		}
+		return resource.get(new GenericType<List<StreamObjectV2>>() {
 		});
 	}
 }

@@ -6,6 +6,7 @@ import com.podio.comment.CommentAPI;
 import com.podio.contact.ContactAPI;
 import com.podio.conversation.ConversationAPI;
 import com.podio.file.FileAPI;
+import com.podio.hook.HookAPI;
 import com.podio.item.ItemAPI;
 import com.podio.item.map.MappedItemAPI;
 import com.podio.notification.NotificationAPI;
@@ -106,5 +107,9 @@ public class APIFactory {
 
 	public StreamAPI getStreamAPI() {
 		return new StreamAPI(resourceFactory);
+	}
+
+	public HookAPI getHookAPI() {
+		return new HookAPI(resourceFactory);
 	}
 }

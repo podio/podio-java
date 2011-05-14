@@ -3,14 +3,14 @@ package com.podio.rating;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.ResourceFactoryProvider;
+import com.podio.APIFactoryProvider;
 import com.podio.common.Reference;
 import com.podio.common.ReferenceType;
 
 public class RatingAPITest {
 
 	private RatingAPI getAPI() {
-		return new RatingAPI(ResourceFactoryProvider.getDefault());
+		return APIFactoryProvider.getDefault().getRatingAPI();
 	}
 
 	@Test

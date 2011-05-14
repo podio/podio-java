@@ -7,7 +7,7 @@ import java.util.TimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.ResourceFactoryProvider;
+import com.podio.APIFactoryProvider;
 import com.podio.contact.Profile;
 import com.podio.contact.ProfileField;
 import com.podio.contact.ProfileFieldValues;
@@ -16,7 +16,7 @@ import com.podio.contact.ProfileUpdate;
 public class UserAPITest {
 
 	private UserAPI getAPI() {
-		return new UserAPI(ResourceFactoryProvider.getDefault());
+		return APIFactoryProvider.getDefault().getUserAPI();
 	}
 
 	@Test

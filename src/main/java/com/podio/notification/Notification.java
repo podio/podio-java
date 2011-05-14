@@ -5,13 +5,12 @@ import java.util.HashMap;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.common.AuthorizationEntity;
-import com.podio.common.AuthorizationInterface;
+import com.podio.common.CreatedBase;
 import com.podio.contact.ProfileMini;
 import com.podio.org.OrganizationMini;
 import com.podio.space.SpaceMini;
 
-public class Notification {
+public class Notification extends CreatedBase {
 
 	/**
 	 * The id of the notification
@@ -38,20 +37,6 @@ public class Notification {
 	 */
 	private Integer subscriptionId;
 
-	/**
-	 * When the notification was created
-	 */
-	private DateTime createdOn;
-
-	/**
-	 * The entity who created the notification
-	 */
-	private AuthorizationEntity createdBy;
-
-	/**
-	 * The interface through which the notification was created
-	 */
-	private AuthorizationInterface createdVia;
 	/**
 	 * The space where the notification comes from, if any,
 	 */
@@ -129,33 +114,6 @@ public class Notification {
 	@JsonProperty("subscription_id")
 	public void setSubscriptionId(Integer subscriptionId) {
 		this.subscriptionId = subscriptionId;
-	}
-
-	public DateTime getCreatedOn() {
-		return createdOn;
-	}
-
-	@JsonProperty("created_on")
-	public void setCreatedOn(DateTime createdOn) {
-		this.createdOn = createdOn;
-	}
-
-	public AuthorizationEntity getCreatedBy() {
-		return createdBy;
-	}
-
-	@JsonProperty("created_by")
-	public void setCreatedBy(AuthorizationEntity createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public AuthorizationInterface getCreatedVia() {
-		return createdVia;
-	}
-
-	@JsonProperty("created_via")
-	public void setCreatedVia(AuthorizationInterface createdVia) {
-		this.createdVia = createdVia;
 	}
 
 	public SpaceMini getSpace() {

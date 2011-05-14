@@ -8,13 +8,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.APIApplicationException;
-import com.podio.ResourceFactoryProvider;
+import com.podio.APIFactoryProvider;
 import com.sun.jersey.api.client.ClientResponse.Status;
 
 public class AppAPITest {
 
 	private AppAPI getAPI() {
-		return new AppAPI(ResourceFactoryProvider.getDefault());
+		return APIFactoryProvider.getDefault().getAppAPI();
 	}
 
 	@Test

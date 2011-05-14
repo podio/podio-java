@@ -7,7 +7,7 @@ import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.ResourceFactoryProvider;
+import com.podio.APIFactoryProvider;
 import com.podio.common.AuthorizationEntityType;
 import com.podio.common.AvatarType;
 import com.podio.common.Reference;
@@ -16,7 +16,7 @@ import com.podio.common.ReferenceType;
 public class CommentAPITest {
 
 	private CommentAPI getAPI() {
-		return new CommentAPI(ResourceFactoryProvider.getDefault());
+		return APIFactoryProvider.getDefault().getCommentAPI();
 	}
 
 	@Test

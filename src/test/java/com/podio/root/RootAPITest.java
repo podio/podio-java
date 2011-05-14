@@ -3,12 +3,12 @@ package com.podio.root;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.podio.ResourceFactoryProvider;
+import com.podio.APIFactoryProvider;
 
 public class RootAPITest {
 
 	private RootAPI getAPI() {
-		return new RootAPI(ResourceFactoryProvider.getDefault());
+		return APIFactoryProvider.getDefault().getRootAPI();
 	}
 
 	@Test
