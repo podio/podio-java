@@ -16,4 +16,8 @@ public final class APIFactoryProvider {
 	public static APIFactory getApp(int appId) {
 		return new APIFactory(ResourceFactoryProvider.getApp(appId));
 	}
+
+	public static APIFactory getCode(String code) {
+		return new APIFactory(ResourceFactoryProvider.getCode(code));
+	}
 }

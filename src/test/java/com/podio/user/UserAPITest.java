@@ -7,11 +7,15 @@ import java.util.TimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.podio.APIFactory;
 import com.podio.APIFactoryProvider;
+import com.podio.ResourceFactory;
 import com.podio.contact.Profile;
 import com.podio.contact.ProfileField;
 import com.podio.contact.ProfileFieldValues;
 import com.podio.contact.ProfileUpdate;
+import com.podio.oauth.OAuthClientCredentials;
+import com.podio.oauth.OAuthCodeCredentials;
 
 public class UserAPITest {
 
@@ -22,6 +26,25 @@ public class UserAPITest {
 	@Test
 	public void getProfile() {
 		Profile profile = getAPI().getProfile();
+		Assert.assertEquals(profile.getName(), "Christian Holm");
+	}
+
+	@Test
+	public void getProfileWithCode() {
+		APIFactory factory = new APIFactory(
+				new ResourceFactory(
+						"localhost",
+						"localhost",
+						"localhost",
+						8080,
+						false,
+						true,
+						new OAuthClientCredentials("twitter",
+								"CmACRWF1WBOTDfOa20A"),
+						new OAuthCodeCredentials(
+								"4806ca76b02139867c4e453a162b0abfb49d522d09af9bd442fb229740ffeb75e61edb5dc6e0d00c2b5f4b2643598525c06e2983230bf223e48c0633e395bff4",
+								"http://twitter.com/hoist")));
+		Profile profile = factory.getUserAPI().getProfile();
 		Assert.assertEquals(profile.getName(), "Christian Holm");
 	}
 
