@@ -93,7 +93,12 @@ public enum NotificationType {
 	/**
 	 * An item was created on an app with RSVP enabled
 	 */
-	RSVP;
+	RSVP,
+
+	/**
+	 * A question was answered
+	 */
+	ANSWER;
 
 	@Override
 	@JsonValue

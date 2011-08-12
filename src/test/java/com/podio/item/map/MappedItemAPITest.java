@@ -3,6 +3,7 @@ package com.podio.item.map;
 import java.math.BigDecimal;
 import java.util.Collections;
 
+import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class MappedItemAPITest {
 	@Test
 	public void createItem() {
 		BugMap1 bug = new BugMap1(1, Collections.singleton(HireStatus.YES),
-				Money.of("EUR", new BigDecimal("123.45")),
+				Money.of(CurrencyUnit.EUR, new BigDecimal("123.45")),
 				"A mexican in a bar", new BigDecimal("1.2"), 30, "Ignored");
 		int itemId = getMappedAPI(BugMap1.class).insert(bug, true);
 		Assert.assertTrue(itemId > 0);

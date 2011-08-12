@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
+import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,8 +23,9 @@ public class ItemMapTest {
 		ItemCreate create = getCreate(
 				1,
 				new BugMap1(1, Collections.singleton(HireStatus.YES), Money.of(
-						"EUR", new BigDecimal("123.45")), "A mexican in a bar",
-						new BigDecimal("1.2"), 30, "Ignored"));
+						CurrencyUnit.EUR, new BigDecimal("123.45")),
+						"A mexican in a bar", new BigDecimal("1.2"), 30,
+						"Ignored"));
 		Assert.assertEquals(create.getExternalId(), "1");
 		checkValue(create.getFields(), "is-hired", 0, "value", "yes");
 		checkValue(create.getFields(), "alotta-cash", 0, "value", "123.45");
@@ -50,8 +52,8 @@ public class ItemMapTest {
 	@Test
 	public void mapTest2() {
 		ItemCreate create = getCreate(1,
-				new BugMap2(2, Collections.singletonList("yes"), new BigDecimal(
-						"123.45"), 1.2d, (short) 30));
+				new BugMap2(2, Collections.singletonList("yes"),
+						new BigDecimal("123.45"), 1.2d, (short) 30));
 		Assert.assertEquals(create.getExternalId(), "2");
 		checkValue(create.getFields(), "is-hired", 0, "value", "yes");
 		checkValue(create.getFields(), "alotta-cash", 0, "value", "123.45");
@@ -105,7 +107,8 @@ public class ItemMapTest {
 	}
 
 	private <T> T getView(int appId, int itemId, Class<T> cls) {
-		Item item = APIFactoryProvider.getDefault().getItemAPI().getItem(itemId);
+		Item item = APIFactoryProvider.getDefault().getItemAPI()
+				.getItem(itemId);
 
 		return (T) getMap(appId, cls).getView(item);
 	}

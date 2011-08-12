@@ -10,7 +10,6 @@ public class TextConverterProvider implements FieldConverterProvider {
 	@Override
 	public boolean isSupported(ApplicationFieldType fieldType) {
 		return fieldType == ApplicationFieldType.TEXT
-				|| fieldType == ApplicationFieldType.TITLE
 				|| fieldType == ApplicationFieldType.LOCATION;
 	}
 

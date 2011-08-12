@@ -118,7 +118,7 @@ public class TaskAPITest {
 		Assert.assertEquals(tasks.getByDueStatus(TaskDueStatus.OVERDUE).size(),
 				1);
 		Assert.assertEquals(
-				tasks.getByDueStatus(TaskDueStatus.UPCOMING).size(), 1);
+				tasks.getByDueStatus(TaskDueStatus.UPCOMING).size(), 2);
 	}
 
 	@Test
@@ -168,7 +168,7 @@ public class TaskAPITest {
 		Assert.assertEquals(totals.getResponsible().getOverDue(), 0);
 		Assert.assertEquals(totals.getResponsible().getDueToday(), 0);
 		Assert.assertEquals(totals.getResponsible().getStarted(), 1);
-		Assert.assertEquals(totals.getResponsible().getTotal(), 2);
+		Assert.assertEquals(totals.getResponsible().getTotal(), 3);
 		Assert.assertEquals(totals.getDelegated().getOverDue(), 0);
 		Assert.assertEquals(totals.getDelegated().getDueToday(), 0);
 		Assert.assertEquals(totals.getDelegated().getStarted(), 0);

@@ -30,26 +30,18 @@ public class ApplicationFieldConfiguration {
 	 */
 	private boolean required;
 
-	/**
-	 * True if the field is visible, false otherwise (might be removed in a
-	 * future version)
-	 */
-	private boolean visible;
-
 	public ApplicationFieldConfiguration() {
 		super();
 	}
 
 	public ApplicationFieldConfiguration(String label, String description,
-			int delta, ApplicationFieldSettings settings, boolean required,
-			boolean visible) {
+			int delta, ApplicationFieldSettings settings, boolean required) {
 		super();
 		this.label = label;
 		this.description = description;
 		this.delta = delta;
 		this.settings = settings;
 		this.required = required;
-		this.visible = visible;
 	}
 
 	public String getLabel() {
@@ -90,13 +82,5 @@ public class ApplicationFieldConfiguration {
 
 	public void setRequired(boolean required) {
 		this.required = required;
-	}
-
-	public boolean isVisible() {
-		return visible;
-	}
-
-	public void setVisible(boolean visible) {
-		this.visible = visible;
 	}
 }

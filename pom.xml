@@ -82,19 +82,19 @@
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-client</artifactId>
-			<version>1.4</version>
+			<version>1.8</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
 			<artifactId>jersey-multipart</artifactId>
-			<version>1.4</version>
+			<version>1.8</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
-			<version>1.4</version>
+			<version>1.8</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -142,7 +142,7 @@
 		<dependency>
 			<groupId>org.joda</groupId>
 			<artifactId>joda-money</artifactId>
-			<version>[0.4,)</version>
+			<version>0.6</version>
 			<type>jar</type>
 			<scope>compile</scope>
 			<optional>true</optional>

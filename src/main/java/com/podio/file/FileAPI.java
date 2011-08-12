@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
@@ -13,11 +14,11 @@ import org.apache.commons.io.IOUtils;
 import org.joda.time.LocalDate;
 
 import com.podio.ResourceFactory;
-import com.podio.common.Reference;
 import com.podio.serialize.DateTimeUtil;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.WebResource.Builder;
+import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 
@@ -27,13 +28,6 @@ public class FileAPI {
 
 	public FileAPI(ResourceFactory resourceFactory) {
 		this.resourceFactory = resourceFactory;
-	}
-
-	/**
-	 * Uploads the file to the API
-	 */
-	public int uploadFile(String name, java.io.File file) throws IOException {
-		return uploadFile(name, file, null);
 	}
 
 	/**
@@ -59,41 +53,31 @@ public class FileAPI {
 	/**
 	 * Uploads the file to the API
 	 */
-	public int uploadFile(String name, java.io.File file, Reference reference)
-			throws IOException {
-		FormDataMultiPart multiPart = new FormDataMultiPart();
-		multiPart.bodyPart(new FileDataBodyPart("file", file));
-		multiPart.field("name", name);
+	public int uploadFile(String name, java.io.File file) {
+		FileDataBodyPart filePart = new FileDataBodyPart("source", file);
+		// Work around for bug in cherrypy
+		FormDataContentDisposition.FormDataContentDispositionBuilder builder = FormDataContentDisposition
+				.name(filePart.getName());
+		builder.fileName(file.getName());
+		builder.size(file.length());
+		filePart.setFormDataContentDisposition(builder.build());
 
-		Builder resource = resourceFactory.getUploadResource("upload.php")
-				.entity(multiPart, MediaType.MULTIPART_FORM_DATA_TYPE);
-		if (reference != null) {
-			resource = resource.header("RefType",
-					reference.getType().toString()).header("RefID",
-					reference.getId());
-		}
-		FileUploadResponse response = resource.post(FileUploadResponse.class);
-		if (response.getResult() != null) {
-			return response.getResult().getFileId();
-		} else {
-			throw new IOException(response.getError().getMessage());
-		}
+		FormDataMultiPart multiPart = new FormDataMultiPart();
+		multiPart.bodyPart(filePart);
+		multiPart.field("filename", name);
+
+		Builder resource = resourceFactory.getApiResource("/file/v2/").entity(
+				multiPart,
+				new MediaType("multipart", "form-data", Collections
+						.singletonMap("boundary", "AaB03x")));
+		return resource.post(File.class).getId();
 	}
 
 	public Integer uploadImage(URL url) throws IOException {
-		return uploadImage(url, null, null);
+		return uploadImage(url, null);
 	}
 
-	public Integer uploadImage(URL url, Reference reference) throws IOException {
-		return uploadImage(url, null, reference);
-	}
-
-	public Integer uploadImage(URL url, String name) throws IOException {
-		return uploadImage(url, name, null);
-	}
-
-	public int uploadImage(URL url, String name, Reference reference)
-			throws IOException {
+	public int uploadImage(URL url, String name) throws IOException {
 		java.io.File file = readURL(url);
 		try {
 			String path = url.getPath();
@@ -102,7 +86,7 @@ public class FileAPI {
 				name = path.substring(lastSlashIdx + 1);
 			}
 
-			return uploadFile(name, file, reference);
+			return uploadFile(name, file);
 		} finally {
 			file.delete();
 		}

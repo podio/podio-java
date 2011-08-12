@@ -83,9 +83,9 @@ public class OrgAPITest {
 		Assert.assertEquals(stats.getId(), 1);
 		Assert.assertEquals(stats.getAppsCount(), 1);
 		Assert.assertEquals(stats.getAvailableInvitations(), 0);
-		Assert.assertEquals(stats.getItemsCount(), 2);
+		Assert.assertEquals(stats.getItemsCount(), 3);
 		Assert.assertNotNull(stats.getLastActivityOn());
-		Assert.assertEquals(stats.getOutstandingInvitations(), 1);
+		Assert.assertEquals(stats.getOutstandingInvitations(), 2);
 		Assert.assertEquals(stats.getSpacesCount(), 2);
 		Assert.assertEquals(stats.getUsersCount(), 0);
 	}

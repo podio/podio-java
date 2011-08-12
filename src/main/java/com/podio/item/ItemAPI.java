@@ -177,20 +177,6 @@ public class ItemAPI {
 	}
 
 	/**
-	 * Returns the recent activity on the app divided into activity today and
-	 * activity the last week. The activity events are ordered descending by the
-	 * time the events occurred.
-	 * 
-	 * @param appId
-	 *            The id of the app
-	 * @return The activities on the app grouped by today and last week.
-	 */
-	public AppActivities getAppActivities(int appId) {
-		return resourceFactory.getApiResource(
-				"/item/app/" + appId + "/activity").get(AppActivities.class);
-	}
-
-	/**
 	 * Returns the items that have a reference to the given item. The references
 	 * are grouped by app. Both the apps and the items are sorted by title.
 	 * 

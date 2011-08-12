@@ -41,7 +41,7 @@ public class CommentAPITest {
 				AvatarType.FILE);
 		Assert.assertEquals(comment.getCreatedBy().getAvatarId().intValue(), 9);
 		Assert.assertEquals(comment.getCreatedBy().getUrl().toString(),
-				"https://podio.com/-/contacts/1");
+				"https://podio.com/users/1");
 		Assert.assertEquals(comment.getCreatedVia().getId(), 1);
 		Assert.assertEquals(comment.getCreatedVia().getName(), "Podio Web");
 		Assert.assertEquals(comment.getCreatedVia().getUrl(), null);

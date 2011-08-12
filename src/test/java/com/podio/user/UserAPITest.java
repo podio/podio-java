@@ -121,13 +121,14 @@ public class UserAPITest {
 		Assert.assertEquals(profile.getName(), "Christian Holm");
 
 		Assert.assertEquals(status.getProperties().size(), 3);
-		Assert.assertEquals(status.getProperties().get("global.video"),
+		Assert.assertEquals(
+				status.getProperties().get("global.video").get("value"),
 				Boolean.TRUE);
 
 		Assert.assertEquals(status.getCalendarCode(),
 				"3OAnjyFACrJjTNe2JLnpn9ZqVe5dLWS59aSLzqtvlXZyXUenbRVqvQwtOMOYZk2T");
 
-		Assert.assertEquals(status.getInboxNew(), 41);
+		Assert.assertEquals(status.getInboxNew(), 44);
 		Assert.assertEquals(status.getMailbox(), "cholm.fdb27615");
 	}
 

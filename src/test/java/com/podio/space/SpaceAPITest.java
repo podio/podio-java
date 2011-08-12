@@ -1,6 +1,5 @@
 package com.podio.space;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -66,21 +65,6 @@ public class SpaceAPITest {
 	}
 
 	@Test
-	public void inviteToSpace() {
-		getAPI().inviteToSpace(
-				1,
-				new SpaceInvitation(Role.REGULAR, "Subject", "Message", true,
-						true, Collections.singletonList(5), Collections
-								.singletonList("cho@cubitech.dk")));
-	}
-
-	@Test
-	public void resendInvitation() {
-		getAPI(2).resendInvitation(2, 1,
-				new SpaceInvitationUpdate("Subject", "Message"));
-	}
-
-	@Test
 	public void getSpaceStatistics() {
 		SpaceStatistics statistics = getAPI().getSpaceStatistics(1);
 
@@ -88,7 +72,7 @@ public class SpaceAPITest {
 				14, 49, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(statistics.getComments(), 5);
 		Assert.assertEquals(statistics.getApps(), 1);
-		Assert.assertEquals(statistics.getItems(), 2);
+		Assert.assertEquals(statistics.getItems(), 3);
 		Assert.assertEquals(statistics.getMembers(), 3);
 		Assert.assertEquals(statistics.getStatuses(), 2);
 	}
@@ -98,7 +82,7 @@ public class SpaceAPITest {
 		SpaceMember member = getAPI().getSpaceMembership(1, 1);
 
 		Assert.assertEquals(member.getEndedOn(), null);
-		Assert.assertEquals(member.getInvitedOn(), new DateTime(2010, 8, 8, 15,
+		Assert.assertEquals(member.getInvitedOn(), new DateTime(2010, 8, 9, 15,
 				7, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(member.getStartedOn(), new DateTime(2010, 8, 9, 15,
 				7, 0, 0, DateTimeZone.UTC));
@@ -130,21 +114,12 @@ public class SpaceAPITest {
 		Assert.assertEquals(members.get(0).getUser().getUserId().intValue(), 1);
 		Assert.assertEquals(members.get(0).getRole(), Role.ADMIN);
 		Assert.assertEquals(members.get(0).getInvitedOn(), new DateTime(2010,
-				8, 8, 15, 7, 0, 0, DateTimeZone.UTC));
+				8, 9, 15, 7, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(members.get(0).getStartedOn(), new DateTime(2010,
 				8, 9, 15, 7, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(members.get(0).getEndedOn(), null);
 		Assert.assertEquals(members.get(1).getUser().getUserId().intValue(), 2);
 		Assert.assertEquals(members.get(2).getUser().getUserId().intValue(), 4);
-	}
-
-	@Test
-	public void getInvitedMembers() {
-		List<SpaceMember> members = getAPI(2).getInvitedMembers(2);
-
-		Assert.assertEquals(members.size(), 1);
-		Assert.assertEquals(members.get(0).getUser().getUserId().intValue(), 1);
-		Assert.assertEquals(members.get(0).getStartedOn(), null);
 	}
 
 	@Test

@@ -1,5 +1,6 @@
 package com.podio.file;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -88,5 +89,10 @@ public class FileAPITest {
 
 		File file = files.get(0);
 		Assert.assertEquals(file.getData().getId(), 1);
+	}
+
+	@Test
+	public void uploadFile() throws IOException {
+		getAPI().uploadFile("test.txt", new java.io.File("pom.xml"));
 	}
 }

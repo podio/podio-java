@@ -6,11 +6,6 @@ import org.codehaus.jackson.annotate.JsonValue;
 public enum ApplicationFieldType {
 
 	/**
-	 * Mandatory field type that most be present in all apps.
-	 */
-	TITLE,
-
-	/**
 	 * A short text field that can hold a string
 	 */
 	TEXT,
@@ -29,11 +24,6 @@ public enum ApplicationFieldType {
 	 * Holds an image. Can currently only be used internally by Hoist.
 	 */
 	IMAGE,
-
-	/**
-	 * An embedded media typically from youtube or similar.
-	 */
-	MEDIA,
 
 	/**
 	 * A interval presented by a start and optional end date and optional time
@@ -79,7 +69,27 @@ public enum ApplicationFieldType {
 	/**
 	 * Holds a reference to a profile, which can be either a member or a contact
 	 */
-	CONTACT;
+	CONTACT,
+
+	/**
+	 * A calculation based on fields in the same or related apps
+	 */
+	CALCULATION,
+
+	/**
+	 * A list of embeds
+	 */
+	EMBED,
+
+	/**
+	 * A category field with multiple values
+	 */
+	CATEGORY,
+
+	/**
+	 * A question
+	 */
+	QUESTION;
 
 	@Override
 	@JsonValue

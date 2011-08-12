@@ -80,37 +80,6 @@ public class SpaceAPI {
 	}
 
 	/**
-	 * Invites a list of users (either through user_id or email) to the space.
-	 * If the user limit is reached, status code 403 will be returned.
-	 * 
-	 * @param invitation
-	 *            The data of the invitations
-	 */
-	public void inviteToSpace(int spaceId, SpaceInvitation invitation) {
-		resourceFactory.getApiResource("/space/" + spaceId + "/invite")
-				.entity(invitation, MediaType.APPLICATION_JSON_TYPE).post();
-	}
-
-	/**
-	 * Resends the space invite with a new subject and message.
-	 * 
-	 * @param spaceId
-	 *            The id of the space
-	 * @param userId
-	 *            The id of the user
-	 * @param update
-	 *            The updated invitation
-	 */
-	public void resendInvitation(int spaceId, int userId,
-			SpaceInvitationUpdate update) {
-		resourceFactory
-				.getApiResource(
-						"/space/" + spaceId + "/member/" + userId
-								+ "/resend_invite")
-				.entity(update, MediaType.APPLICATION_JSON_TYPE).post();
-	}
-
-	/**
 	 * Returns the statistics for the space with the number of members,
 	 * statuses, items and comments.
 	 * 
@@ -179,21 +148,6 @@ public class SpaceAPI {
 	public List<SpaceMember> getActiveMembers(int spaceId) {
 		return resourceFactory.getApiResource("/space/" + spaceId + "/member/")
 				.get(new GenericType<List<SpaceMember>>() {
-				});
-	}
-
-	/**
-	 * Returns the members that was invited to the space, but has not yet
-	 * accepted or declined.
-	 * 
-	 * @param spaceId
-	 *            The id of the space
-	 * @return The active members of the space
-	 */
-	public List<SpaceMember> getInvitedMembers(int spaceId) {
-		return resourceFactory.getApiResource(
-				"/space/" + spaceId + "/member/invited/").get(
-				new GenericType<List<SpaceMember>>() {
 				});
 	}
 

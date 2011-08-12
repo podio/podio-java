@@ -106,7 +106,7 @@ public class ItemAPITest {
 		Assert.assertEquals(item.getApplication().getName(), "Bugs");
 		Assert.assertEquals(item.getApplication().getItemName(), "Bug");
 		Assert.assertEquals(item.getApplication().getIcon(), "23.png");
-		Assert.assertEquals(item.getFields().size(), 12);
+		Assert.assertEquals(item.getFields().size(), 13);
 		FieldValuesView field = item.getFields().get(0);
 		Assert.assertEquals(field.getId(), 1);
 		Assert.assertEquals(field.getExternalId(), "is-hired");
@@ -133,7 +133,7 @@ public class ItemAPITest {
 		// Assert.assertEquals(item.getShares().get(0).getUser().getId(), 4);
 		Assert.assertEquals(item.getFiles().size(), 1);
 		Assert.assertEquals(item.getFiles().get(0).getId(), 1);
-		Assert.assertEquals(item.getReferences().size(), 0);
+		Assert.assertEquals(item.getReferences().size(), 1);
 		Assert.assertEquals(item.getTags().size(), 2);
 		Assert.assertEquals(item.getTags().get(0), "release");
 		Assert.assertEquals(item.getTags().get(1), "rollout");
@@ -153,7 +153,7 @@ public class ItemAPITest {
 	public void getItemValues() {
 		List<FieldValuesView> values = getAPI().getItemValues(1);
 
-		Assert.assertEquals(values.size(), 12);
+		Assert.assertEquals(values.size(), 13);
 		Assert.assertEquals(values.get(4).getValues().size(), 1);
 		Assert.assertEquals(values.get(4).getValues().get(0).size(), 1);
 		Assert.assertEquals(((Map<String, Object>) values.get(4).getValues()
@@ -202,7 +202,7 @@ public class ItemAPITest {
 		List<ItemFieldDifference> differences = getAPI()
 				.getItemRevisionDifference(2, 0, 1);
 
-		Assert.assertEquals(differences.size(), 1);
+		Assert.assertEquals(differences.size(), 2);
 		Assert.assertEquals(differences.get(0).getId(), 1);
 		Assert.assertEquals(differences.get(0).getType(),
 				ApplicationFieldType.STATE);
@@ -275,14 +275,6 @@ public class ItemAPITest {
 
 		Assert.assertEquals(items.size(), 1);
 		Assert.assertEquals(items.get(0).getId(), 2);
-	}
-
-	@Test
-	public void getAppActivity() {
-		AppActivities activities = getAPI().getAppActivities(1);
-
-		Assert.assertEquals(activities.getToday().size(), 0);
-		Assert.assertEquals(activities.getLastWeek().size(), 0);
 	}
 
 	@Test
