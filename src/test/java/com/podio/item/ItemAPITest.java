@@ -106,7 +106,7 @@ public class ItemAPITest {
 		Assert.assertEquals(item.getApplication().getName(), "Bugs");
 		Assert.assertEquals(item.getApplication().getItemName(), "Bug");
 		Assert.assertEquals(item.getApplication().getIcon(), "23.png");
-		Assert.assertEquals(item.getFields().size(), 13);
+		Assert.assertEquals(item.getFields().size(), 15);
 		FieldValuesView field = item.getFields().get(0);
 		Assert.assertEquals(field.getId(), 1);
 		Assert.assertEquals(field.getExternalId(), "is-hired");
@@ -123,17 +123,8 @@ public class ItemAPITest {
 				.getCounts(1).getTotal(), 1);
 		Assert.assertEquals(item.getRatings().get(RatingType.APPROVED)
 				.getCounts(1).getUsers().get(0).getUserId().intValue(), 2);
-		// Assert.assertEquals(item.getConversations().size(), 1);
-		// Assert.assertEquals(item.getConversations().get(0).getId(), 1);
-		// Assert.assertEquals(
-		// item.getConversations().get(0).getMessages().size(), 2);
-		Assert.assertEquals(item.getTasks().size(), 1);
-		Assert.assertEquals(item.getTasks().get(0).getId(), 4);
-		// Assert.assertEquals(item.getShares().size(), 1);
-		// Assert.assertEquals(item.getShares().get(0).getUser().getId(), 4);
 		Assert.assertEquals(item.getFiles().size(), 1);
 		Assert.assertEquals(item.getFiles().get(0).getId(), 1);
-		Assert.assertEquals(item.getReferences().size(), 1);
 		Assert.assertEquals(item.getTags().size(), 2);
 		Assert.assertEquals(item.getTags().get(0), "release");
 		Assert.assertEquals(item.getTags().get(1), "rollout");
@@ -153,7 +144,7 @@ public class ItemAPITest {
 	public void getItemValues() {
 		List<FieldValuesView> values = getAPI().getItemValues(1);
 
-		Assert.assertEquals(values.size(), 13);
+		Assert.assertEquals(values.size(), 15);
 		Assert.assertEquals(values.get(4).getValues().size(), 1);
 		Assert.assertEquals(values.get(4).getValues().get(0).size(), 1);
 		Assert.assertEquals(((Map<String, Object>) values.get(4).getValues()

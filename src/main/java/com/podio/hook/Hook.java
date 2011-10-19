@@ -2,7 +2,9 @@ package com.podio.hook;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class Hook {
+import com.podio.common.CreatedBase;
+
+public class Hook extends CreatedBase {
 
 	private int id;
 

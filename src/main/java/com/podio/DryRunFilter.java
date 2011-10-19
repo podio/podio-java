@@ -14,7 +14,7 @@ public class DryRunFilter extends ClientFilter {
 	public ClientResponse handle(ClientRequest cr)
 			throws ClientHandlerException {
 		if (!cr.getURI().getPath().startsWith("/oauth")) {
-			cr.getHeaders().putSingle("X-Podio-Dry-Run", "1");
+			cr.getHeaders().putSingle("X-Podio-Dry-Run", "steYut44");
 		}
 
 		return getNext().handle(cr);

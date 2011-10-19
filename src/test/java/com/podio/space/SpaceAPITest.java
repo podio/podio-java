@@ -51,11 +51,6 @@ public class SpaceAPITest {
 	}
 
 	@Test
-	public void deleteSpace() {
-		getAPI().deleteSpace(1);
-	}
-
-	@Test
 	public void getSpaceByURL() {
 		SpaceWithOrganization space = getAPI().getSpaceByURL(
 				"https://hoist.podio.com/api/");
@@ -126,11 +121,11 @@ public class SpaceAPITest {
 	public void getEndedMembers() {
 		List<SpaceMember> members = getAPI(2).getEndedMembers(3);
 
-		Assert.assertEquals(members.size(), 2);
+		Assert.assertEquals(members.size(), 3);
 		Assert.assertEquals(members.get(0).getUser().getUserId().intValue(), 1);
 		Assert.assertEquals(members.get(0).getEndedOn(), new DateTime(2010, 8,
 				9, 15, 12, 0, 0, DateTimeZone.UTC));
-		Assert.assertEquals(members.get(1).getUser().getUserId().intValue(), 4);
+		Assert.assertEquals(members.get(1).getUser().getUserId().intValue(), 3);
 	}
 
 	@Test
@@ -147,7 +142,7 @@ public class SpaceAPITest {
 	public void getTopSpaces() {
 		List<SpaceWithOrganization> topSpaces = getAPI().getTopSpaces(null);
 
-		Assert.assertEquals(topSpaces.size(), 1);
+		Assert.assertEquals(topSpaces.size(), 6);
 		Assert.assertEquals(topSpaces.get(0).getId(), 1);
 	}
 }

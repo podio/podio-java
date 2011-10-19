@@ -128,7 +128,7 @@ public class UserAPITest {
 		Assert.assertEquals(status.getCalendarCode(),
 				"3OAnjyFACrJjTNe2JLnpn9ZqVe5dLWS59aSLzqtvlXZyXUenbRVqvQwtOMOYZk2T");
 
-		Assert.assertEquals(status.getInboxNew(), 44);
+		Assert.assertEquals(status.getInboxNew(), 46);
 		Assert.assertEquals(status.getMailbox(), "cholm.fdb27615");
 	}
 

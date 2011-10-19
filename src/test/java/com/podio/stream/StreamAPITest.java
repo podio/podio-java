@@ -67,7 +67,7 @@ public class StreamAPITest {
 		Assert.assertEquals(object.getOrganization().getId(), 1);
 		Assert.assertEquals(object.getSpace().getId(), 1);
 		Assert.assertEquals(object.getApp().getId(), 1);
-		Assert.assertEquals(object.getActivities().size(), 0);
+		Assert.assertEquals(object.getActivities().size(), 2);
 	}
 
 	@Test
@@ -77,7 +77,7 @@ public class StreamAPITest {
 
 		Assert.assertEquals(objects.size(), 2);
 		Assert.assertEquals(objects.get(0).getType(), ReferenceType.STATUS);
-		Assert.assertEquals(objects.get(0).getId(), 1);
+		Assert.assertEquals(objects.get(0).getId(), 3);
 	}
 
 	@Test
@@ -87,7 +87,7 @@ public class StreamAPITest {
 
 		Assert.assertEquals(objects.size(), 2);
 		Assert.assertEquals(objects.get(0).getType(), ReferenceType.STATUS);
-		Assert.assertEquals(objects.get(0).getId(), 1);
+		Assert.assertEquals(objects.get(0).getId(), 3);
 	}
 
 	@Test
@@ -106,7 +106,7 @@ public class StreamAPITest {
 
 		Assert.assertEquals(objects.size(), 2);
 		Assert.assertEquals(objects.get(0).getType(), ReferenceType.STATUS);
-		Assert.assertEquals(objects.get(0).getId(), 1);
+		Assert.assertEquals(objects.get(0).getId(), 3);
 	}
 
 	@Test
@@ -121,6 +121,6 @@ public class StreamAPITest {
 	public void getAppStreamV2() {
 		List<StreamObjectV2> objects = getAPI().getAppStream(1, 3, 2);
 
-		Assert.assertEquals(objects.size(), 1);
+		Assert.assertEquals(objects.size(), 3);
 	}
 }

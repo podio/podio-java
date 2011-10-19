@@ -31,12 +31,6 @@ public class File extends CreatedBase {
 	private MimeType mimetype;
 
 	/**
-	 * The reference to where the file was added, either comment, task, item or
-	 * status,
-	 */
-	private FileReference data;
-
-	/**
 	 * The context of the file, either an item, task or status
 	 */
 	private FileReference context;
@@ -83,14 +77,6 @@ public class File extends CreatedBase {
 
 	public void setMimetype(MimeType mimetype) {
 		this.mimetype = mimetype;
-	}
-
-	public FileReference getData() {
-		return data;
-	}
-
-	public void setData(FileReference data) {
-		this.data = data;
 	}
 
 	public FileReference getContext() {

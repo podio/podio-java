@@ -57,17 +57,6 @@ public class SpaceAPI {
 	}
 
 	/**
-	 * Deletes the space with the given id. This will also end all memberships
-	 * of the space and cancel any space invites still outstanding.
-	 * 
-	 * @param spaceId
-	 *            The id of the space
-	 */
-	public void deleteSpace(int spaceId) {
-		resourceFactory.getApiResource("/space/" + spaceId).delete();
-	}
-
-	/**
 	 * Returns the space and organization with the given full URL.
 	 * 
 	 * @param url

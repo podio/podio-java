@@ -81,13 +81,13 @@ public class ContactAPITest {
 	public void getContactTotals() {
 		List<ContactTotal> totals = getAPI().getContactTotals();
 
-		Assert.assertEquals(totals.size(), 4);
+		Assert.assertEquals(totals.size(), 3);
 		Assert.assertEquals(totals.get(0).getOrganization().getId(), 1);
 		Assert.assertEquals(totals.get(0).getContacts(), 2);
 		Assert.assertEquals(totals.get(1).getOrganization().getId(), 2);
-		Assert.assertEquals(totals.get(1).getContacts(), 0);
-		Assert.assertEquals(totals.get(2).getOrganization().getId(), 4);
-		Assert.assertEquals(totals.get(2).getContacts(), 0);
+		Assert.assertEquals(totals.get(1).getContacts(), 1);
+		Assert.assertEquals(totals.get(2).getOrganization().getId(), 5);
+		Assert.assertEquals(totals.get(2).getContacts(), 1);
 	}
 
 	@Test

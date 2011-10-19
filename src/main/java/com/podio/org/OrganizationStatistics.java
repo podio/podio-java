@@ -36,11 +36,6 @@ public class OrganizationStatistics {
 	private int spacesCount;
 
 	/**
-	 * number of remaining invitations
-	 */
-	private int outstandingInvitations;
-
-	/**
 	 * number of users in this org
 	 */
 	private int usersCount;
@@ -97,15 +92,6 @@ public class OrganizationStatistics {
 	@JsonProperty("spaces_count")
 	public void setSpacesCount(int spacesCount) {
 		this.spacesCount = spacesCount;
-	}
-
-	public int getOutstandingInvitations() {
-		return outstandingInvitations;
-	}
-
-	@JsonProperty("outstanding_invitations")
-	public void setOutstandingInvitations(int outstandingInvitations) {
-		this.outstandingInvitations = outstandingInvitations;
 	}
 
 	public int getUsersCount() {

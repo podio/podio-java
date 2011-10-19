@@ -57,18 +57,6 @@ public class OrgAPI {
 	}
 
 	/**
-	 * Deletes the organization with the given id. This will also delete all
-	 * spaces under the organization (see the delete space operation for
-	 * details)
-	 * 
-	 * @param orgId
-	 *            The id of the organization
-	 */
-	public void deleteOrganization(int orgId) {
-		resourceFactory.getApiResource("/org/" + orgId).delete();
-	}
-
-	/**
 	 * Returns a list of all the organizations and spaces the user is member of.
 	 * 
 	 * @return The organizations the user is member of
@@ -101,6 +89,7 @@ public class OrgAPI {
 	 */
 	public OrganizationStatistics getOrganizationStatistics(int orgId) {
 		return resourceFactory.getApiResource("/org/" + orgId + "/statistics")
+				.queryParam("all_counts", "1")
 				.get(OrganizationStatistics.class);
 	}
 

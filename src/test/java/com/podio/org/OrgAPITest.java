@@ -48,11 +48,6 @@ public class OrgAPITest {
 	}
 
 	@Test
-	public void deleteOrganization() {
-		getAPI().deleteOrganization(1);
-	}
-
-	@Test
 	public void getOrganizations() throws URISyntaxException {
 		List<OrganizationWithSpaces> organizations = getAPI()
 				.getOrganizations();
@@ -62,7 +57,7 @@ public class OrgAPITest {
 		Assert.assertEquals(org.getId(), 1);
 		Assert.assertEquals(org.getName(), "Hoist");
 		List<SpaceMini> spaces = org.getSpaces();
-		Assert.assertEquals(spaces.size(), 1);
+		Assert.assertEquals(spaces.size(), 3);
 		SpaceMini space = spaces.get(0);
 		Assert.assertEquals(space.getId(), 1);
 		Assert.assertEquals(space.getName(), "API");
@@ -85,8 +80,7 @@ public class OrgAPITest {
 		Assert.assertEquals(stats.getAvailableInvitations(), 0);
 		Assert.assertEquals(stats.getItemsCount(), 3);
 		Assert.assertNotNull(stats.getLastActivityOn());
-		Assert.assertEquals(stats.getOutstandingInvitations(), 2);
-		Assert.assertEquals(stats.getSpacesCount(), 2);
+		Assert.assertEquals(stats.getSpacesCount(), 4);
 		Assert.assertEquals(stats.getUsersCount(), 0);
 	}
 
@@ -95,9 +89,9 @@ public class OrgAPITest {
 		List<OrganizationWithSpaces> organizations = getAPI()
 				.getSharedOrganizations(2);
 
-		Assert.assertEquals(organizations.size(), 1);
+		Assert.assertEquals(organizations.size(), 3);
 		Assert.assertEquals(organizations.get(0).getId(), 1);
-		Assert.assertEquals(organizations.get(0).getSpaces().size(), 1);
+		Assert.assertEquals(organizations.get(0).getSpaces().size(), 3);
 		Assert.assertEquals(organizations.get(0).getSpaces().get(0).getId(), 1);
 	}
 
@@ -112,7 +106,7 @@ public class OrgAPITest {
 	public void getSpaces() {
 		List<Space> spaces = getAPI().getSpaces(1);
 
-		Assert.assertEquals(spaces.size(), 1);
+		Assert.assertEquals(spaces.size(), 3);
 		Assert.assertEquals(spaces.get(0).getId(), 1);
 	}
 }
