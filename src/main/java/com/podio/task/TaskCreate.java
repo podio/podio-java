@@ -11,6 +11,11 @@ public class TaskCreate {
 	private String text;
 
 	/**
+	 * The description of the task
+	 */
+	private String description;
+
+	/**
 	 * True if the task should be private, false otherwise
 	 */
 	private boolean priv;
@@ -26,10 +31,11 @@ public class TaskCreate {
 	 */
 	private int responsible;
 
-	public TaskCreate(String text, boolean priv, LocalDate dueDate,
-			int responsible) {
+	public TaskCreate(String text, String description, boolean priv,
+			LocalDate dueDate, int responsible) {
 		super();
 		this.text = text;
+		this.description = description;
 		this.priv = priv;
 		this.dueDate = dueDate;
 		this.responsible = responsible;
@@ -41,6 +47,14 @@ public class TaskCreate {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public boolean isPrivate() {

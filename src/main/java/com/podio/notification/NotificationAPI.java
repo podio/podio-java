@@ -155,27 +155,6 @@ public class NotificationAPI {
 	}
 
 	/**
-	 * Returns the notification settings for the active user
-	 * 
-	 * @return The notification settings
-	 */
-	public NotificationSettings getSettings() {
-		return resourceFactory.getApiResource("/notification/settings").get(
-				NotificationSettings.class);
-	}
-
-	/**
-	 * Updates the notification settings for the user
-	 * 
-	 * @param settings
-	 *            The updated settings
-	 */
-	public void updateSettings(NotificationSettings settings) {
-		resourceFactory.getApiResource("/notification/settings")
-				.entity(settings, MediaType.APPLICATION_JSON_TYPE).put();
-	}
-
-	/**
 	 * Mark the notification as viewed. This will move the notification from the
 	 * inbox to the viewed archive.
 	 * 
@@ -186,17 +165,5 @@ public class NotificationAPI {
 		resourceFactory
 				.getApiResource("/notification/" + notificationId + "/viewed")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
-	}
-
-	/**
-	 * Mark the notification as not viewed. This will keep the notification in
-	 * the inbox even though it has been viewed.
-	 * 
-	 * @param notificationId
-	 *            The id of the notification
-	 */
-	public void markAsNotViewed(int notificationId) {
-		resourceFactory.getApiResource(
-				"/notification/" + notificationId + "/viewed").delete();
 	}
 }
