@@ -11,7 +11,6 @@ import com.podio.APIApplicationException;
 import com.podio.APIFactoryProvider;
 import com.podio.ResourceFactoryProvider;
 import com.podio.common.Role;
-import com.podio.contact.ProfileMini;
 
 public class SpaceAPITest {
 
@@ -130,12 +129,18 @@ public class SpaceAPITest {
 
 	@Test
 	public void getTopUsers() {
-		List<ProfileMini> topUsers = getAPI().getTopUsers(1, null);
+		SpaceTopMembers topUsers = getAPI().getTopUsers(1, null);
 
-		Assert.assertEquals(topUsers.size(), 3);
-		Assert.assertEquals(topUsers.get(0).getUserId().intValue(), 1);
-		Assert.assertEquals(topUsers.get(1).getUserId().intValue(), 2);
-		Assert.assertEquals(topUsers.get(2).getUserId().intValue(), 4);
+		Assert.assertEquals(topUsers.getEmployee().getProfiles().size(), 3);
+		Assert.assertEquals(topUsers.getEmployee().getProfiles().get(0)
+				.getUserId().intValue(), 1);
+		Assert.assertEquals(topUsers.getEmployee().getProfiles().get(1)
+				.getUserId().intValue(), 4);
+		Assert.assertEquals(topUsers.getEmployee().getProfiles().get(2)
+				.getUserId().intValue(), 2);
+		Assert.assertEquals(topUsers.getEmployee().getLeft(), 48);
+		Assert.assertEquals(topUsers.getExternal().getProfiles().size(), 0);
+		Assert.assertEquals(topUsers.getExternal().getLeft(), 50);
 	}
 
 	@Test

@@ -227,17 +227,6 @@ public class TaskAPI {
 	}
 
 	/**
-	 * Returns the tasks that the user has assigned to another user.
-	 * 
-	 * @return The list of tasks ordered by date of completion
-	 */
-	public List<Task> getAssignedCompletedTasks() {
-		return resourceFactory.getApiResource("/task/assigned/completed/").get(
-				new GenericType<List<Task>>() {
-				});
-	}
-
-	/**
 	 * Returns the tasks that is completed and where the active user is
 	 * responsible.
 	 * 

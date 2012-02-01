@@ -88,10 +88,9 @@ public class ContactAPI {
 	 * 
 	 * @return The list of contact totals by organization
 	 */
-	public List<ContactTotal> getContactTotals() {
+	public ContactTotal getContactTotal() {
 		return resourceFactory.getApiResource("/contact/totals/").get(
-				new GenericType<List<ContactTotal>>() {
-				});
+				ContactTotal.class);
 	}
 
 	/**

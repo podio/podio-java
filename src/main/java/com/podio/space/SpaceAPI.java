@@ -6,7 +6,6 @@ import javax.ws.rs.core.MediaType;
 
 import com.podio.ResourceFactory;
 import com.podio.common.Role;
-import com.podio.contact.ProfileMini;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
@@ -163,15 +162,14 @@ public class SpaceAPI {
 	 *            The max number of members to return, defaults to 6
 	 * @return The top users for the space
 	 */
-	public List<ProfileMini> getTopUsers(int spaceId, Integer limit) {
+	public SpaceTopMembers getTopUsers(int spaceId, Integer limit) {
 		WebResource resource = resourceFactory.getApiResource("/space/"
 				+ spaceId + "/member/top/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
 
-		return resource.get(new GenericType<List<ProfileMini>>() {
-		});
+		return resource.get(SpaceTopMembers.class);
 	}
 
 	/**

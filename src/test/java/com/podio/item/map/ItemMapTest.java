@@ -44,7 +44,7 @@ public class ItemMapTest {
 				"256.50"));
 		Assert.assertEquals(model.getAlottaCash().getCurrencyUnit()
 				.getCurrencyCode(), "DKK");
-		Assert.assertEquals(model.getWriteAJoke(), "æøå");
+		Assert.assertEquals(model.getWriteAJoke(), "<p>æøå</p>");
 		Assert.assertEquals(model.getImportance(), new BigDecimal("2.2000"));
 		Assert.assertEquals(model.getHowFarAreWe(), 15);
 	}

@@ -45,7 +45,7 @@ public final class ResourceFactoryProvider {
 			return api;
 		}
 
-		api = new ResourceFactory("localhost", "localhost", "localhost", 8080,
+		api = new ResourceFactory("localhost", "localhost", "localhost", 8082,
 				false, true, CLIENT_CREDENTIALS,
 				USER_CREDENTIALS_MAP.get(userId));
 
@@ -60,7 +60,7 @@ public final class ResourceFactoryProvider {
 			return api;
 		}
 
-		api = new ResourceFactory("localhost", "localhost", "localhost", 8080,
+		api = new ResourceFactory("localhost", "localhost", "localhost", 8082,
 				false, true, CLIENT_CREDENTIALS, APP_CREDENTIALS_MAP.get(appId));
 
 		APP_API_MAP.put(appId, api);

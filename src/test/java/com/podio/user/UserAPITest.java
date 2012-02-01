@@ -77,12 +77,6 @@ public class UserAPITest {
 	}
 
 	@Test
-	public void getUserByMail() {
-		User user = getAPI().getUserByMail("dev@hoisthq.com");
-		Assert.assertEquals(user.getId(), 1);
-	}
-
-	@Test
 	public void getStatus() {
 		UserStatus status = getAPI().getStatus();
 
@@ -105,7 +99,7 @@ public class UserAPITest {
 		Assert.assertEquals(status.getCalendarCode(),
 				"3OAnjyFACrJjTNe2JLnpn9ZqVe5dLWS59aSLzqtvlXZyXUenbRVqvQwtOMOYZk2T");
 
-		Assert.assertEquals(status.getInboxNew(), 46);
+		Assert.assertEquals(status.getInboxNew(), 50);
 		Assert.assertEquals(status.getMailbox(), "cholm.fdb27615");
 	}
 

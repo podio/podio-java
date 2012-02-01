@@ -1,11 +1,11 @@
-package com.podio.stream;
+package com.podio.connection;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonValue;
 
-public enum StreamActivityType {
+public enum ConnectionType {
 
-	COMMENT, FILE, TASK, RATING, CREATION, UPDATE, ANSWER, MEETING;
+	GOOGLE, OUTLOOK, VCARD;
 
 	@Override
 	@JsonValue
@@ -14,7 +14,7 @@ public enum StreamActivityType {
 	}
 
 	@JsonCreator
-	public static StreamActivityType getByName(String value) {
+	public static ConnectionType getByName(String value) {
 		return valueOf(value.toUpperCase());
 	}
 }

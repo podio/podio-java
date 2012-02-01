@@ -1,30 +1,25 @@
 package com.podio.contact;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
-import com.podio.org.OrganizationMini;
-
 public class ContactTotal {
 
-	private OrganizationMini organization;
+	private UserContactTotal user;
 
-	private int contacts;
+	private ConnectionsContactTotal connection;
 
-	@JsonProperty("org")
-	public OrganizationMini getOrganization() {
-		return organization;
+	public UserContactTotal getUser() {
+		return user;
 	}
 
-	@JsonProperty("org")
-	public void setOrganization(OrganizationMini organization) {
-		this.organization = organization;
+	public void setUser(UserContactTotal user) {
+		this.user = user;
 	}
 
-	public int getContacts() {
-		return contacts;
+	public ConnectionsContactTotal getConnection() {
+		return connection;
 	}
 
-	public void setContacts(int contacts) {
-		this.contacts = contacts;
+	public void setConnection(ConnectionsContactTotal connection) {
+		this.connection = connection;
 	}
+
 }

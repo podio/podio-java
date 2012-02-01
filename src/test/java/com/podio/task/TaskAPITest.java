@@ -119,7 +119,7 @@ public class TaskAPITest {
 		Assert.assertEquals(tasks.getByDueStatus(TaskDueStatus.OVERDUE).size(),
 				1);
 		Assert.assertEquals(
-				tasks.getByDueStatus(TaskDueStatus.UPCOMING).size(), 3);
+				tasks.getByDueStatus(TaskDueStatus.UPCOMING).size(), 4);
 	}
 
 	@Test
@@ -127,12 +127,6 @@ public class TaskAPITest {
 		TasksByDue tasks = getAPI().getAssignedActiveTasks();
 		Assert.assertEquals(tasks.getByDueStatus(TaskDueStatus.OVERDUE).size(),
 				1);
-	}
-
-	@Test
-	public void getAssignedCompletedTasks() {
-		List<Task> tasks = getAPI().getAssignedCompletedTasks();
-		Assert.assertEquals(tasks.size(), 0);
 	}
 
 	@Test
@@ -159,7 +153,7 @@ public class TaskAPITest {
 		Assert.assertEquals(tasks.size(), 3);
 		Assert.assertEquals(tasks.get(0).getResponsible().getUserId()
 				.intValue(), 1);
-		Assert.assertEquals(tasks.get(0).getTasks().size(), 3);
+		Assert.assertEquals(tasks.get(0).getTasks().size(), 4);
 		Assert.assertEquals(tasks.get(0).getTasks().get(0).getId(), 5);
 	}
 
@@ -169,7 +163,7 @@ public class TaskAPITest {
 		Assert.assertEquals(totals.getResponsible().getOverDue(), 0);
 		Assert.assertEquals(totals.getResponsible().getDueToday(), 0);
 		Assert.assertEquals(totals.getResponsible().getStarted(), 1);
-		Assert.assertEquals(totals.getResponsible().getTotal(), 4);
+		Assert.assertEquals(totals.getResponsible().getTotal(), 5);
 		Assert.assertEquals(totals.getDelegated().getOverDue(), 0);
 		Assert.assertEquals(totals.getDelegated().getDueToday(), 0);
 		Assert.assertEquals(totals.getDelegated().getStarted(), 0);
@@ -182,7 +176,7 @@ public class TaskAPITest {
 		Assert.assertEquals(totals.getResponsible().getOverDue(), 0);
 		Assert.assertEquals(totals.getResponsible().getDueToday(), 0);
 		Assert.assertEquals(totals.getResponsible().getStarted(), 1);
-		Assert.assertEquals(totals.getResponsible().getTotal(), 3);
+		Assert.assertEquals(totals.getResponsible().getTotal(), 4);
 		Assert.assertEquals(totals.getDelegated().getOverDue(), 0);
 		Assert.assertEquals(totals.getDelegated().getDueToday(), 0);
 		Assert.assertEquals(totals.getDelegated().getStarted(), 0);

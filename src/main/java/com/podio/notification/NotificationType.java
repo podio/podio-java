@@ -98,7 +98,12 @@ public enum NotificationType {
 	/**
 	 * A question was answered
 	 */
-	ANSWER;
+	ANSWER,
+
+	/**
+	 * A reminder
+	 */
+	REMINDER;
 
 	@Override
 	@JsonValue

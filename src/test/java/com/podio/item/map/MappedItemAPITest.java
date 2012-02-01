@@ -26,7 +26,7 @@ public class MappedItemAPITest {
 				"256.50"));
 		Assert.assertEquals(bug.getAlottaCash().getCurrencyUnit()
 				.getCurrencyCode(), "DKK");
-		Assert.assertEquals(bug.getWriteAJoke(), "æøå");
+		Assert.assertEquals(bug.getWriteAJoke(), "<p>æøå</p>");
 		Assert.assertEquals(bug.getImportance(), new BigDecimal("2.2000"));
 		Assert.assertEquals(bug.getHowFarAreWe(), 15);
 	}

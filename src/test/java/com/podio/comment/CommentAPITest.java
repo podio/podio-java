@@ -26,7 +26,7 @@ public class CommentAPITest {
 		Assert.assertEquals(comment.getId(), 1);
 		Assert.assertEquals(
 				comment.getValue(),
-				"Hoist rules, but we need to do more.<br />@Andreas Haugstrup Can you fix the javascript popup problem?");
+				"Hoist rules, but we need to do more.\n\n@Andreas Haugstrup Can you fix the javascript popup problem?");
 		Assert.assertEquals(comment.getExternalId(), "c1");
 		// Assert.assertEquals(comment.getAlerts().size(), 1);
 		// Assert.assertEquals(comment.getAlerts().get(0).getId(), 2);

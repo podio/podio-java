@@ -164,17 +164,6 @@ public class UserAPI {
 	}
 
 	/**
-	 * Returns the user with given mail address.
-	 * 
-	 * @param mail
-	 *            The mail address of the user
-	 * @return The user with the given mail address
-	 */
-	public User getUserByMail(String mail) {
-		return resourceFactory.getApiResource("/user/" + mail).get(User.class);
-	}
-
-	/**
 	 * Returns the value of the property for the active user with the given
 	 * name. The property is specific to the auth client used.
 	 * 

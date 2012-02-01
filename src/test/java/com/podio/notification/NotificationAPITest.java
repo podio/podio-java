@@ -27,7 +27,7 @@ public class NotificationAPITest {
 		Assert.assertEquals(notification.getContextType(),
 				NotificationContextType.ITEM);
 		Assert.assertEquals(notification.getDataLink(),
-				"https://hoist.podio.com/api/item/1#comment-2");
+				"https://hoist.podio.com/api/item/1#!comment-2");
 		Assert.assertEquals(notification.getCreatedBy().getId(), 2);
 		Assert.assertEquals(notification.getCreatedOn(), new DateTime(2010, 8,
 				5, 9, 9, 0, 0, DateTimeZone.UTC));
@@ -45,15 +45,15 @@ public class NotificationAPITest {
 		List<Notification> notifications = getAPI().getInboxNew(2, 1, null);
 
 		Assert.assertEquals(notifications.size(), 2);
-		Assert.assertEquals(notifications.get(0).getId(), 99);
-		Assert.assertEquals(notifications.get(1).getId(), 98);
+		Assert.assertEquals(notifications.get(0).getId(), 121);
+		Assert.assertEquals(notifications.get(1).getId(), 107);
 	}
 
 	@Test
 	public void getInboxNewCount() {
 		int count = getAPI().getInboxNewCount();
 
-		Assert.assertEquals(count, 46);
+		Assert.assertEquals(count, 50);
 	}
 
 	@Test

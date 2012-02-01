@@ -59,8 +59,8 @@ public class StatusAPITest {
 		Assert.assertEquals(
 				status.getRatings().get(RatingType.LIKE).getCounts(1)
 						.getUsers().get(0).getUserId().intValue(), 4);
-		Assert.assertEquals(status.getFiles().size(), 2);
-		Assert.assertEquals(status.getFiles().get(0).getId(), 3);
+		Assert.assertEquals(status.getFiles().size(), 3);
+		Assert.assertEquals(status.getFiles().get(0).getId(), 35);
 		Assert.assertEquals(status.isSubscribed(), true);
 		Assert.assertEquals(status.getUserRatings().size(), 0);
 	}
