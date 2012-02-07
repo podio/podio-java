@@ -73,7 +73,7 @@ public class FileAPITest {
 		Assert.assertEquals(files.size(), 5);
 
 		File file = files.get(0);
-		Assert.assertEquals(file.getId(), 5);
+		Assert.assertEquals(file.getId(), 32);
 	}
 
 	@Test

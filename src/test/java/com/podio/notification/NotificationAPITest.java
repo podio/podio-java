@@ -53,7 +53,7 @@ public class NotificationAPITest {
 	public void getInboxNewCount() {
 		int count = getAPI().getInboxNewCount();
 
-		Assert.assertEquals(count, 50);
+		Assert.assertEquals(count, 51);
 	}
 
 	@Test

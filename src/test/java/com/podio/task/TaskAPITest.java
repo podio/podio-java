@@ -117,9 +117,9 @@ public class TaskAPITest {
 	public void getActiveTasks() {
 		TasksByDue tasks = getAPI().getActiveTasks();
 		Assert.assertEquals(tasks.getByDueStatus(TaskDueStatus.OVERDUE).size(),
-				1);
+				2);
 		Assert.assertEquals(
-				tasks.getByDueStatus(TaskDueStatus.UPCOMING).size(), 4);
+				tasks.getByDueStatus(TaskDueStatus.UPCOMING).size(), 7);
 	}
 
 	@Test

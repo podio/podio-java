@@ -17,7 +17,8 @@ public class ExceptionFilter extends ClientFilter {
 			throws ClientHandlerException {
 		try {
 			ClientResponse response = getNext().handle(cr);
-			if (response.getClientResponseStatus().getFamily() != Family.SUCCESSFUL) {
+			if (response.getClientResponseStatus() == null
+					|| response.getClientResponseStatus().getFamily() != Family.SUCCESSFUL) {
 				Map<String, Object> errorData = response
 						.getEntity(new GenericType<Map<String, Object>>() {
 						});

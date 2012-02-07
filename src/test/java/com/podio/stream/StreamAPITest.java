@@ -67,7 +67,7 @@ public class StreamAPITest {
 		Assert.assertEquals(object.getOrganization().getId(), 1);
 		Assert.assertEquals(object.getSpace().getId(), 1);
 		Assert.assertEquals(object.getApp().getId(), 1);
-		Assert.assertEquals(object.getActivities().size(), 2);
+		Assert.assertEquals(object.getActivities().size(), 3);
 	}
 
 	@Test
