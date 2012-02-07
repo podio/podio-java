@@ -260,13 +260,13 @@ public class ItemAPITest {
 		Assert.assertEquals(response.getItems().get(0).getId(), 2);
 	}
 
-	@Test
-	public void getItemsByFieldAndText() {
-		List<ItemMini> items = getAPI().getItemsByFieldAndTitle(5, "bug");
-
-		Assert.assertEquals(items.size(), 1);
-		Assert.assertEquals(items.get(0).getId(), 2);
-	}
+	// @Test
+	// public void getItemsByFieldAndText() {
+	// List<ItemMini> items = getAPI().getItemsByFieldAndTitle(5, "bug");
+	//
+	// Assert.assertEquals(items.size(), 1);
+	// Assert.assertEquals(items.get(0).getId(), 2);
+	// }
 
 	@Test
 	public void getNextItem() {
