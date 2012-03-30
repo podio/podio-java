@@ -1,5 +1,7 @@
 package com.podio;
 
+import java.lang.reflect.InvocationTargetException;
+
 import com.podio.app.AppAPI;
 import com.podio.calendar.CalendarAPI;
 import com.podio.comment.CommentAPI;
@@ -31,6 +33,21 @@ public class APIFactory {
 	public APIFactory(ResourceFactory resourceFactory) {
 		super();
 		this.resourceFactory = resourceFactory;
+	}
+
+	public <T extends BaseAPI> T getAPI(Class<T> apiClass) {
+		try {
+			return apiClass.getConstructor(ResourceFactory.class).newInstance(
+					this.resourceFactory);
+		} catch (InstantiationException e) {
+			return null;
+		} catch (IllegalAccessException e) {
+			return null;
+		} catch (InvocationTargetException e) {
+			return null;
+		} catch (NoSuchMethodException e) {
+			return null;
+		}
 	}
 
 	public AppAPI getAppAPI() {

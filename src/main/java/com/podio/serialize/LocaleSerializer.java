@@ -14,7 +14,7 @@ public class LocaleSerializer extends JsonSerializer<Locale> {
 	public void serialize(Locale value, JsonGenerator jgen,
 			SerializerProvider provider) throws IOException,
 			JsonProcessingException {
-		jgen.writeString(value.getLanguage());
+		jgen.writeString(value.getLanguage() + "_" + value.getCountry());
 	}
 
 }

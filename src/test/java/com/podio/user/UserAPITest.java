@@ -72,7 +72,7 @@ public class UserAPITest {
 	@Test
 	public void getUpdateUser() {
 		getAPI().updateUser(
-				new UserUpdate(new Locale("da"), TimeZone
+				new UserUpdate(new Locale("da", "DK"), TimeZone
 						.getTimeZone("Europe/Copenhagen")));
 	}
 
@@ -99,7 +99,7 @@ public class UserAPITest {
 		Assert.assertEquals(status.getCalendarCode(),
 				"3OAnjyFACrJjTNe2JLnpn9ZqVe5dLWS59aSLzqtvlXZyXUenbRVqvQwtOMOYZk2T");
 
-		Assert.assertEquals(status.getInboxNew(), 51);
+		Assert.assertEquals(status.getInboxNew(), 53);
 		Assert.assertEquals(status.getMailbox(), "cholm.fdb27615");
 	}
 

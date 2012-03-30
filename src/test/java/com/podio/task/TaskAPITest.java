@@ -114,32 +114,6 @@ public class TaskAPITest {
 	}
 
 	@Test
-	public void getActiveTasks() {
-		TasksByDue tasks = getAPI().getActiveTasks();
-		Assert.assertEquals(tasks.getByDueStatus(TaskDueStatus.OVERDUE).size(),
-				2);
-		Assert.assertEquals(
-				tasks.getByDueStatus(TaskDueStatus.UPCOMING).size(), 7);
-	}
-
-	@Test
-	public void getAssignedTasks() {
-		TasksByDue tasks = getAPI().getAssignedActiveTasks();
-		Assert.assertEquals(tasks.getByDueStatus(TaskDueStatus.OVERDUE).size(),
-				1);
-	}
-
-	@Test
-	public void getCompletedTasks() {
-		List<Task> tasks = getAPI().getCompletedTasks();
-		Assert.assertEquals(tasks.size(), 1);
-		Assert.assertEquals(tasks.get(0).getId(), 4);
-		Assert.assertEquals(tasks.get(0).getCompletedOn(), new DateTime(2010,
-				8, 20, 11, 44, 0, 0, DateTimeZone.UTC));
-		Assert.assertEquals(tasks.get(0).getCompletedBy().getId(), 1);
-	}
-
-	@Test
 	public void getTasksInSpaceByDue() {
 		TasksByDue tasks = getAPI().getTasksInSpaceByDue(1);
 		Assert.assertEquals(tasks.getByDueStatus(TaskDueStatus.OVERDUE).size(),

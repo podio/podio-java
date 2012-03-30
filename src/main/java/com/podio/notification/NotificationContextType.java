@@ -5,7 +5,7 @@ import org.codehaus.jackson.annotate.JsonValue;
 
 public enum NotificationContextType {
 
-	STATUS, TASK, PROFILES, SPACE, ITEM, BULLETIN, APP, SHARE, ORG, QUESTION, FILE;
+	STATUS, TASK, PROFILES, SPACE, ITEM, BULLETIN, APP, SHARE, ORG, QUESTION, FILE, BATCH;
 
 	@Override
 	@JsonValue

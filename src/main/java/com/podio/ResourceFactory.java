@@ -40,19 +40,18 @@ import com.sun.jersey.api.client.filter.GZIPContentEncodingFilter;
 public final class ResourceFactory {
 
 	private final WebResource apiResource;
-	private final WebResource uploadResource;
-	private final WebResource downloadResource;
+	private final WebResource fileResource;
 
 	private final LoginFilter loginFilter;
 
 	public ResourceFactory(OAuthClientCredentials clientCredentials,
 			OAuthUserCredentials userCredentials) {
-		this("api.podio.com", "upload.podio.com", "download.podio.com", 443,
-				true, false, clientCredentials, userCredentials);
+		this("api.podio.com", "file.podio.com", 443, true, false,
+				clientCredentials, userCredentials);
 	}
 
-	public ResourceFactory(String apiHostname, String uploadHostname,
-			String downloadHostname, int port, boolean ssl, boolean dryRun,
+	public ResourceFactory(String apiHostname, String fileHostname, int port,
+			boolean ssl, boolean dryRun,
 			OAuthClientCredentials clientCredentials,
 			OAuthUserCredentials userCredentials) {
 		ClientConfig config = new DefaultClientConfig();
@@ -67,10 +66,8 @@ public final class ResourceFactory {
 
 		this.apiResource = client.resource(getURI(apiHostname, port, ssl));
 		apiResource.header(HttpHeaders.USER_AGENT, "Podio Java API Client");
-		this.uploadResource = client
-				.resource(getURI(uploadHostname, port, ssl));
-		this.downloadResource = client.resource(getURI(downloadHostname, port,
-				ssl));
+		this.fileResource = client.resource(getURI(fileHostname, port, ssl));
+		fileResource.header(HttpHeaders.USER_AGENT, "Podio Java API Client");
 
 		AuthProvider authProvider = new AuthProvider(this, clientCredentials,
 				userCredentials);
@@ -119,25 +116,12 @@ public final class ResourceFactory {
 		return new CustomJacksonJsonProvider(mapper);
 	}
 
-	public WebResource getUploadResource(String path) {
-		return getUploadResource(path, true);
+	public WebResource getFileResource(String path) {
+		return getFileResource(path, true);
 	}
 
-	public WebResource getUploadResource(String path, boolean secure) {
-		WebResource subResource = uploadResource.path(path);
-		if (secure) {
-			subResource.addFilter(this.loginFilter);
-		}
-
-		return subResource;
-	}
-
-	public WebResource getDownloadResource(String path) {
-		return getDownloadResource(path, true);
-	}
-
-	public WebResource getDownloadResource(String path, boolean secure) {
-		WebResource subResource = downloadResource.path(path);
+	public WebResource getFileResource(String path, boolean secure) {
+		WebResource subResource = fileResource.path(path);
 		if (secure) {
 			subResource.addFilter(this.loginFilter);
 		}

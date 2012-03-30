@@ -4,17 +4,16 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.common.Reference;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
-public class ConversationAPI {
-
-	private final ResourceFactory resourceFactory;
+public class ConversationAPI extends BaseAPI {
 
 	public ConversationAPI(ResourceFactory resourceFactory) {
-		this.resourceFactory = resourceFactory;
+		super(resourceFactory);
 	}
 
 	/**
@@ -54,10 +53,10 @@ public class ConversationAPI {
 			List<Integer> participants, Reference reference) {
 		WebResource resource;
 		if (reference != null) {
-			resource = resourceFactory.getApiResource("/conversation/"
-					+ reference.toURLFragment());
+			resource = getResourceFactory().getApiResource(
+					"/conversation/" + reference.toURLFragment());
 		} else {
-			resource = resourceFactory.getApiResource("/conversation/");
+			resource = getResourceFactory().getApiResource("/conversation/");
 		}
 
 		return resource
@@ -76,9 +75,8 @@ public class ConversationAPI {
 	 * @return The conversation requested
 	 */
 	public Conversation getConversation(int conversationId) {
-		return resourceFactory
-				.getApiResource("/conversation/" + conversationId).get(
-						Conversation.class);
+		return getResourceFactory().getApiResource(
+				"/conversation/" + conversationId).get(Conversation.class);
 	}
 
 	/**
@@ -90,7 +88,7 @@ public class ConversationAPI {
 	 * @return The list of conversations
 	 */
 	public List<Conversation> getConversationsOnObject(Reference object) {
-		return resourceFactory.getApiResource(
+		return getResourceFactory().getApiResource(
 				"/conversation/" + object.toURLFragment()).get(
 				new GenericType<List<Conversation>>() {
 				});
@@ -106,7 +104,7 @@ public class ConversationAPI {
 	 * @return The id of the new message
 	 */
 	public int addReply(int conversationId, String text) {
-		return resourceFactory
+		return getResourceFactory()
 				.getApiResource("/conversation/" + conversationId + "/reply")
 				.entity(new MessageCreate(text),
 						MediaType.APPLICATION_JSON_TYPE)

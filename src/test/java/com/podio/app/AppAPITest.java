@@ -172,9 +172,10 @@ public class AppAPITest {
 	public void getAppDependencies() {
 		Dependencies dependencies = getAPI().getDependencies(2);
 
-		Assert.assertEquals(dependencies.getApps().size(), 1);
-		Assert.assertEquals(dependencies.getDependencies().size(), 1);
-		Assert.assertEquals(dependencies.getDependencies().get(1), null);
+		Assert.assertEquals(dependencies.getApps().size(), 2);
+		Assert.assertEquals(dependencies.getDependencies().size(), 2);
+		Assert.assertEquals(dependencies.getDependencies().get(1).get(0)
+				.intValue(), 3);
 	}
 
 	@Test

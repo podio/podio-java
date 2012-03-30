@@ -13,6 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.joda.time.LocalDate;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.serialize.DateTimeUtil;
 import com.sun.jersey.api.client.GenericType;
@@ -22,12 +23,10 @@ import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 
-public class FileAPI {
-
-	private final ResourceFactory resourceFactory;
+public class FileAPI extends BaseAPI {
 
 	public FileAPI(ResourceFactory resourceFactory) {
-		this.resourceFactory = resourceFactory;
+		super(resourceFactory);
 	}
 
 	/**
@@ -42,7 +41,8 @@ public class FileAPI {
 	 */
 	public void downloadFile(int fileId, java.io.File target, FileSize size)
 			throws IOException {
-		WebResource builder = resourceFactory.getDownloadResource("/" + fileId);
+		WebResource builder = getResourceFactory()
+				.getFileResource("/" + fileId);
 		if (size != null) {
 			builder = builder.path("/" + size.name().toLowerCase());
 		}
@@ -66,10 +66,10 @@ public class FileAPI {
 		multiPart.bodyPart(filePart);
 		multiPart.field("filename", name);
 
-		Builder resource = resourceFactory.getApiResource("/file/v2/").entity(
-				multiPart,
-				new MediaType("multipart", "form-data", Collections
-						.singletonMap("boundary", "AaB03x")));
+		Builder resource = getResourceFactory().getApiResource("/file/v2/")
+				.entity(multiPart,
+						new MediaType("multipart", "form-data", Collections
+								.singletonMap("boundary", "AaB03x")));
 		return resource.post(File.class).getId();
 	}
 
@@ -115,15 +115,15 @@ public class FileAPI {
 	 * Returns the file with the given id
 	 */
 	public File getFile(int fileId) {
-		return resourceFactory.getApiResource("/file/" + fileId)
-				.get(File.class);
+		return getResourceFactory().getApiResource("/file/" + fileId).get(
+				File.class);
 	}
 
 	/**
 	 * Used to update the description of the file.
 	 */
 	public void updateFile(int fileId, FileUpdate update) {
-		resourceFactory.getApiResource("/file/" + fileId)
+		getResourceFactory().getApiResource("/file/" + fileId)
 				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -131,7 +131,7 @@ public class FileAPI {
 	 * Deletes the file with the given id.
 	 */
 	public void deleteFile(int fileId) {
-		resourceFactory.getApiResource("/file/" + fileId).delete();
+		getResourceFactory().getApiResource("/file/" + fileId).delete();
 	}
 
 	/**
@@ -146,8 +146,8 @@ public class FileAPI {
 	 *            The latest date to return files from. Defaults to no limit.
 	 */
 	public List<File> getLatestOnApp(int appId, Integer limit, LocalDate latest) {
-		WebResource resource = resourceFactory.getApiResource("/file/app/"
-				+ appId + "/latest/");
+		WebResource resource = getResourceFactory().getApiResource(
+				"/file/app/" + appId + "/latest/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
@@ -172,8 +172,8 @@ public class FileAPI {
 	 *            pagination. Defaults to 0 (no offset).
 	 */
 	public List<File> getOnApp(int appId, Integer limit, Integer offset) {
-		WebResource resource = resourceFactory.getApiResource("/file/app/"
-				+ appId + "/");
+		WebResource resource = getResourceFactory().getApiResource(
+				"/file/app/" + appId + "/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
@@ -197,8 +197,8 @@ public class FileAPI {
 	 */
 	public List<File> getLatestOnSpace(int spaceId, Integer limit,
 			LocalDate latest) {
-		WebResource resource = resourceFactory.getApiResource("/file/space/"
-				+ spaceId + "/latest/");
+		WebResource resource = getResourceFactory().getApiResource(
+				"/file/space/" + spaceId + "/latest/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
@@ -222,8 +222,8 @@ public class FileAPI {
 	 *            pagination. Defaults to 0 (no offset).
 	 */
 	public List<File> getOnSpace(int spaceId, Integer limit, Integer offset) {
-		WebResource resource = resourceFactory.getApiResource("/file/space/"
-				+ spaceId + "/");
+		WebResource resource = getResourceFactory().getApiResource(
+				"/file/space/" + spaceId + "/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}

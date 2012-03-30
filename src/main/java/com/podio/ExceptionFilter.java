@@ -12,6 +12,7 @@ import com.sun.jersey.api.client.filter.ClientFilter;
 
 public class ExceptionFilter extends ClientFilter {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ClientResponse handle(ClientRequest cr)
 			throws ClientHandlerException {

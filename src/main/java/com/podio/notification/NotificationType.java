@@ -103,7 +103,17 @@ public enum NotificationType {
 	/**
 	 * A reminder
 	 */
-	REMINDER;
+	REMINDER,
+
+	/**
+	 * The batch is processing
+	 */
+	BATCH_PROCESS,
+
+	/**
+	 * The batch was completed
+	 */
+	BATCH_COMPLETE;
 
 	@Override
 	@JsonValue

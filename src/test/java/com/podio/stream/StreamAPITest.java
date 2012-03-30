@@ -32,10 +32,7 @@ public class StreamAPITest {
 		Assert.assertEquals(object.getFiles().size(), 2);
 		Assert.assertEquals(object.getFiles().get(0).getId(), 1);
 		Assert.assertEquals(object.getFiles().get(1).getId(), 8);
-		Assert.assertEquals(object.getObject().get("item_id"), 1);
 		Assert.assertEquals(object.getOrganization().getId(), 1);
-		Assert.assertEquals(object.getRatings().size(), 0);
-		Assert.assertEquals(object.getRevisions().size(), 0);
 		Assert.assertEquals(object.getSpace().getId(), 1);
 	}
 
@@ -75,9 +72,9 @@ public class StreamAPITest {
 		List<StreamObject> objects = getAPI().getGlobalStream(3, 2, null,
 				new DateTime(2011, 6, 30, 12, 0, 0, 0, DateTimeZone.UTC));
 
-		Assert.assertEquals(objects.size(), 1);
-		Assert.assertEquals(objects.get(0).getType(), ReferenceType.STATUS);
-		Assert.assertEquals(objects.get(0).getId(), 3);
+		Assert.assertEquals(objects.size(), 3);
+		Assert.assertEquals(objects.get(1).getType(), ReferenceType.ACTION);
+		Assert.assertEquals(objects.get(1).getId(), 41);
 	}
 
 	@Test
@@ -85,9 +82,9 @@ public class StreamAPITest {
 		List<StreamObject> objects = getAPI().getOrganizationStream(1, 3, 2,
 				null, new DateTime(2011, 6, 30, 12, 0, 0, 0, DateTimeZone.UTC));
 
-		Assert.assertEquals(objects.size(), 1);
-		Assert.assertEquals(objects.get(0).getType(), ReferenceType.STATUS);
-		Assert.assertEquals(objects.get(0).getId(), 3);
+		Assert.assertEquals(objects.size(), 3);
+		Assert.assertEquals(objects.get(1).getType(), ReferenceType.ACTION);
+		Assert.assertEquals(objects.get(1).getId(), 41);
 	}
 
 	@Test
@@ -104,9 +101,9 @@ public class StreamAPITest {
 		List<StreamObject> objects = getAPI().getSpaceStream(1, 3, 2, null,
 				new DateTime(2011, 6, 30, 12, 0, 0, 0, DateTimeZone.UTC));
 
-		Assert.assertEquals(objects.size(), 1);
-		Assert.assertEquals(objects.get(0).getType(), ReferenceType.STATUS);
-		Assert.assertEquals(objects.get(0).getId(), 3);
+		Assert.assertEquals(objects.size(), 3);
+		Assert.assertEquals(objects.get(1).getType(), ReferenceType.ACTION);
+		Assert.assertEquals(objects.get(1).getId(), 41);
 	}
 
 	@Test

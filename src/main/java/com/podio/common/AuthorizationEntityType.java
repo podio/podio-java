@@ -5,8 +5,7 @@ import org.codehaus.jackson.annotate.JsonValue;
 
 public enum AuthorizationEntityType {
 
-	USER,
-	APP;
+	USER, APP, SYSTEM;
 
 	@Override
 	@JsonValue

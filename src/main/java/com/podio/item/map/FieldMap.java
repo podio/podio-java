@@ -47,7 +47,7 @@ public class FieldMap {
 
 		if (value != null) {
 			if (!single) {
-				Collection subValues = (Collection) value;
+				Collection<?> subValues = (Collection<?>) value;
 				for (Object subValue : subValues) {
 					apiValues.add(converter.fromModel(subValue));
 				}
@@ -97,15 +97,16 @@ public class FieldMap {
 		}
 	}
 
-	private Collection getCollectionInstance() throws InstantiationException,
-			IllegalAccessException {
+	private Collection<?> getCollectionInstance()
+			throws InstantiationException, IllegalAccessException {
 		if (property.getPropertyType() == Collection.class
 				|| property.getPropertyType() == List.class) {
-			return new ArrayList();
+			return new ArrayList<Object>();
 		} else if (property.getPropertyType() == Set.class) {
-			return new HashSet();
+			return new HashSet<Object>();
 		} else {
-			return (Collection) property.getPropertyType().newInstance();
+			return (Collection<Object>) property.getPropertyType()
+					.newInstance();
 		}
 	}
 

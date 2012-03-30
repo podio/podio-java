@@ -39,7 +39,8 @@ public class CalendarAPI {
 					.queryParam("space_ids", CSVUtil.toCSV(spaceIds));
 		}
 		if (types.length > 0) {
-			resource = resource.queryParam("types", CSVUtil.toCSV(types));
+			resource = resource.queryParam("types",
+					CSVUtil.toCSV((Object[]) types));
 		}
 
 		return resource.get(new GenericType<List<Event>>() {
