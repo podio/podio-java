@@ -5,6 +5,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
@@ -17,12 +18,10 @@ import com.sun.jersey.api.client.WebResource;
  * only be one name, but multiple mail addresses. The value of a field can
  * either be a string, a number or a date.
  */
-public class ContactAPI {
-
-	private final ResourceFactory resourceFactory;
+public class ContactAPI extends BaseAPI {
 
 	public ContactAPI(ResourceFactory resourceFactory) {
-		this.resourceFactory = resourceFactory;
+		super(resourceFactory);
 	}
 
 	/**
@@ -33,7 +32,7 @@ public class ContactAPI {
 	 * @return The contact profile
 	 */
 	public Profile getContact(int userId) {
-		return resourceFactory.getApiResource("/contact/" + userId).get(
+		return getResourceFactory().getApiResource("/contact/" + userId).get(
 				Profile.class);
 	}
 
@@ -47,7 +46,7 @@ public class ContactAPI {
 	 * @return The list of values for the given field
 	 */
 	public <T, R> List<T> getContactField(int userId, ProfileField<T, R> field) {
-		List<R> values = resourceFactory.getApiResource(
+		List<R> values = getResourceFactory().getApiResource(
 				"/contact/" + userId + "/" + field.getName())
 
 		.get(new GenericType<List<R>>() {
@@ -73,7 +72,8 @@ public class ContactAPI {
 	 * @return The list of contacts
 	 */
 	public <T> List<T> getTopContacts(Integer limit, ProfileType<T> type) {
-		WebResource resource = resourceFactory.getApiResource("/contact/top/");
+		WebResource resource = getResourceFactory().getApiResource(
+				"/contact/top/");
 
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
@@ -89,7 +89,7 @@ public class ContactAPI {
 	 * @return The list of contact totals by organization
 	 */
 	public ContactTotal getContactTotal() {
-		return resourceFactory.getApiResource("/contact/totals/").get(
+		return getResourceFactory().getApiResource("/contact/totals/").get(
 				ContactTotal.class);
 	}
 
@@ -113,7 +113,7 @@ public class ContactAPI {
 	public <T, F, R> List<T> getContacts(ProfileField<F, R> key, F value,
 			Integer limit, Integer offset, ProfileType<T> type,
 			ContactOrder order) {
-		WebResource resource = resourceFactory.getApiResource("/contact/");
+		WebResource resource = getResourceFactory().getApiResource("/contact/");
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
 				order);
@@ -142,8 +142,8 @@ public class ContactAPI {
 	public <T, F, R> List<T> getOrganizationContacts(int organizationId,
 			ProfileField<F, R> key, F value, Integer limit, Integer offset,
 			ProfileType<T> type, ContactOrder order) {
-		WebResource resource = resourceFactory.getApiResource("/contact/org/"
-				+ organizationId);
+		WebResource resource = getResourceFactory().getApiResource(
+				"/contact/org/" + organizationId);
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
 				order);
@@ -171,8 +171,8 @@ public class ContactAPI {
 	public <T, F, R> List<T> getSpaceContacts(int spaceId,
 			ProfileField<F, R> key, F value, Integer limit, Integer offset,
 			ProfileType<T> type, ContactOrder order) {
-		WebResource resource = resourceFactory.getApiResource("/contact/space/"
-				+ spaceId);
+		WebResource resource = getResourceFactory().getApiResource(
+				"/contact/space/" + spaceId);
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
 				order);

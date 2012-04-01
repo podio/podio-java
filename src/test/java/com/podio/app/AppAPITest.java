@@ -14,7 +14,7 @@ import com.sun.jersey.api.client.ClientResponse.Status;
 public class AppAPITest {
 
 	private AppAPI getAPI() {
-		return APIFactoryProvider.getDefault().getAppAPI();
+		return APIFactoryProvider.getDefault().getAPI(AppAPI.class);
 	}
 
 	@Test

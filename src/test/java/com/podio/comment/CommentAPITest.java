@@ -16,7 +16,7 @@ import com.podio.common.ReferenceType;
 public class CommentAPITest {
 
 	private CommentAPI getAPI() {
-		return APIFactoryProvider.getDefault().getCommentAPI();
+		return APIFactoryProvider.getDefault().getAPI(CommentAPI.class);
 	}
 
 	@Test

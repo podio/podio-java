@@ -14,7 +14,7 @@ import com.podio.common.ReferenceType;
 public class FileAPITest {
 
 	private FileAPI getAPI() {
-		return APIFactoryProvider.getDefault().getFileAPI();
+		return APIFactoryProvider.getDefault().getAPI(FileAPI.class);
 	}
 
 	@Test

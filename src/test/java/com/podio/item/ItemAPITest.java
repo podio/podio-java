@@ -22,7 +22,7 @@ import com.podio.rating.RatingValue;
 public class ItemAPITest {
 
 	private ItemAPI getAPI() {
-		return APIFactoryProvider.getDefault().getItemAPI();
+		return APIFactoryProvider.getDefault().getAPI(ItemAPI.class);
 	}
 
 	@Test
@@ -40,7 +40,7 @@ public class ItemAPITest {
 	public void addItemAsApp() {
 		int itemId = APIFactoryProvider
 				.getApp(1)
-				.getItemAPI()
+				.getAPI(ItemAPI.class)
 				.addItem(
 						1,
 						new ItemCreate(null,

@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import javax.ws.rs.core.MediaType;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.common.Reference;
 
@@ -14,12 +15,10 @@ import com.podio.common.Reference;
  * @see RatingType
  * @see RatingValue
  */
-public class RatingAPI {
-
-	private final ResourceFactory resourceFactory;
+public class RatingAPI extends BaseAPI {
 
 	public RatingAPI(ResourceFactory resourceFactory) {
-		this.resourceFactory = resourceFactory;
+		super(resourceFactory);
 	}
 
 	/**
@@ -40,7 +39,7 @@ public class RatingAPI {
 	 * @see RatingValue
 	 */
 	public int createRating(Reference reference, RatingType type, int value) {
-		return resourceFactory
+		return getResourceFactory()
 				.getApiResource("/rating/" + reference.toURLFragment() + type)
 				.entity(Collections.singletonMap("value", value),
 						MediaType.APPLICATION_JSON_TYPE)
@@ -56,7 +55,7 @@ public class RatingAPI {
 	 *            The type of the rating
 	 */
 	public void deleteRating(Reference reference, RatingType type) {
-		resourceFactory.getApiResource(
+		getResourceFactory().getApiResource(
 				"/rating/" + reference.toURLFragment() + type).delete();
 	}
 
@@ -197,7 +196,7 @@ public class RatingAPI {
 	 * @return The map of rating types and their values
 	 */
 	public RatingValuesMap getAllRatings(Reference reference) {
-		return resourceFactory.getApiResource(
+		return getResourceFactory().getApiResource(
 				"/rating/" + reference.toURLFragment()).get(
 				RatingValuesMap.class);
 	}
@@ -213,7 +212,7 @@ public class RatingAPI {
 	 * @return The ratings for the type
 	 */
 	public TypeRating getRatings(Reference reference, RatingType type) {
-		return resourceFactory.getApiResource(
+		return getResourceFactory().getApiResource(
 				"/rating/" + reference.toURLFragment() + type).get(
 				TypeRating.class);
 	}
@@ -230,7 +229,7 @@ public class RatingAPI {
 	 * @return The value of the rating
 	 */
 	public int getRating(Reference reference, RatingType type, int userId) {
-		return resourceFactory
+		return getResourceFactory()
 				.getApiResource(
 						"/rating/" + reference.toURLFragment() + type + "/"
 								+ userId).get(SingleRatingValue.class)

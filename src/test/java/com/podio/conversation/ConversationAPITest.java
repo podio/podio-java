@@ -15,7 +15,7 @@ import com.podio.common.ReferenceType;
 public class ConversationAPITest {
 
 	private ConversationAPI getAPI() {
-		return APIFactoryProvider.getDefault().getConversationAPI();
+		return APIFactoryProvider.getDefault().getAPI(ConversationAPI.class);
 	}
 
 	@Test

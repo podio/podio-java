@@ -15,7 +15,7 @@ import com.podio.common.Role;
 public class SpaceAPITest {
 
 	private SpaceAPI getAPI() {
-		return APIFactoryProvider.getDefault().getSpaceAPI();
+		return APIFactoryProvider.getDefault().getAPI(SpaceAPI.class);
 	}
 
 	private SpaceAPI getAPI(int userId) {

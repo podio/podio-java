@@ -10,9 +10,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.APIFactoryProvider;
+import com.podio.app.AppAPI;
 import com.podio.app.Application;
 import com.podio.item.FieldValuesUpdate;
 import com.podio.item.Item;
+import com.podio.item.ItemAPI;
 import com.podio.item.ItemCreate;
 import com.podio.item.ItemUpdate;
 
@@ -91,8 +93,8 @@ public class ItemMapTest {
 	}
 
 	private <T> ItemMap<T> getMap(int appId, Class<? extends Object> cls) {
-		Application application = APIFactoryProvider.getDefault().getAppAPI()
-				.getApp(appId);
+		Application application = APIFactoryProvider.getDefault()
+				.getAPI(AppAPI.class).getApp(appId);
 
 		ItemMap<T> itemMap = (ItemMap<T>) ItemMap.get(application, cls);
 		return itemMap;
@@ -107,7 +109,7 @@ public class ItemMapTest {
 	}
 
 	private <T> T getView(int appId, int itemId, Class<T> cls) {
-		Item item = APIFactoryProvider.getDefault().getItemAPI()
+		Item item = APIFactoryProvider.getDefault().getAPI(ItemAPI.class)
 				.getItem(itemId);
 
 		return (T) getMap(appId, cls).getView(item);

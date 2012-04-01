@@ -8,7 +8,7 @@ import com.podio.APIFactoryProvider;
 public class RootAPITest {
 
 	private RootAPI getAPI() {
-		return APIFactoryProvider.getDefault().getRootAPI();
+		return APIFactoryProvider.getDefault().getAPI(RootAPI.class);
 	}
 
 	@Test

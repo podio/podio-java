@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.contact.Profile;
 import com.podio.contact.ProfileField;
@@ -16,12 +17,10 @@ import com.sun.jersey.api.client.GenericType;
 /**
  * This area holds all the users which just includes basic operations.
  */
-public class UserAPI {
-
-	private final ResourceFactory resourceFactory;
+public class UserAPI extends BaseAPI {
 
 	public UserAPI(ResourceFactory resourceFactory) {
-		this.resourceFactory = resourceFactory;
+		super(resourceFactory);
 	}
 
 	/**
@@ -30,7 +29,7 @@ public class UserAPI {
 	 * old password has to be supplied as well.
 	 */
 	public void updateUser(UserUpdate update) {
-		resourceFactory.getApiResource("/user/")
+		getResourceFactory().getApiResource("/user/")
 				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -41,7 +40,7 @@ public class UserAPI {
 	 * @return The status of the user
 	 */
 	public UserStatus getStatus() {
-		return resourceFactory.getApiResource("/user/status").get(
+		return getResourceFactory().getApiResource("/user/status").get(
 				UserStatus.class);
 	}
 
@@ -51,7 +50,7 @@ public class UserAPI {
 	 * @return The profile for the user
 	 */
 	public Profile getProfile() {
-		return resourceFactory.getApiResource("/user/profile/").get(
+		return getResourceFactory().getApiResource("/user/profile/").get(
 				Profile.class);
 	}
 
@@ -63,7 +62,7 @@ public class UserAPI {
 	 * @return The values for the given field
 	 */
 	public <T, R> List<T> getProfileField(ProfileField<T, R> field) {
-		List<R> values = resourceFactory.getApiResource(
+		List<R> values = getResourceFactory().getApiResource(
 				"/user/profile/" + field.getName()).get(
 				new GenericType<List<R>>() {
 				});
@@ -84,7 +83,7 @@ public class UserAPI {
 	 *            The updated profile
 	 */
 	public void updateProfile(ProfileUpdate profile) {
-		resourceFactory.getApiResource("/user/profile/")
+		getResourceFactory().getApiResource("/user/profile/")
 				.entity(profile, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -98,12 +97,12 @@ public class UserAPI {
 	 */
 	public <F> void updateProfileField(ProfileField<F, ?> field, F value) {
 		if (field.isSingle()) {
-			resourceFactory
+			getResourceFactory()
 					.getApiResource("/user/profile/" + field.getName())
 					.entity(new ProfileFieldSingleValue<F>(value),
 							MediaType.APPLICATION_JSON_TYPE).put();
 		} else {
-			resourceFactory
+			getResourceFactory()
 					.getApiResource("/user/profile/" + field.getName())
 					.entity(new ProfileFieldMultiValue<F>(value),
 							MediaType.APPLICATION_JSON_TYPE).put();
@@ -135,7 +134,7 @@ public class UserAPI {
 			throw new IllegalArgumentException(
 					"Field is only valid for single value");
 		} else {
-			resourceFactory
+			getResourceFactory()
 					.getApiResource("/user/profile/" + field.getName())
 					.entity(new ProfileFieldMultiValue<F>(values),
 							MediaType.APPLICATION_JSON_TYPE).put();
@@ -150,7 +149,7 @@ public class UserAPI {
 	 *            The updated values for the profile
 	 */
 	public void updateProfile(ProfileFieldValues values) {
-		resourceFactory.getApiResource("/user/profile/")
+		getResourceFactory().getApiResource("/user/profile/")
 				.entity(values, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -160,7 +159,7 @@ public class UserAPI {
 	 * @return The active user
 	 */
 	public User getUser() {
-		return resourceFactory.getApiResource("/user/").get(User.class);
+		return getResourceFactory().getApiResource("/user/").get(User.class);
 	}
 
 	/**
@@ -171,7 +170,7 @@ public class UserAPI {
 	 *            The key of the property
 	 */
 	public boolean getProperty(String key) {
-		return resourceFactory.getApiResource("/user/property/" + key)
+		return getResourceFactory().getApiResource("/user/property/" + key)
 				.get(PropertyValue.class).getValue();
 	}
 
@@ -185,7 +184,7 @@ public class UserAPI {
 	 *            The value of the property
 	 */
 	public void setProperty(String key, boolean value) {
-		resourceFactory
+		getResourceFactory()
 				.getApiResource("/user/property/" + key)
 				.entity(new PropertyValue(value),
 						MediaType.APPLICATION_JSON_TYPE).put();
@@ -199,6 +198,6 @@ public class UserAPI {
 	 *            The key of the property that should be deleted
 	 */
 	public void deleteProperty(String key) {
-		resourceFactory.getApiResource("/user/property/" + key).delete();
+		getResourceFactory().getApiResource("/user/property/" + key).delete();
 	}
 }

@@ -2,6 +2,7 @@ package com.podio.status;
 
 import javax.ws.rs.core.MediaType;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 
 /**
@@ -13,12 +14,10 @@ import com.podio.ResourceFactory;
  * Other users can comment on a status message and indicate that they like the
  * status message.
  */
-public class StatusAPI {
-
-	private final ResourceFactory resourceFactory;
+public class StatusAPI extends BaseAPI {
 
 	public StatusAPI(ResourceFactory resourceFactory) {
-		this.resourceFactory = resourceFactory;
+		super(resourceFactory);
 	}
 
 	/**
@@ -31,7 +30,8 @@ public class StatusAPI {
 	 * @return The id of the newly created status message
 	 */
 	public int createStatus(int spaceId, StatusCreate status) {
-		return resourceFactory.getApiResource("/status/space/" + spaceId + "/")
+		return getResourceFactory()
+				.getApiResource("/status/space/" + spaceId + "/")
 				.entity(status, MediaType.APPLICATION_JSON_TYPE)
 				.post(StatusCreateResponse.class).getId();
 	}
@@ -45,7 +45,7 @@ public class StatusAPI {
 	 *            The id of the status to delete
 	 */
 	public void deleteStatus(int statusId) {
-		resourceFactory.getApiResource("/status/" + statusId).delete();
+		getResourceFactory().getApiResource("/status/" + statusId).delete();
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class StatusAPI {
 	 * @return The latest status message
 	 */
 	public Status getLatestStatus(int userId, int spaceId) {
-		return resourceFactory.getApiResource(
+		return getResourceFactory().getApiResource(
 				"/status/user/" + userId + "/space/" + spaceId + "/latest/")
 				.get(Status.class);
 	}
@@ -73,7 +73,7 @@ public class StatusAPI {
 	 * @return The status message
 	 */
 	public StatusFull getStatus(int statusId) {
-		return resourceFactory.getApiResource("/status/" + statusId).get(
+		return getResourceFactory().getApiResource("/status/" + statusId).get(
 				StatusFull.class);
 	}
 
@@ -87,7 +87,7 @@ public class StatusAPI {
 	 *            The new data for the status
 	 */
 	public void updateStatus(int statusId, StatusUpdate update) {
-		resourceFactory.getApiResource("/status/" + statusId)
+		getResourceFactory().getApiResource("/status/" + statusId)
 				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 }

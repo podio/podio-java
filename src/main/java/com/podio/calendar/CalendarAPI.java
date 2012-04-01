@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.joda.time.LocalDate;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.common.CSVUtil;
 import com.podio.common.ReferenceType;
@@ -18,18 +19,16 @@ import com.sun.jersey.api.client.WebResource;
  * 
  * Calendar entries are always sorted by date.
  */
-public class CalendarAPI {
-
-	private final ResourceFactory resourceFactory;
+public class CalendarAPI extends BaseAPI {
 
 	public CalendarAPI(ResourceFactory resourceFactory) {
-		this.resourceFactory = resourceFactory;
+		super(resourceFactory);
 	}
 
 	private List<Event> getCalendar(String path, LocalDate dateFrom,
 			LocalDate dateTo, List<Integer> spaceIds, ReferenceType... types) {
-		WebResource resource = resourceFactory.getApiResource("/calendar/"
-				+ path + "/");
+		WebResource resource = getResourceFactory().getApiResource(
+				"/calendar/" + path + "/");
 		resource = resource.queryParam("date_from",
 				DateTimeUtil.formatDate(dateFrom));
 		resource = resource.queryParam("date_to",

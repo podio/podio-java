@@ -2,6 +2,7 @@ package com.podio.subscription;
 
 import javax.ws.rs.core.MediaType;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.common.Empty;
 import com.podio.common.Reference;
@@ -10,12 +11,10 @@ import com.podio.common.Reference;
  * Subscriptions allows the user to be notified when an object is created,
  * updated, delete, comments added to it or rated.
  */
-public class SubscriptionAPI {
+public class SubscriptionAPI extends BaseAPI {
 
-	private final ResourceFactory resourceFactory;
-
-	public SubscriptionAPI(ResourceFactory baseAPI) {
-		this.resourceFactory = baseAPI;
+	public SubscriptionAPI(ResourceFactory resourceFactory) {
+		super(resourceFactory);
 	}
 
 	/**
@@ -26,9 +25,8 @@ public class SubscriptionAPI {
 	 * @return The subscription
 	 */
 	public Subscription getSubscription(int susbcriptionId) {
-		return resourceFactory
-				.getApiResource("/subscription/" + susbcriptionId).get(
-						Subscription.class);
+		return getResourceFactory().getApiResource(
+				"/subscription/" + susbcriptionId).get(Subscription.class);
 	}
 
 	/**
@@ -39,7 +37,7 @@ public class SubscriptionAPI {
 	 * @return The subscription on the object
 	 */
 	public Subscription getSubscription(Reference reference) {
-		return resourceFactory.getApiResource(
+		return getResourceFactory().getApiResource(
 				"/subscription/" + reference.toURLFragment(false)).get(
 				Subscription.class);
 	}
@@ -53,7 +51,7 @@ public class SubscriptionAPI {
 	 *            The reference to the object to subscribe to
 	 */
 	public void subscribe(Reference reference) {
-		resourceFactory
+		getResourceFactory()
 				.getApiResource(
 						"/subscription/" + reference.toURLFragment(false))
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
@@ -66,7 +64,7 @@ public class SubscriptionAPI {
 	 *            The id of the subscription
 	 */
 	public void unsubscribe(int subscriptionId) {
-		resourceFactory.getApiResource("/subscription/" + subscriptionId)
+		getResourceFactory().getApiResource("/subscription/" + subscriptionId)
 				.delete();
 	}
 
@@ -77,7 +75,7 @@ public class SubscriptionAPI {
 	 *            The reference to the object
 	 */
 	public void unsubscribe(Reference reference) {
-		resourceFactory.getApiResource(
+		getResourceFactory().getApiResource(
 				"/subscription/" + reference.toURLFragment(false)).delete();
 	}
 }

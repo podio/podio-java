@@ -4,17 +4,16 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.common.Empty;
 import com.podio.common.Reference;
 import com.sun.jersey.api.client.GenericType;
 
-public class HookAPI {
-
-	private final ResourceFactory resourceFactory;
+public class HookAPI extends BaseAPI {
 
 	public HookAPI(ResourceFactory resourceFactory) {
-		this.resourceFactory = resourceFactory;
+		super(resourceFactory);
 	}
 
 	/**
@@ -27,7 +26,7 @@ public class HookAPI {
 	 * @return The id of the newly created hook
 	 */
 	public int create(Reference object, HookCreate create) {
-		return resourceFactory
+		return getResourceFactory()
 				.getApiResource(
 						"/hook/" + object.getType() + "/" + object.getId()
 								+ "/")
@@ -42,7 +41,7 @@ public class HookAPI {
 	 *            The id of the hook
 	 */
 	public void delete(int id) {
-		resourceFactory.getApiResource("/hook/" + id).delete();
+		getResourceFactory().getApiResource("/hook/" + id).delete();
 	}
 
 	/**
@@ -54,7 +53,7 @@ public class HookAPI {
 	 * @return The list of hooks on the object
 	 */
 	public List<Hook> get(Reference object) {
-		return resourceFactory.getApiResource(
+		return getResourceFactory().getApiResource(
 				"/hook/" + object.getType() + "/" + object.getId() + "/").get(
 				new GenericType<List<Hook>>() {
 				});
@@ -70,7 +69,7 @@ public class HookAPI {
 	 *            The id of the hook to be verified
 	 */
 	public void requestVerification(int id) {
-		resourceFactory.getApiResource("/hook/" + id + "/verify/request")
+		getResourceFactory().getApiResource("/hook/" + id + "/verify/request")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -84,7 +83,7 @@ public class HookAPI {
 	 *            The code received from the call to the endpoint
 	 */
 	public void validateVerification(int id, String code) {
-		resourceFactory.getApiResource("/hook/" + id + "/verify/validate")
+		getResourceFactory().getApiResource("/hook/" + id + "/verify/validate")
 				.entity(new HookValidate(code), MediaType.APPLICATION_JSON)
 				.post();
 	}

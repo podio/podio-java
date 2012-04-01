@@ -13,7 +13,7 @@ import com.podio.APIFactoryProvider;
 public class NotificationAPITest {
 
 	private NotificationAPI getAPI() {
-		return APIFactoryProvider.getDefault().getNotificationAPI();
+		return APIFactoryProvider.getDefault().getAPI(NotificationAPI.class);
 	}
 
 	@Test

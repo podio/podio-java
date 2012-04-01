@@ -13,7 +13,7 @@ import com.podio.common.ReferenceType;
 public class HookAPITest {
 
 	private HookAPI getAPI() {
-		return APIFactoryProvider.getDefault().getHookAPI();
+		return APIFactoryProvider.getDefault().getAPI(HookAPI.class);
 	}
 
 	@Test

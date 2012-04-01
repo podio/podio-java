@@ -12,7 +12,7 @@ import com.podio.common.ReferenceType;
 public class SubscriptionAPITest {
 
 	private SubscriptionAPI getAPI() {
-		return APIFactoryProvider.getDefault().getSubscriptionAPI();
+		return APIFactoryProvider.getDefault().getAPI(SubscriptionAPI.class);
 	}
 
 	@Test

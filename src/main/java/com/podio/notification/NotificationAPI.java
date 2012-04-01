@@ -7,6 +7,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.joda.time.DateTime;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.common.CSVUtil;
 import com.podio.common.Empty;
@@ -20,12 +21,10 @@ import com.sun.jersey.api.client.WebResource;
  * either unread or viewed. Notifications have a reference to the action that
  * caused the notification.
  */
-public class NotificationAPI {
-
-	private final ResourceFactory resourceFactory;
+public class NotificationAPI extends BaseAPI {
 
 	public NotificationAPI(ResourceFactory resourceFactory) {
-		this.resourceFactory = resourceFactory;
+		super(resourceFactory);
 	}
 
 	/**
@@ -41,9 +40,8 @@ public class NotificationAPI {
 	 * @return The notification requested
 	 */
 	public Notification getNotification(int notificationId) {
-		return resourceFactory
-				.getApiResource("/notification/" + notificationId).get(
-						Notification.class);
+		return getResourceFactory().getApiResource(
+				"/notification/" + notificationId).get(Notification.class);
 	}
 
 	/**
@@ -59,8 +57,8 @@ public class NotificationAPI {
 	 */
 	public List<Notification> getInboxNew(Integer limit, Integer offset,
 			DateTime earliest) {
-		WebResource resource = resourceFactory
-				.getApiResource("/notification/inbox/new/");
+		WebResource resource = getResourceFactory().getApiResource(
+				"/notification/inbox/new/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
@@ -82,8 +80,8 @@ public class NotificationAPI {
 	 * @return The number of unread notifications
 	 */
 	public int getInboxNewCount() {
-		WebResource resource = resourceFactory
-				.getApiResource("/notification/inbox/new/count");
+		WebResource resource = getResourceFactory().getApiResource(
+				"/notification/inbox/new/count");
 
 		return resource.get(InboxNewCount.class).getNewNotifications();
 	}
@@ -121,8 +119,8 @@ public class NotificationAPI {
 			NotificationDateType dateType, Collection<NotificationType> types,
 			DateTime dateFrom, DateTime dateTo, Collection<Integer> users,
 			Boolean sent) {
-		WebResource resource = resourceFactory
-				.getApiResource("/notification/inbox/viewed/");
+		WebResource resource = getResourceFactory().getApiResource(
+				"/notification/inbox/viewed/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
@@ -162,7 +160,7 @@ public class NotificationAPI {
 	 *            The id of the notification
 	 */
 	public void markAsViewed(int notificationId) {
-		resourceFactory
+		getResourceFactory()
 				.getApiResource("/notification/" + notificationId + "/viewed")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}

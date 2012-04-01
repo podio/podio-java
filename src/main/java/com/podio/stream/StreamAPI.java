@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.common.Reference;
 import com.podio.serialize.DateTimeUtil;
@@ -14,12 +15,10 @@ import com.sun.jersey.api.client.WebResource;
  * Subscriptions allows the user to be notified when an object is created,
  * updated, delete, comments added to it or rated.
  */
-public class StreamAPI {
+public class StreamAPI extends BaseAPI {
 
-	private final ResourceFactory resourceFactory;
-
-	public StreamAPI(ResourceFactory baseAPI) {
-		this.resourceFactory = baseAPI;
+	public StreamAPI(ResourceFactory resourceFactory) {
+		super(resourceFactory);
 	}
 
 	/**
@@ -32,7 +31,7 @@ public class StreamAPI {
 	 * @return The stream object
 	 */
 	public StreamObject getStreamObject(Reference reference) {
-		return resourceFactory.getApiResource(
+		return getResourceFactory().getApiResource(
 				"/stream/" + reference.toURLFragment(false)).get(
 				StreamObject.class);
 	}
@@ -47,7 +46,7 @@ public class StreamAPI {
 	 * @return The stream object
 	 */
 	public StreamObjectV2 getStreamObjectV2(Reference reference) {
-		return resourceFactory.getApiResource(
+		return getResourceFactory().getApiResource(
 				"/stream/" + reference.toURLFragment(false) + "/v2").get(
 				StreamObjectV2.class);
 	}
@@ -206,7 +205,7 @@ public class StreamAPI {
 
 	private List<StreamObject> getStream(String path, Integer limit,
 			Integer offset, DateTime dateFrom, DateTime dateTo) {
-		WebResource resource = resourceFactory.getApiResource(path);
+		WebResource resource = getResourceFactory().getApiResource(path);
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
@@ -227,7 +226,7 @@ public class StreamAPI {
 
 	private List<StreamObjectV2> getStreamV2(String path, Integer limit,
 			Integer offset, DateTime dateFrom, DateTime dateTo) {
-		WebResource resource = resourceFactory.getApiResource(path);
+		WebResource resource = getResourceFactory().getApiResource(path);
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}

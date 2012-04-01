@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.common.Reference;
 import com.sun.jersey.api.client.GenericType;
@@ -17,12 +18,10 @@ import com.sun.jersey.api.client.GenericType;
  * 
  * Podio supports tags on statuses and items and tags that include spaces.
  */
-public class TagAPI {
-
-	private final ResourceFactory resourceFactory;
+public class TagAPI extends BaseAPI {
 
 	public TagAPI(ResourceFactory resourceFactory) {
-		this.resourceFactory = resourceFactory;
+		super(resourceFactory);
 	}
 
 	/**
@@ -35,7 +34,8 @@ public class TagAPI {
 	 *            The tags that should be added
 	 */
 	public void createTags(Reference reference, Collection<String> tags) {
-		resourceFactory.getApiResource("/tag/" + reference.toURLFragment())
+		getResourceFactory()
+				.getApiResource("/tag/" + reference.toURLFragment())
 				.entity(tags, MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -61,7 +61,8 @@ public class TagAPI {
 	 *            The tags that should now be set on the object
 	 */
 	public void updateTags(Reference reference, Collection<String> tags) {
-		resourceFactory.getApiResource("/tag/" + reference.toURLFragment())
+		getResourceFactory()
+				.getApiResource("/tag/" + reference.toURLFragment())
 				.entity(tags, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -86,7 +87,8 @@ public class TagAPI {
 	 *            The tag to remove
 	 */
 	public void removeTag(Reference reference, String tag) {
-		resourceFactory.getApiResource("/tag/" + reference.toURLFragment())
+		getResourceFactory()
+				.getApiResource("/tag/" + reference.toURLFragment())
 				.queryParam("text", tag).delete();
 	}
 
@@ -99,8 +101,8 @@ public class TagAPI {
 	 * @return The list of tags with their count
 	 */
 	public List<TagCount> getTagsOnApp(int appId) {
-		return resourceFactory.getApiResource("/tag/app/" + appId + "/").get(
-				new GenericType<List<TagCount>>() {
+		return getResourceFactory().getApiResource("/tag/app/" + appId + "/")
+				.get(new GenericType<List<TagCount>>() {
 				});
 	}
 
@@ -114,8 +116,9 @@ public class TagAPI {
 	 * @return The list of tags with their count
 	 */
 	public List<TagCount> getTagsOnSpace(int spaceId) {
-		return resourceFactory.getApiResource("/tag/space/" + spaceId + "/")
-				.get(new GenericType<List<TagCount>>() {
+		return getResourceFactory().getApiResource(
+				"/tag/space/" + spaceId + "/").get(
+				new GenericType<List<TagCount>>() {
 				});
 	}
 
@@ -130,7 +133,8 @@ public class TagAPI {
 	 * @return The list of objects in the app that have the given tag
 	 */
 	public List<TagReference> getTagsOnAppWithText(int appId, String text) {
-		return resourceFactory.getApiResource("/tag/app/" + appId + "/search/")
+		return getResourceFactory()
+				.getApiResource("/tag/app/" + appId + "/search/")
 				.queryParam("text", text)
 				.get(new GenericType<List<TagReference>>() {
 				});
@@ -147,7 +151,7 @@ public class TagAPI {
 	 * @return The list of objects in the space that have the given tag
 	 */
 	public List<TagReference> getTagsOnSpaceWithText(int spaceId, String text) {
-		return resourceFactory
+		return getResourceFactory()
 				.getApiResource("/tag/space/" + spaceId + "/search/")
 				.queryParam("text", text)
 				.get(new GenericType<List<TagReference>>() {

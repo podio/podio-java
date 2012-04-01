@@ -6,6 +6,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.joda.time.LocalDate;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.common.Empty;
 import com.podio.common.Reference;
@@ -47,12 +48,10 @@ import com.sun.jersey.api.client.WebResource;
  * <li>incomplete: Mark the task as being incomplete
  * </ul>
  */
-public class TaskAPI {
-
-	private final ResourceFactory resourceFactory;
+public class TaskAPI extends BaseAPI {
 
 	public TaskAPI(ResourceFactory resourceFactory) {
-		this.resourceFactory = resourceFactory;
+		super(resourceFactory);
 	}
 
 	/**
@@ -63,8 +62,8 @@ public class TaskAPI {
 	 * @return The retrieved task
 	 */
 	public Task getTask(int taskId) {
-		return resourceFactory.getApiResource("/task/" + taskId)
-				.get(Task.class);
+		return getResourceFactory().getApiResource("/task/" + taskId).get(
+				Task.class);
 	}
 
 	/**
@@ -77,7 +76,7 @@ public class TaskAPI {
 	 *            The id of the user the task should be assigned to
 	 */
 	public void assignTask(int taskId, int responsible) {
-		resourceFactory
+		getResourceFactory()
 				.getApiResource("/task/" + taskId + "/assign")
 				.entity(new AssignValue(responsible),
 						MediaType.APPLICATION_JSON_TYPE).post();
@@ -90,7 +89,7 @@ public class TaskAPI {
 	 *            The id of the task to nark as complete
 	 */
 	public void completeTask(int taskId) {
-		resourceFactory.getApiResource("/task/" + taskId + "/complete")
+		getResourceFactory().getApiResource("/task/" + taskId + "/complete")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -101,7 +100,7 @@ public class TaskAPI {
 	 *            The id of the task to mark as incomplete
 	 */
 	public void incompleteTask(int taskId) {
-		resourceFactory.getApiResource("/task/" + taskId + "/incomplete")
+		getResourceFactory().getApiResource("/task/" + taskId + "/incomplete")
 				.entity(new Empty(), MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
@@ -114,7 +113,7 @@ public class TaskAPI {
 	 *            The new due date of the task
 	 */
 	public void updateDueDate(int taskId, LocalDate dueDate) {
-		resourceFactory
+		getResourceFactory()
 				.getApiResource("/task/" + taskId + "/due_date")
 				.entity(new TaskDueDate(dueDate),
 						MediaType.APPLICATION_JSON_TYPE).put();
@@ -130,7 +129,7 @@ public class TaskAPI {
 	 *            <code>false</code> otherwise
 	 */
 	public void updatePrivate(int taskId, boolean priv) {
-		resourceFactory.getApiResource("/task/" + taskId + "/private")
+		getResourceFactory().getApiResource("/task/" + taskId + "/private")
 				.entity(new TaskPrivate(priv), MediaType.APPLICATION_JSON_TYPE)
 				.put();
 	}
@@ -144,7 +143,7 @@ public class TaskAPI {
 	 *            The new text of the task
 	 */
 	public void updateText(int taskId, String text) {
-		resourceFactory.getApiResource("/task/" + taskId + "/text")
+		getResourceFactory().getApiResource("/task/" + taskId + "/text")
 				.entity(new TaskText(text), MediaType.APPLICATION_JSON_TYPE)
 				.put();
 	}
@@ -157,7 +156,8 @@ public class TaskAPI {
 	 * @return The id of the newly created task
 	 */
 	public int createTask(TaskCreate task, boolean silent) {
-		TaskCreateResponse response = resourceFactory.getApiResource("/task/")
+		TaskCreateResponse response = getResourceFactory()
+				.getApiResource("/task/")
 				.queryParam("silent", silent ? "1" : "0")
 				.entity(task, MediaType.APPLICATION_JSON_TYPE)
 				.post(TaskCreateResponse.class);
@@ -176,7 +176,7 @@ public class TaskAPI {
 	 */
 	public int createTaskWithReference(TaskCreate task, Reference reference,
 			boolean silent) {
-		return resourceFactory
+		return getResourceFactory()
 				.getApiResource(
 						"/task/" + reference.getType().name().toLowerCase()
 								+ "/" + reference.getId() + "/")
@@ -195,7 +195,7 @@ public class TaskAPI {
 	 * @return The list of tasks
 	 */
 	public List<Task> getTasksWithReference(Reference reference) {
-		return resourceFactory.getApiResource(
+		return getResourceFactory().getApiResource(
 				"/task/" + reference.getType().name().toLowerCase() + "/"
 						+ reference.getId() + "/").get(
 				new GenericType<List<Task>>() {
@@ -212,7 +212,7 @@ public class TaskAPI {
 	 * @return The tasks grouped by due date
 	 */
 	public TasksByDue getActiveTasks() {
-		return resourceFactory.getApiResource("/task/active/").get(
+		return getResourceFactory().getApiResource("/task/active/").get(
 				TasksByDue.class);
 	}
 
@@ -222,8 +222,8 @@ public class TaskAPI {
 	 * @return The tasks grouped by due date
 	 */
 	public TasksByDue getAssignedActiveTasks() {
-		return resourceFactory.getApiResource("/task/assigned/active/").get(
-				TasksByDue.class);
+		return getResourceFactory().getApiResource("/task/assigned/active/")
+				.get(TasksByDue.class);
 	}
 
 	/**
@@ -233,7 +233,7 @@ public class TaskAPI {
 	 * @return The list of tasks ordered by date of completion
 	 */
 	public List<Task> getCompletedTasks() {
-		return resourceFactory.getApiResource("/task/completed/").get(
+		return getResourceFactory().getApiResource("/task/completed/").get(
 				new GenericType<List<Task>>() {
 				});
 	}
@@ -248,7 +248,7 @@ public class TaskAPI {
 	 * @return The tasks grouped by due date
 	 */
 	public TasksByDue getTasksInSpaceByDue(int spaceId) {
-		return resourceFactory
+		return getResourceFactory()
 				.getApiResource("/task/in_space/" + spaceId + "/")
 				.queryParam("sort_by", "due_date").get(TasksByDue.class);
 	}
@@ -263,7 +263,7 @@ public class TaskAPI {
 	 * @return The tasks grouped by responsible
 	 */
 	public List<TasksWithResponsible> getTasksInSpaceByResponsible(int spaceId) {
-		return resourceFactory
+		return getResourceFactory()
 				.getApiResource("/task/in_space/" + spaceId + "/")
 				.queryParam("sort_by", "responsible")
 				.get(new GenericType<List<TasksWithResponsible>>() {
@@ -288,7 +288,8 @@ public class TaskAPI {
 	 * @return The task totals for the given space
 	 */
 	public TaskTotals getTaskTotals(Integer spaceId) {
-		WebResource resource = resourceFactory.getApiResource("/task/total");
+		WebResource resource = getResourceFactory().getApiResource(
+				"/task/total");
 		if (spaceId != null) {
 			resource = resource.queryParam("space_id", spaceId.toString());
 		}

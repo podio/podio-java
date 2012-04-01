@@ -14,7 +14,7 @@ import com.podio.common.ReferenceType;
 public class CalendarAPITest {
 
 	private CalendarAPI getAPI() {
-		return APIFactoryProvider.getDefault().getCalendarAPI();
+		return APIFactoryProvider.getDefault().getAPI(CalendarAPI.class);
 	}
 
 	@Test

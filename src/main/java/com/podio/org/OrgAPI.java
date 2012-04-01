@@ -5,16 +5,15 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
+import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.space.Space;
 import com.sun.jersey.api.client.GenericType;
 
-public class OrgAPI {
-
-	private final ResourceFactory resourceFactory;
+public class OrgAPI extends BaseAPI {
 
 	public OrgAPI(ResourceFactory resourceFactory) {
-		this.resourceFactory = resourceFactory;
+		super(resourceFactory);
 	}
 
 	/**
@@ -25,7 +24,7 @@ public class OrgAPI {
 	 * @return The data for the newly created organization
 	 */
 	public OrganizationCreateResponse createOrganization(OrganizationCreate data) {
-		return resourceFactory.getApiResource("/org/")
+		return getResourceFactory().getApiResource("/org/")
 				.entity(data, MediaType.APPLICATION_JSON_TYPE)
 				.post(OrganizationCreateResponse.class);
 	}
@@ -40,7 +39,7 @@ public class OrgAPI {
 	 *            The new data
 	 */
 	public void updateOrganization(int orgId, OrganizationCreate data) {
-		resourceFactory.getApiResource("/org/" + orgId)
+		getResourceFactory().getApiResource("/org/" + orgId)
 				.entity(data, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -52,7 +51,7 @@ public class OrgAPI {
 	 * @return The organization
 	 */
 	public Organization getOrganization(int orgId) {
-		return resourceFactory.getApiResource("/org/" + orgId).get(
+		return getResourceFactory().getApiResource("/org/" + orgId).get(
 				Organization.class);
 	}
 
@@ -62,7 +61,7 @@ public class OrgAPI {
 	 * @return The organizations the user is member of
 	 */
 	public List<OrganizationWithSpaces> getOrganizations() {
-		return Arrays.asList(resourceFactory.getApiResource("/org/").get(
+		return Arrays.asList(getResourceFactory().getApiResource("/org/").get(
 				OrganizationWithSpaces[].class));
 	}
 
@@ -75,7 +74,7 @@ public class OrgAPI {
 	 * @return The organization
 	 */
 	public OrganizationMini getOrganizationByURL(String url) {
-		return resourceFactory.getApiResource("/org/url")
+		return getResourceFactory().getApiResource("/org/url")
 				.queryParam("url", url).get(OrganizationMini.class);
 	}
 
@@ -88,7 +87,8 @@ public class OrgAPI {
 	 * @return The statistics
 	 */
 	public OrganizationStatistics getOrganizationStatistics(int orgId) {
-		return resourceFactory.getApiResource("/org/" + orgId + "/statistics")
+		return getResourceFactory()
+				.getApiResource("/org/" + orgId + "/statistics")
 				.queryParam("all_counts", "1")
 				.get(OrganizationStatistics.class);
 	}
@@ -103,8 +103,8 @@ public class OrgAPI {
 	 * @return The organizations with spaces that are shared with the user
 	 */
 	public List<OrganizationWithSpaces> getSharedOrganizations(int userId) {
-		return resourceFactory.getApiResource("/org/shared/" + userId).get(
-				new GenericType<List<OrganizationWithSpaces>>() {
+		return getResourceFactory().getApiResource("/org/shared/" + userId)
+				.get(new GenericType<List<OrganizationWithSpaces>>() {
 				});
 	}
 
@@ -121,7 +121,7 @@ public class OrgAPI {
 	 * @return The matching space
 	 */
 	public Space getSpaceByURL(int orgId, String url) {
-		return resourceFactory.getApiResource(
+		return getResourceFactory().getApiResource(
 				"/org/" + orgId + "/space/url/" + url).get(Space.class);
 	}
 
@@ -133,8 +133,8 @@ public class OrgAPI {
 	 * @return The spaces in the organization
 	 */
 	public List<Space> getSpaces(int orgId) {
-		return resourceFactory.getApiResource("/org/" + orgId + "/space/").get(
-				new GenericType<List<Space>>() {
+		return getResourceFactory().getApiResource("/org/" + orgId + "/space/")
+				.get(new GenericType<List<Space>>() {
 				});
 	}
 }

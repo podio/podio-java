@@ -15,7 +15,7 @@ import com.podio.common.ReferenceType;
 public class TaskAPITest {
 
 	private TaskAPI getAPI() {
-		return APIFactoryProvider.getDefault().getTaskAPI();
+		return APIFactoryProvider.getDefault().getAPI(TaskAPI.class);
 	}
 
 	@Test
