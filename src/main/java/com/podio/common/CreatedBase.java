@@ -20,6 +20,7 @@ public class CreatedBase {
 	 */
 	private DateTime createdOn;
 
+	@JsonProperty("created_by")
 	public AuthorizationEntity getCreatedBy() {
 		return createdBy;
 	}
@@ -29,6 +30,7 @@ public class CreatedBase {
 		this.createdBy = createdBy;
 	}
 
+	@JsonProperty("created_via")
 	public AuthorizationInterface getCreatedVia() {
 		return createdVia;
 	}

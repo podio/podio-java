@@ -5,8 +5,7 @@ import org.codehaus.jackson.annotate.JsonValue;
 
 public enum TaskStatus {
 
-	ACTIVE,
-	COMPLETED;
+	ACTIVE, COMPLETED, DELETED;
 
 	@Override
 	@JsonValue

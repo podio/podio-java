@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.APIFactoryProvider;
+import com.podio.common.Role;
 import com.podio.space.Space;
 import com.podio.space.SpaceMini;
 
@@ -108,5 +109,17 @@ public class OrgAPITest {
 
 		Assert.assertEquals(spaces.size(), 3);
 		Assert.assertEquals(spaces.get(0).getId(), 1);
+	}
+
+	@Test
+	public void getMembers() {
+		List<OrganizationMember> members = getAPI().getMembers(1);
+
+		Assert.assertEquals(members.size(), 4);
+		OrganizationMember member = members.get(0);
+		Assert.assertEquals(member.getUser().getId(), 4);
+		Assert.assertEquals(member.getProfile().getProfileId(), 4);
+		Assert.assertEquals(member.getRole(), Role.REGULAR);
+		Assert.assertEquals(member.getSpaceMemberships(), 1);
 	}
 }

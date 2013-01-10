@@ -137,4 +137,21 @@ public class OrgAPI extends BaseAPI {
 				.get(new GenericType<List<Space>>() {
 				});
 	}
+
+	/**
+	 * Returns the members, both invited and active, of the given organization.
+	 * This method is only available for organization administrators. For users
+	 * only invited, only very limited information will be returned for the user
+	 * and profile.
+	 * 
+	 * @param orgId
+	 *            The id of the organization
+	 * @return The list of members on the organization with detailed information
+	 */
+	public List<OrganizationMember> getMembers(int orgId) {
+		return getResourceFactory()
+				.getApiResource("/org/" + orgId + "/member/").get(
+						new GenericType<List<OrganizationMember>>() {
+						});
+	}
 }

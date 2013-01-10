@@ -94,7 +94,7 @@ public class User {
 		return createdOn;
 	}
 
-	@JsonProperty("created_by")
+	@JsonProperty("created_on")
 	public void setCreatedOn(DateTime createdOn) {
 		this.createdOn = createdOn;
 	}
