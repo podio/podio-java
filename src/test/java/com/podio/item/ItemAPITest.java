@@ -259,26 +259,4 @@ public class ItemAPITest {
 		Assert.assertEquals(response.getItems().size(), 1);
 		Assert.assertEquals(response.getItems().get(0).getId(), 2);
 	}
-
-	// @Test
-	// public void getItemsByFieldAndText() {
-	// List<ItemMini> items = getAPI().getItemsByFieldAndTitle(5, "bug");
-	//
-	// Assert.assertEquals(items.size(), 1);
-	// Assert.assertEquals(items.get(0).getId(), 2);
-	// }
-
-	@Test
-	public void getNextItem() {
-		ItemMicro item = getAPI().getNextItem(1);
-
-		Assert.assertEquals(item.getId(), 2);
-	}
-
-	@Test
-	public void getPreviousItem() {
-		ItemMicro item = getAPI().getPreviousItem(2);
-
-		Assert.assertEquals(item.getId(), 1);
-	}
 }

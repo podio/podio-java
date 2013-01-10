@@ -298,30 +298,4 @@ public class ItemAPI extends BaseAPI {
 		return getItems(appId, null, null, null, null,
 				new FilterByValue<String>(new ExternalIdFilterBy(), externalId));
 	}
-
-	/**
-	 * Returns the next item after the given item id. This takes into
-	 * consideration the last used filter on the app.
-	 * 
-	 * @param itemId
-	 *            The id of the item
-	 * @return The next item
-	 */
-	public ItemMicro getNextItem(int itemId) {
-		return getResourceFactory().getApiResource("/item/" + itemId + "/next")
-				.get(ItemMicro.class);
-	}
-
-	/**
-	 * Returns the previous item relative to the given item. This takes into
-	 * consideration the last used filter on the app.
-	 * 
-	 * @param itemId
-	 *            The id of the item
-	 * @return The previous item
-	 */
-	public ItemMicro getPreviousItem(int itemId) {
-		return getResourceFactory().getApiResource(
-				"/item/" + itemId + "/previous").get(ItemMicro.class);
-	}
 }

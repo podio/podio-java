@@ -49,22 +49,6 @@ public class StatusAPI extends BaseAPI {
 	}
 
 	/**
-	 * Retrieves the latest status message on a space from a user. This is
-	 * usually displayed on profile pages.
-	 * 
-	 * @param userId
-	 *            The id of the user
-	 * @param spaceId
-	 *            The id of the space
-	 * @return The latest status message
-	 */
-	public Status getLatestStatus(int userId, int spaceId) {
-		return getResourceFactory().getApiResource(
-				"/status/user/" + userId + "/space/" + spaceId + "/latest/")
-				.get(Status.class);
-	}
-
-	/**
 	 * Retrieves a status message by its id. The id of the status message is
 	 * usually gotten from the stream.
 	 * 

@@ -3,9 +3,8 @@ package com.podio.calendar;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
+import com.podio.app.ApplicationMini;
 import com.podio.common.ReferenceType;
-import com.podio.org.OrganizationWithSpaces;
-import com.podio.space.SpaceMini;
 
 public class Event {
 
@@ -45,14 +44,9 @@ public class Event {
 	private String link;
 
 	/**
-	 * The space the object is on, if any
+	 * The app the event comes from, if any
 	 */
-	private SpaceMini space;
-
-	/**
-	 * The organization the object is on, if any
-	 */
-	private OrganizationWithSpaces organization;
+	private ApplicationMini application;
 
 	public ReferenceType getType() {
 		return type;
@@ -110,21 +104,13 @@ public class Event {
 		this.link = link;
 	}
 
-	public SpaceMini getSpace() {
-		return space;
+	@JsonProperty("app")
+	public ApplicationMini getApplication() {
+		return application;
 	}
 
-	public void setSpace(SpaceMini space) {
-		this.space = space;
-	}
-
-	@JsonProperty("org")
-	public OrganizationWithSpaces getOrganization() {
-		return organization;
-	}
-
-	@JsonProperty("org")
-	public void setOrganization(OrganizationWithSpaces organization) {
-		this.organization = organization;
+	@JsonProperty("app")
+	public void setApplication(ApplicationMini application) {
+		this.application = application;
 	}
 }

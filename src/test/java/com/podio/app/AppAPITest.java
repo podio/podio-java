@@ -39,23 +39,11 @@ public class AppAPITest {
 		Assert.assertEquals(app.getConfiguration().getDefaultView(),
 				ApplicationViewType.BADGE);
 
-		Assert.assertEquals(app.getFields().size(), 16);
+		Assert.assertEquals(app.getFields().size(), 18);
 		ApplicationField stateField = app.getFields().get(0);
 		Assert.assertEquals(stateField.getType(), ApplicationFieldType.STATE);
 		Assert.assertEquals(stateField.getConfiguration().getLabel(),
 				"Is hired?");
-	}
-
-	@Test
-	public void getAppShort() throws JSONException {
-		Application app = getAPI().getApp(1, ApplicationGetType.SHORT);
-
-		Assert.assertEquals(app.getId(), 1);
-		Assert.assertNotNull(app.getConfiguration());
-		Assert.assertEquals(app.getConfiguration().getDefaultView(),
-				ApplicationViewType.BADGE);
-
-		Assert.assertNull(app.getFields());
 	}
 
 	@Test
@@ -165,7 +153,9 @@ public class AppAPITest {
 	@Test
 	public void getAvailableApps() {
 		List<ApplicationMicro> apps = getAPI().getAvailableApps(1);
-		Assert.assertEquals(apps.size(), 0);
+		Assert.assertEquals(apps.size(), 1);
+
+		Assert.assertEquals(apps.get(0).getId(), 15);
 	}
 
 	@Test

@@ -89,7 +89,12 @@ public enum ApplicationFieldType {
 	/**
 	 * A question
 	 */
-	QUESTION;
+	QUESTION,
+
+	/**
+	 * A generic file field to hold many kinds of files
+	 */
+	FILE;
 
 	@Override
 	@JsonValue

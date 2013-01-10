@@ -67,19 +67,6 @@ public class SpaceAPI extends BaseAPI {
 	}
 
 	/**
-	 * Returns the statistics for the space with the number of members,
-	 * statuses, items and comments.
-	 * 
-	 * @param spaceId
-	 *            The id of the space
-	 * @return The statistics for the space
-	 */
-	public SpaceStatistics getSpaceStatistics(int spaceId) {
-		return getResourceFactory().getApiResource(
-				"/space/" + spaceId + "/statistics").get(SpaceStatistics.class);
-	}
-
-	/**
 	 * Used to get the details of an active users membership of a space.
 	 * 
 	 * @param spaceId

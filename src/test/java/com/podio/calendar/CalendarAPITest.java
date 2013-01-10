@@ -34,8 +34,7 @@ public class CalendarAPITest {
 				0, DateTimeZone.UTC));
 		Assert.assertEquals(event.getLink(),
 				"https://hoist.podio.com/api/item/1");
-		Assert.assertEquals(event.getSpace().getId(), 1);
-		Assert.assertEquals(event.getOrganization().getId(), 1);
+		Assert.assertEquals(event.getApplication().getId(), 1);
 	}
 
 	@Test
@@ -49,6 +48,6 @@ public class CalendarAPITest {
 	public void getGlobalCalendar() {
 		List<Event> events = getAPI().getGlobal(new LocalDate(2010, 8, 1),
 				new LocalDate(2010, 8, 31), null);
-		Assert.assertEquals(events.size(), 3);
+		Assert.assertEquals(events.size(), 4);
 	}
 }

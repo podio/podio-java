@@ -47,8 +47,8 @@ public class TagAPITest {
 	public void getTagsOnSpace() {
 		List<TagCount> tags = getAPI().getTagsOnSpace(1);
 
-		Assert.assertEquals(tags.size(), 4);
-		Assert.assertEquals(tags.get(0).getText(), "file upload");
+		Assert.assertEquals(tags.size(), 3);
+		Assert.assertEquals(tags.get(0).getText(), "problems");
 		Assert.assertEquals(tags.get(0).getCount(), 1);
 	}
 
@@ -73,22 +73,14 @@ public class TagAPITest {
 		List<TagReference> references = getAPI().getTagsOnSpaceWithText(1,
 				"release");
 
-		Assert.assertEquals(references.size(), 2);
-		Assert.assertEquals(references.get(0).getType(), ReferenceType.STATUS);
-		Assert.assertEquals(references.get(0).getId(), 1);
-		Assert.assertEquals(
-				references.get(0).getTitle(),
-				"This is going to be legen- wait for it -dary. @Andreas Haugstrup Now it's up to you to make it ha...");
-		Assert.assertEquals(references.get(0).getCreatedOn(), new DateTime(
-				2010, 8, 12, 17, 9, 0, 0, DateTimeZone.UTC));
-		Assert.assertEquals(references.get(0).getLink(),
-				"https://hoist.podio.com/api/status/1");
-		Assert.assertEquals(references.get(1).getType(), ReferenceType.ITEM);
-		Assert.assertEquals(references.get(1).getId(), 1);
-		Assert.assertEquals(references.get(1).getTitle(), "æøå");
-		Assert.assertEquals(references.get(1).getCreatedOn(), new DateTime(
-				2010, 8, 2, 16, 0, 0, 0, DateTimeZone.UTC));
-		Assert.assertEquals(references.get(1).getLink(),
+		Assert.assertEquals(references.size(), 1);
+		TagReference reference = references.get(0);
+		Assert.assertEquals(reference.getType(), ReferenceType.ITEM);
+		Assert.assertEquals(reference.getId(), 1);
+		Assert.assertEquals(reference.getTitle(), "æøå");
+		Assert.assertEquals(reference.getCreatedOn(), new DateTime(2010, 8, 2,
+				16, 0, 0, 0, DateTimeZone.UTC));
+		Assert.assertEquals(reference.getLink(),
 				"https://hoist.podio.com/api/item/1");
 	}
 }

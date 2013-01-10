@@ -62,8 +62,9 @@ public class ConversationAPITest {
 		List<Conversation> conversations = getAPI().getConversationsOnObject(
 				new Reference(ReferenceType.ITEM, 1));
 
-		Assert.assertEquals(conversations.size(), 1);
-		Assert.assertEquals(conversations.get(0).getId(), 1);
+		Assert.assertEquals(conversations.size(), 2);
+		Assert.assertEquals(conversations.get(0).getId(), 6);
+		Assert.assertEquals(conversations.get(1).getId(), 1);
 	}
 
 	@Test

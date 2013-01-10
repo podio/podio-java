@@ -16,7 +16,7 @@ public class EmbedAPITest {
 		Embed embed = getAPI().createEmbed("https://podio.com");
 
 		Assert.assertEquals(embed.getOriginalUrl(), "https://podio.com");
-		Assert.assertEquals(embed.getResolvedUrl(), "https://podio.com");
+		Assert.assertEquals(embed.getResolvedUrl(), "https://podio.com/");
 		Assert.assertEquals(embed.getType(), EmbedType.LINK);
 		Assert.assertEquals(embed.getTitle(), "Podio");
 		Assert.assertEquals(

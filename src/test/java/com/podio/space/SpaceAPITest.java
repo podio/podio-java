@@ -59,19 +59,6 @@ public class SpaceAPITest {
 	}
 
 	@Test
-	public void getSpaceStatistics() {
-		SpaceStatistics statistics = getAPI().getSpaceStatistics(1);
-
-		Assert.assertEquals(statistics.getCreatedOn(), new DateTime(2010, 8, 9,
-				14, 49, 0, 0, DateTimeZone.UTC));
-		Assert.assertEquals(statistics.getComments(), 5);
-		Assert.assertEquals(statistics.getApps(), 1);
-		Assert.assertEquals(statistics.getItems(), 3);
-		Assert.assertEquals(statistics.getMembers(), 3);
-		Assert.assertEquals(statistics.getStatuses(), 2);
-	}
-
-	@Test
 	public void getSpaceMembership() {
 		SpaceMember member = getAPI().getSpaceMembership(1, 1);
 

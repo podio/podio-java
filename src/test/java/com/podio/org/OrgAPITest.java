@@ -77,11 +77,11 @@ public class OrgAPITest {
 		OrganizationStatistics stats = getAPI().getOrganizationStatistics(1);
 
 		Assert.assertEquals(stats.getId(), 1);
-		Assert.assertEquals(stats.getAppsCount(), 1);
+		Assert.assertEquals(stats.getAppsCount(), 3);
 		Assert.assertEquals(stats.getAvailableInvitations(), 0);
-		Assert.assertEquals(stats.getItemsCount(), 3);
+		Assert.assertEquals(stats.getItemsCount(), 7);
 		Assert.assertNotNull(stats.getLastActivityOn());
-		Assert.assertEquals(stats.getSpacesCount(), 4);
+		Assert.assertEquals(stats.getSpacesCount(), 5);
 		Assert.assertEquals(stats.getUsersCount(), 0);
 	}
 

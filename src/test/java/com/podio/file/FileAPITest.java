@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.podio.APIFactoryProvider;
-import com.podio.common.ReferenceType;
 
 public class FileAPITest {
 
@@ -46,34 +45,12 @@ public class FileAPITest {
 	}
 
 	@Test
-	public void getLatestOnSpace() {
-		List<File> files = getAPI().getLatestOnSpace(1, null, null);
-		Assert.assertEquals(files.size(), 5);
-
-		File file = files.get(1);
-		Assert.assertEquals(file.getContext().getId(), 1);
-		Assert.assertEquals(file.getContext().getType(), ReferenceType.ITEM);
-		Assert.assertEquals(file.getContext().getTitle(), "æøå");
-	}
-
-	@Test
-	public void getLatestOnApp() {
-		List<File> files = getAPI().getLatestOnApp(1, null, null);
-		Assert.assertEquals(files.size(), 1);
-
-		File file = files.get(0);
-		Assert.assertEquals(file.getContext().getId(), 1);
-		Assert.assertEquals(file.getContext().getType(), ReferenceType.ITEM);
-		Assert.assertEquals(file.getContext().getTitle(), "æøå");
-	}
-
-	@Test
 	public void getOnSpace() {
 		List<File> files = getAPI().getOnSpace(1, null, null);
 		Assert.assertEquals(files.size(), 5);
 
 		File file = files.get(0);
-		Assert.assertEquals(file.getId(), 32);
+		Assert.assertEquals(file.getId(), 31);
 	}
 
 	@Test

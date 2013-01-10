@@ -85,10 +85,9 @@ public final class ResourceFactory {
 
 	private JacksonJsonProvider getJsonProvider() {
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		mapper.configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS, false);
-		mapper.getSerializationConfig().setSerializationInclusion(
-				Inclusion.NON_NULL);
+		mapper.disable(Feature.FAIL_ON_UNKNOWN_PROPERTIES);
+		mapper.disable(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS);
+		mapper.setSerializationInclusion(Inclusion.NON_NULL);
 
 		CustomSerializerFactory serializerFactory = new CustomSerializerFactory();
 		serializerFactory.addSpecificMapping(DateTime.class,

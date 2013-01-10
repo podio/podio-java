@@ -73,15 +73,15 @@ public class ContactAPITest {
 		List<Profile> contacts = getAPI().getTopContacts(2, ProfileType.FULL);
 
 		Assert.assertEquals(contacts.size(), 2);
-		Assert.assertEquals(contacts.get(0).getUserId().intValue(), 4);
-		Assert.assertEquals(contacts.get(1).getUserId().intValue(), 2);
+		Assert.assertEquals(contacts.get(0).getUserId().intValue(), 1);
+		Assert.assertEquals(contacts.get(1).getUserId().intValue(), 4);
 	}
 
 	@Test
 	public void getContactTotals() {
 		ContactTotal total = getAPI().getContactTotal();
 
-		Assert.assertEquals(total.getUser().getCount(), 3);
+		Assert.assertEquals(total.getUser().getCount(), 5);
 	}
 
 	@Test

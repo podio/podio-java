@@ -11,11 +11,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.joda.time.LocalDate;
 
 import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
-import com.podio.serialize.DateTimeUtil;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.WebResource.Builder;
@@ -135,32 +133,6 @@ public class FileAPI extends BaseAPI {
 	}
 
 	/**
-	 * Returns the latest files added to the app sorted descending by the time
-	 * the file was uploaded. This includes both files from items directly and
-	 * from comments to items.
-	 * 
-	 * @param limit
-	 *            The limit of how many files should be returned. Defaults to 10
-	 *            and cannot be any higher than 50.
-	 * @param latest
-	 *            The latest date to return files from. Defaults to no limit.
-	 */
-	public List<File> getLatestOnApp(int appId, Integer limit, LocalDate latest) {
-		WebResource resource = getResourceFactory().getApiResource(
-				"/file/app/" + appId + "/latest/");
-		if (limit != null) {
-			resource = resource.queryParam("limit", limit.toString());
-		}
-		if (latest != null) {
-			resource = resource.queryParam("latest",
-					DateTimeUtil.formatDate(latest));
-		}
-
-		return resource.get(new GenericType<List<File>>() {
-		});
-	}
-
-	/**
 	 * Returns all the files related to the items in the application. This
 	 * includes files both on the item itself and in comments on the item.
 	 * 
@@ -179,32 +151,6 @@ public class FileAPI extends BaseAPI {
 		}
 		if (offset != null) {
 			resource = resource.queryParam("offset", offset.toString());
-		}
-
-		return resource.get(new GenericType<List<File>>() {
-		});
-	}
-
-	/**
-	 * Returns the latest files on the space order descending by the date the
-	 * file was uploaded.
-	 * 
-	 * @param limit
-	 *            The limit of how many files should be returned. Defaults to 10
-	 *            and cannot be any higher than 50.
-	 * @param latest
-	 *            The latest date to return files from. Defaults to no limit.
-	 */
-	public List<File> getLatestOnSpace(int spaceId, Integer limit,
-			LocalDate latest) {
-		WebResource resource = getResourceFactory().getApiResource(
-				"/file/space/" + spaceId + "/latest/");
-		if (limit != null) {
-			resource = resource.queryParam("limit", limit.toString());
-		}
-		if (latest != null) {
-			resource = resource.queryParam("latest",
-					DateTimeUtil.formatDate(latest));
 		}
 
 		return resource.get(new GenericType<List<File>>() {

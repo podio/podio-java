@@ -30,27 +30,8 @@ public class AppAPI extends BaseAPI {
 	 * @return The full definition of the app
 	 */
 	public Application getApp(int appId) {
-		return getApp(appId, ApplicationGetType.FULL);
-	}
-
-	/**
-	 * Gets the definition of an app and can include configuration and fields.
-	 * This method will always return the latest revision of the app definition.
-	 * 
-	 * @param appId
-	 *            The id of the app to be returned
-	 * @param type
-	 *            The type of the view of the app requested. Can be either FULL
-	 *            for the full definition or SHORT for just the short
-	 *            definition, which does not include the fields. If not
-	 *            specified the full definition will be returned.
-	 * 
-	 * @return The definition of the app
-	 */
-	public Application getApp(int appId, ApplicationGetType type) {
-		return getResourceFactory().getApiResource("/app/" + appId)
-				.queryParam("type", type.name().toLowerCase())
-				.get(Application.class);
+		return getResourceFactory().getApiResource("/app/" + appId).get(
+				Application.class);
 	}
 
 	/**

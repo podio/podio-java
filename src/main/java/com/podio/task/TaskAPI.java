@@ -11,7 +11,6 @@ import com.podio.ResourceFactory;
 import com.podio.common.Empty;
 import com.podio.common.Reference;
 import com.sun.jersey.api.client.GenericType;
-import com.sun.jersey.api.client.WebResource;
 
 /**
  * Tasks are used to track what work has to be done. Tasks have the following
@@ -236,64 +235,5 @@ public class TaskAPI extends BaseAPI {
 		return getResourceFactory().getApiResource("/task/completed/").get(
 				new GenericType<List<Task>>() {
 				});
-	}
-
-	/**
-	 * Returns all the tasks that are related to the space. It includes tasks
-	 * with a direct reference to the space, and tasks with an indirect
-	 * reference to the space (like items and status updates).
-	 * 
-	 * @param spaceId
-	 *            The id of the space
-	 * @return The tasks grouped by due date
-	 */
-	public TasksByDue getTasksInSpaceByDue(int spaceId) {
-		return getResourceFactory()
-				.getApiResource("/task/in_space/" + spaceId + "/")
-				.queryParam("sort_by", "due_date").get(TasksByDue.class);
-	}
-
-	/**
-	 * Returns all the tasks that are related to the space. It includes tasks
-	 * with a direct reference to the space, and tasks with an indirect
-	 * reference to the space (like items and status updates).
-	 * 
-	 * @param spaceId
-	 *            The id of the space
-	 * @return The tasks grouped by responsible
-	 */
-	public List<TasksWithResponsible> getTasksInSpaceByResponsible(int spaceId) {
-		return getResourceFactory()
-				.getApiResource("/task/in_space/" + spaceId + "/")
-				.queryParam("sort_by", "responsible")
-				.get(new GenericType<List<TasksWithResponsible>>() {
-				});
-	}
-
-	/**
-	 * Returns the total task count for the active user.
-	 * 
-	 * @return The task total for all spaces
-	 */
-	public TaskTotals getTaskTotals() {
-		return getTaskTotals(null);
-	}
-
-	/**
-	 * Returns the total task count for the active user.
-	 * 
-	 * @param spaceId
-	 *            The id of the space to get totals for, <code>null</code> for
-	 *            all spaces
-	 * @return The task totals for the given space
-	 */
-	public TaskTotals getTaskTotals(Integer spaceId) {
-		WebResource resource = getResourceFactory().getApiResource(
-				"/task/total");
-		if (spaceId != null) {
-			resource = resource.queryParam("space_id", spaceId.toString());
-		}
-
-		return resource.get(TaskTotals.class);
 	}
 }

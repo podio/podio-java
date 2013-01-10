@@ -26,7 +26,7 @@ public class TaskAPITest {
 		Assert.assertEquals(task.getStatus(), TaskStatus.ACTIVE);
 		Assert.assertEquals(task.getText(), "Document API");
 		Assert.assertEquals(task.isPrivate(), true);
-		Assert.assertEquals(task.getDueDate(), new LocalDate(2010, 8, 21));
+		Assert.assertEquals(task.getDueDate(), new LocalDate(2010, 8, 20));
 		Assert.assertEquals(task.getResponsible().getUserId().intValue(), 2);
 		Assert.assertEquals(task.getSpaceId(), null);
 		Assert.assertEquals(task.getLink(), "https://podio.com/tasks/3");
@@ -111,49 +111,5 @@ public class TaskAPITest {
 		List<Task> tasks = getAPI().getTasksWithReference(
 				new Reference(ReferenceType.ITEM, 3));
 		Assert.assertEquals(tasks.size(), 0);
-	}
-
-	@Test
-	public void getTasksInSpaceByDue() {
-		TasksByDue tasks = getAPI().getTasksInSpaceByDue(1);
-		Assert.assertEquals(tasks.getByDueStatus(TaskDueStatus.OVERDUE).size(),
-				1);
-	}
-
-	@Test
-	public void getTasksInSpaceByResponsible() {
-		List<TasksWithResponsible> tasks = getAPI()
-				.getTasksInSpaceByResponsible(1);
-		Assert.assertEquals(tasks.size(), 3);
-		Assert.assertEquals(tasks.get(0).getResponsible().getUserId()
-				.intValue(), 1);
-		Assert.assertEquals(tasks.get(0).getTasks().size(), 4);
-		Assert.assertEquals(tasks.get(0).getTasks().get(0).getId(), 5);
-	}
-
-	@Test
-	public void getTaskTotals() {
-		TaskTotals totals = getAPI().getTaskTotals();
-		Assert.assertEquals(totals.getResponsible().getOverDue(), 0);
-		Assert.assertEquals(totals.getResponsible().getDueToday(), 0);
-		Assert.assertEquals(totals.getResponsible().getStarted(), 1);
-		Assert.assertEquals(totals.getResponsible().getTotal(), 5);
-		Assert.assertEquals(totals.getDelegated().getOverDue(), 0);
-		Assert.assertEquals(totals.getDelegated().getDueToday(), 0);
-		Assert.assertEquals(totals.getDelegated().getStarted(), 0);
-		Assert.assertEquals(totals.getDelegated().getTotal(), 2);
-	}
-
-	@Test
-	public void getTaskTotalsInSpace() {
-		TaskTotals totals = getAPI().getTaskTotals(1);
-		Assert.assertEquals(totals.getResponsible().getOverDue(), 0);
-		Assert.assertEquals(totals.getResponsible().getDueToday(), 0);
-		Assert.assertEquals(totals.getResponsible().getStarted(), 1);
-		Assert.assertEquals(totals.getResponsible().getTotal(), 4);
-		Assert.assertEquals(totals.getDelegated().getOverDue(), 0);
-		Assert.assertEquals(totals.getDelegated().getDueToday(), 0);
-		Assert.assertEquals(totals.getDelegated().getStarted(), 0);
-		Assert.assertEquals(totals.getDelegated().getTotal(), 1);
 	}
 }

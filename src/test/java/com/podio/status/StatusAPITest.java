@@ -33,18 +33,6 @@ public class StatusAPITest {
 	}
 
 	@Test
-	public void getLatestStatus() {
-		Status status = getAPI().getLatestStatus(1, 1);
-
-		Assert.assertEquals(status.getStatusId(), 3);
-		Assert.assertEquals(status.getCreatedBy().getId(), 1);
-		Assert.assertEquals(status.getValue(),
-				"What is after legendary? This status message.");
-		Assert.assertEquals(status.getCreatedOn(), new DateTime(2010, 8, 14,
-				17, 9, 0, 0, DateTimeZone.UTC));
-	}
-
-	@Test
 	public void getStatus() {
 		StatusFull status = getAPI().getStatus(1);
 
@@ -60,7 +48,7 @@ public class StatusAPITest {
 				status.getRatings().get(RatingType.LIKE).getCounts(1)
 						.getUsers().get(0).getUserId().intValue(), 4);
 		Assert.assertEquals(status.getFiles().size(), 4);
-		Assert.assertEquals(status.getFiles().get(0).getId(), 35);
+		Assert.assertEquals(status.getFiles().get(0).getId(), 34);
 		Assert.assertEquals(status.isSubscribed(), true);
 		Assert.assertEquals(status.getUserRatings().size(), 0);
 	}

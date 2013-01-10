@@ -42,7 +42,7 @@ public class HookAPITest {
 	public void get() {
 		List<Hook> hooks = getAPI().get(new Reference(ReferenceType.APP, 1));
 
-		Assert.assertEquals(hooks.size(), 2);
+		Assert.assertEquals(hooks.size(), 8);
 		Assert.assertEquals(hooks.get(0).getId(), 1);
 		Assert.assertEquals(hooks.get(0).getUrl(), "http://nowhere.com");
 		Assert.assertEquals(hooks.get(0).getStatus(), HookStatus.ACTIVE);
