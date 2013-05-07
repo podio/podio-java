@@ -79,21 +79,6 @@ public class OrgAPI extends BaseAPI {
 	}
 
 	/**
-	 * Returns interesting statistics for this organization. Only org creator is
-	 * allowed to see this.
-	 * 
-	 * @param orgId
-	 *            The id of the organization
-	 * @return The statistics
-	 */
-	public OrganizationStatistics getOrganizationStatistics(int orgId) {
-		return getResourceFactory()
-				.getApiResource("/org/" + orgId + "/statistics")
-				.queryParam("all_counts", "1")
-				.get(OrganizationStatistics.class);
-	}
-
-	/**
 	 * Returns the organizations and spaces that the logged in user shares with
 	 * the specified user. The organizations and spaces will be returned sorted
 	 * by name.

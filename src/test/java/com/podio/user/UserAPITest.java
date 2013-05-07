@@ -91,7 +91,7 @@ public class UserAPITest {
 		Assert.assertEquals(profile.getUserId().intValue(), 1);
 		Assert.assertEquals(profile.getName(), "Christian Holm");
 
-		Assert.assertEquals(status.getProperties().size(), 3);
+		Assert.assertEquals(status.getProperties().size(), 4);
 		Assert.assertEquals(
 				status.getProperties().get("global.video").get("value"),
 				Boolean.TRUE);

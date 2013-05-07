@@ -73,19 +73,6 @@ public class OrgAPITest {
 	}
 
 	@Test
-	public void getOrganizationStatistics() {
-		OrganizationStatistics stats = getAPI().getOrganizationStatistics(1);
-
-		Assert.assertEquals(stats.getId(), 1);
-		Assert.assertEquals(stats.getAppsCount(), 3);
-		Assert.assertEquals(stats.getAvailableInvitations(), 0);
-		Assert.assertEquals(stats.getItemsCount(), 7);
-		Assert.assertNotNull(stats.getLastActivityOn());
-		Assert.assertEquals(stats.getSpacesCount(), 5);
-		Assert.assertEquals(stats.getUsersCount(), 0);
-	}
-
-	@Test
 	public void getSharedOrganizations() {
 		List<OrganizationWithSpaces> organizations = getAPI()
 				.getSharedOrganizations(2);

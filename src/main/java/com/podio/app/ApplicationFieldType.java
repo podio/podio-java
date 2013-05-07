@@ -94,7 +94,12 @@ public enum ApplicationFieldType {
 	/**
 	 * A generic file field to hold many kinds of files
 	 */
-	FILE;
+	FILE,
+	
+	/**
+	 * An advanced calculation field
+	 */
+	ADVANCED_CALCULATION;
 
 	@Override
 	@JsonValue

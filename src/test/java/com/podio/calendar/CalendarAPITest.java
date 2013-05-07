@@ -27,7 +27,7 @@ public class CalendarAPITest {
 		Assert.assertEquals(event.getType(), ReferenceType.ITEM);
 		Assert.assertEquals(event.getId(), 1);
 		Assert.assertEquals(event.getGroup(), "Bug");
-		Assert.assertEquals(event.getTitle(), "æøå");
+		Assert.assertEquals(event.getTitle(), "no & yes");
 		Assert.assertEquals(event.getStart(), new DateTime(2010, 8, 4, 9, 0, 0,
 				0, DateTimeZone.UTC));
 		Assert.assertEquals(event.getEnd(), new DateTime(2010, 8, 4, 10, 0, 0,

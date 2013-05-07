@@ -49,7 +49,7 @@ public class StreamAPITest {
 		Assert.assertEquals(object.getCreatedVia().getId(), 1);
 		Assert.assertEquals(object.getLastUpdateOn(), new DateTime(2010, 8, 20,
 				11, 43, 0, 0, DateTimeZone.UTC));
-		Assert.assertEquals(object.getTitle(), "æøå");
+		Assert.assertEquals(object.getTitle(), "no & yes");
 		Assert.assertEquals(object.getRights().size(), 10);
 		Assert.assertTrue(object.getRights().contains(Right.ADD_FILE));
 		Assert.assertTrue(object.isCommentsAllowed());
