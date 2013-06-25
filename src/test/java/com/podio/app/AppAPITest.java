@@ -40,10 +40,20 @@ public class AppAPITest {
 				ApplicationViewType.BADGE);
 
 		Assert.assertEquals(app.getFields().size(), 19);
+		
 		ApplicationField stateField = app.getFields().get(0);
 		Assert.assertEquals(stateField.getType(), ApplicationFieldType.STATE);
 		Assert.assertEquals(stateField.getConfiguration().getLabel(),
 				"Is hired?");
+		Assert.assertEquals(stateField.getConfiguration().getSettings().getAllowedValues().get(0), "yes");
+		
+		ApplicationField categoryField = app.getFields().get(15);
+		Assert.assertEquals(categoryField.getType(), ApplicationFieldType.CATEGORY);
+		Assert.assertEquals(categoryField.getConfiguration().getSettings().getMultiple(), true);
+		Assert.assertEquals(categoryField.getConfiguration().getSettings().getOptions().get(0).getId(), 1);
+		Assert.assertEquals(categoryField.getConfiguration().getSettings().getOptions().get(0).getStatus(), CategoryOptionStatus.ACTIVE);
+		Assert.assertEquals(categoryField.getConfiguration().getSettings().getOptions().get(0).getText(), "Indie");
+		Assert.assertEquals(categoryField.getConfiguration().getSettings().getOptions().get(0).getColor(), "DCEBD8");
 	}
 
 	@Test

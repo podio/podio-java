@@ -14,18 +14,25 @@ public class ApplicationFieldSettings {
 
 	private List<String> allowedCurrencies;
 
+	private List<CategoryOption> options;
+
+	private Boolean multiple;
+
 	public ApplicationFieldSettings() {
 		super();
 	}
 
 	public ApplicationFieldSettings(TextFieldSize size,
 			List<String> allowedValues, List<Integer> referenceableTypes,
-			List<String> allowedCurrencies) {
+			List<String> allowedCurrencies, List<CategoryOption> options,
+			Boolean multiple) {
 		super();
 		this.size = size;
 		this.allowedValues = allowedValues;
 		this.referenceableTypes = referenceableTypes;
 		this.allowedCurrencies = allowedCurrencies;
+		this.options = options;
+		this.multiple = multiple;
 	}
 
 	@JsonProperty("size")
@@ -68,6 +75,22 @@ public class ApplicationFieldSettings {
 		this.allowedCurrencies = allowedCurrencies;
 	}
 
+	public List<CategoryOption> getOptions() {
+		return options;
+	}
+
+	public void setOptions(List<CategoryOption> options) {
+		this.options = options;
+	}
+
+	public Boolean getMultiple() {
+		return multiple;
+	}
+
+	public void setMultiple(Boolean multiple) {
+		this.multiple = multiple;
+	}
+
 	@Override
 	public String toString() {
 		return "ApplicationFieldSettings [allowedValues=" + allowedValues
@@ -76,21 +99,29 @@ public class ApplicationFieldSettings {
 	}
 
 	public static ApplicationFieldSettings getState(List<String> allowedValues) {
-		return new ApplicationFieldSettings(null, allowedValues, null, null);
+		return new ApplicationFieldSettings(null, allowedValues, null, null,
+				null, null);
 	}
 
 	public static ApplicationFieldSettings getApp(
 			List<Integer> referenceableTypes) {
 		return new ApplicationFieldSettings(null, null, referenceableTypes,
-				null);
+				null, null, null);
 	}
 
 	public static ApplicationFieldSettings getText(TextFieldSize size) {
-		return new ApplicationFieldSettings(size, null, null, null);
+		return new ApplicationFieldSettings(size, null, null, null, null, null);
 	}
 
 	public static ApplicationFieldSettings getMoney(
 			List<String> allowedCurrencies) {
-		return new ApplicationFieldSettings(null, null, null, allowedCurrencies);
+		return new ApplicationFieldSettings(null, null, null,
+				allowedCurrencies, null, null);
+	}
+
+	public static ApplicationFieldSettings getCategory(
+			List<CategoryOption> options, boolean multiple) {
+		return new ApplicationFieldSettings(null, null, null, null, options,
+				multiple);
 	}
 }
