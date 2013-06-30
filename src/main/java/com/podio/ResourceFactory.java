@@ -32,6 +32,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.GZIPContentEncodingFilter;
+import com.sun.jersey.multipart.impl.MultiPartWriter;
 
 /**
  * This is the main low level entry point to access the Podio API. Construct
@@ -56,6 +57,7 @@ public final class ResourceFactory {
 			OAuthUserCredentials userCredentials) {
 		ClientConfig config = new DefaultClientConfig();
 		config.getSingletons().add(getJsonProvider());
+		config.getClasses().add(MultiPartWriter.class);
 		Client client = Client.create(config);
 		client.addFilter(new GZIPContentEncodingFilter(false));
 		client.addFilter(new ExceptionFilter());
