@@ -13,6 +13,11 @@ public class ItemUpdate {
 	private String externalId;
 
 	/**
+	 * The internal revision from podio.
+	 */
+	private int revision;
+
+	/**
 	 * The values for each field
 	 */
 	private List<FieldValuesUpdate> fields;
@@ -35,6 +40,16 @@ public class ItemUpdate {
 	@JsonProperty("external_id")
 	public void setExternalId(String externalId) {
 		this.externalId = externalId;
+	}
+	
+	@JsonProperty("revision")
+	public int getRevision() {
+		return revision;
+	}
+
+	@JsonProperty("revision")
+	public void setRevision(int revision) {
+		this.revision = revision;
 	}
 
 	public List<FieldValuesUpdate> getFields() {
