@@ -42,6 +42,7 @@ public class AppAPITest {
 		Assert.assertEquals(app.getFields().size(), 19);
 		
 		ApplicationField stateField = app.getFields().get(0);
+		Assert.assertEquals(stateField.getStatus(), ApplicationFieldStatus.ACTIVE);
 		Assert.assertEquals(stateField.getType(), ApplicationFieldType.STATE);
 		Assert.assertEquals(stateField.getConfiguration().getLabel(),
 				"Is hired?");

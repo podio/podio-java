@@ -17,7 +17,7 @@ public class ApplicationField extends ApplicationFieldCreate {
 	/**
 	 * Indicates if the field was deleted in Podio - values include "active" and "deleted".
 	 */
-	private String status;
+	private ApplicationFieldStatus status;
 
 	@JsonProperty("field_id")
 	public int getId() {
@@ -39,12 +39,12 @@ public class ApplicationField extends ApplicationFieldCreate {
 	}
 
 	@JsonProperty("status")
-	public String getStatus() {
+	public ApplicationFieldStatus getStatus() {
 		return status;
 	}
 	
 	@JsonProperty("status")
-	public void setStatus(String status) {
+	public void setStatus(ApplicationFieldStatus status) {
 		this.status = status;
 	}
 }
