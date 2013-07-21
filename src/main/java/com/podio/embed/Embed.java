@@ -1,9 +1,17 @@
 package com.podio.embed;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.DeserializationContext;
+import org.codehaus.jackson.map.JsonDeserializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import com.podio.file.File;
 
@@ -74,6 +82,7 @@ public class Embed {
 		return id;
 	}
 
+	@JsonProperty("embed_id")
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -127,6 +136,7 @@ public class Embed {
 	}
 
 	@JsonProperty("created_on")
+	@JsonDeserialize(using = DateDeserlializer.class)
 	public void setCreatedOn(DateTime createdOn) {
 		this.createdOn = createdOn;
 	}
@@ -175,4 +185,18 @@ public class Embed {
 		this.files = files;
 	}
 
+        public static class DateDeserlializer extends JsonDeserializer<DateTime> {
+                
+                public DateDeserlializer() {
+                    super();
+                }
+            
+                @Override
+                public DateTime deserialize(JsonParser arg0, DeserializationContext arg1) throws IOException,
+                	JsonProcessingException {
+                    DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+                    return formatter.parseDateTime(arg0.getText());
+                }
+    	    
+            }
 }
