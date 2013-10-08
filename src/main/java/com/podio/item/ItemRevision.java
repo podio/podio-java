@@ -6,6 +6,8 @@ import com.podio.common.CreatedBase;
 
 public class ItemRevision extends CreatedBase {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The revision number
 	 */

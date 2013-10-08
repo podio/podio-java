@@ -1,8 +1,11 @@
 package com.podio.common;
 
+import java.io.Serializable;
 import java.net.URL;
 
-public class AuthorizationInterface {
+public class AuthorizationInterface implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 

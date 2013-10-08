@@ -1,5 +1,6 @@
 package com.podio.item;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,9 @@ import com.podio.rating.RatingType;
 import com.podio.rating.RatingTypeKeyDeserializer;
 import com.podio.rating.RatingValuesMap;
 
-public class Item {
+public class Item implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The id of the item

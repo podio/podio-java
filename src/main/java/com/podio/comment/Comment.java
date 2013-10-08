@@ -10,6 +10,8 @@ import com.podio.file.File;
 
 public class Comment extends CreatedBase {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The id of the comment. Can be used to update and delete the comment
 	 */

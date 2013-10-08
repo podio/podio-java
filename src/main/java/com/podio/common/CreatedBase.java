@@ -1,9 +1,13 @@
 package com.podio.common;
 
+import java.io.Serializable;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-public class CreatedBase {
+public class CreatedBase implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The entity who created the comment

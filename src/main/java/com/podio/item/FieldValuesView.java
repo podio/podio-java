@@ -1,5 +1,6 @@
 package com.podio.item;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -7,7 +8,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 import com.podio.app.ApplicationFieldType;
 
-public class FieldValuesView {
+public class FieldValuesView implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The id of the field

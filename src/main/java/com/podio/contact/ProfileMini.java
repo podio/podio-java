@@ -1,6 +1,9 @@
 package com.podio.contact;
 
+
 public class ProfileMini extends ProfileBase {
+
+	private static final long serialVersionUID = 1L;
 
 	private Integer avatar;
 
