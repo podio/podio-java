@@ -1,11 +1,14 @@
 package com.podio.rating;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.podio.contact.ProfileMini;
 
-public class ValueRatings {
+public class ValueRatings implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private int total;
 
 	private List<ProfileMini> users;
