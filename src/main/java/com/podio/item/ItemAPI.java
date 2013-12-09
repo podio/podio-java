@@ -70,10 +70,13 @@ public class ItemAPI extends BaseAPI {
 	 *            The data for the update
 	 * @param silent
 	 *            True if the update should be silent, false otherwise
+	 * @param hook
+	 *            True if hooks should be executed for the change, false otherwise
 	 */
-	public void updateItem(int itemId, ItemUpdate update, boolean silent) {
+	public void updateItem(int itemId, ItemUpdate update, boolean silent, boolean hook) {
 		getResourceFactory().getApiResource("/item/" + itemId)
 				.queryParam("silent", silent ? "1" : "0")
+				.queryParam("hook", hook ? "1" : "0")
 				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -86,11 +89,14 @@ public class ItemAPI extends BaseAPI {
 	 *            The values for the fields
 	 * @param silent
 	 *            True if the update should be silent, false otherwise
+	 * @param hook
+	 *            True if hooks should be executed for the change, false otherwise
 	 */
 	public void updateItemValues(int itemId, List<FieldValuesUpdate> values,
-			boolean silent) {
+			boolean silent, boolean hook) {
 		getResourceFactory().getApiResource("/item/" + itemId + "/value/")
 				.queryParam("silent", silent ? "1" : "0")
+				.queryParam("hook", hook ? "1" : "0")
 				.entity(values, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
@@ -105,12 +111,15 @@ public class ItemAPI extends BaseAPI {
 	 *            The new values for the field
 	 * @param silent
 	 *            True if the update should be silent, false otherwise
+	 * @param hook
+	 *            True if hooks should be executed for the change, false otherwise
 	 */
 	public void updateItemFieldValues(int itemId, int fieldId,
-			List<Map<String, Object>> values, boolean silent) {
+			List<Map<String, Object>> values, boolean silent, boolean hook) {
 		getResourceFactory()
 				.getApiResource("/item/" + itemId + "/value/" + fieldId)
 				.queryParam("silent", silent ? "1" : "0")
+				.queryParam("hook", hook ? "1" : "0")
 				.entity(values, MediaType.APPLICATION_JSON_TYPE).put();
 	}
 
