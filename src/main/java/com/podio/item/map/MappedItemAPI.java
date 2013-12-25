@@ -30,7 +30,7 @@ public class MappedItemAPI<T> {
 
 	public void update(T object, boolean silent) {
 		factory.getAPI(ItemAPI.class).updateItem(-1, map.getUpdate(object),
-				silent);
+				silent, false);
 	}
 
 	public T get(Object externalId) {
