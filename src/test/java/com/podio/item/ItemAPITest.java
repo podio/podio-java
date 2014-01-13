@@ -57,7 +57,7 @@ public class ItemAPITest {
 		getAPI().updateItem(
 				1,
 				new ItemUpdate(null, Arrays.asList(new FieldValuesUpdate(1,
-						"value", "no"))), false);
+						"value", "no"))), false, false);
 	}
 
 	@Test
@@ -65,13 +65,13 @@ public class ItemAPITest {
 		getAPI().updateItem(
 				1,
 				new ItemUpdate(null, Arrays.asList(new FieldValuesUpdate(
-						"is-hired", "value", "no"))), false);
+						"is-hired", "value", "no"))), false, false);
 	}
 
 	@Test
 	public void updateItemValues() {
 		getAPI().updateItemValues(1,
-				Arrays.asList(new FieldValuesUpdate(1, "value", "no")), false);
+				Arrays.asList(new FieldValuesUpdate(1, "value", "no")), false, false);
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class ItemAPITest {
 		getAPI().updateItemValues(
 				1,
 				Arrays.asList(new FieldValuesUpdate("is-hired", "value", "no")),
-				false);
+				false, false);
 	}
 
 	@Test
@@ -88,7 +88,7 @@ public class ItemAPITest {
 				1,
 				1,
 				Collections.singletonList(Collections
-						.<String, Object> singletonMap("value", "no")), false);
+						.<String, Object> singletonMap("value", "no")), false, false);
 	}
 
 	@Test
