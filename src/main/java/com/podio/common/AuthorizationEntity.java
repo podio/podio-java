@@ -1,10 +1,13 @@
 package com.podio.common;
 
+import java.io.Serializable;
 import java.net.URL;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class AuthorizationEntity {
+public class AuthorizationEntity implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private AuthorizationEntityType type;
 

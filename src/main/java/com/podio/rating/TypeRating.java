@@ -1,10 +1,13 @@
 package com.podio.rating;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TypeRating {
+public class TypeRating implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Map<Integer, ValueRatings> counts = new HashMap<Integer, ValueRatings>();
 
 	private Float average;

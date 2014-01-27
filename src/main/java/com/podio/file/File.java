@@ -10,6 +10,8 @@ import com.podio.common.CreatedBase;
 
 public class File extends CreatedBase {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The id of the file
 	 */

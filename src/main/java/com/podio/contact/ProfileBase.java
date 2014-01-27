@@ -1,8 +1,12 @@
 package com.podio.contact;
 
+import java.io.Serializable;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class ProfileBase {
+public class ProfileBase implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The id of the profile

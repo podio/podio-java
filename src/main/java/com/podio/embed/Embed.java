@@ -1,5 +1,6 @@
 package com.podio.embed;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -7,7 +8,9 @@ import org.joda.time.DateTime;
 
 import com.podio.file.File;
 
-public class Embed {
+public class Embed implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The id of the embed
@@ -74,6 +77,7 @@ public class Embed {
 		return id;
 	}
 
+	@JsonProperty("embed_id")
 	public void setId(int id) {
 		this.id = id;
 	}
