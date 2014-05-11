@@ -6,7 +6,7 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.app.ApplicationMini;
+import com.podio.app.Application;
 import com.podio.comment.Comment;
 import com.podio.common.CreatedBase;
 import com.podio.common.ReferenceType;
@@ -61,7 +61,7 @@ public class StreamObjectV2 extends CreatedBase {
 	/**
 	 * The app this object belongs to, if any,
 	 */
-	private ApplicationMini app;
+	private Application app;
 
 	/**
 	 * The space the object belongs to
@@ -187,11 +187,11 @@ public class StreamObjectV2 extends CreatedBase {
 		this.files = files;
 	}
 
-	public ApplicationMini getApp() {
+	public Application getApp() {
 		return app;
 	}
 
-	public void setApp(ApplicationMini app) {
+	public void setApp(Application app) {
 		this.app = app;
 	}
 

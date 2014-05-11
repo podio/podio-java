@@ -19,11 +19,6 @@ public class Conversation {
 	private String subject;
 
 	/**
-	 * The messages in the conversation
-	 */
-	private List<Message> messages;
-
-	/**
 	 * The list of participants in the conversation
 	 */
 	private List<ProfileMini> participants;
@@ -44,14 +39,6 @@ public class Conversation {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
-	}
-
-	public List<Message> getMessages() {
-		return messages;
-	}
-
-	public void setMessages(List<Message> messages) {
-		this.messages = messages;
 	}
 
 	public List<ProfileMini> getParticipants() {

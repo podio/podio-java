@@ -41,15 +41,6 @@ public class ConversationAPITest {
 		Assert.assertEquals(conversation.getId(), 1);
 		Assert.assertEquals(conversation.getSubject(),
 				"Isn't all these notification types annoying?");
-		Assert.assertEquals(conversation.getMessages().size(), 2);
-		Message message = conversation.getMessages().get(0);
-		Assert.assertEquals(message.getId(), 1);
-		Assert.assertEquals(
-				message.getText(),
-				"They are really getting on my nerves.\n\nCan we not get this sorted out better?!?");
-		Assert.assertEquals(message.getCreatedOn(), new DateTime(2010, 8, 25,
-				14, 26, 0, 0, DateTimeZone.UTC));
-		Assert.assertEquals(message.getCreatedBy().getUserId().intValue(), 1);
 		Assert.assertEquals(conversation.getParticipants().size(), 2);
 		Assert.assertEquals(conversation.getParticipants().get(0).getUserId()
 				.intValue(), 1);

@@ -15,6 +15,8 @@ public class UserStatus {
 	private Map<String, Map<String, ?>> properties;
 
 	private int inboxNew;
+	
+	private int messageUnreadCount;
 
 	private String calendarCode;
 
@@ -49,9 +51,17 @@ public class UserStatus {
 		return inboxNew;
 	}
 
-	@JsonProperty("inbox_new")
 	public void setInboxNew(int inboxNew) {
 		this.inboxNew = inboxNew;
+	}
+
+	@JsonProperty("message_unread_count")
+	public int getMessageUnreadCount() {
+		return messageUnreadCount;
+	}
+
+	public void setMessageUnreadCount(int messageUnreadCount) {
+		this.messageUnreadCount = messageUnreadCount;
 	}
 
 	@JsonProperty("calendar_code")
@@ -59,7 +69,6 @@ public class UserStatus {
 		return calendarCode;
 	}
 
-	@JsonProperty("calendar_code")
 	public void setCalendarCode(String calendarCode) {
 		this.calendarCode = calendarCode;
 	}
@@ -69,7 +78,6 @@ public class UserStatus {
 		return mailbox;
 	}
 
-	@JsonProperty("mailbox")
 	public void setMailbox(String mailbox) {
 		this.mailbox = mailbox;
 	}

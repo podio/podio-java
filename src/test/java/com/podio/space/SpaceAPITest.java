@@ -28,7 +28,7 @@ public class SpaceAPITest {
 				new SpaceCreate("New", true, true, 1));
 
 		Assert.assertTrue(response.getId() > 1);
-		Assert.assertEquals(response.getUrl(), "https://hoist.podio.com/new/");
+		Assert.assertEquals(response.getUrl(), "https://podio.com/hoist/new");
 	}
 
 	@Test
@@ -37,7 +37,7 @@ public class SpaceAPITest {
 
 		Assert.assertEquals(space.getId(), 1);
 		Assert.assertEquals(space.getName(), "API");
-		Assert.assertEquals(space.getUrl(), "https://hoist.podio.com/api/");
+		Assert.assertEquals(space.getUrl(), "https://podio.com/hoist/api");
 		Assert.assertEquals(space.getCreatedOn(), new DateTime(2010, 8, 9, 14,
 				49, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(space.getCreatedBy().getUserId().intValue(), 1);
@@ -52,7 +52,7 @@ public class SpaceAPITest {
 	@Test
 	public void getSpaceByURL() {
 		SpaceWithOrganization space = getAPI().getSpaceByURL(
-				"https://hoist.podio.com/api/");
+				"https://podio.com/hoist/api/");
 
 		Assert.assertEquals(space.getId(), 1);
 		Assert.assertEquals(space.getOrganization().getId(), 1);
@@ -112,22 +112,6 @@ public class SpaceAPITest {
 		Assert.assertEquals(members.get(0).getEndedOn(), new DateTime(2010, 9,
 				30, 12, 35, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(members.get(1).getUser().getUserId().intValue(), 1);
-	}
-
-	@Test
-	public void getTopUsers() {
-		SpaceTopMembers topUsers = getAPI().getTopUsers(1, null);
-
-		Assert.assertEquals(topUsers.getEmployee().getProfiles().size(), 3);
-		Assert.assertEquals(topUsers.getEmployee().getProfiles().get(0)
-				.getUserId().intValue(), 1);
-		Assert.assertEquals(topUsers.getEmployee().getProfiles().get(1)
-				.getUserId().intValue(), 4);
-		Assert.assertEquals(topUsers.getEmployee().getProfiles().get(2)
-				.getUserId().intValue(), 2);
-		Assert.assertEquals(topUsers.getEmployee().getLeft(), 48);
-		Assert.assertEquals(topUsers.getExternal().getProfiles().size(), 0);
-		Assert.assertEquals(topUsers.getExternal().getLeft(), 50);
 	}
 
 	@Test

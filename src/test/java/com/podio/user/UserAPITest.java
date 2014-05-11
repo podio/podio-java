@@ -90,8 +90,9 @@ public class UserAPITest {
 		Profile profile = status.getProfile();
 		Assert.assertEquals(profile.getUserId().intValue(), 1);
 		Assert.assertEquals(profile.getName(), "Christian Holm");
+		Assert.assertEquals(profile.getImage().getThumbnailLink(), "https://d1izh0afz5ebv1.cloudfront.net/public/9");
 
-		Assert.assertEquals(status.getProperties().size(), 4);
+		Assert.assertEquals(status.getProperties().size(), 5);
 		Assert.assertEquals(
 				status.getProperties().get("global.video").get("value"),
 				Boolean.TRUE);
@@ -99,7 +100,8 @@ public class UserAPITest {
 		Assert.assertEquals(status.getCalendarCode(),
 				"3OAnjyFACrJjTNe2JLnpn9ZqVe5dLWS59aSLzqtvlXZyXUenbRVqvQwtOMOYZk2T");
 
-		Assert.assertEquals(status.getInboxNew(), 54);
+		Assert.assertEquals(status.getInboxNew(), 57);
+		Assert.assertEquals(status.getMessageUnreadCount(), 5);
 		Assert.assertEquals(status.getMailbox(), "cholm.fdb27615");
 	}
 

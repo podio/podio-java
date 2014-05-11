@@ -26,6 +26,9 @@ public class FileAPITest {
 		Assert.assertEquals(file.getMimetype().getPrimaryType(), "image");
 		Assert.assertEquals(file.getMimetype().getSubType(), "png");
 		Assert.assertEquals(file.getName(), "party_poster.png");
+		Assert.assertEquals(file.getLink(), "https://files.podio.com/3");
+		Assert.assertEquals(file.getPermaLink(), null);
+		Assert.assertEquals(file.getThumbnailLink(), "https://files.podio.com/3");
 		Assert.assertEquals(file.getSize(), 127445);
 		Assert.assertEquals(file.getCreatedBy().getId(), 1);
 		Assert.assertEquals(file.getCreatedOn(), new DateTime(2010, 8, 13, 14,

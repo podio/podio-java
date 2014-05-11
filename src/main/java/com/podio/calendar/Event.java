@@ -3,30 +3,55 @@ package com.podio.calendar;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-import com.podio.app.ApplicationMini;
+import com.podio.app.Application;
 import com.podio.common.ReferenceType;
 
 public class Event {
 
 	/**
+	 * The UID of the event
+	 */
+	private String uid;
+
+	/**
 	 * The type of the entry, either "task" or "item"
 	 */
-	private ReferenceType type;
+	private ReferenceType refType;
 
 	/**
 	 * The id of the entry
 	 */
-	private int id;
-
-	/**
-	 * The group of the object, null for tasks and app item name for items
-	 */
-	private String group;
+	private int refId;
 
 	/**
 	 * The title of the entry
 	 */
 	private String title;
+
+	/**
+	 * The description of the entry
+	 */
+	private String description;
+
+	/**
+	 * The location of the entry
+	 */
+	private String location;
+
+	/**
+	 * The active users participation status
+	 */
+	private ParticipationStatus status;
+	
+	/**
+	 * True if the user is marked as busy, false otherwise
+	 */
+	private boolean busy;
+	
+	/**
+	 * The version of the event, increments on each change
+	 */
+	private int version;
 
 	/**
 	 * The start date
@@ -42,34 +67,78 @@ public class Event {
 	 * The full link to the object
 	 */
 	private String link;
-
+	
 	/**
-	 * The app the event comes from, if any
+	 * The application the event belongs to
 	 */
-	private ApplicationMini application;
+	private Application application;
 
-	public ReferenceType getType() {
-		return type;
+
+	@JsonProperty("uid")
+	public String getUID() {
+		return uid;
 	}
 
-	public void setType(ReferenceType type) {
-		this.type = type;
+	public void setUID(String uid) {
+		this.uid = uid;
 	}
 
-	public int getId() {
-		return id;
+	@JsonProperty("ref_type")
+	public ReferenceType getRefType() {
+		return refType;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setRefType(ReferenceType refType) {
+		this.refType = refType;
 	}
 
-	public String getGroup() {
-		return group;
+	@JsonProperty("ref_id")
+	public int getRefId() {
+		return refId;
 	}
 
-	public void setGroup(String group) {
-		this.group = group;
+	public void setRefId(int refId) {
+		this.refId = refId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public ParticipationStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ParticipationStatus status) {
+		this.status = status;
+	}
+
+	public boolean isBusy() {
+		return busy;
+	}
+
+	public void setBusy(boolean busy) {
+		this.busy = busy;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public String getTitle() {
@@ -105,12 +174,11 @@ public class Event {
 	}
 
 	@JsonProperty("app")
-	public ApplicationMini getApplication() {
+	public Application getApplication() {
 		return application;
 	}
 
-	@JsonProperty("app")
-	public void setApplication(ApplicationMini application) {
+	public void setApplication(Application application) {
 		this.application = application;
 	}
 }

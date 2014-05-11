@@ -5,15 +5,15 @@ import java.util.Map;
 
 public class Dependencies {
 
-	private List<ApplicationMicro> apps;
+	private List<Application> apps;
 
 	private Map<Integer, List<Integer>> dependencies;
 
-	public List<ApplicationMicro> getApps() {
+	public List<Application> getApps() {
 		return apps;
 	}
 
-	public void setApps(List<ApplicationMicro> apps) {
+	public void setApps(List<Application> apps) {
 		this.apps = apps;
 	}
 

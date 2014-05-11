@@ -103,9 +103,9 @@ public class ItemAPITest {
 		Assert.assertEquals(item.getId(), 1);
 		Assert.assertEquals(item.getExternalId(), "12");
 		Assert.assertEquals(item.getApplication().getId(), 1);
-		Assert.assertEquals(item.getApplication().getName(), "Bugs");
-		Assert.assertEquals(item.getApplication().getItemName(), "Bug");
-		Assert.assertEquals(item.getApplication().getIcon(), "23.png");
+		Assert.assertEquals(item.getApplication().getConfiguration().getName(), "Bugs");
+		Assert.assertEquals(item.getApplication().getConfiguration().getItemName(), "Bug");
+		Assert.assertEquals(item.getApplication().getConfiguration().getIcon(), "23.png");
 		Assert.assertEquals(item.getFields().size(), 17);
 		FieldValuesView field = item.getFields().get(0);
 		Assert.assertEquals(field.getId(), 1);

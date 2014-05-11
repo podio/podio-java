@@ -61,29 +61,6 @@ public class ContactAPI extends BaseAPI {
 	}
 
 	/**
-	 * Returns the top contacts for the user ordered by their overall
-	 * interactive with the active user.
-	 * 
-	 * @param limit
-	 *            The maximum number of contacts to return, defaults to no
-	 *            limit.
-	 * @param type
-	 *            How the contacts should be returned, MINI, SHORT or FULL
-	 * @return The list of contacts
-	 */
-	public <T> List<T> getTopContacts(Integer limit, ProfileType<T> type) {
-		WebResource resource = getResourceFactory().getApiResource(
-				"/contact/top/");
-
-		if (limit != null) {
-			resource = resource.queryParam("limit", limit.toString());
-		}
-		resource = resource.queryParam("type", type.getName());
-
-		return resource.get(getGenericType(type));
-	}
-
-	/**
 	 * Returns the total number of contacts by organization.
 	 * 
 	 * @return The list of contact totals by organization

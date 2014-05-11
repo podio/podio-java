@@ -5,7 +5,7 @@ import org.codehaus.jackson.annotate.JsonValue;
 
 public enum StreamActivityType {
 
-	COMMENT, FILE, TASK, RATING, CREATION, UPDATE, ANSWER, MEETING;
+	COMMENT, FILE, TASK, RATING, CREATION, UPDATE, ANSWER, MEETING, REFERENCE, GRANT, PARTICIPATION;
 
 	@Override
 	@JsonValue

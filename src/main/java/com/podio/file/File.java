@@ -36,6 +36,27 @@ public class File extends CreatedBase {
 	 * The context of the file, either an item, task or status
 	 */
 	private FileReference context;
+	
+	/**
+	 * The URL where the file can be downloaded.
+	 */
+	private String link;
+	
+	/**
+	 * The base link to the thumbnail of the file. Can be postfixed with the required size, one of:
+	 * 
+	 * tiny - 16x16
+	 * small - 32x32
+	 * default - 40x40
+	 * medium - 80x80
+	 * large - 160x160
+	 */
+	private String thumbnailLink;
+	
+	/**
+	 * The link to the file with information on Podio.
+	 */
+	private String permaLink;
 
 	/**
 	 * The size of the file in bytes
@@ -87,6 +108,32 @@ public class File extends CreatedBase {
 
 	public void setContext(FileReference context) {
 		this.context = context;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	@JsonProperty("thumbnail_link")
+	public String getThumbnailLink() {
+		return thumbnailLink;
+	}
+
+	public void setThumbnailLink(String thumbnailLink) {
+		this.thumbnailLink = thumbnailLink;
+	}
+
+	@JsonProperty("permalink_link")
+	public String getPermaLink() {
+		return permaLink;
+	}
+
+	public void setPermaLink(String permaLink) {
+		this.permaLink = permaLink;
 	}
 
 	public long getSize() {

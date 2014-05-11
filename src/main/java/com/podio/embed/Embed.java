@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.joda.time.DateTime;
 
 import com.podio.file.File;
 
@@ -18,14 +17,9 @@ public class Embed implements Serializable {
 	private int id;
 
 	/**
-	 * The url the user originally provided
+	 * The url for the embed
 	 */
-	private String originalUrl;
-
-	/**
-	 * The final url after redirects (e.g. if the url was shortened link)
-	 */
-	private String resolvedUrl;
+	private String url;
 
 	/**
 	 * The type of embed
@@ -41,16 +35,6 @@ public class Embed implements Serializable {
 	 * An descriptive excerpt of the linked content
 	 */
 	private String description;
-
-	/**
-	 * When the embed was created
-	 */
-	private DateTime createdOn;
-
-	/**
-	 * The name of the linked service provider or website
-	 */
-	private String providerName;
 
 	/**
 	 * HTML object extracted from the link that can be embedded as is
@@ -81,23 +65,14 @@ public class Embed implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 
-	public String getOriginalUrl() {
-		return originalUrl;
+	public String getUrl() {
+		return url;
 	}
 
-	@JsonProperty("original_url")
-	public void setOriginalUrl(String originalUrl) {
-		this.originalUrl = originalUrl;
-	}
-
-	public String getResolvedUrl() {
-		return resolvedUrl;
-	}
-
-	@JsonProperty("resolved_url")
-	public void setResolvedUrl(String resolvedUrl) {
-		this.resolvedUrl = resolvedUrl;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public EmbedType getType() {
@@ -124,24 +99,6 @@ public class Embed implements Serializable {
 	@JsonProperty("description")
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public DateTime getCreatedOn() {
-		return createdOn;
-	}
-
-	@JsonProperty("created_on")
-	public void setCreatedOn(DateTime createdOn) {
-		this.createdOn = createdOn;
-	}
-
-	public String getProviderName() {
-		return providerName;
-	}
-
-	@JsonProperty("provider_name")
-	public void setProviderName(String providerName) {
-		this.providerName = providerName;
 	}
 
 	public String getEmbedHtml() {

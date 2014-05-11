@@ -5,6 +5,8 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.LocalDate;
 
+import com.podio.file.File;
+
 public class ProfileUpdate {
 
 	/**
@@ -16,6 +18,11 @@ public class ProfileUpdate {
 	 * The file id of the avatar
 	 */
 	private Integer avatar;
+	
+	/**
+	 * The image details for the user
+	 */
+	private File image;
 
 	/**
 	 * The birthdate
@@ -86,6 +93,14 @@ public class ProfileUpdate {
 
 	public void setAvatar(Integer avatar) {
 		this.avatar = avatar;
+	}
+
+	public File getImage() {
+		return image;
+	}
+
+	public void setImage(File image) {
+		this.image = image;
 	}
 
 	public LocalDate getBirthdate() {

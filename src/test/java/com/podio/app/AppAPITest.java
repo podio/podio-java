@@ -147,7 +147,7 @@ public class AppAPITest {
 
 	@Test
 	public void getAppsInSpace() {
-		List<ApplicationMini> apps = getAPI().getAppsOnSpace(1);
+		List<Application> apps = getAPI().getAppsOnSpace(1);
 
 		Assert.assertEquals(apps.size(), 1);
 		Assert.assertEquals(apps.get(0).getId(), 1);
@@ -155,18 +155,18 @@ public class AppAPITest {
 
 	@Test
 	public void getTopApps() {
-		List<ApplicationMini> apps = getAPI().getTopApps(null);
+		List<Application> apps = getAPI().getTopApps(null);
 
 		Assert.assertEquals(apps.size(), 1);
 		Assert.assertEquals(apps.get(0).getId(), 1);
 	}
 
 	@Test
-	public void getAvailableApps() {
-		List<ApplicationMicro> apps = getAPI().getAvailableApps(1);
-		Assert.assertEquals(apps.size(), 1);
+	public void getApps() {
+		List<Application> apps = getAPI().getApps();
+		Assert.assertEquals(apps.size(), 2);
 
-		Assert.assertEquals(apps.get(0).getId(), 15);
+		Assert.assertEquals(apps.get(0).getId(), 1);
 	}
 
 	@Test

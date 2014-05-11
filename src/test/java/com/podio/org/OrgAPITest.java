@@ -25,7 +25,7 @@ public class OrgAPITest {
 				new OrganizationCreate("CubiTech2", null));
 
 		Assert.assertTrue(response.getId() > 1);
-		Assert.assertEquals(response.getUrl(), "https://cubitech2.podio.com/");
+		Assert.assertEquals(response.getUrl(), "https://podio.com/cubitech2");
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class OrgAPITest {
 
 		Assert.assertEquals(org.getId(), 1);
 		Assert.assertEquals(org.getName(), "Hoist");
-		Assert.assertEquals(org.getUrl(), "https://hoist.podio.com/");
+		Assert.assertEquals(org.getUrl(), "https://podio.com/hoist");
 		Assert.assertEquals(org.getLogo().intValue(), 10);
 		Assert.assertEquals(org.getStatus(), OrganizationStatus.ACTIVE);
 		Assert.assertEquals(org.getUserLimit(), 50);
@@ -52,7 +52,7 @@ public class OrgAPITest {
 	public void getOrganizations() throws URISyntaxException {
 		List<OrganizationWithSpaces> organizations = getAPI()
 				.getOrganizations();
-		Assert.assertEquals(organizations.size(), 3);
+		Assert.assertEquals(organizations.size(), 4);
 
 		OrganizationWithSpaces org = organizations.get(0);
 		Assert.assertEquals(org.getId(), 1);
@@ -67,7 +67,7 @@ public class OrgAPITest {
 	@Test
 	public void getOrganizationByURL() {
 		OrganizationMini org = getAPI().getOrganizationByURL(
-				"https://hoist.podio.com/");
+				"https://podio.com/hoist");
 
 		Assert.assertEquals(org.getId(), 1);
 	}
