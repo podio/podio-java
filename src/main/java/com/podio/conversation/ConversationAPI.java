@@ -94,6 +94,14 @@ public class ConversationAPI extends BaseAPI {
 				});
 	}
 
+        
+        public List<Conversation> getConversations() {
+		WebResource resource = getResourceFactory().getApiResource(
+				"/conversation/");
+                resource=resource.queryParam("limit","15");
+		return resource.get(new GenericType<List<Conversation>>() {});
+	}
+
 	/**
 	 * Creates a reply to the conversation.
 	 * 

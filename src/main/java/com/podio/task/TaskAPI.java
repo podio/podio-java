@@ -11,6 +11,7 @@ import com.podio.ResourceFactory;
 import com.podio.common.Empty;
 import com.podio.common.Reference;
 import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.api.client.WebResource;
 
 /**
  * Tasks are used to track what work has to be done. Tasks have the following
@@ -234,6 +235,14 @@ public class TaskAPI extends BaseAPI {
 	public List<Task> getCompletedTasks() {
 		return getResourceFactory().getApiResource("/task/completed/").get(
 				new GenericType<List<Task>>() {
+				});
+	}
+	public List<Task> getUncomletedTasks(int userId) {
+            WebResource resource= getResourceFactory().getApiResource("/task/");
+            resource=resource.queryParam("completed", "0");
+            resource=resource.queryParam("responsible", Integer.toString(userId));
+            resource=resource.queryParam("limit", "25");
+            return resource.get(new GenericType<List<Task>>() {
 				});
 	}
 }
