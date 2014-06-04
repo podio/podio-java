@@ -118,4 +118,10 @@ public class ConversationAPI extends BaseAPI {
 						MediaType.APPLICATION_JSON_TYPE)
 				.get(MessageCreateResponse.class).getMessageId();
 	}
+	public void markRead(int conversationId) {
+		getResourceFactory()
+				.getApiResource("/conversation/" + conversationId + "/read")
+                         .method("POST");
+	}
+
 }

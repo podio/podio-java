@@ -54,7 +54,7 @@ public class NotificationData {
         }else if(questionOption!=null){
            return questionOption.getText();
         }else{
-            return "";
+            return null;
         }
     }
 }

@@ -6,9 +6,6 @@
 
 package com.podio.notification;
 
-import com.podio.status.StatusQuestion;
-import org.codehaus.jackson.annotate.JsonProperty;
-
 /**
  *
  * @author MrBr
