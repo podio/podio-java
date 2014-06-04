@@ -8,7 +8,7 @@ package com.podio.notification;
 
 /**
  *
- * @author Direktor
+ * @author MrBr
  */
 public class NotificationContext {
     private String link;

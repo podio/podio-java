@@ -8,7 +8,7 @@ package com.podio.status;
 
 /**
  *
- * @author Direktor
+ * @author MrBr
  */
 public class StatusQuestion {
         private String text;

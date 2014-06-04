@@ -11,7 +11,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  *
- * @author Direktor
+ * @author MrBr
  */
 public class Notification {
     private List<NotificationMini> nots;
