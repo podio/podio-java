@@ -2,6 +2,7 @@ package com.podio.item;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -110,12 +111,12 @@ public class ItemAPITest {
 		FieldValuesView field = item.getFields().get(0);
 		Assert.assertEquals(field.getId(), 1);
 		Assert.assertEquals(field.getExternalId(), "is-hired");
-		Assert.assertEquals(field.getType(), ApplicationFieldType.STATE);
+		Assert.assertEquals(field.getType(), ApplicationFieldType.CATEGORY);
 		Assert.assertEquals(field.getLabel(), "Is hired?");
 		Assert.assertEquals(field.getValues().size(), 2);
-		Assert.assertEquals(field.getValues().get(0).get("value"), "no");
+		Assert.assertEquals(((Map<String, Object>) field.getValues().get(0).get("value")).get("text"), "no");
 		Assert.assertEquals(field.getValues().get(0).size(), 1);
-		Assert.assertEquals(field.getValues().get(1).get("value"), "yes");
+		Assert.assertEquals(((Map<String, Object>)field.getValues().get(1).get("value")).get("text"), "yes");
 		Assert.assertEquals(field.getValues().get(1).size(), 1);
 		Assert.assertEquals(item.getComments().size(), 2);
 		Assert.assertEquals(item.getRevisions().size(), 1);
@@ -129,7 +130,7 @@ public class ItemAPITest {
 		Assert.assertEquals(item.getTags().get(0), "release");
 		Assert.assertEquals(item.getTags().get(1), "rollout");
 		Assert.assertEquals(item.isSubscribed(), true);
-		Assert.assertEquals(item.getUserRatings().size(), 4);
+		Assert.assertEquals(item.getUserRatings().size(), 5);
 		Assert.assertEquals(item.getUserRating(RatingType.APPROVED),
 				new Integer(RatingValue.APPROVED_APPROVES));
 		Assert.assertEquals(item.getUserRating(RatingType.FIVESTAR),
@@ -196,13 +197,13 @@ public class ItemAPITest {
 		Assert.assertEquals(differences.size(), 2);
 		Assert.assertEquals(differences.get(0).getId(), 1);
 		Assert.assertEquals(differences.get(0).getType(),
-				ApplicationFieldType.STATE);
+				ApplicationFieldType.CATEGORY);
 		Assert.assertEquals(differences.get(0).getLabel(), "Is hired?");
 		Assert.assertEquals(differences.get(0).getFrom().size(), 1);
-		Assert.assertEquals(differences.get(0).getFrom().get(0).get("value"),
+		Assert.assertEquals(((Map<String, Object>) differences.get(0).getFrom().get(0).get("value")).get("text"),
 				"yes");
 		Assert.assertEquals(differences.get(0).getTo().size(), 1);
-		Assert.assertEquals(differences.get(0).getTo().get(0).get("value"),
+		Assert.assertEquals(((Map<String, Object>) differences.get(0).getTo().get(0).get("value")).get("text"),
 				"no");
 	}
 

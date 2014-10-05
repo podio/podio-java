@@ -22,7 +22,6 @@ public class ContactAPITest {
 		Assert.assertEquals(contact.getName(), "Christian Holm");
 		Assert.assertEquals(contact.getAvatar(), new Integer(9));
 		Assert.assertEquals(contact.getBirthdate(), new LocalDate(1978, 12, 11));
-		Assert.assertEquals(contact.getOrganization(), "Podio");
 		Assert.assertEquals(contact.getSkype(), "cho@cubitech.dk");
 		Assert.assertEquals(contact.getAbout(), "King of the API, baby!");
 		Assert.assertEquals(contact.getAddresses().get(0),

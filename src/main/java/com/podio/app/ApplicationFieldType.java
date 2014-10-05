@@ -16,11 +16,6 @@ public enum ApplicationFieldType {
 	NUMBER,
 
 	/**
-	 * A field that can hold one or more state values.
-	 */
-	STATE,
-
-	/**
 	 * Holds an image. Can currently only be used internally by Hoist.
 	 */
 	IMAGE,
@@ -87,19 +82,9 @@ public enum ApplicationFieldType {
 	CATEGORY,
 
 	/**
-	 * A question
-	 */
-	QUESTION,
-
-	/**
 	 * A generic file field to hold many kinds of files
 	 */
-	FILE,
-	
-	/**
-	 * An advanced calculation field
-	 */
-	ADVANCED_CALCULATION;
+	FILE;
 
 	@Override
 	@JsonValue

@@ -100,7 +100,7 @@ public class UserAPITest {
 		Assert.assertEquals(status.getCalendarCode(),
 				"3OAnjyFACrJjTNe2JLnpn9ZqVe5dLWS59aSLzqtvlXZyXUenbRVqvQwtOMOYZk2T");
 
-		Assert.assertEquals(status.getInboxNew(), 57);
+		Assert.assertEquals(status.getInboxNew(), 59);
 		Assert.assertEquals(status.getMessageUnreadCount(), 5);
 		Assert.assertEquals(status.getMailbox(), "cholm.fdb27615");
 	}

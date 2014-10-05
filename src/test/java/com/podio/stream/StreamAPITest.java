@@ -47,8 +47,8 @@ public class StreamAPITest {
 		Assert.assertEquals(object.getCreatedOn(), new DateTime(2010, 8, 2, 16,
 				0, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(object.getCreatedVia().getId(), 1);
-		Assert.assertEquals(object.getLastUpdateOn(), new DateTime(2011, 6, 17,
-				12, 49, 0, 0, DateTimeZone.UTC));
+		Assert.assertEquals(object.getLastUpdateOn(), new DateTime(2014, 5, 27,
+				10, 36, 5, 0, DateTimeZone.UTC));
 		Assert.assertEquals(object.getTitle(), "no & yes");
 		Assert.assertEquals(object.getRights().size(), 10);
 		Assert.assertTrue(object.getRights().contains(Right.ADD_FILE));
@@ -64,7 +64,7 @@ public class StreamAPITest {
 		Assert.assertEquals(object.getOrganization().getId(), 1);
 		Assert.assertEquals(object.getSpace().getId(), 1);
 		Assert.assertEquals(object.getApp().getId(), 1);
-		Assert.assertEquals(object.getActivities().size(), 2);
+		Assert.assertEquals(object.getActivities().size(), 9);
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class StreamAPITest {
 
 		Assert.assertEquals(objects.size(), 3);
 		Assert.assertEquals(objects.get(2).getType(), ReferenceType.ITEM);
-		Assert.assertEquals(objects.get(2).getId(), 9);
+		Assert.assertEquals(objects.get(2).getId(), 8);
 	}
 
 	@Test
@@ -84,7 +84,7 @@ public class StreamAPITest {
 
 		Assert.assertEquals(objects.size(), 3);
 		Assert.assertEquals(objects.get(2).getType(), ReferenceType.ITEM);
-		Assert.assertEquals(objects.get(2).getId(), 9);
+		Assert.assertEquals(objects.get(2).getId(), 8);
 	}
 
 	@Test
@@ -102,8 +102,8 @@ public class StreamAPITest {
 				new DateTime(2011, 6, 30, 12, 0, 0, 0, DateTimeZone.UTC));
 
 		Assert.assertEquals(objects.size(), 3);
-		Assert.assertEquals(objects.get(0).getType(), ReferenceType.FILE);
-		Assert.assertEquals(objects.get(0).getId(), 32);
+		Assert.assertEquals(objects.get(0).getType(), ReferenceType.ITEM);
+		Assert.assertEquals(objects.get(0).getId(), 1);
 	}
 
 	@Test

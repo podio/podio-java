@@ -91,16 +91,17 @@ public class SpaceAPITest {
 	public void getActiveMembers() {
 		List<SpaceMember> members = getAPI().getActiveMembers(1);
 
-		Assert.assertEquals(members.size(), 3);
-		Assert.assertEquals(members.get(0).getUser().getUserId().intValue(), 4);
-		Assert.assertEquals(members.get(1).getUser().getUserId().intValue(), 2);
-		Assert.assertEquals(members.get(2).getUser().getUserId().intValue(), 1);
-		Assert.assertEquals(members.get(2).getRole(), Role.ADMIN);
-		Assert.assertEquals(members.get(2).getInvitedOn(), new DateTime(2010,
+		Assert.assertEquals(members.size(), 6);
+		Assert.assertEquals(members.get(0).getUser().getUserId().intValue(), 5);
+		Assert.assertEquals(members.get(1).getUser().getUserId().intValue(), 4);
+		Assert.assertEquals(members.get(2).getUser().getUserId().intValue(), 2);
+		Assert.assertEquals(members.get(3).getUser().getUserId().intValue(), 1);
+		Assert.assertEquals(members.get(3).getRole(), Role.ADMIN);
+		Assert.assertEquals(members.get(3).getInvitedOn(), new DateTime(2010,
 				8, 9, 15, 7, 0, 0, DateTimeZone.UTC));
-		Assert.assertEquals(members.get(2).getStartedOn(), new DateTime(2010,
+		Assert.assertEquals(members.get(3).getStartedOn(), new DateTime(2010,
 				8, 9, 15, 7, 0, 0, DateTimeZone.UTC));
-		Assert.assertEquals(members.get(2).getEndedOn(), null);
+		Assert.assertEquals(members.get(3).getEndedOn(), null);
 	}
 
 	@Test
