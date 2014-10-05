@@ -109,4 +109,41 @@ public class OrgAPITest {
 		Assert.assertEquals(member.getRole(), Role.REGULAR);
 		Assert.assertEquals(member.getSpaceMemberships(), 1);
 	}
+
+	@Test
+	public void getMemberByUserId() {
+		OrganizationMember member = getAPI().getMember(1, 2);
+
+		Assert.assertEquals(member.getUser().getId(), 2);
+		Assert.assertEquals(member.getProfile().getProfileId(), 2);
+		Assert.assertEquals(member.getRole(), Role.REGULAR);
+		Assert.assertEquals(member.getSpaceMemberships(), 3);
+	}
+
+	@Test
+	public void getMemberByMail() {
+		OrganizationMember member = getAPI().getMemberByMail(1, "haugstrup@hoisthq.com");
+
+		Assert.assertEquals(member.getUser().getId(), 2);
+		Assert.assertEquals(member.getProfile().getProfileId(), 2);
+		Assert.assertEquals(member.getRole(), Role.REGULAR);
+		Assert.assertEquals(member.getSpaceMemberships(), 3);
+	}
+
+	@Test
+	public void getEndMemberInfo() {
+		EndMemberInfo endMemberInfo = getAPI().getEndMemberInfo(1, 2);
+		
+		Assert.assertEquals(endMemberInfo.getToRemove().size(), 3);
+		Assert.assertEquals(endMemberInfo.getToRemove().get(0).getSpace().getId(), 1);
+		Assert.assertEquals(endMemberInfo.getToRemove().get(0).getRole(), Role.REGULAR);
+		Assert.assertEquals(endMemberInfo.getToRemove().get(0).getGrants(), 0);
+		Assert.assertEquals(endMemberInfo.getToPromote().size(), 1);
+		Assert.assertEquals(endMemberInfo.getToDelete().size(), 0);
+	}
+
+	@Test
+	public void endMember() {
+		getAPI().endMember(1, 4);
+	}
 }

@@ -139,4 +139,65 @@ public class OrgAPI extends BaseAPI {
 						new GenericType<List<OrganizationMember>>() {
 						});
 	}
+
+	/**
+	 * Returns the member data for the given user in the given organization.
+	 * 
+	 * @param orgId
+	 *            The id of the organization
+	 * @param userId
+	 *            The id of the user
+	 * @return The details of the users membership of the organization
+	 */
+	public OrganizationMember getMember(int orgId, int userId) {
+		return getResourceFactory().getApiResource(
+				"/org/" + orgId + "/member/" + userId).get(
+				OrganizationMember.class);
+	}
+
+	/**
+	 * Returns the member data for the given user in the given organization.
+	 * 
+	 * @param orgId
+	 *            The id of the organization
+	 * @param mail
+	 *            The mail of the users account
+	 * @return The details of the users membership of the organization
+	 */
+	public OrganizationMember getMemberByMail(int orgId, String mail) {
+		return getResourceFactory().getApiResource(
+				"/org/" + orgId + "/member/mail/" + mail).get(
+				OrganizationMember.class);
+	}
+	
+	/**
+	 * Returns information about what would happen if this user would be removed from the org
+	 * 
+	 * @param orgId
+	 *            The id of the organization
+	 * @param userId
+	 *            The id of the user
+	 * @return The information about the users workspace memberships in the org
+	 */
+	public EndMemberInfo getEndMemberInfo(int orgId, int userId) {
+		return getResourceFactory().getApiResource(
+				"/org/" + orgId + "/member/" + userId + "/end_member_info").get(
+						EndMemberInfo.class);		
+	}
+
+	/**
+	 * Ends the users membership of all spaces in the organization. In
+	 * workspaces in the organization where the user is the last admin, other
+	 * users will be promoted to admins. Workspaces where the user is the only
+	 * member will be deleted.
+	 * 
+	 * @param orgId
+	 *            The id of the organization
+	 * @param userId
+	 *            The id of the user
+	 */
+	public void endMember(int orgId, int userId) {
+		getResourceFactory().getApiResource(
+				"/org/" + orgId + "/member/" + userId).delete();
+	}
 }
