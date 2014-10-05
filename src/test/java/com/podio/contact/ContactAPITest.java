@@ -2,6 +2,8 @@ package com.podio.contact;
 
 import java.util.List;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,6 +37,8 @@ public class ContactAPITest {
 		Assert.assertEquals(contact.getTitles().get(0), "Develoment Team Lead");
 		Assert.assertEquals(contact.getUrls().get(0),
 				"http://www.facebook.com/profile.php?id=504601663");
+		Assert.assertEquals(contact.getLastSeenOn(), new DateTime(2011, 7, 23, 13,
+				0, 0, 0, DateTimeZone.UTC));
 	}
 
 	@Test
