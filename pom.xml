@@ -12,7 +12,7 @@
 	<packaging>jar</packaging>
 
 	<name>api</name>
-	<version>0.7.7-SNAPSHOT</version>
+	<version>0.7.7</version>
 	<description>The official Java wrapper for the Podio API</description>
 	<url>http://podio.com</url>
 
