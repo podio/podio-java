@@ -141,25 +141,6 @@ public class SpaceAPI extends BaseAPI {
 	}
 
 	/**
-	 * Returns the top most active members of the space.
-	 * 
-	 * @param spaceId
-	 *            The id of the space
-	 * @param limit
-	 *            The max number of members to return, defaults to 6
-	 * @return The top users for the space
-	 */
-	public SpaceTopMembers getTopUsers(int spaceId, Integer limit) {
-		WebResource resource = getResourceFactory().getApiResource(
-				"/space/" + spaceId + "/member/top/");
-		if (limit != null) {
-			resource = resource.queryParam("limit", limit.toString());
-		}
-
-		return resource.get(SpaceTopMembers.class);
-	}
-
-	/**
 	 * Returns the top spaces for the user
 	 * 
 	 * @param limit

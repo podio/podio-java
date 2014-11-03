@@ -2,6 +2,8 @@ package com.podio.contact;
 
 import java.util.List;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,7 +24,6 @@ public class ContactAPITest {
 		Assert.assertEquals(contact.getName(), "Christian Holm");
 		Assert.assertEquals(contact.getAvatar(), new Integer(9));
 		Assert.assertEquals(contact.getBirthdate(), new LocalDate(1978, 12, 11));
-		Assert.assertEquals(contact.getOrganization(), "Podio");
 		Assert.assertEquals(contact.getSkype(), "cho@cubitech.dk");
 		Assert.assertEquals(contact.getAbout(), "King of the API, baby!");
 		Assert.assertEquals(contact.getAddresses().get(0),
@@ -36,6 +37,8 @@ public class ContactAPITest {
 		Assert.assertEquals(contact.getTitles().get(0), "Develoment Team Lead");
 		Assert.assertEquals(contact.getUrls().get(0),
 				"http://www.facebook.com/profile.php?id=504601663");
+		Assert.assertEquals(contact.getLastSeenOn(), new DateTime(2011, 7, 23, 13,
+				0, 0, 0, DateTimeZone.UTC));
 	}
 
 	@Test
@@ -66,15 +69,6 @@ public class ContactAPITest {
 				ProfileField.BIRTHDATE);
 		Assert.assertEquals(birthdates.size(), 1);
 		Assert.assertEquals(birthdates.get(0), new LocalDate(1978, 12, 11));
-	}
-
-	@Test
-	public void getTopContacts() {
-		List<Profile> contacts = getAPI().getTopContacts(2, ProfileType.FULL);
-
-		Assert.assertEquals(contacts.size(), 2);
-		Assert.assertEquals(contacts.get(0).getUserId().intValue(), 1);
-		Assert.assertEquals(contacts.get(1).getUserId().intValue(), 4);
 	}
 
 	@Test

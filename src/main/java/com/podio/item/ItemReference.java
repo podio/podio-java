@@ -4,21 +4,21 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import com.podio.app.ApplicationMicro;
+import com.podio.app.Application;
 
 public class ItemReference {
 
-	private ApplicationMicro application;
+	private Application application;
 
 	private List<ItemMicro> items;
 
 	@JsonProperty("app")
-	public ApplicationMicro getApplication() {
+	public Application getApplication() {
 		return application;
 	}
 
 	@JsonProperty("app")
-	public void setApplication(ApplicationMicro application) {
+	public void setApplication(Application application) {
 		this.application = application;
 	}
 

@@ -19,7 +19,7 @@ public class HookAPITest {
 	@Test
 	public void create() {
 		int id = getAPI().create(new Reference(ReferenceType.APP, 1),
-				new HookCreate("http://localhost/test", HookType.ITEM_CREATE));
+				new HookCreate("http://foobar.com/test", HookType.ITEM_CREATE));
 		Assert.assertTrue(id > 1);
 	}
 
@@ -44,7 +44,7 @@ public class HookAPITest {
 
 		Assert.assertEquals(hooks.size(), 9);
 		Assert.assertEquals(hooks.get(0).getId(), 1);
-		Assert.assertEquals(hooks.get(0).getUrl(), "http://nowhere.com");
+		Assert.assertEquals(hooks.get(0).getUrl(), "http://foobar.com/nowhere");
 		Assert.assertEquals(hooks.get(0).getStatus(), HookStatus.ACTIVE);
 		Assert.assertEquals(hooks.get(0).getType(), HookType.ITEM_CREATE);
 	}

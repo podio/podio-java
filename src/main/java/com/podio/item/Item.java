@@ -7,7 +7,7 @@ import java.util.Map;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
-import com.podio.app.ApplicationMicro;
+import com.podio.app.Application;
 import com.podio.comment.Comment;
 import com.podio.file.File;
 import com.podio.rating.RatingType;
@@ -26,7 +26,7 @@ public class Item implements Serializable {
 	/**
 	 * The app where the item belongs
 	 */
-	private ApplicationMicro application;
+	private Application application;
 
 	/**
 	 * The external id of the item. This can be used to hold a reference to the
@@ -102,12 +102,12 @@ public class Item implements Serializable {
 	}
 
 	@JsonProperty("app")
-	public ApplicationMicro getApplication() {
+	public Application getApplication() {
 		return application;
 	}
 
 	@JsonProperty("app")
-	public void setApplication(ApplicationMicro application) {
+	public void setApplication(Application application) {
 		this.application = application;
 	}
 

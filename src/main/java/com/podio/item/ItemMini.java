@@ -2,7 +2,7 @@ package com.podio.item;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import com.podio.app.ApplicationMicro;
+import com.podio.app.Application;
 
 public class ItemMini {
 
@@ -25,7 +25,7 @@ public class ItemMini {
 	/**
 	 * The app where the item belongs
 	 */
-	private ApplicationMicro application;
+	private Application application;
 
 	@JsonProperty("item_id")
 	public int getId() {
@@ -38,12 +38,12 @@ public class ItemMini {
 	}
 
 	@JsonProperty("app")
-	public ApplicationMicro getApplication() {
+	public Application getApplication() {
 		return application;
 	}
 
 	@JsonProperty("app")
-	public void setApplication(ApplicationMicro application) {
+	public void setApplication(Application application) {
 		this.application = application;
 	}
 

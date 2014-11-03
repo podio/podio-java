@@ -29,7 +29,7 @@ public class ItemMapTest {
 						"A mexican in a bar", new BigDecimal("1.2"), 30,
 						"Ignored"));
 		Assert.assertEquals(create.getExternalId(), "1");
-		checkValue(create.getFields(), "is-hired", 0, "value", "yes");
+		checkValue(create.getFields(), "is-hired", 0, "value", 1);
 		checkValue(create.getFields(), "alotta-cash", 0, "value", "123.45");
 		checkValue(create.getFields(), "alotta-cash", 0, "currency", "EUR");
 		checkValue(create.getFields(), "write-a-joke", 0, "value",
@@ -57,7 +57,7 @@ public class ItemMapTest {
 				new BugMap2(2, Collections.singletonList("yes"),
 						new BigDecimal("123.45"), 1.2d, (short) 30));
 		Assert.assertEquals(create.getExternalId(), "2");
-		checkValue(create.getFields(), "is-hired", 0, "value", "yes");
+		checkValue(create.getFields(), "is-hired", 0, "value", 1);
 		checkValue(create.getFields(), "alotta-cash", 0, "value", "123.45");
 		checkValue(create.getFields(), "alotta-cash", 0, "currency", "DKK");
 		checkValue(create.getFields(), "importance", 0, "value", "1.2");
@@ -78,7 +78,7 @@ public class ItemMapTest {
 		ItemCreate create = getCreate(1,
 				new BugMap3("3", Collections.singleton("yes"), 123.45, 1.2f));
 		Assert.assertEquals(create.getExternalId(), "3");
-		checkValue(create.getFields(), "is-hired", 0, "value", "yes");
+		checkValue(create.getFields(), "is-hired", 0, "value", 1);
 		checkValue(create.getFields(), "alotta-cash", 0, "value", "123.45");
 		checkValue(create.getFields(), "alotta-cash", 0, "currency", "EUR");
 		checkValue(create.getFields(), "importance", 0, "value", "1.2");

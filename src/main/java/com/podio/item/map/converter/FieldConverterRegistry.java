@@ -12,7 +12,7 @@ public class FieldConverterRegistry {
 
 	static {
 		REGISTRY.add(new MoneyConverterProvider());
-		REGISTRY.add(new StateConverterProvider());
+		REGISTRY.add(new CategoryConverterProvider());
 		REGISTRY.add(new NumberConverterProvider());
 		REGISTRY.add(new TextConverterProvider());
 		REGISTRY.add(new ProgressConverterProvider());

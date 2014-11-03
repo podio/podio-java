@@ -25,7 +25,7 @@ public class OrgAPITest {
 				new OrganizationCreate("CubiTech2", null));
 
 		Assert.assertTrue(response.getId() > 1);
-		Assert.assertEquals(response.getUrl(), "https://cubitech2.podio.com/");
+		Assert.assertEquals(response.getUrl(), "https://podio.com/cubitech2");
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class OrgAPITest {
 
 		Assert.assertEquals(org.getId(), 1);
 		Assert.assertEquals(org.getName(), "Hoist");
-		Assert.assertEquals(org.getUrl(), "https://hoist.podio.com/");
+		Assert.assertEquals(org.getUrl(), "https://podio.com/hoist");
 		Assert.assertEquals(org.getLogo().intValue(), 10);
 		Assert.assertEquals(org.getStatus(), OrganizationStatus.ACTIVE);
 		Assert.assertEquals(org.getUserLimit(), 50);
@@ -52,7 +52,7 @@ public class OrgAPITest {
 	public void getOrganizations() throws URISyntaxException {
 		List<OrganizationWithSpaces> organizations = getAPI()
 				.getOrganizations();
-		Assert.assertEquals(organizations.size(), 3);
+		Assert.assertEquals(organizations.size(), 4);
 
 		OrganizationWithSpaces org = organizations.get(0);
 		Assert.assertEquals(org.getId(), 1);
@@ -67,7 +67,7 @@ public class OrgAPITest {
 	@Test
 	public void getOrganizationByURL() {
 		OrganizationMini org = getAPI().getOrganizationByURL(
-				"https://hoist.podio.com/");
+				"https://podio.com/hoist");
 
 		Assert.assertEquals(org.getId(), 1);
 	}
@@ -108,5 +108,42 @@ public class OrgAPITest {
 		Assert.assertEquals(member.getProfile().getProfileId(), 4);
 		Assert.assertEquals(member.getRole(), Role.REGULAR);
 		Assert.assertEquals(member.getSpaceMemberships(), 1);
+	}
+
+	@Test
+	public void getMemberByUserId() {
+		OrganizationMember member = getAPI().getMember(1, 2);
+
+		Assert.assertEquals(member.getUser().getId(), 2);
+		Assert.assertEquals(member.getProfile().getProfileId(), 2);
+		Assert.assertEquals(member.getRole(), Role.REGULAR);
+		Assert.assertEquals(member.getSpaceMemberships(), 3);
+	}
+
+	@Test
+	public void getMemberByMail() {
+		OrganizationMember member = getAPI().getMemberByMail(1, "haugstrup@hoisthq.com");
+
+		Assert.assertEquals(member.getUser().getId(), 2);
+		Assert.assertEquals(member.getProfile().getProfileId(), 2);
+		Assert.assertEquals(member.getRole(), Role.REGULAR);
+		Assert.assertEquals(member.getSpaceMemberships(), 3);
+	}
+
+	@Test
+	public void getEndMemberInfo() {
+		EndMemberInfo endMemberInfo = getAPI().getEndMemberInfo(1, 2);
+		
+		Assert.assertEquals(endMemberInfo.getToRemove().size(), 3);
+		Assert.assertEquals(endMemberInfo.getToRemove().get(0).getSpace().getId(), 1);
+		Assert.assertEquals(endMemberInfo.getToRemove().get(0).getRole(), Role.REGULAR);
+		Assert.assertEquals(endMemberInfo.getToRemove().get(0).getGrants(), 0);
+		Assert.assertEquals(endMemberInfo.getToPromote().size(), 1);
+		Assert.assertEquals(endMemberInfo.getToDelete().size(), 0);
+	}
+
+	@Test
+	public void endMember() {
+		getAPI().endMember(1, 4);
 	}
 }

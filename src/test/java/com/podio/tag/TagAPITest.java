@@ -65,7 +65,7 @@ public class TagAPITest {
 		Assert.assertEquals(references.get(0).getCreatedOn(), new DateTime(
 				2010, 8, 5, 10, 12, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(references.get(0).getLink(),
-				"https://hoist.podio.com/api/item/2");
+				"https://podio.com/hoist/api/apps/bugs/items/2");
 	}
 
 	@Test
@@ -81,6 +81,6 @@ public class TagAPITest {
 		Assert.assertEquals(reference.getCreatedOn(), new DateTime(2010, 8, 2,
 				16, 0, 0, 0, DateTimeZone.UTC));
 		Assert.assertEquals(reference.getLink(),
-				"https://hoist.podio.com/api/item/1");
+				"https://podio.com/hoist/api/apps/bugs/items/1");
 	}
 }

@@ -24,16 +24,21 @@ public class CalendarAPITest {
 
 		Assert.assertEquals(events.size(), 3);
 		Event event = events.get(0);
-		Assert.assertEquals(event.getType(), ReferenceType.ITEM);
-		Assert.assertEquals(event.getId(), 1);
-		Assert.assertEquals(event.getGroup(), "Bug");
+		Assert.assertEquals(event.getRefType(), ReferenceType.ITEM);
+		Assert.assertEquals(event.getRefId(), 1);
+		Assert.assertEquals(event.getUID(), "item_1_2");
 		Assert.assertEquals(event.getTitle(), "no & yes");
+		Assert.assertEquals(event.getDescription(), "æøå");
+		Assert.assertEquals(event.getLocation(), null);
+		Assert.assertEquals(event.getVersion(), 0);
+		Assert.assertEquals(event.isBusy(), false);
+		Assert.assertEquals(event.getStatus(), null);
 		Assert.assertEquals(event.getStart(), new DateTime(2010, 8, 4, 9, 0, 0,
 				0, DateTimeZone.UTC));
 		Assert.assertEquals(event.getEnd(), new DateTime(2010, 8, 4, 10, 0, 0,
 				0, DateTimeZone.UTC));
 		Assert.assertEquals(event.getLink(),
-				"https://hoist.podio.com/api/item/1");
+				"https://podio.com/hoist/api/apps/bugs/items/1");
 		Assert.assertEquals(event.getApplication().getId(), 1);
 	}
 

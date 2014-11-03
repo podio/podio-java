@@ -42,10 +42,10 @@ public class AppAPI extends BaseAPI {
 	 *            The id of the space
 	 * @return The list of apps on the given space
 	 */
-	public List<ApplicationMini> getAppsOnSpace(int spaceId) {
+	public List<Application> getAppsOnSpace(int spaceId) {
 		return getResourceFactory().getApiResource(
 				"/app/space/" + spaceId + "/").get(
-				new GenericType<List<ApplicationMini>>() {
+				new GenericType<List<Application>>() {
 				});
 	}
 
@@ -57,12 +57,12 @@ public class AppAPI extends BaseAPI {
 	 *            The maximum number of apps to return, defaults to 4.
 	 * @return The top apps for the active user
 	 */
-	public List<ApplicationMini> getTopApps(Integer limit) {
+	public List<Application> getTopApps(Integer limit) {
 		WebResource resource = getResourceFactory().getApiResource("/app/top/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
-		return resource.get(new GenericType<List<ApplicationMini>>() {
+		return resource.get(new GenericType<List<Application>>() {
 		});
 	}
 
@@ -194,18 +194,13 @@ public class AppAPI extends BaseAPI {
 	}
 
 	/**
-	 * Returns the apps available for install on the given space. This includes
-	 * all the apps that are visible and allows insert on all the others space
-	 * the user is a member of.
+	 * Returns the apps available to the user.
 	 * 
-	 * @param spaceId
-	 *            The id of the space the apps should be installable on
-	 * @return The list of available apps for the space
+	 * @return The list of apps the user has access to
 	 */
-	public List<ApplicationMicro> getAvailableApps(int spaceId) {
-		return getResourceFactory().getApiResource(
-				"/app/space/" + spaceId + "/available/").get(
-				new GenericType<List<ApplicationMicro>>() {
+	public List<Application> getApps() {
+		return getResourceFactory().getApiResource("/app/v2/").get(
+				new GenericType<List<Application>>() {
 				});
 	}
 

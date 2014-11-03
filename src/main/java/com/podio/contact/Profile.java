@@ -1,6 +1,7 @@
 package com.podio.contact;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.joda.time.DateTime;
 
 public class Profile extends ProfileUpdate {
 
@@ -13,6 +14,11 @@ public class Profile extends ProfileUpdate {
 	 * The id of the user
 	 */
 	private Integer userId;
+	
+	/**
+	 * The last time the user was seen
+	 */
+	private DateTime lastSeenOn;
 
 	@JsonProperty("profile_id")
 	public int getProfileId() {
@@ -32,5 +38,10 @@ public class Profile extends ProfileUpdate {
 	@JsonProperty("user_id")
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	@JsonProperty("last_seen_on")
+	public DateTime getLastSeenOn() {
+		return lastSeenOn;
 	}
 }

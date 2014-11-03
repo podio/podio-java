@@ -5,17 +5,16 @@ import java.lang.reflect.AnnotatedElement;
 import com.podio.app.ApplicationField;
 import com.podio.app.ApplicationFieldType;
 
-public class StateConverterProvider implements FieldConverterProvider {
+public class CategoryConverterProvider implements FieldConverterProvider {
 
 	@Override
 	public boolean isSupported(ApplicationFieldType fieldType) {
-		return fieldType == ApplicationFieldType.STATE;
+		return fieldType == ApplicationFieldType.CATEGORY;
 	}
 
 	@Override
 	public FieldConverter getConverter(ApplicationField field,
 			AnnotatedElement element) {
-		return new StateConverter(field.getConfiguration().getSettings()
-				.getAllowedValues());
+		return new CategoryConverter(field.getConfiguration().getSettings().getOptions());
 	}
 }

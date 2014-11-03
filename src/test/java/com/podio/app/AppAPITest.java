@@ -43,10 +43,10 @@ public class AppAPITest {
 		
 		ApplicationField stateField = app.getFields().get(0);
 		Assert.assertEquals(stateField.getStatus(), ApplicationFieldStatus.ACTIVE);
-		Assert.assertEquals(stateField.getType(), ApplicationFieldType.STATE);
+		Assert.assertEquals(stateField.getType(), ApplicationFieldType.CATEGORY);
 		Assert.assertEquals(stateField.getConfiguration().getLabel(),
 				"Is hired?");
-		Assert.assertEquals(stateField.getConfiguration().getSettings().getAllowedValues().get(0), "yes");
+		Assert.assertEquals(stateField.getConfiguration().getSettings().getOptions().get(0).getText(), "yes");
 		
 		ApplicationField categoryField = app.getFields().get(15);
 		Assert.assertEquals(categoryField.getType(), ApplicationFieldType.CATEGORY);
@@ -98,12 +98,14 @@ public class AppAPITest {
 		ApplicationField field = getAPI().getField(1, 1);
 
 		Assert.assertEquals(field.getId(), 1);
-		Assert.assertEquals(field.getType(), ApplicationFieldType.STATE);
+		Assert.assertEquals(field.getType(), ApplicationFieldType.CATEGORY);
 		Assert.assertEquals(field.getExternalId(), "is-hired");
 		Assert.assertEquals(field.getConfiguration().getLabel(), "Is hired?");
 		Assert.assertEquals(field.getConfiguration().getDelta(), 0);
-		Assert.assertEquals(field.getConfiguration().getSettings()
-				.getAllowedValues(), Arrays.asList("yes", "no"));
+		Assert.assertEquals(field.getConfiguration().getSettings().getOptions().get(0).getId(), 1);
+		Assert.assertEquals(field.getConfiguration().getSettings().getOptions().get(0).getStatus(), CategoryOptionStatus.ACTIVE);
+		Assert.assertEquals(field.getConfiguration().getSettings().getOptions().get(0).getText(), "yes");
+		Assert.assertEquals(field.getConfiguration().getSettings().getOptions().get(0).getColor(), "D2E4EB");
 	}
 
 	@Test
@@ -147,26 +149,27 @@ public class AppAPITest {
 
 	@Test
 	public void getAppsInSpace() {
-		List<ApplicationMini> apps = getAPI().getAppsOnSpace(1);
+		List<Application> apps = getAPI().getAppsOnSpace(1);
 
-		Assert.assertEquals(apps.size(), 1);
-		Assert.assertEquals(apps.get(0).getId(), 1);
+		Assert.assertEquals(apps.size(), 2);
+		Assert.assertEquals(apps.get(0).getId(), 20);
+		Assert.assertEquals(apps.get(1).getId(), 1);
 	}
 
 	@Test
 	public void getTopApps() {
-		List<ApplicationMini> apps = getAPI().getTopApps(null);
+		List<Application> apps = getAPI().getTopApps(null);
 
 		Assert.assertEquals(apps.size(), 1);
 		Assert.assertEquals(apps.get(0).getId(), 1);
 	}
 
 	@Test
-	public void getAvailableApps() {
-		List<ApplicationMicro> apps = getAPI().getAvailableApps(1);
-		Assert.assertEquals(apps.size(), 1);
+	public void getApps() {
+		List<Application> apps = getAPI().getApps();
+		Assert.assertEquals(apps.size(), 3);
 
-		Assert.assertEquals(apps.get(0).getId(), 15);
+		Assert.assertEquals(apps.get(0).getId(), 1);
 	}
 
 	@Test
