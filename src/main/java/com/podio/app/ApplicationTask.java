@@ -6,6 +6,8 @@ import com.podio.user.UserMini;
 
 public class ApplicationTask extends ApplicationTaskBase {
 
+	private static final long serialVersionUID = 1L;
+
 	private List<UserMini> responsible;
 
 	public List<UserMini> getResponsible() {

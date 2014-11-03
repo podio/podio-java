@@ -1,6 +1,10 @@
 package com.podio.app;
 
-public class ApplicationTaskBase {
+import java.io.Serializable;
+
+public class ApplicationTaskBase implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String text;
 	

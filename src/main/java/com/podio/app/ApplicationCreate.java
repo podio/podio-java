@@ -1,10 +1,13 @@
 package com.podio.app;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class ApplicationCreate  {
+public class ApplicationCreate implements Serializable  {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The id of the space on which the app is placed
