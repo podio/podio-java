@@ -3,6 +3,7 @@ package com.podio.space;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
@@ -124,6 +125,41 @@ public class SpaceAPI extends BaseAPI {
 				"/space/" + spaceId + "/member/").get(
 				new GenericType<List<SpaceMember>>() {
 				});
+	}
+	
+	/**
+	 * Returns the active members of the given space ("v2").
+	 * 
+	 * @param spaceId
+	 *            The id of the space
+	 * @param offset
+	 *            The offset into the user list
+	 * @param limit
+	 *            The number of results to return (max 500)
+	 * @return The active members of the space
+	 */
+	public List<SpaceMemberV2> getActiveMembersV2(int spaceId, int offset, int limit) {
+		return getResourceFactory()
+		           .getApiResource("/space/" + spaceId + "/member/v2/")
+		           .queryParam("offset", new Integer(offset).toString())
+		           .queryParam("limit", new Integer(limit).toString())
+		           .get(new GenericType<List<SpaceMemberV2>>() { });
+	}
+	
+	/**
+	 * Returns the active members of the given space ("v2").
+	 * 
+	 * @param spaceId
+	 *            The id of the space
+	 * @param options
+	 *            The parameters for get space members v2 
+	 * @return The active members of the space
+	 */
+	public List<SpaceMemberV2> getActiveMembersV2(int spaceId, MultivaluedMap<String, String> options) {
+		return getResourceFactory()
+		           .getApiResource("/space/" + spaceId + "/member/v2/")
+		           .queryParams(options)
+		           .get(new GenericType<List<SpaceMemberV2>>() { });
 	}
 
 	/**
