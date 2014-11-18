@@ -61,7 +61,7 @@ public class SpaceMemberV2 {
 	 * @param profile the profile to set
 	 */
 	@JsonProperty("profile")
-	public void setUser(Profile profile) {
+	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
 	
