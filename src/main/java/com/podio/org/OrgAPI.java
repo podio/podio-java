@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
@@ -138,6 +139,47 @@ public class OrgAPI extends BaseAPI {
 				.getApiResource("/org/" + orgId + "/member/").get(
 						new GenericType<List<OrganizationMember>>() {
 						});
+	}
+	
+	/**
+	 * Returns the members, both invited and active, of the given organization.
+	 * This method is only available for organization administrators. For users
+	 * only invited, only very limited information will be returned for the user
+	 * and profile.
+	 * 
+	 * @param orgId
+	 *            The id of the organization
+	 * @param offset
+	 *            The offset into the user list
+	 * @param limit
+	 *            The number of results to return (max 500)
+	 * @return The list of members on the organization with detailed information
+	 */
+	public List<OrganizationMember> getMembers(int orgId, int offset, int limit) {
+		return getResourceFactory()
+				.getApiResource("/org/" + orgId + "/member/")
+				.queryParam("offset", new Integer(offset).toString())
+				.queryParam("limit", new Integer(limit).toString())
+				.get(new GenericType<List<OrganizationMember>>() { });
+	}
+	
+	/**
+	 * Returns the members, both invited and active, of the given organization.
+	 * This method is only available for organization administrators. For users
+	 * only invited, only very limited information will be returned for the user
+	 * and profile.
+	 * 
+	 * @param orgId
+	 *            The id of the organization
+	 * @param options
+	 *            The parameters for get organization members
+	 * @return The list of members on the organization with detailed information
+	 */
+	public List<OrganizationMember> getMembers(int orgId, MultivaluedMap<String, String> options) {
+		return getResourceFactory()
+				.getApiResource("/org/" + orgId + "/member/")
+				.queryParams(options)
+				.get(new GenericType<List<OrganizationMember>>() { });
 	}
 
 	/**
