@@ -5,11 +5,13 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.common.Reference;
 import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 /**
  * Tags are words or short sentences that are used as metadata for objects. For
@@ -104,6 +106,65 @@ public class TagAPI extends BaseAPI {
 		return getResourceFactory().getApiResource("/tag/app/" + appId + "/")
 				.get(new GenericType<List<TagCount>>() {
 				});
+	}
+	
+	/**
+	 * Returns the tags on the given org. This includes both items and statuses on
+	 * all spaces in the organization that the user is part of. The tags are first
+	 * limited ordered by their frequency of use, and then returned sorted
+	 * alphabetically.
+	 * 
+	 * @param orgId
+	 *            The id of the org to return tags from
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnOrg(int orgId) {
+		return getResourceFactory()
+				.getApiResource("/tag/org/" + orgId + "/")
+				.get(new GenericType<List<TagCount>>() { });
+	}
+	
+	/**
+	 * Returns the tags on the given org. This includes both items and statuses on
+	 * all spaces in the organization that the user is part of. The tags are first
+	 * limited ordered by their frequency of use, and then returned sorted
+	 * alphabetically.
+	 * 
+	 * @param orgId
+	 *            The id of the org to return tags from
+	 * @param options
+	 *            The options for this operation, including limit on number of tags
+	 *            returned and/or text of tag to search for
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnOrg(int orgId, MultivaluedMap<String, String> options) {
+		return getResourceFactory()
+				.getApiResource("/tag/org/" + orgId + "/")
+				.queryParams(options)
+				.get(new GenericType<List<TagCount>>() { });
+	}
+	
+	/**
+	 * Returns the tags on the given org. This includes both items and statuses on
+	 * all spaces in the organization that the user is part of. The tags are first
+	 * limited ordered by their frequency of use, and then returned sorted
+	 * alphabetically.
+	 * 
+	 * @param orgId
+	 *            The id of the org to return tags from
+	 * @param limit
+	 *            limit on number of tags returned (max 250)
+	 * @param text
+	 *            text of tag to search for
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnOrg(int orgId, int limit, String text) {
+		MultivaluedMap<String, String> params=new MultivaluedMapImpl();
+		params.add("limit", new Integer(limit).toString());
+		if ((text != null) && (!text.isEmpty())) {
+			params.add("text", text);
+		}
+		return getTagsOnOrg(orgId, params);
 	}
 
 	/**
