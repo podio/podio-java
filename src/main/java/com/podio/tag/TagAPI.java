@@ -104,8 +104,46 @@ public class TagAPI extends BaseAPI {
 	 */
 	public List<TagCount> getTagsOnApp(int appId) {
 		return getResourceFactory().getApiResource("/tag/app/" + appId + "/")
-				.get(new GenericType<List<TagCount>>() {
-				});
+				.get(new GenericType<List<TagCount>>() { });
+	}
+	
+	/**
+	 * Returns the tags on the given app. This includes only items. The tags are
+	 * ordered firstly by the number of uses, secondly by the tag text.
+	 * 
+	 * @param appId
+	 *            The id of the app to return tags from *
+	 * @param options
+	 *            The options for this operation, including limit on number of tags
+	 *            returned and/or text of tag to search for
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnApp(int appId, MultivaluedMap<String, String> options) {
+		return getResourceFactory()
+				.getApiResource("/tag/app/" + appId + "/")
+				.queryParams(options)
+				.get(new GenericType<List<TagCount>>() { });
+	}
+	
+	/**
+	 * Returns the tags on the given app. This includes only items. The tags are
+	 * ordered firstly by the number of uses, secondly by the tag text.
+	 * 
+	 * @param appId
+	 *            The id of the app to return tags from
+	 * @param limit
+	 *            limit on number of tags returned (max 250)
+	 * @param text
+	 *            text of tag to search for
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnApp(int appId, int limit, String text) {
+		MultivaluedMap<String, String> params=new MultivaluedMapImpl();
+		params.add("limit", new Integer(limit).toString());
+		if ((text != null) && (!text.isEmpty())) {
+			params.add("text", text);
+		}
+		return getTagsOnApp(appId, params);
 	}
 	
 	/**
