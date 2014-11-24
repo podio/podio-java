@@ -152,12 +152,30 @@ public class TaskAPI extends BaseAPI {
 	 * 
 	 * @param task
 	 *            The data of the task to be created
+	 * @param silent
+	 *            Disable notifications
 	 * @return The id of the newly created task
 	 */
 	public int createTask(TaskCreate task, boolean silent) {
+		return createTask(task, silent, true);
+	}
+	
+	/**
+	 * Creates a new task with no reference to other objects.
+	 * 
+	 * @param task
+	 *            The data of the task to be created
+	 * @param silent
+	 *            Disable notifications
+	 * @param hook
+	 *            Execute hooks for the change
+	 * @return The id of the newly created task
+	 */
+	public int createTask(TaskCreate task, boolean silent, boolean hook) {
 		TaskCreateResponse response = getResourceFactory()
 				.getApiResource("/task/")
 				.queryParam("silent", silent ? "1" : "0")
+				.queryParam("hook", hook ? "1" : "0")
 				.entity(task, MediaType.APPLICATION_JSON_TYPE)
 				.post(TaskCreateResponse.class);
 
