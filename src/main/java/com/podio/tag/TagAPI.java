@@ -200,6 +200,24 @@ public class TagAPI extends BaseAPI {
 				.get(new GenericType<List<TagReference>>() {
 				});
 	}
+	
+	/**
+	 * Returns the objects that are tagged with the given text on the org. The
+	 * objects are returned sorted descending by the time the tag was added.
+	 * 
+	 * @param orgId
+	 *            The id of the org to search within
+	 * @param text
+	 *            The tag to search for
+	 * @return The list of objects in the org that have the given tag
+	 */
+	public List<TagReference> getTagsOnOrgWithText(int orgId, String text) {
+		return getResourceFactory()
+				.getApiResource("/tag/org/" + orgId + "/search/")
+				.queryParam("text", text)
+				.get(new GenericType<List<TagReference>>() {
+				});
+	}
 
 	/**
 	 * Returns the objects that are tagged with the given text on the space. The
