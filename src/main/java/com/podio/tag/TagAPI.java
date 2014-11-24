@@ -215,10 +215,50 @@ public class TagAPI extends BaseAPI {
 	 * @return The list of tags with their count
 	 */
 	public List<TagCount> getTagsOnSpace(int spaceId) {
-		return getResourceFactory().getApiResource(
-				"/tag/space/" + spaceId + "/").get(
-				new GenericType<List<TagCount>>() {
-				});
+		return getResourceFactory()
+				.getApiResource("/tag/space/" + spaceId + "/")
+				.get(new GenericType<List<TagCount>>() { });
+	}
+
+	/**
+	 * Returns the tags on the given space. This includes both items and
+	 * statuses. The tags are ordered firstly by the number of uses, secondly by
+	 * the tag text.
+	 * 
+	 * @param spaceId
+	 *            The id of the space to return tags from
+	 * @param options
+	 *            The options for this operation, including limit on number of tags
+	 *            returned and/or text of tag to search for
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnSpace(int spaceId, MultivaluedMap<String, String> options) {
+		return getResourceFactory()
+				.getApiResource("/tag/space/" + spaceId + "/")
+				.queryParams(options)
+				.get(new GenericType<List<TagCount>>() { });
+	}
+	
+	/**
+	 * Returns the tags on the given space. This includes both items and
+	 * statuses. The tags are ordered firstly by the number of uses, secondly by
+	 * the tag text.
+	 * 
+	 * @param spaceId
+	 *            The id of the space to return tags from
+	 * @param limit
+	 *            limit on number of tags returned (max 250)
+	 * @param text
+	 *            text of tag to search for
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnSpace(int spaceId, int limit, String text) {
+		MultivaluedMap<String, String> params=new MultivaluedMapImpl();
+		params.add("limit", new Integer(limit).toString());
+		if ((text != null) && (!text.isEmpty())) {
+			params.add("text", text);
+		}
+		return getTagsOnSpace(spaceId, params);
 	}
 
 	/**
