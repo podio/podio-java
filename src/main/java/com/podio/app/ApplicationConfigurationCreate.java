@@ -5,6 +5,8 @@ import java.util.List;
 public class ApplicationConfigurationCreate extends
 		ApplicationConfigurationBase {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * A comma separated list of the tasks that will automatically be created
 	 * when a new item is added

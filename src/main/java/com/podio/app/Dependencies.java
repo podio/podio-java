@@ -1,9 +1,12 @@
 package com.podio.app;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class Dependencies {
+public class Dependencies implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private List<Application> apps;
 

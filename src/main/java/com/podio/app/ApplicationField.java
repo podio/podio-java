@@ -4,6 +4,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class ApplicationField extends ApplicationFieldCreate {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The id of the field
 	 */

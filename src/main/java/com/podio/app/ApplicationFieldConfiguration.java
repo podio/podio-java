@@ -1,6 +1,10 @@
 package com.podio.app;
 
-public class ApplicationFieldConfiguration {
+import java.io.Serializable;
+
+public class ApplicationFieldConfiguration implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The label of the field, which is what the users will see

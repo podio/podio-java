@@ -5,6 +5,8 @@ import java.util.List;
 
 public class ApplicationTaskCreate extends ApplicationTaskBase {
 
+	private static final long serialVersionUID = 1L;
+
 	private List<Integer> responsible;
 
 	public ApplicationTaskCreate() {
