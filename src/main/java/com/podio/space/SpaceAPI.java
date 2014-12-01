@@ -66,6 +66,21 @@ public class SpaceAPI extends BaseAPI {
 		return getResourceFactory().getApiResource("/space/url")
 				.queryParam("url", url).get(SpaceWithOrganization.class);
 	}
+	
+	/**
+	 * Adds a list of users (either through user_id or email) to the space.
+	 * 
+	 * @param spaceId
+	 *            The id of the space
+	 * @param spaceMemberAdd
+	 *            Information about the user(s) to add
+	 */
+	public void addSpaceMembers(int spaceId, SpaceMemberAdd spaceMemberAdd) {
+		getResourceFactory()
+				.getApiResource("/space/" + spaceId + "/member/")
+				.entity(spaceMemberAdd,	MediaType.APPLICATION_JSON_TYPE)
+				.post();
+	}
 
 	/**
 	 * Used to get the details of an active users membership of a space.
