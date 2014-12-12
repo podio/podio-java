@@ -47,7 +47,7 @@ public final class ResourceFactory {
 
 	public ResourceFactory(OAuthClientCredentials clientCredentials,
 			OAuthUserCredentials userCredentials) {
-		this("api.podio.com", "file.podio.com", 443, true, false,
+		this("api.podio.com", "files.podio.com", 443, true, false,
 				clientCredentials, userCredentials);
 	}
 
