@@ -5,11 +5,13 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.common.Reference;
 import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 /**
  * Tags are words or short sentences that are used as metadata for objects. For
@@ -102,8 +104,105 @@ public class TagAPI extends BaseAPI {
 	 */
 	public List<TagCount> getTagsOnApp(int appId) {
 		return getResourceFactory().getApiResource("/tag/app/" + appId + "/")
-				.get(new GenericType<List<TagCount>>() {
-				});
+				.get(new GenericType<List<TagCount>>() { });
+	}
+	
+	/**
+	 * Returns the tags on the given app. This includes only items. The tags are
+	 * ordered firstly by the number of uses, secondly by the tag text.
+	 * 
+	 * @param appId
+	 *            The id of the app to return tags from *
+	 * @param options
+	 *            The options for this operation, including limit on number of tags
+	 *            returned and/or text of tag to search for
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnApp(int appId, MultivaluedMap<String, String> options) {
+		return getResourceFactory()
+				.getApiResource("/tag/app/" + appId + "/")
+				.queryParams(options)
+				.get(new GenericType<List<TagCount>>() { });
+	}
+	
+	/**
+	 * Returns the tags on the given app. This includes only items. The tags are
+	 * ordered firstly by the number of uses, secondly by the tag text.
+	 * 
+	 * @param appId
+	 *            The id of the app to return tags from
+	 * @param limit
+	 *            limit on number of tags returned (max 250)
+	 * @param text
+	 *            text of tag to search for
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnApp(int appId, int limit, String text) {
+		MultivaluedMap<String, String> params=new MultivaluedMapImpl();
+		params.add("limit", new Integer(limit).toString());
+		if ((text != null) && (!text.isEmpty())) {
+			params.add("text", text);
+		}
+		return getTagsOnApp(appId, params);
+	}
+	
+	/**
+	 * Returns the tags on the given org. This includes both items and statuses on
+	 * all spaces in the organization that the user is part of. The tags are first
+	 * limited ordered by their frequency of use, and then returned sorted
+	 * alphabetically.
+	 * 
+	 * @param orgId
+	 *            The id of the org to return tags from
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnOrg(int orgId) {
+		return getResourceFactory()
+				.getApiResource("/tag/org/" + orgId + "/")
+				.get(new GenericType<List<TagCount>>() { });
+	}
+	
+	/**
+	 * Returns the tags on the given org. This includes both items and statuses on
+	 * all spaces in the organization that the user is part of. The tags are first
+	 * limited ordered by their frequency of use, and then returned sorted
+	 * alphabetically.
+	 * 
+	 * @param orgId
+	 *            The id of the org to return tags from
+	 * @param options
+	 *            The options for this operation, including limit on number of tags
+	 *            returned and/or text of tag to search for
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnOrg(int orgId, MultivaluedMap<String, String> options) {
+		return getResourceFactory()
+				.getApiResource("/tag/org/" + orgId + "/")
+				.queryParams(options)
+				.get(new GenericType<List<TagCount>>() { });
+	}
+	
+	/**
+	 * Returns the tags on the given org. This includes both items and statuses on
+	 * all spaces in the organization that the user is part of. The tags are first
+	 * limited ordered by their frequency of use, and then returned sorted
+	 * alphabetically.
+	 * 
+	 * @param orgId
+	 *            The id of the org to return tags from
+	 * @param limit
+	 *            limit on number of tags returned (max 250)
+	 * @param text
+	 *            text of tag to search for
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnOrg(int orgId, int limit, String text) {
+		MultivaluedMap<String, String> params=new MultivaluedMapImpl();
+		params.add("limit", new Integer(limit).toString());
+		if ((text != null) && (!text.isEmpty())) {
+			params.add("text", text);
+		}
+		return getTagsOnOrg(orgId, params);
 	}
 
 	/**
@@ -116,10 +215,50 @@ public class TagAPI extends BaseAPI {
 	 * @return The list of tags with their count
 	 */
 	public List<TagCount> getTagsOnSpace(int spaceId) {
-		return getResourceFactory().getApiResource(
-				"/tag/space/" + spaceId + "/").get(
-				new GenericType<List<TagCount>>() {
-				});
+		return getResourceFactory()
+				.getApiResource("/tag/space/" + spaceId + "/")
+				.get(new GenericType<List<TagCount>>() { });
+	}
+
+	/**
+	 * Returns the tags on the given space. This includes both items and
+	 * statuses. The tags are ordered firstly by the number of uses, secondly by
+	 * the tag text.
+	 * 
+	 * @param spaceId
+	 *            The id of the space to return tags from
+	 * @param options
+	 *            The options for this operation, including limit on number of tags
+	 *            returned and/or text of tag to search for
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnSpace(int spaceId, MultivaluedMap<String, String> options) {
+		return getResourceFactory()
+				.getApiResource("/tag/space/" + spaceId + "/")
+				.queryParams(options)
+				.get(new GenericType<List<TagCount>>() { });
+	}
+	
+	/**
+	 * Returns the tags on the given space. This includes both items and
+	 * statuses. The tags are ordered firstly by the number of uses, secondly by
+	 * the tag text.
+	 * 
+	 * @param spaceId
+	 *            The id of the space to return tags from
+	 * @param limit
+	 *            limit on number of tags returned (max 250)
+	 * @param text
+	 *            text of tag to search for
+	 * @return The list of tags with their count
+	 */
+	public List<TagCount> getTagsOnSpace(int spaceId, int limit, String text) {
+		MultivaluedMap<String, String> params=new MultivaluedMapImpl();
+		params.add("limit", new Integer(limit).toString());
+		if ((text != null) && (!text.isEmpty())) {
+			params.add("text", text);
+		}
+		return getTagsOnSpace(spaceId, params);
 	}
 
 	/**
@@ -135,6 +274,24 @@ public class TagAPI extends BaseAPI {
 	public List<TagReference> getTagsOnAppWithText(int appId, String text) {
 		return getResourceFactory()
 				.getApiResource("/tag/app/" + appId + "/search/")
+				.queryParam("text", text)
+				.get(new GenericType<List<TagReference>>() {
+				});
+	}
+	
+	/**
+	 * Returns the objects that are tagged with the given text on the org. The
+	 * objects are returned sorted descending by the time the tag was added.
+	 * 
+	 * @param orgId
+	 *            The id of the org to search within
+	 * @param text
+	 *            The tag to search for
+	 * @return The list of objects in the org that have the given tag
+	 */
+	public List<TagReference> getTagsOnOrgWithText(int orgId, String text) {
+		return getResourceFactory()
+				.getApiResource("/tag/org/" + orgId + "/search/")
 				.queryParam("text", text)
 				.get(new GenericType<List<TagReference>>() {
 				});
