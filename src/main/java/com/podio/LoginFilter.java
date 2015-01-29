@@ -1,6 +1,6 @@
 package com.podio;
 
-import org.eclipse.jetty.http.HttpHeaders;
+import javax.ws.rs.core.HttpHeaders;
 
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientRequest;

@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import javax.ws.rs.core.HttpHeaders;
+
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.codehaus.jackson.map.DeserializationConfig.Feature;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -13,7 +15,6 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.codehaus.jackson.map.deser.CustomDeserializerFactory;
 import org.codehaus.jackson.map.deser.StdDeserializerProvider;
 import org.codehaus.jackson.map.ser.CustomSerializerFactory;
-import org.eclipse.jetty.http.HttpHeaders;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
