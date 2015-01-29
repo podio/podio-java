@@ -39,7 +39,7 @@ public class AppAPITest {
 		Assert.assertEquals(app.getConfiguration().getDefaultView(),
 				ApplicationViewType.BADGE);
 
-		Assert.assertEquals(app.getFields().size(), 19);
+		Assert.assertTrue(app.getFields().size() >= 21);
 		
 		ApplicationField stateField = app.getFields().get(0);
 		Assert.assertEquals(stateField.getStatus(), ApplicationFieldStatus.ACTIVE);

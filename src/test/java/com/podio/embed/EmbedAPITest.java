@@ -17,7 +17,7 @@ public class EmbedAPITest {
 
 		Assert.assertEquals(embed.getUrl(), "https://podio.com");
 		Assert.assertEquals(embed.getType(), EmbedType.LINK);
-		Assert.assertEquals(embed.getTitle(), "Podio - Work the way you want to");
+		Assert.assertEquals(embed.getTitle(), "Podio - There's a Better Way to Work");
 		Assert.assertNotNull(embed.getDescription());
 		Assert.assertTrue(embed.getFiles().size() > 0);
 

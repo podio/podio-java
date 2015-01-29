@@ -84,7 +84,12 @@ public enum ApplicationFieldType {
 	/**
 	 * A generic file field to hold many kinds of files
 	 */
-	FILE;
+	FILE,
+	
+	/**
+	 * A telephone field to hold telephone numbers properly formatted
+	 */
+	TEL;
 
 	@Override
 	@JsonValue
