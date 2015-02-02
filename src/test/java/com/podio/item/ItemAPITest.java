@@ -2,10 +2,10 @@ package com.podio.item;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,8 +15,10 @@ import com.podio.common.AuthorizationEntityType;
 import com.podio.common.Reference;
 import com.podio.common.ReferenceType;
 import com.podio.filter.CreatedByFilterBy;
+import com.podio.filter.CreatedOnFilterBy;
 import com.podio.filter.CreatedViaFilterBy;
 import com.podio.filter.FilterByValue;
+import com.podio.filter.PodioDateInterval;
 import com.podio.rating.RatingType;
 import com.podio.rating.RatingValue;
 
@@ -259,5 +261,21 @@ public class ItemAPITest {
 
 		Assert.assertEquals(response.getItems().size(), 1);
 		Assert.assertEquals(response.getItems().get(0).getId(), 2);
+	}
+
+	@Test
+	public void getItemsFilterByCreatedOn() {
+		ItemsResponse response = getAPI().getItems(
+				1,
+				null,
+				null,
+				null,
+				null,
+				new FilterByValue<PodioDateInterval>(new CreatedOnFilterBy(),
+						PodioDateInterval.absolute(new LocalDate(2010, 8, 2), new LocalDate(2010, 8, 5))));
+
+		Assert.assertEquals(response.getItems().size(), 2);
+		Assert.assertEquals(response.getItems().get(0).getId(), 2);
+		Assert.assertEquals(response.getItems().get(1).getId(), 1);
 	}
 }
