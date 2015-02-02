@@ -10,9 +10,4 @@ public abstract class BaseIntListFilterBy implements FilterBy<List<Integer>> {
 	public final String format(List<Integer> values) {
 		return CSVUtil.toCSV(values);
 	}
-
-	@Override
-	public final List<Integer> parse(String value) {
-		return FilterUtil.integerListFromCSV(value);
-	}
 }

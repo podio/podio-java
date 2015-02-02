@@ -11,9 +11,4 @@ public class ExternalIdFilterBy implements FilterBy<String> {
 	public String format(String value) {
 		return value;
 	}
-
-	@Override
-	public String parse(String value) {
-		return value;
-	}
 }

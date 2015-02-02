@@ -14,9 +14,4 @@ public class StateFieldFilterBy extends FieldFilterBy<List<String>> {
 	public String format(List<String> values) {
 		return CSVUtil.toCSV(values);
 	}
-
-	@Override
-	public List<String> parse(String value) {
-		return FilterUtil.stringListFromCSV(value);
-	}
 }
