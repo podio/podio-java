@@ -5,6 +5,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.core.MediaType;
+
 import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.sun.jersey.api.client.GenericType;
@@ -24,6 +26,24 @@ public class ContactAPI extends BaseAPI {
 		super(resourceFactory);
 	}
 
+         /**
+	 * Adds a new contact to the given space.
+	 * 
+	 * @param spaceId
+	 *            The id of the space the contact should be added to
+	 * @param create
+	 *            The data for the new contact
+	 * @param silent
+	 *            True if the create should be silent, false otherwise
+	 * @return The id of the newly created contact
+	 */
+	public int addSpaceContact(int spaceId, ContactCreate create, boolean silent) {
+		return getResourceFactory().getApiResource("/contact/space/" + spaceId + "/")
+				.queryParam("silent", silent ? "1" : "0")
+				.entity(create, MediaType.APPLICATION_JSON_TYPE)
+				.post(ContactCreateResponse.class).getId();
+	}
+        
 	/**
 	 * Returns all the contact details about the user with the given id.
 	 * 
