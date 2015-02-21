@@ -118,10 +118,10 @@ public class ContactCreate {
 
         public ContactCreate(String name, Integer avatar, LocalDate birthdate,
                         String organization, String department, String skype, String about,
-                        List<String> address, String zip, String city, String state,
-                        String country, List<String> location, List<String> mail,
-                        List<String> phone, List<String> title, String linkedin,
-                        String twitter, List<String> url, List<String> skill) {
+                        List<String> addresses, String zip, String city, String state,
+                        String country, List<String> locations, List<String> mails,
+                        List<String> phones, List<String> titles, String linkedin,
+                        String twitter, List<String> urls, List<String> skills) {
                 super();
 
                 this.name = name;
@@ -131,19 +131,19 @@ public class ContactCreate {
                 this.department = department;
                 this.skype = skype;
                 this.about = about;
-                this.addresses = address;
+                this.addresses = addresses;
                 this.zip = zip;
                 this.city = city;
                 this.state = state;
                 this.country = country;
-                this.locations = location;
-                this.mails = mail;
-                this.phones = phone;
-                this.titles = title;
+                this.locations = locations;
+                this.mails = mails;
+                this.phones = phones;
+                this.titles = titles;
                 this.linkedin = linkedin;
                 this.twitter = twitter;
-                this.urls = url;
-                this.skills = skill;
+                this.urls = urls;
+                this.skills = skills;
         }
 
         public String getName() {
