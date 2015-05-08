@@ -44,6 +44,41 @@ public class ContactAPI extends BaseAPI {
 				.post(ContactCreateResponse.class).getId();
 	}
         
+        /**
+	 * Updates the entire space contact. Only fields which have values specified 
+	 * will be updated. To delete the contents of a field, pass an empty array 
+	 * for the value.
+	 * 
+	 * @param profileId
+	 *            The id of the space contact to be updated
+	 * @param update
+	 *            The data for the update
+	 * @param silent
+	 *            True if the update should be silent, false otherwise
+	 * @param hook
+	 *            True if hooks should be executed for the change, false otherwise
+	 */
+	public void updateSpaceContact(int profileId, ContactUpdate update, boolean silent, boolean hook) {
+		getResourceFactory().getApiResource("/contact/" + profileId)
+				.queryParam("silent", silent ? "1" : "0")
+				.queryParam("hook", hook ? "1" : "0")
+				.entity(update, MediaType.APPLICATION_JSON_TYPE).put();
+	}
+        
+        /**
+	 * Deletes a space contact.
+	 * 
+	 * @param profileId
+	 *            The id of the space contact to be deleted
+         * @param silent
+	 *            True if the deletion should be silent, false otherwise
+	 */
+	public void deleteSpaceContact(int profileId, boolean silent) {
+		getResourceFactory().getApiResource("/contact/" + profileId)
+                        .queryParam("silent", silent ? "1" : "0")
+                        .delete();
+	}
+        
 	/**
 	 * Returns all the contact details about the user with the given id.
 	 * 
