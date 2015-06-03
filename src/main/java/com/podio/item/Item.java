@@ -6,9 +6,11 @@ import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.joda.time.DateTime;
 
 import com.podio.app.Application;
 import com.podio.comment.Comment;
+import com.podio.common.AuthorizationEntity;
 import com.podio.file.File;
 import com.podio.rating.RatingType;
 import com.podio.rating.RatingTypeKeyDeserializer;
@@ -51,6 +53,11 @@ public class Item implements Serializable {
 	private String title;
 
 	/**
+	 * The direct link to the item
+	 */
+	private String link;
+
+	/**
 	 * The values for each field
 	 */
 	private List<FieldValuesView> fields;
@@ -90,6 +97,17 @@ public class Item implements Serializable {
 	 * The ratings and their values done by the active user on the item
 	 */
 	private Map<RatingType, Integer> userRatings;
+
+	/**
+	 * The entity who created the item
+	 */
+	private AuthorizationEntity createdBy;
+
+	/**
+	 * The date and time the comment was created
+	 */
+	private DateTime createdOn;
+
 
 	@JsonProperty("item_id")
 	public int getId() {
@@ -147,6 +165,14 @@ public class Item implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	public List<FieldValuesView> getFields() {
@@ -217,5 +243,25 @@ public class Item implements Serializable {
 	@JsonProperty("user_ratings")
 	public void setUserRatings(Map<RatingType, Integer> userRatings) {
 		this.userRatings = userRatings;
+	}
+
+	@JsonProperty("created_by")
+	public AuthorizationEntity getCreatedBy() {
+		return createdBy;
+	}
+
+	@JsonProperty("created_by")
+	public void setCreatedBy(AuthorizationEntity createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@JsonProperty("created_on")
+	public DateTime getCreatedOn() {
+		return createdOn;
+	}
+
+	@JsonProperty("created_on")
+	public void setCreatedOn(DateTime createdOn) {
+		this.createdOn = createdOn;
 	}
 }

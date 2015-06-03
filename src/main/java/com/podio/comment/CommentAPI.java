@@ -63,12 +63,13 @@ public class CommentAPI extends BaseAPI {
 	 *            True if the update should be silent, false otherwise
 	 */
 	public int addComment(Reference reference, CommentCreate comment,
-			boolean silent) {
+			boolean silent, boolean hook) {
 		return getResourceFactory()
 				.getApiResource(
 						"/comment/" + reference.getType() + "/"
 								+ reference.getId())
 				.queryParam("silent", silent ? "1" : "0")
+				.queryParam("hook", hook ? "1" : "0")
 				.entity(comment, MediaType.APPLICATION_JSON_TYPE)
 				.post(CommentCreateResponse.class).getId();
 	}

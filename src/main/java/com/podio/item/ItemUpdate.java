@@ -1,5 +1,6 @@
 package com.podio.item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -58,5 +59,12 @@ public class ItemUpdate {
 
 	public void setFields(List<FieldValuesUpdate> fields) {
 		this.fields = fields;
+	}
+
+	public void addField(FieldValuesUpdate field) {
+		if (this.fields == null) {
+			this.fields = new ArrayList<FieldValuesUpdate>();
+		}
+		this.fields.add(field);
 	}
 }
