@@ -11,7 +11,8 @@ public enum ApplicationViewType {
 	NODE,
 	CALENDAR,
 	GALLERY,
-	CARD;
+	CARD,
+        STREAM;
 
 	@Override
 	@JsonValue
