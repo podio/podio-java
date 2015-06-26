@@ -12,7 +12,7 @@ public enum ApplicationViewType {
 	CALENDAR,
 	GALLERY,
 	CARD,
-        STREAM;
+	STREAM;
 
 	@Override
 	@JsonValue
