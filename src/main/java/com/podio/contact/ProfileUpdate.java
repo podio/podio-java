@@ -44,6 +44,26 @@ public class ProfileUpdate {
 	 */
 	private String about;
 
+        /**
+	 * The zip code of the address
+	 */
+	private String zip;
+
+        /**
+	 * The name of the city
+	 */
+	private String city;
+
+        /**
+	 * The name of the state, only applicable in some countries
+	 */
+	private String state;
+
+        /**
+	 * The name of the country
+	 */
+	private String country;
+
 	/**
 	 * The addresses where the person lives or work
 	 */
@@ -134,6 +154,38 @@ public class ProfileUpdate {
 	public void setAbout(String about) {
 		this.about = about;
 	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+        public String getCity() {
+                return city;
+        }
+
+        public void setCity(String city) {
+                this.city = city;
+        }
+
+        public String getState() {
+                return state;
+        }
+
+        public void setState(String state) {
+                this.state = state;
+        }
+
+        public String getCountry() {
+                return country;
+        }
+
+        public void setCountry(String country) {
+                this.country = country;
+        }
 
 	@JsonProperty("address")
 	public List<String> getAddresses() {
