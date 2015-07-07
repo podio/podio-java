@@ -82,12 +82,12 @@ public class ContactAPI extends BaseAPI {
 	/**
 	 * Returns all the contact details about the user with the given id.
 	 * 
-	 * @param userId
-	 *            The id of the user
+	 * @param profileId
+	 *            The profile id of the user
 	 * @return The contact profile
 	 */
-	public Profile getContact(int userId) {
-		return getResourceFactory().getApiResource("/contact/" + userId).get(
+	public Profile getContact(int profileId) {
+		return getResourceFactory().getApiResource("/contact/" + profileId + "/v2").get(
 				Profile.class);
 	}
 
@@ -140,15 +140,17 @@ public class ContactAPI extends BaseAPI {
 	 *            The format in which the contacts should be returned
 	 * @param order
 	 *            How the contacts should be ordered
+         * @param contactType
+         *            The type of contacts to be returned
 	 * @return The list of contacts
 	 */
 	public <T, F, R> List<T> getContacts(ProfileField<F, R> key, F value,
 			Integer limit, Integer offset, ProfileType<T> type,
-			ContactOrder order) {
+			ContactOrder order, ContactType contactType) {
 		WebResource resource = getResourceFactory().getApiResource("/contact/");
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
-				order);
+				order, contactType);
 	}
 
 	/**
@@ -169,16 +171,18 @@ public class ContactAPI extends BaseAPI {
 	 *            The format in which the contacts should be returned
 	 * @param order
 	 *            How the contacts should be ordered
+         * @param contactType
+         *            The type of contacts to be returned
 	 * @return The list of contacts
 	 */
 	public <T, F, R> List<T> getOrganizationContacts(int organizationId,
 			ProfileField<F, R> key, F value, Integer limit, Integer offset,
-			ProfileType<T> type, ContactOrder order) {
+			ProfileType<T> type, ContactOrder order, ContactType contactType) {
 		WebResource resource = getResourceFactory().getApiResource(
 				"/contact/org/" + organizationId);
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
-				order);
+				order, contactType);
 	}
 
 	/**
@@ -198,21 +202,23 @@ public class ContactAPI extends BaseAPI {
 	 *            The format in which the contacts should be returned
 	 * @param order
 	 *            How the contacts should be ordered
+         * @param contactType
+         *            The type of contacts to be returned
 	 * @return The list of contacts
 	 */
 	public <T, F, R> List<T> getSpaceContacts(int spaceId,
 			ProfileField<F, R> key, F value, Integer limit, Integer offset,
-			ProfileType<T> type, ContactOrder order) {
+			ProfileType<T> type, ContactOrder order, ContactType contactType) {
 		WebResource resource = getResourceFactory().getApiResource(
 				"/contact/space/" + spaceId);
 
 		return getContactsCommon(resource, key, value, limit, offset, type,
-				order);
+				order, contactType);
 	}
 
 	private <T, F, R> List<T> getContactsCommon(WebResource resource,
 			ProfileField<F, R> key, F value, Integer limit, Integer offset,
-			final ProfileType<T> type, ContactOrder order) {
+			final ProfileType<T> type, ContactOrder order, ContactType contactType) {
 		if (key != null && value != null) {
 			resource = resource.queryParam("key", key.getName().toLowerCase())
 					.queryParam("value", key.format(value).toString());
@@ -227,7 +233,10 @@ public class ContactAPI extends BaseAPI {
 		if (order != null) {
 			resource = resource.queryParam("order", order.name().toLowerCase());
 		}
-
+		if (contactType != null) {
+			resource = resource.queryParam("contact_type", contactType.name().toLowerCase());
+		}
+                
 		return resource.get(getGenericType(type));
 	}
 
