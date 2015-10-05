@@ -89,7 +89,13 @@ public enum ApplicationFieldType {
 	/**
 	 * A telephone field to hold telephone numbers properly formatted
 	 */
-	TEL;
+	PHONE,
+	
+	/**
+	 * An Email field to hold email addresses
+	 */
+	EMAIL;
+
 
 	@Override
 	@JsonValue
