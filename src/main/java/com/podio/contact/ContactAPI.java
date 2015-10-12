@@ -215,6 +215,20 @@ public class ContactAPI extends BaseAPI {
 		return getContactsCommon(resource, key, value, limit, offset, type,
 				order, contactType);
 	}
+        
+        /**
+         * Returns the total number of contacts on the space
+         * 
+         * @param spaceId
+         *            The id of the space the number of contacts should be 
+         *            returned from
+         * @return The total number of space contacts
+         */
+        public SpaceContactTotals getSpaceContactTotals(int spaceId) {
+                return getResourceFactory().getApiResource(
+                        "/contact/space/" + spaceId + "/totals/space/").get(
+                        SpaceContactTotals.class);
+        }
 
 	private <T, F, R> List<T> getContactsCommon(WebResource resource,
 			ProfileField<F, R> key, F value, Integer limit, Integer offset,
