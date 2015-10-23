@@ -104,7 +104,7 @@ public class Item implements Serializable {
 	private AuthorizationEntity createdBy;
 
 	/**
-	 * The date and time the comment was created
+	 * The date and time the item was created
 	 */
 	private DateTime createdOn;
 
