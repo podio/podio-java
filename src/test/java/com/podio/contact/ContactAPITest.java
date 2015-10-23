@@ -82,7 +82,7 @@ public class ContactAPITest {
 	public void getSpaceContactsByMail() {
 		List<Profile> contacts = getAPI().getSpaceContacts(1,
 				ProfileField.MAIL, "haugstrup@hoisthq.com", null, null,
-				ProfileType.FULL, null);
+				ProfileType.FULL, null, ContactType.SPACE);
 
 		Assert.assertEquals(contacts.size(), 1);
 		Assert.assertEquals(contacts.get(0).getUserId().intValue(), 2);

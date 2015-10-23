@@ -148,6 +148,21 @@ public class AppAPI extends BaseAPI {
 	}
 
 	/**
+	 * Returns a single field from an app.
+	 * 
+	 * @param appId
+	 *            The id of the app the field is on
+	 * @param externalId
+	 *            The id of the field to be returned
+	 * @return The definition and current configuration of the requested field
+	 */
+	public ApplicationField getField(int appId, String externalId) {
+		return getResourceFactory().getApiResource(
+				"/app/" + appId + "/field/" + externalId).get(
+				ApplicationField.class);
+	}
+
+	/**
 	 * Deletes a field on an app. When deleting a field any new items and
 	 * updates to existing items will not have this field present. For existing
 	 * items, the field will still be presented when viewing the item.

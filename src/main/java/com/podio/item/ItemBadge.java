@@ -9,6 +9,7 @@ import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import com.podio.rating.RatingType;
 import com.podio.rating.RatingTypeKeyDeserializer;
 import com.podio.rating.TypeRating;
+import org.joda.time.DateTime;
 
 public class ItemBadge {
 
@@ -62,6 +63,11 @@ public class ItemBadge {
 	 * The number of files on the item
 	 */
 	private int files;
+        
+        /**
+	 * The date and time the item was created
+	 */
+	private DateTime createdOn;
 
 	@JsonProperty("item_id")
 	public int getId() {
@@ -149,5 +155,15 @@ public class ItemBadge {
 
 	public void setFiles(int files) {
 		this.files = files;
+	}
+        
+	@JsonProperty("created_on")
+	public DateTime getCreatedOn() {
+		return createdOn;
+	}
+
+	@JsonProperty("created_on")
+	public void setCreatedOn(DateTime createdOn) {
+		this.createdOn = createdOn;
 	}
 }
