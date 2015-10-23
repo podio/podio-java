@@ -9,11 +9,11 @@ public final class ToStringUtil {
 
 	public static String toString(Collection<?> objects, CharSequence delimiter) {
 		StringBuilder sb = new StringBuilder();
-                for (Object o : objects) {
-                    sb.append(o.toString());
-                    sb.append(delimiter);
-                }
-                sb.setLength(sb.length() - delimiter.length());
-                return sb.toString();
+		for (Object o : objects) {
+			sb.append(o.toString());
+			sb.append(delimiter);
+		}
+		sb.setLength(sb.length() - delimiter.length());
+		return sb.toString();
 	}
 }

@@ -177,26 +177,28 @@ public class ItemAPI extends BaseAPI {
 	 *            The id of app reference field to search for
 	 * @param text
 	 *            The text to search for in the items title
-         * @param notItemIds
-         *            If supplied the items with these ids will not be returned
-         * @param limit
-         *            The maximum number of results to return. Default value: 13
+	 * @param notItemIds
+	 *            If supplied the items with these ids will not be returned
+	 * @param limit
+	 *            The maximum number of results to return. Default value: 13
 	 * @return The items that were valid for the field and with text matching
 	 */
 	public List<ItemMini> getItemsByFieldAndTitle(int fieldId, String text,
-                        List<Integer> notItemIds, Integer limit) {
-                WebResource resource = getResourceFactory().getApiResource(
-                                "/item/field/" + fieldId + "/find");
-                if (limit != null) {
+												List<Integer> notItemIds, Integer limit) {
+		WebResource resource = getResourceFactory().getApiResource(
+			"/item/field/" + fieldId + "/find");
+
+		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
-                if (notItemIds != null && notItemIds.size() > 0) {
+
+		if (notItemIds != null && notItemIds.size() > 0) {
 			resource = resource.queryParam(
-                                        "not_item_id", ToStringUtil.toString(notItemIds, ","));
+				"not_item_id", ToStringUtil.toString(notItemIds, ","));
 		}
-                resource = resource.queryParam("text", text);
-		return resource.get(new GenericType<List<ItemMini>>() {
-				});
+
+		resource = resource.queryParam("text", text);
+		return resource.get(new GenericType<List<ItemMini>>() {});
 	}
 
 	/**
