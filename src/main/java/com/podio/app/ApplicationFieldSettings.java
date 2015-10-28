@@ -20,7 +20,15 @@ public class ApplicationFieldSettings implements Serializable {
 	private List<CategoryOption> options;
 
 	private Boolean multiple;
+        
+	private String color;
+        
+	private Boolean showInCalendars;
+      
+	private DateFieldEndDateType endDate;
 
+	private DateFieldTimeEntryType timeEntry;
+        
 	public ApplicationFieldSettings() {
 		super();
 	}
@@ -127,4 +135,43 @@ public class ApplicationFieldSettings implements Serializable {
 		return new ApplicationFieldSettings(null, null, null, null, options,
 				multiple);
 	}
+
+        public String getColor() {
+                return color;
+        }
+
+        public void setColor(String color) {
+                this.color = color;
+        }
+
+        @JsonProperty("calendar")
+        public Boolean getShowInCalendars() {
+                return showInCalendars;
+        }
+
+        @JsonProperty("calendar")
+        public void setShowInCalendars(Boolean showInCalendars) {
+                this.showInCalendars = showInCalendars;
+        }
+
+        @JsonProperty("end")
+        public DateFieldEndDateType getEndDate() {
+                return endDate;
+        }
+
+        @JsonProperty("end")
+        public void setEndDate(DateFieldEndDateType endDate) {
+                this.endDate = endDate;
+        }
+
+        @JsonProperty("time")
+        public DateFieldTimeEntryType getTimeEntry() {
+                return timeEntry;
+        }
+
+        @JsonProperty("time")
+        public void setTimeEntry(DateFieldTimeEntryType timeEntry) {
+                this.timeEntry = timeEntry;
+        }
+        
 }
