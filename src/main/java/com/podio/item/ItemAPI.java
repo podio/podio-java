@@ -288,7 +288,7 @@ public class ItemAPI extends BaseAPI {
 	public ItemsResponse getItems(int appId, Integer limit, Integer offset,
 			SortBy sortBy, Boolean sortDesc, FilterByValue<?>... filters) {
 		WebResource resource = getResourceFactory().getApiResource(
-				"/item/app/" + appId + "/v2/");
+				"/item/app/" + appId + "/filter/");
 		if (limit != null) {
 			resource = resource.queryParam("limit", limit.toString());
 		}
