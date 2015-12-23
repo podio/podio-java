@@ -306,7 +306,7 @@ public class ItemAPI extends BaseAPI {
 					filter.getFormattedValue());
 		}
 
-		return resource.get(ItemsResponse.class);
+		return resource.post(ItemsResponse.class);
 	}
 
 	/**
@@ -321,5 +321,50 @@ public class ItemAPI extends BaseAPI {
 	public ItemsResponse getItemsByExternalId(int appId, String externalId) {
 		return getItems(appId, null, null, null, null,
 				new FilterByValue<String>(new ExternalIdFilterBy(), externalId));
+	}
+	
+	/**
+	 * Returns the items on app for a given view
+	 *
+	 * @param appId
+	 *            The id of the app
+	 * @param viewId
+	 * 			  The id of the view
+	 * @param limit
+	 *            The maximum number of items to receive, defaults to 20
+	 * @param offset
+	 *            The offset from the start of the items returned, defaults to 0
+	 * @param sortBy
+	 *            How the items should be sorted. For the possible options, see
+	 *            the filter area.
+	 * @param sortDesc
+	 *            <code>true</code> or leave out to sort descending, use
+	 *            <code>false</code> to sort ascending
+	 * @param filters
+	 *            The filters to apply
+	 * @return The items matching the filters
+	 */
+	public ItemsResponse getItemsByView(int appId, int viewId, Integer limit, Integer offset,
+			SortBy sortBy, Boolean sortDesc, FilterByValue<?>... filters) {
+		WebResource resource = getResourceFactory().getApiResource(
+				"/item/app/" + appId + "/filter/" + viewId + "/");
+		if (limit != null) {
+			resource = resource.queryParam("limit", limit.toString());
+		}
+		if (offset != null) {
+			resource = resource.queryParam("offset", offset.toString());
+		}
+		if (sortBy != null) {
+			resource = resource.queryParam("sort_by", sortBy.getKey());
+		}
+		if (sortDesc != null) {
+			resource = resource.queryParam("sort_desc", sortDesc ? "1" : "0");
+		}
+		for (FilterByValue<?> filter : filters) {
+			resource = resource.queryParam(filter.getBy().getKey(),
+					filter.getFormattedValue());
+		}
+
+		return resource.post(ItemsResponse.class);
 	}
 }
