@@ -367,4 +367,34 @@ public class ItemAPI extends BaseAPI {
 
 		return resource.post(ItemsResponse.class);
 	}
+	
+	/**
+	 * Returns the items on app for a given view
+	 *
+	 * @param appId
+	 *            The id of the app
+	 * @return the item count
+	 */
+	public ItemCount getItemCount(int appId )
+	{
+		WebResource resource = getResourceFactory().getApiResource(
+				"/item/app/" + appId + "/count");
+		return resource.get( ItemCount.class );
+	}
+	
+	/**
+	 * Returns the items on app for a given view
+	 *
+	 * @param appId
+	 *            The id of the app
+	 * @param viewId
+	 * 			  The id of the view
+	 * @return the item count
+	 */
+	public ItemCount getItemCount(int appId, int viewId) {
+		WebResource resource = getResourceFactory().getApiResource( 
+				"/item/app/" + appId + "/count?view_id=" + viewId);
+		return resource.get( ItemCount.class );
+	}
+	
 }
