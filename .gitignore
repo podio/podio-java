@@ -1,1 +1,6 @@
 /target
+.settings
+.classpath
+podio-java
+.project
+.factorypath

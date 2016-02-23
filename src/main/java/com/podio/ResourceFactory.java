@@ -39,6 +39,7 @@ import com.sun.jersey.multipart.impl.MultiPartWriter;
  * This is the main low level entry point to access the Podio API. Construct
  * this and pass it to the APIFactory.
  */
+@SuppressWarnings( "deprecation" )
 public final class ResourceFactory {
 
 	private final WebResource apiResource;
@@ -51,7 +52,7 @@ public final class ResourceFactory {
 		this("api.podio.com", "files.podio.com", 443, true, false,
 				clientCredentials, userCredentials);
 	}
-
+	
 	public ResourceFactory(String apiHostname, String fileHostname, int port,
 			boolean ssl, boolean dryRun,
 			OAuthClientCredentials clientCredentials,

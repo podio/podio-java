@@ -1,5 +1,6 @@
 package com.podio.item;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,12 @@ import com.sun.jersey.api.client.WebResource;
  * the sub_id values. Others have multiple sub_ids.
  */
 public class ItemAPI extends BaseAPI {
-
+	
+	public class PaginatePodio 
+	{
+		public int limit = 50;
+	}
+	
 	public ItemAPI(ResourceFactory resourceFactory) {
 		super(resourceFactory);
 	}
@@ -288,25 +294,31 @@ public class ItemAPI extends BaseAPI {
 	public ItemsResponse getItems(int appId, Integer limit, Integer offset,
 			SortBy sortBy, Boolean sortDesc, FilterByValue<?>... filters) {
 		WebResource resource = getResourceFactory().getApiResource(
-				"/item/app/" + appId + "/v2/");
+				"/item/app/" + appId + "/filter/");
+		Map<String, Object> object = new HashMap<String, Object>();
 		if (limit != null) {
-			resource = resource.queryParam("limit", limit.toString());
+			object.put("limit", limit);
 		}
 		if (offset != null) {
-			resource = resource.queryParam("offset", offset.toString());
+			object.put("offset", offset);
 		}
 		if (sortBy != null) {
-			resource = resource.queryParam("sort_by", sortBy.getKey());
+			object.put("sort_by", sortBy);
 		}
 		if (sortDesc != null) {
-			resource = resource.queryParam("sort_desc", sortDesc ? "1" : "0");
+			object.put("sort_desc", sortDesc);
 		}
+		Map<String, Object> filterMap = new HashMap<String, Object>();
 		for (FilterByValue<?> filter : filters) {
-			resource = resource.queryParam(filter.getBy().getKey(),
-					filter.getFormattedValue());
+			filterMap.put(filter.getBy().getKey(), filter.getFormattedValue());
 		}
-
-		return resource.get(ItemsResponse.class);
+		if (filterMap.size() > 0)
+		{
+			object.put("filters", filterMap);
+		}
+		
+		return resource.entity(object, MediaType.APPLICATION_JSON_TYPE)
+				.post(ItemsResponse.class);
 	}
 
 	/**
@@ -322,4 +334,85 @@ public class ItemAPI extends BaseAPI {
 		return getItems(appId, null, null, null, null,
 				new FilterByValue<String>(new ExternalIdFilterBy(), externalId));
 	}
+	
+	/**
+	 * Returns the items on app for a given view
+	 *
+	 * @param appId
+	 *            The id of the app
+	 * @param viewId
+	 * 			  The id of the view
+	 * @param limit
+	 *            The maximum number of items to receive, defaults to 20
+	 * @param offset
+	 *            The offset from the start of the items returned, defaults to 0
+	 * @param sortBy
+	 *            How the items should be sorted. For the possible options, see
+	 *            the filter area.
+	 * @param sortDesc
+	 *            <code>true</code> or leave out to sort descending, use
+	 *            <code>false</code> to sort ascending
+	 * @param filters
+	 *            The filters to apply
+	 * @return The items matching the filters
+	 */
+	public ItemsResponse getItemsByView(int appId, int viewId, Integer limit, Integer offset,
+			SortBy sortBy, Boolean sortDesc, FilterByValue<?>... filters) {
+		WebResource resource = getResourceFactory().getApiResource(
+				"/item/app/" + appId + "/filter/" + viewId + "/");
+		Map<String, Object> object = new HashMap<String, Object>();
+		if (limit != null) {
+			object.put("limit", limit);
+		}
+		if (offset != null) {
+			object.put("offest", offset);
+		}
+		if (sortBy != null) {
+			object.put("sort_by", sortBy);
+		}
+		if (sortDesc != null) {
+			object.put("sort_desc", sortDesc);
+		}
+		Map<String, Object> filterMap = new HashMap<String, Object>();
+		for (FilterByValue<?> filter : filters) {
+			filterMap.put(filter.getBy().getKey(), filter.getFormattedValue());
+		}		
+		object.put("filters", filterMap);
+		
+		return resource.entity(object, MediaType.APPLICATION_JSON_TYPE)
+				.post(ItemsResponse.class);
+	}
+	
+	/**
+	 * Returns the items on app for a given view
+	 *
+	 * @param appId
+	 *            The id of the app
+	 * @return the item count
+	 */
+	public ItemCount getItemCount(int appId )
+	{
+		WebResource resource = getResourceFactory().getApiResource(
+				"/item/app/" + appId + "/count");
+		return resource.get( ItemCount.class );
+	}
+	
+	/**
+	 * Returns the items on app for a given view
+	 *
+	 * @param appId
+	 *            The id of the app
+	 * @param viewId
+	 * 			  The id of the view
+	 * @return the item count
+	 */
+	public ItemCount getItemCount(int appId, Integer viewId) {
+		WebResource resource = getResourceFactory().getApiResource( 
+				"/item/app/" + appId + "/count");
+		if (viewId != null) {
+			resource = resource.queryParam("view_id", viewId.toString());
+		}
+		return resource.get( ItemCount.class );
+	}
+	
 }
