@@ -94,8 +94,12 @@ public enum ApplicationFieldType {
 	/**
 	 * An Email field to hold email addresses
 	 */
-	EMAIL;
+	EMAIL,
 
+	/**
+	 * Tel field
+	 */
+	TEL;
 
 	@Override
 	@JsonValue

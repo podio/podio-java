@@ -52,13 +52,13 @@ public class OrgAPITest {
 	public void getOrganizations() throws URISyntaxException {
 		List<OrganizationWithSpaces> organizations = getAPI()
 				.getOrganizations();
-		Assert.assertEquals(organizations.size(), 4);
+		Assert.assertEquals(organizations.size(), 3);
 
 		OrganizationWithSpaces org = organizations.get(0);
 		Assert.assertEquals(org.getId(), 1);
 		Assert.assertEquals(org.getName(), "Hoist");
 		List<SpaceMini> spaces = org.getSpaces();
-		Assert.assertEquals(spaces.size(), 3);
+		Assert.assertEquals(spaces.size(), 4);
 		SpaceMini space = spaces.get(0);
 		Assert.assertEquals(space.getId(), 1);
 		Assert.assertEquals(space.getName(), "API");
@@ -94,7 +94,7 @@ public class OrgAPITest {
 	public void getSpaces() {
 		List<Space> spaces = getAPI().getSpaces(1);
 
-		Assert.assertEquals(spaces.size(), 3);
+		Assert.assertEquals(spaces.size(), 4);
 		Assert.assertEquals(spaces.get(0).getId(), 1);
 	}
 

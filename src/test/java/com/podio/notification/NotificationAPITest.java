@@ -20,6 +20,6 @@ public class NotificationAPITest {
 
 	@Test
 	public void markAsViewed() {
-		getAPI().markAsViewed(4);
+		getAPI().markAsViewed(3);
 	}
 }

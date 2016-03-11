@@ -28,7 +28,7 @@ public class CalendarAPITest {
 		Assert.assertEquals(event.getRefId(), 1);
 		Assert.assertEquals(event.getUID(), "item_1_2");
 		Assert.assertEquals(event.getTitle(), "no & yes");
-		Assert.assertEquals(event.getDescription(), "æøå");
+		Assert.assertEquals(event.getDescription(), "æøå\n\n![](https://files.podio.com/1000)");
 		Assert.assertEquals(event.getLocation(), null);
 		Assert.assertEquals(event.getVersion(), 0);
 		Assert.assertEquals(event.isBusy(), false);

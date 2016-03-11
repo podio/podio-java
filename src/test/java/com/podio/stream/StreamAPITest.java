@@ -29,7 +29,7 @@ public class StreamAPITest {
 				"https://podio.com/hoist/api/apps/bugs/items/1");
 		Assert.assertEquals(object.getComments().size(), 2);
 		Assert.assertEquals(object.getComments().get(0).getId(), 1);
-		Assert.assertEquals(object.getFiles().size(), 2);
+		Assert.assertEquals(object.getFiles().size(), 3);
 		Assert.assertEquals(object.getFiles().get(0).getId(), 1);
 		Assert.assertEquals(object.getFiles().get(1).getId(), 8);
 		Assert.assertEquals(object.getOrganization().getId(), 1);
@@ -57,7 +57,7 @@ public class StreamAPITest {
 				"https://podio.com/hoist/api/apps/bugs/items/1");
 		Assert.assertEquals(object.getComments().size(), 2);
 		Assert.assertEquals(object.getComments().get(0).getId(), 1);
-		Assert.assertEquals(object.getFiles().size(), 2);
+		Assert.assertEquals(object.getFiles().size(), 3);
 		Assert.assertEquals(object.getFiles().get(0).getId(), 1);
 		Assert.assertEquals(object.getFiles().get(1).getId(), 8);
 		Assert.assertEquals(object.getData().get("item_id"), 1);
@@ -74,7 +74,7 @@ public class StreamAPITest {
 
 		Assert.assertEquals(objects.size(), 3);
 		Assert.assertEquals(objects.get(2).getType(), ReferenceType.ITEM);
-		Assert.assertEquals(objects.get(2).getId(), 8);
+		Assert.assertEquals(objects.get(2).getId(), 20);
 	}
 
 	@Test
@@ -84,7 +84,7 @@ public class StreamAPITest {
 
 		Assert.assertEquals(objects.size(), 3);
 		Assert.assertEquals(objects.get(2).getType(), ReferenceType.ITEM);
-		Assert.assertEquals(objects.get(2).getId(), 8);
+		Assert.assertEquals(objects.get(2).getId(), 20);
 	}
 
 	@Test
@@ -103,7 +103,7 @@ public class StreamAPITest {
 
 		Assert.assertEquals(objects.size(), 3);
 		Assert.assertEquals(objects.get(0).getType(), ReferenceType.ITEM);
-		Assert.assertEquals(objects.get(0).getId(), 1);
+		Assert.assertEquals(objects.get(0).getId(), 24);
 	}
 
 	@Test

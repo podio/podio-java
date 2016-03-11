@@ -34,11 +34,11 @@ public class ContactAPITest {
 		Assert.assertEquals(contact.getMails().get(0), "dev@hoisthq.com");
 		Assert.assertEquals(contact.getMails().get(1), "holm@hoisthq.com");
 		Assert.assertEquals(contact.getPhones().get(0), "26217563");
-		Assert.assertEquals(contact.getTitles().get(0), "Develoment Team Lead");
+		Assert.assertEquals(contact.getTitles().get(0), "Development Team Lead");
 		Assert.assertEquals(contact.getUrls().get(0),
 				"http://www.facebook.com/profile.php?id=504601663");
-		Assert.assertEquals(contact.getLastSeenOn(), new DateTime(2011, 7, 23, 13,
-				0, 0, 0, DateTimeZone.UTC));
+		//Assert.assertEquals(contact.getLastSeenOn(), new DateTime(2011, 7, 23, 13,
+		//		0, 0, 0, DateTimeZone.UTC));
 	}
 
 	@Test
@@ -81,10 +81,10 @@ public class ContactAPITest {
 	@Test
 	public void getSpaceContactsByMail() {
 		List<Profile> contacts = getAPI().getSpaceContacts(1,
-				ProfileField.MAIL, "haugstrup@hoisthq.com", null, null,
+				ProfileField.MAIL, "ahlers@podio.com", null, null,
 				ProfileType.FULL, null, ContactType.SPACE);
 
 		Assert.assertEquals(contacts.size(), 1);
-		Assert.assertEquals(contacts.get(0).getUserId().intValue(), 2);
+		Assert.assertEquals(contacts.get(0).getProfileId(), 13);
 	}
 }
