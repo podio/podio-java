@@ -11,6 +11,7 @@ import com.podio.common.ToStringUtil;
 import com.podio.filter.ExternalIdFilterBy;
 import com.podio.filter.FilterByValue;
 import com.podio.filter.SortBy;
+import com.podio.item.filter.ItemFilter;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
@@ -264,6 +265,11 @@ public class ItemAPI extends BaseAPI {
 				"/item/" + itemId + "/revision/").get(
 				new GenericType<List<ItemRevision>>() {
 				});
+	}
+
+	public ItemsResponse filterItems(int appId, ItemFilter filter) {
+		return getResourceFactory().getApiResource("/item/app/" + appId + "/filter/")
+				.entity(filter, MediaType.APPLICATION_JSON_TYPE).post(ItemsResponse.class);
 	}
 
 	/**

@@ -153,6 +153,7 @@ public class ItemBadge {
 		return files;
 	}
 
+	@JsonProperty("file_count")
 	public void setFiles(int files) {
 		this.files = files;
 	}
