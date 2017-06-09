@@ -35,6 +35,11 @@ public class Application implements Serializable {
 	 * The owner of the app, which has special access to the app
 	 */
 	private int ownerId;
+	
+	/**
+	 *  The direct url of the app
+	 */
+	private String url;
 
 	/**
 	 * The configuration of the app
@@ -107,5 +112,15 @@ public class Application implements Serializable {
 
 	public void setFields(List<ApplicationField> fields) {
 		this.fields = fields;
+	}
+
+	public String getUrl()
+	{
+		return url;
+	}
+
+	public void setUrl( String url )
+	{
+		this.url = url;
 	}
 }

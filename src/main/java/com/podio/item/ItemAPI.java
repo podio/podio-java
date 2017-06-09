@@ -303,20 +303,23 @@ public class ItemAPI extends BaseAPI {
 			object.put("offset", offset);
 		}
 		if (sortBy != null) {
-			object.put("sort_by", sortBy);
+			object.put("sort_by", sortBy.getKey());
 		}
 		if (sortDesc != null) {
 			object.put("sort_desc", sortDesc);
 		}
-		Map<String, Object> filterMap = new HashMap<String, Object>();
-		for (FilterByValue<?> filter : filters) {
-			filterMap.put(filter.getBy().getKey(), filter.getFormattedValue());
-		}
-		if (filterMap.size() > 0)
+		if( filters != null )
 		{
-			object.put("filters", filterMap);
+			Map<String, Object> filterMap = new HashMap<String, Object>();
+			for (FilterByValue<?> filter : filters) 
+			{
+				filterMap.put( filter.getBy().getKey(), filter.getValue() );
+			}
+			if (filterMap.size() > 0)
+			{
+				object.put("filters", filterMap);
+			}
 		}
-		
 		return resource.entity(object, MediaType.APPLICATION_JSON_TYPE)
 				.post(ItemsResponse.class);
 	}

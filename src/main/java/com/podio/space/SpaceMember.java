@@ -37,7 +37,8 @@ public class SpaceMember {
 	public ProfileMini getUser() {
 		return user;
 	}
-
+	
+	@JsonProperty("profile")
 	public void setUser(ProfileMini user) {
 		this.user = user;
 	}
