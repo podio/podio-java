@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
 
@@ -46,6 +47,22 @@ public class FileAPI extends BaseAPI {
 		}
 		byte[] data = builder.get(byte[].class);
 		FileUtils.writeByteArrayToFile(target, data);
+	}
+	
+	/**
+	 * Attaches a previously uploaded file to an item
+	 * @param fileId
+	 * @param attributes { "ref_type":  "status, item, comment, space, or task", "ref_id": object id }
+	 * @param silent
+	 * @param hook
+	 */
+	public void attachFile( int fileId, Map<String, Object> attributes, boolean silent, boolean hook )
+	{
+		getResourceFactory()
+			.getApiResource("/file/" + fileId + "/attach")
+			.queryParam("silent", silent ? "1" : "0")
+			.queryParam("hook", hook ? "1" : "0")
+			.entity(attributes, MediaType.APPLICATION_JSON_TYPE).post();
 	}
 
 	/**
