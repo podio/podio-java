@@ -23,6 +23,16 @@ public class Conversation {
 	 */
 	private List<ProfileMini> participants;
 
+        private int unreadCount;
+        private String excerpt;
+        @JsonProperty("unread_count")
+	public int getUnreadCount() {
+		return unreadCount;
+	}
+	public String getExcerpt() {
+		return excerpt;
+	}
+
 	@JsonProperty("conversation_id")
 	public int getId() {
 		return id;
@@ -31,6 +41,13 @@ public class Conversation {
 	@JsonProperty("conversation_id")
 	public void setId(int id) {
 		this.id = id;
+	}
+        @JsonProperty("unread_count")
+	public void setUnreadCount(int unreadCount) {
+		this.unreadCount = unreadCount;
+	}
+	public void setExcerpt(String excerpt) {
+		this.excerpt =excerpt;
 	}
 
 	public String getSubject() {

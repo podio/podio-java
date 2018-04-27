@@ -1,19 +1,21 @@
 package com.podio.notification;
 
-import java.util.Collection;
-import java.util.List;
-
-import javax.ws.rs.core.MediaType;
-
-import org.joda.time.DateTime;
-
 import com.podio.BaseAPI;
 import com.podio.ResourceFactory;
 import com.podio.common.CSVUtil;
 import com.podio.common.Empty;
+import com.podio.conversation.Conversation;
 import com.podio.serialize.DateTimeUtil;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import org.joda.time.DateTime;
 
 /**
  * A notification is an information about an event that occured in Podio. A
@@ -38,7 +40,14 @@ public class NotificationAPI extends BaseAPI {
 
 		return resource.get(InboxNewCount.class).getNewNotifications();
 	}
-	
+	public List<Notification>  getUnviewedNotifications(MultivaluedMap<String,String> filters) {
+		WebResource resource = getResourceFactory().getApiResource(
+				"/notification/");
+//                MultivaluedMap<String,String> filters=new MultivaluedMap();
+                resource=resource.queryParams(filters);
+		return resource.get(new GenericType<List<Notification>>() {
+				});
+	}
 	/**
 	 * Mark the notification as viewed. This will move the notification from the
 	 * inbox to the viewed archive.
